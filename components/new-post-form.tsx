@@ -6,6 +6,7 @@ import { TownSelect } from "@/components/town-select";
 import { Button } from "@/components/ui/button";
 import { features } from "@/lib/features";
 import { preparePhoto } from "@/lib/photo";
+import { findNearestTown } from "@/lib/services/towns";
 import type { NewPostInput, Town } from "@/lib/types";
 import { useGeolocation } from "@/lib/use-geolocation";
 import { cn } from "@/lib/utils";
@@ -13,30 +14,30 @@ import { cn } from "@/lib/utils";
 export const NEW_POST_FORM_ID = "new-post-form";
 
 const INPUT = "h-11 w-full bg-transparent type-body outline-none placeholder:text-muted-foreground";
+const MAX_PHOTOS = 4;
 
 // An iOS form: grouped rows with labels, footers for the privacy notes. The Post button lives in the nav bar
 // (it submits this form by id), so the page passes onSubmittingChange to disable it while sending
-// and onReadyChange to keep it disabled until the required fields are filled.
+// and onReadyChange to keep it disabled until the post has a town and some text or a photo.
 export function NewPostForm({
+  author,
   onSubmit,
   onSubmittingChange,
   onReadyChange,
 }: {
+  author: string; // the signed-in Google user, who the post is from
   onSubmit: (input: NewPostInput) => Promise<void>;
   onSubmittingChange?: (submitting: boolean) => void;
   onReadyChange?: (ready: boolean) => void;
 }) {
-  const geo = useGeolocation();
   const [town, setTown] = useState<Town>();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [tickSpecies, setTickSpecies] = useState("");
-  const [author, setAuthor] = useState("");
-  const [photo, setPhoto] = useState<File>();
+  const [photos, setPhotos] = useState<File[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  // Mirrors the inputs' own constraints (title minLength 3, body and name required).
-  const ready = !!town && title.trim().length >= 3 && body.trim().length > 0 && author.trim().length > 0;
+  const ready = !!town && (title.trim().length > 0 || body.trim().length > 0 || photos.length > 0);
   useEffect(() => onReadyChange?.(ready), [ready, onReadyChange]);
 
   async function submit(e: React.FormEvent) {
@@ -45,22 +46,13 @@ export function NewPostForm({
     onSubmittingChange?.(true);
     setError(null);
     try {
-      // Without "Use my location", the post is pinned to the town center. The API rounds both to ~1 km.
-      await onSubmit({
-        townId: town.id,
-        lat: geo.coords?.lat ?? town.lat,
-        lng: geo.coords?.lng ?? town.lng,
-        title,
-        body,
-        tickSpecies: tickSpecies || undefined,
-        author,
-        photo,
-      });
+      // Only the town is sent: posts never carry coordinates.
+      await onSubmit({ townId: town.id, title, body, tickSpecies: tickSpecies || undefined, photos });
       // Pages stay mounted across navigations (Cache Components), so clear the form for next time.
       setTitle("");
       setBody("");
       setTickSpecies("");
-      setPhoto(undefined);
+      setPhotos([]);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
@@ -76,35 +68,20 @@ export function NewPostForm({
         </p>
       )}
 
-      <Group
-        footer={
-          features.geolocation
-            ? "Shown to others within about 1 km, never your exact spot."
-            : "Pinned to the center of the town you choose."
-        }
-      >
+      <Group footer="Others see the town only, never your exact spot.">
         <Row label="Town" htmlFor="post-town">
           <TownSelect id="post-town" value={town?.id ?? ""} onChange={(_, t) => setTown(t)} />
         </Row>
-        {features.geolocation && (
-          <Row label="Location">
-            <Button type="button" variant="plain" size="sm" className="-ml-3.5 self-start" onClick={geo.request} disabled={geo.loading}>
-              {geo.loading ? <Loader2 className="size-4 animate-spin" aria-hidden /> : <LocateFixed className="size-4" aria-hidden />}
-              {geo.coords ? "Location added (about 1 km)" : "Use my location"}
-            </Button>
-            {geo.error && <p className="pb-2 type-footnote text-destructive">{geo.error}</p>}
-          </Row>
-        )}
+        {features.geolocation && <LocateRow onTown={setTown} />}
       </Group>
 
-      <Group>
+      <Group footer="Write something, add a photo, or both.">
         <Row label="Title" htmlFor="post-title">
-          <input id="post-title" required minLength={3} maxLength={120} placeholder="What you found, and where" value={title} onChange={(e) => setTitle(e.target.value)} className={INPUT} />
+          <input id="post-title" maxLength={120} placeholder="What you found, and where" value={title} onChange={(e) => setTitle(e.target.value)} className={INPUT} />
         </Row>
         <Row label="What did you see?" htmlFor="post-body">
           <textarea
             id="post-body"
-            required
             maxLength={2000}
             rows={4}
             placeholder="Where you were, what the tick looked like, what you did."
@@ -118,37 +95,64 @@ export function NewPostForm({
         </Row>
       </Group>
 
-      <Group footer="Optional. Location data in the photo is removed before it's posted.">
-        <PhotoField photo={photo} onChange={setPhoto} />
+      <Group footer={`Up to ${MAX_PHOTOS}. Location data in photos is removed before they're posted.`}>
+        <PhotosField photos={photos} onChange={setPhotos} />
       </Group>
 
-      <Group footer="Don't include personal information.">
-        <Row label="Display name" htmlFor="post-author">
-          <input id="post-author" required maxLength={40} autoComplete="nickname" placeholder="First name or nickname" value={author} onChange={(e) => setAuthor(e.target.value)} className={INPUT} />
-        </Row>
-      </Group>
+      <p className="px-4 type-footnote text-muted-foreground">Posting as {author}. Don&apos;t include personal information.</p>
     </form>
   );
 }
 
-// A photo of the tick: a tap opens the camera or the photo library (iOS offers both). The picked photo is
-// resized to a JPEG before upload, and its preview has a remove button.
-function PhotoField({ photo, onChange }: { photo?: File; onChange: (photo?: File) => void }) {
+// "Use my location" only picks the town around you; the coordinates stay on the phone.
+function LocateRow({ onTown }: { onTown: (town: Town) => void }) {
+  const geo = useGeolocation();
+  const [finding, setFinding] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [found, setFound] = useState<string | null>(null);
+
+  async function locate() {
+    setError(null);
+    const coords = await geo.request();
+    if (!coords) return;
+    setFinding(true);
+    try {
+      const town = await findNearestTown(coords.lat, coords.lng);
+      onTown(town);
+      setFound(town.name);
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setFinding(false);
+    }
+  }
+
+  const busy = geo.loading || finding;
+  return (
+    <Row label="Location">
+      <Button type="button" variant="plain" size="sm" className="-ml-3.5 self-start" onClick={locate} disabled={busy}>
+        {busy ? <Loader2 className="size-4 animate-spin" aria-hidden /> : <LocateFixed className="size-4" aria-hidden />}
+        {found ? `Town set to ${found}` : "Use my location"}
+      </Button>
+      {(geo.error ?? error) && <p className="pb-2 type-footnote text-destructive">{geo.error ?? error}</p>}
+    </Row>
+  );
+}
+
+// Photos of the tick: a tap opens the camera or the photo library (iOS offers both). Each pick is resized to a
+// JPEG before upload (lib/photo.ts), and every preview has a remove button.
+function PhotosField({ photos, onChange }: { photos: File[]; onChange: (photos: File[]) => void }) {
   const [preparing, setPreparing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const preview = useMemo(() => photo && URL.createObjectURL(photo), [photo]);
-  useEffect(
-    () => () => {
-      if (preview) URL.revokeObjectURL(preview);
-    },
-    [preview],
-  );
+  const previews = useMemo(() => photos.map((p) => URL.createObjectURL(p)), [photos]);
+  useEffect(() => () => previews.forEach((url) => URL.revokeObjectURL(url)), [previews]);
 
-  async function pick(file: File) {
+  async function pick(files: File[]) {
     setPreparing(true);
     setError(null);
     try {
-      onChange(await preparePhoto(file));
+      const ready = await Promise.all(files.slice(0, MAX_PHOTOS - photos.length).map(preparePhoto));
+      onChange([...photos, ...ready]);
     } catch (err) {
       setError((err as Error).message);
     } finally {
@@ -158,38 +162,45 @@ function PhotoField({ photo, onChange }: { photo?: File; onChange: (photo?: File
 
   return (
     <div className="flex flex-col gap-2 p-3">
-      {photo && preview ? (
-        <div className="relative">
-          {/* eslint-disable-next-line @next/next/no-img-element -- a local preview (blob: URL) */}
-          <img src={preview} alt="Your photo" className="max-h-64 w-full rounded-xl bg-fill object-cover" />
-          <button
-            type="button"
-            onClick={() => onChange(undefined)}
-            aria-label="Remove photo"
-            className="glass pressable absolute top-2 right-2 grid size-9 place-items-center rounded-full text-foreground"
-          >
-            <X className="size-[18px]" strokeWidth={2.4} aria-hidden />
-          </button>
-        </div>
-      ) : (
+      {photos.length > 0 && (
+        <ul className="grid grid-cols-2 gap-2">
+          {photos.map((photo, i) => (
+            <li key={previews[i]} className="relative">
+              {/* eslint-disable-next-line @next/next/no-img-element -- a local preview (blob: URL) */}
+              <img src={previews[i]} alt={`Your photo ${i + 1}`} className="aspect-square w-full rounded-xl bg-fill object-cover" />
+              <button
+                type="button"
+                onClick={() => onChange(photos.filter((p) => p !== photo))}
+                aria-label={`Remove photo ${i + 1}`}
+                className="glass pressable absolute top-2 right-2 grid size-9 place-items-center rounded-full text-foreground"
+              >
+                <X className="size-[18px]" strokeWidth={2.4} aria-hidden />
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+      {photos.length < MAX_PHOTOS && (
         <label
           className={cn(
-            "pressable flex min-h-28 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-xl border-2 border-dashed border-separator text-primary",
+            "pressable flex cursor-pointer flex-col items-center justify-center gap-1.5 rounded-xl border-2 border-dashed border-separator text-primary",
+            photos.length ? "min-h-16" : "min-h-28",
             "focus-within:ring-2 focus-within:ring-ring/60",
             preparing && "pointer-events-none opacity-60",
           )}
         >
           {preparing ? <Loader2 className="size-7 animate-spin" aria-hidden /> : <ImagePlus className="size-7" strokeWidth={2} aria-hidden />}
-          <span className="type-headline">{preparing ? "Adding photo…" : "Add a photo of the tick"}</span>
-          <span className="type-footnote text-muted-foreground">Take one or choose from your library</span>
+          <span className="type-headline">{preparing ? "Adding photos…" : photos.length ? "Add another photo" : "Add photos of the tick"}</span>
+          {!photos.length && <span className="type-footnote text-muted-foreground">Take one or choose from your library</span>}
           <input
             type="file"
             accept="image/*"
+            multiple
             className="sr-only"
             disabled={preparing}
             onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) void pick(file);
+              const files = Array.from(e.target.files ?? []);
+              if (files.length) void pick(files);
               e.target.value = "";
             }}
           />

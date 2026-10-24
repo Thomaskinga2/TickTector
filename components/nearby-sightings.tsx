@@ -24,7 +24,7 @@ export function NearbySightings({ townId }: { townId: string }) {
             <li key={post.id}>
               <Link href={`/forum/${post.id}`} className="flex items-center gap-3 py-2.5 first:pt-0">
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate type-headline">{post.title}</span>
+                  <span className="block truncate type-headline">{post.title || post.body || "Photo sighting"}</span>
                   <span className="block type-footnote text-muted-foreground">
                     {post.author} · {formatRelative(post.createdAt)}
                   </span>

@@ -6,10 +6,11 @@ import { cn } from "@/lib/utils";
 
 // The iOS share symbol. Phones get the native share sheet; everywhere else (or if sharing fails) the link is
 // copied, and Tick confirms either way. Cancelling the share sheet is not an error and shows nothing.
-export function ShareButton({ title, text, className }: { title: string; text?: string; className?: string }) {
+// `path` shares another page than this one (a post in the forum feed).
+export function ShareButton({ title, text, path, className }: { title: string; text?: string; path?: string; className?: string }) {
   async function share() {
     // A clean link: no hash or tracking bits, just the page.
-    const url = `${window.location.origin}${window.location.pathname}`;
+    const url = `${window.location.origin}${path ?? window.location.pathname}`;
     const data = { title, text: text ? `${title}. ${text}` : title, url };
 
     if (navigator.share && (!navigator.canShare || navigator.canShare(data))) {

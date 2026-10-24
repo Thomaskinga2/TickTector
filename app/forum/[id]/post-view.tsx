@@ -3,10 +3,11 @@
 import { useState } from "react";
 import { CommentThread } from "@/components/comment-thread";
 import { ForumPostCard } from "@/components/forum-post-card";
+import { ForumNotice } from "@/components/forum-post-list";
 import { Page, Section } from "@/components/page";
-import { Disclaimer, slotStatus } from "@/components/states";
+import { slotStatus } from "@/components/states";
 import { toast } from "@/components/toaster";
-import { addComment, getComments, getPost } from "@/lib/services/forum";
+import { addComment, getComments, getPost, reportPost } from "@/lib/services/forum";
 import type { ForumComment } from "@/lib/types";
 import { useAsync } from "@/lib/use-async";
 
@@ -21,19 +22,22 @@ export function PostView({ postId }: { postId: string }) {
       {slotStatus(postSlot, !post, "This post doesn't exist or was removed.") ??
         (post && (
           <>
-            <ForumPostCard post={post} />
-            <Section title="Comments">
-              <CommentThread
-                comments={comments && [...comments, ...sent.filter((s) => !comments.some((c) => c.id === s.id))]}
-                {...commentsSlot}
-                onSend={async (body, author) => {
-                  const comment = await addComment(postId, body, author);
-                  setSent((prev) => [...prev, comment]);
-                  toast("Comment added");
-                }}
-              />
-            </Section>
-            <Disclaimer />
+            <ForumPostCard post={post} full />
+            <div id="comments" className="scroll-mt-20">
+              <Section title="Comments">
+                <CommentThread
+                  comments={comments && [...comments, ...sent.filter((s) => !comments.some((c) => c.id === s.id))]}
+                  {...commentsSlot}
+                  onSend={async (body) => {
+                    const comment = await addComment(postId, body);
+                    setSent((prev) => [...prev, comment]);
+                    toast("Comment added");
+                  }}
+                  onReport={(commentId) => reportPost(postId, commentId)}
+                />
+              </Section>
+            </div>
+            <ForumNotice />
           </>
         ))}
     </Page>

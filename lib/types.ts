@@ -54,32 +54,82 @@ export type HeatmapPoint = { townId: string; lat: number; lng: number; value: nu
 
 export type ScanResult = { species: string | null; confidence: number; advice: string };
 
-// Forum: lat/lng are always rounded to 2 decimals (~1 km) before saving or showing.
+// Signed in with Google (lib/auth.ts). id is Google's account id; the email is never kept.
+export type SessionUser = { id: string; name: string; picture?: string };
+
+// Forum: a post carries its town and county only, never coordinates.
+// "text": written by a person. "scan": made by createScanPost() from a tick scan.
+export type ForumPostType = "text" | "scan";
+
+export const SCAN_SPECIES = ["deer-tick", "dog-tick", "lone-star-tick", "woodchuck-tick", "asian-longhorned-tick", "other", "unknown"] as const;
+export type ScanSpecies = (typeof SCAN_SPECIES)[number];
+export const SCAN_SPECIES_NAME: Record<ScanSpecies, string> = {
+  "deer-tick": "Blacklegged (deer) tick",
+  "dog-tick": "American dog tick",
+  "lone-star-tick": "Lone star tick",
+  "woodchuck-tick": "Woodchuck tick",
+  "asian-longhorned-tick": "Asian longhorned tick",
+  other: "Other tick",
+  unknown: "Unidentified tick",
+};
+export const SCAN_STAGES = ["larva", "nymph", "adult", "unknown"] as const;
+export type ScanStage = (typeof SCAN_STAGES)[number];
+
 export type ForumPost = {
   id: string;
+  type: ForumPostType;
   townId: string;
-  lat: number;
-  lng: number;
-  title: string;
-  body: string;
-  photoUrl?: string;
-  tickSpecies?: string;
-  author: string;
+  townName: string;
+  county: string;
+  title: string; // scan posts: the species name
+  body: string; // scan posts: the caption, or ""
+  photos: string[]; // up to 4 image URLs (/api/forum/photos/:id), EXIF removed
+  tickSpecies?: string; // text posts: what the writer typed, if anything
+  scan?: { species: ScanSpecies; confidence?: number; stage?: ScanStage; scannedAt: string };
+  author: string; // the signed-in Google user's name
+  authorPicture?: string; // their Google profile photo URL
   createdAt: string;
   commentCount: number;
+  likeCount: number;
 };
 
 export type ForumComment = { id: string; postId: string; body: string; author: string; createdAt: string };
 
+// A text post. Needs some text (title or body) or at least one photo.
 export type NewPostInput = {
   townId: string;
-  lat: number;
-  lng: number;
   title: string;
   body: string;
-  photo?: File;
+  photos: File[]; // 0–4
   tickSpecies?: string;
-  author: string;
+};
+
+// Scan → forum contract. The scan screen's Post button calls createScanPost() from lib/services/forum.ts:
+//
+//   import { createScanPost } from "@/lib/services/forum";
+//   const town = await findNearestTown(lat, lng); // lib/services/towns.ts, or any MA town name
+//   const post = await createScanPost({
+//     photo: file, // the tick photo: File/Blob, or a data:/blob: URL
+//     species: speciesIdFor(result.species) as ScanSpecies, // lib/tickdex.ts ids match
+//     confidence: result.confidence,
+//     stage: entry.stage, // the Tickdex catch (lib/tickdex.ts TickStage)
+//     location: { town: town.name, lat, lng },
+//     scannedAt: new Date().toISOString(),
+//     caption: "Found it on my sock after the hike", // optional
+//   });
+//   router.push(`/forum/${post.id}`);
+//
+// The person must be signed in with Google (the post is theirs); otherwise it throws "Sign in with Google to post".
+// It throws an Error whose message the button can show as-is, e.g. "Location is outside Massachusetts"
+// or "Invalid image: use a JPEG, PNG or WebP photo". lat/lng are dropped before upload and never stored.
+export type ScanPostInput = {
+  photo: Blob | string;
+  species: ScanSpecies;
+  confidence?: number; // 0–1
+  stage?: ScanStage;
+  location: { town: string; lat?: number; lng?: number };
+  scannedAt: string; // ISO date-time
+  caption?: string; // how the person feels about it, up to 500 characters, shown under the title
 };
 
 // The weather in a town right now (Open-Meteo), for the town page's date line.

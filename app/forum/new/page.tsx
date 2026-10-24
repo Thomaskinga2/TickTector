@@ -6,12 +6,14 @@ import { useRouter } from "next/navigation";
 import { useDragControls, type PanInfo } from "motion/react";
 import * as m from "motion/react-m";
 import { Loader2 } from "lucide-react";
+import { GoogleSignIn } from "@/components/google-sign-in";
 import { NEW_POST_FORM_ID, NewPostForm } from "@/components/new-post-form";
 import { Page } from "@/components/page";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { createPost } from "@/lib/services/forum";
 import { toast } from "@/components/toaster";
 import { smooth } from "@/lib/motion";
+import { useSession } from "@/lib/use-session";
 
 // Pull the grabber down this far (or flick it) to dismiss, as with iOS sheets.
 const DISMISS_PX = 120;
@@ -27,6 +29,8 @@ export default function NewPostPage() {
   const [ready, setReady] = useState(false);
   const close = () => router.push("/forum");
   const sheetRef = useRef<HTMLDivElement>(null);
+  // Posting needs a Google sign-in; signed out, the sheet shows the button instead of the form.
+  const { user, loaded } = useSession();
 
   // A dialog takes focus when it opens, and Escape closes it wherever focus is (it used to need focus inside).
   useEffect(() => {
@@ -82,21 +86,26 @@ export default function NewPostPage() {
             </Link>
           }
           trailing={
-            <Button type="submit" form={NEW_POST_FORM_ID} size="sm" disabled={!ready || submitting}>
+            <Button type="submit" form={NEW_POST_FORM_ID} size="sm" disabled={!user || !ready || submitting}>
               {submitting && <Loader2 className="size-4 animate-spin" aria-hidden />}
               Post
             </Button>
           }
         >
-          <NewPostForm
-            onSubmittingChange={setSubmitting}
-            onReadyChange={setReady}
-            onSubmit={async (input) => {
-              await createPost(input);
-              toast("Posted. Thanks for the tip!");
-              router.push("/forum");
-            }}
-          />
+          {user ? (
+            <NewPostForm
+              author={user.name}
+              onSubmittingChange={setSubmitting}
+              onReadyChange={setReady}
+              onSubmit={async (input) => {
+                await createPost(input);
+                toast("Posted. Thanks for the tip!");
+                router.push("/forum");
+              }}
+            />
+          ) : (
+            loaded && <GoogleSignIn prompt="Sign in with Google to post a sighting." />
+          )}
         </Page>
       </m.div>
     </div>

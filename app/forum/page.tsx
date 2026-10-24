@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
 import { Plus } from "lucide-react";
-import { ForumPostList } from "@/components/forum-post-list";
+import { ForumNotice, ForumPostList } from "@/components/forum-post-list";
+import { AccountRow } from "@/components/google-sign-in";
 import { buttonVariants } from "@/components/ui/button";
 import { EmptyState } from "@/components/states";
 import { Page } from "@/components/page";
+import { ScanPostComposer } from "@/components/scan-post-composer";
 import { TownSelect } from "@/components/town-select";
 import { getPosts } from "@/lib/services/forum";
 import { useAsync } from "@/lib/use-async";
@@ -30,7 +32,14 @@ export default function ForumPage() {
         </Link>
       }
     >
-      <p className="-mt-3 px-0.5 type-subhead text-muted-foreground">Ticks your neighbors found, shown within about 1 km.</p>
+      <p className="-mt-3 px-0.5 type-subhead text-muted-foreground">Ticks your neighbors found or scanned, town by town.</p>
+      <ForumNotice />
+      <AccountRow prompt="Sign in with Google to post and comment. Reading is open to everyone." />
+
+      {/* Opened by Scan's "Post tick" button (?post=<catch id>). */}
+      <Suspense fallback={null}>
+        <ScanPostComposer onPosted={slot.onRetry} />
+      </Suspense>
 
       <div className="flex flex-col gap-1.5">
         <div className="flex items-baseline justify-between px-1 type-footnote text-muted-foreground">
@@ -60,3 +69,4 @@ export default function ForumPage() {
     </Page>
   );
 }
+

@@ -3,17 +3,24 @@
 import { useState } from "react";
 import { ArrowUp, Loader2 } from "lucide-react";
 import { formatRelative } from "@/components/format";
+import { GoogleSignIn } from "@/components/google-sign-in";
 import { ReportButton } from "@/components/report-button";
 import { slotStatus, type SlotProps } from "@/components/states";
 import { Button } from "@/components/ui/button";
 import { List } from "@/components/ui/list";
 import type { ForumComment } from "@/lib/types";
+import { useSession } from "@/lib/use-session";
 
 export function CommentThread({
   comments,
   onSend,
+  onReport,
   ...slot
-}: { comments?: ForumComment[]; onSend: (body: string, author: string) => Promise<void> } & SlotProps) {
+}: {
+  comments?: ForumComment[];
+  onSend: (body: string) => Promise<void>;
+  onReport: (commentId: string) => Promise<unknown>;
+} & SlotProps) {
   // TODO: real-time chat: subscribe to new comments for this post (e.g. Supabase Realtime) and append them.
   const status = slotStatus(slot, !comments?.length, "No comments yet. Start the conversation.");
 
@@ -26,8 +33,8 @@ export function CommentThread({
               <p className="type-subhead font-semibold">
                 {c.author} <span className="font-normal text-muted-foreground">· {formatRelative(c.createdAt)}</span>
               </p>
-              <p className="type-body">{c.body}</p>
-              <ReportButton label={`Report comment by ${c.author}`} className="type-footnote" />
+              <p className="break-words whitespace-pre-line type-body">{c.body}</p>
+              <ReportButton label={`Report comment by ${c.author}`} onReport={() => onReport(c.id)} className="type-footnote" />
             </li>
           ))}
         </List>
@@ -37,10 +44,10 @@ export function CommentThread({
   );
 }
 
-// A Messages-style composer: the comment, a display name, and a round send button.
-function CommentForm({ onSend }: { onSend: (body: string, author: string) => Promise<void> }) {
+// A Messages-style composer: the comment and a round send button, posted as the signed-in Google user.
+function CommentForm({ onSend }: { onSend: (body: string) => Promise<void> }) {
+  const { user, loaded } = useSession();
   const [body, setBody] = useState("");
-  const [author, setAuthor] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -49,7 +56,7 @@ function CommentForm({ onSend }: { onSend: (body: string, author: string) => Pro
     setSending(true);
     setError(null);
     try {
-      await onSend(body, author);
+      await onSend(body);
       setBody("");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
@@ -57,6 +64,9 @@ function CommentForm({ onSend }: { onSend: (body: string, author: string) => Pro
       setSending(false);
     }
   }
+
+  if (!loaded) return null;
+  if (!user) return <GoogleSignIn prompt="Sign in with Google to comment." />;
 
   return (
     <form onSubmit={submit} className="flex flex-col gap-2 rounded-xl bg-card p-3">
@@ -74,16 +84,7 @@ function CommentForm({ onSend }: { onSend: (body: string, author: string) => Pro
         className="w-full resize-none bg-transparent px-1 type-body outline-none placeholder:text-muted-foreground"
       />
       <div className="flex items-center gap-2 border-t border-separator pt-2">
-        <input
-          aria-label="Display name"
-          placeholder="Your display name"
-          required
-          maxLength={40}
-          autoComplete="nickname"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-          className="h-9 min-w-0 flex-1 rounded-full bg-fill px-3 type-subhead outline-none placeholder:text-muted-foreground"
-        />
+        <p className="min-w-0 flex-1 truncate px-1 type-footnote text-muted-foreground">Commenting as {user.name}</p>
         <Button type="submit" size="icon-sm" disabled={sending} aria-label="Send comment">
           {sending ? <Loader2 className="size-4 animate-spin" aria-hidden /> : <ArrowUp className="size-5" strokeWidth={2.6} aria-hidden />}
         </Button>

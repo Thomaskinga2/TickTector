@@ -35,7 +35,7 @@ export const eBounce = (p: number): number => {
 export const WOBBLE = 0.65;
 export const HIT = 1.55;
 export const DIAGRAM_LEN = 3.2;
-// The tick starts embedded in the skin; it strains (TUG), pops free (POP), then flies into the vial
+// The beam grips the tick (TUG), lifts it off the surface (POP), then it flies into the vial (IN)
 export const TUG = 1.78;
 export const POP = 2.02;
 export const IN = 2.22;

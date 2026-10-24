@@ -1,4 +1,4 @@
-// A shaded, shadowed tick for the photo: light from the top left, a soft cast shadow on the skin,
+// A shaded, shadowed tick for the photo: light from the top left, a soft cast shadow on the surface,
 // jointed legs with a highlight, a domed body and a glossy shield. Used both on the live camera
 // and in the capture animation, so the hand-over between them is seamless.
 // Fixed game colours on purpose (see draw-kit.ts).
@@ -86,7 +86,7 @@ function drawLegs(c: Ctx, legs: number, phase: number, col: Rgb, shadow: boolean
   }
 }
 
-// The soft shadow the tick casts on the skin; grows and fades as it is lifted off
+// The soft shadow the tick casts on the surface; grows and fades as it is lifted off
 export function drawTick3dShadow(c: Ctx, x: number, y: number, look: Tick3dLook, pose: Tick3dPose = {}): void {
   const lift = pose.lift ?? 0;
   const fed = look.fed;
@@ -103,7 +103,7 @@ export function drawTick3dShadow(c: Ctx, x: number, y: number, look: Tick3dLook,
   }
   if (lift < 0.5) drawLegs(c, look.legs, pose.phase ?? 0, [0, 0, 0], true);
   c.restore();
-  // contact: a tight dark rim where the body presses on the skin
+  // contact: a tight dark rim where the body rests on the surface
   if (lift < 0.3) {
     c.save();
     c.translate(x, y);
@@ -203,26 +203,6 @@ export function drawTick3d(c: Ctx, x: number, y: number, look: Tick3dLook, pose:
   c.restore();
 }
 
-// Redness of the skin around the bite, scaled with the tick; kept faint so it reads as skin
-const HALO_ALPHA = 0.4;
-export function drawBiteHalo(c: Ctx, x: number, y: number, scale: number, alpha = 1): void {
-  const r = 30 * Math.max(0.6, scale);
-  const halo = c.createRadialGradient(x, y, 2, x, y, r);
-  halo.addColorStop(0, `rgba(205,70,60,${HALO_ALPHA * alpha})`);
-  halo.addColorStop(1, "rgba(205,70,60,0)");
-  c.fillStyle = halo;
-  c.beginPath();
-  c.arc(x, y, r, 0, Math.PI * 2);
-  c.fill();
-}
-
-// Where the mouthparts enter the skin, from the tick's centre (tick units times unit)
-const BITE_REACH = 22;
-export function biteOffset(look: Tick3dLook, unit: number): { x: number; y: number } {
-  const d = BITE_REACH * look.scale * unit;
-  return { x: d * Math.sin(look.angle), y: -d * Math.cos(look.angle) };
-}
-
 export function lookFor(sim: SimTick): Tick3dLook {
   return {
     species: sim.speciesId,
@@ -234,13 +214,11 @@ export function lookFor(sim: SimTick): Tick3dLook {
   };
 }
 
-// The attached tick as it sits on the skin: redness, cast shadow, tick. unit: pixels per tick unit.
-export function drawTickOnSkin(c: Ctx, x: number, y: number, look: Tick3dLook, unit: number, alpha = 1): void {
+// The removed tick lying on a surface: cast shadow, then the tick. unit: pixels per tick unit.
+export function drawTickOnSurface(c: Ctx, x: number, y: number, look: Tick3dLook, unit: number, alpha = 1): void {
   const scaled = { ...look, scale: look.scale * unit };
-  const bite = biteOffset(look, unit);
   c.save();
   c.globalAlpha = alpha;
-  drawBiteHalo(c, x + bite.x, y + bite.y, scaled.scale);
   drawTick3dShadow(c, x, y, scaled);
   drawTick3d(c, x, y, scaled);
   c.restore();

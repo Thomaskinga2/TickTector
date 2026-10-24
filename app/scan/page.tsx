@@ -29,14 +29,14 @@ function headingFor(o: CatchOutcome): string {
   return `TICKDEX · NO. ${String(o.dexNumber).padStart(3, "0")} · ${what}`;
 }
 
-// The sample has no photo; a small skin-coloured square keeps it on the same API path
+// The sample has no camera photo; a small paper-coloured square keeps it on the same API path
 function samplePhoto(): HTMLCanvasElement {
   const c = document.createElement("canvas");
   c.width = SAMPLE_PHOTO_SIZE;
   c.height = SAMPLE_PHOTO_SIZE;
   const ctx = c.getContext("2d");
   if (ctx) {
-    ctx.fillStyle = "#dfa983";
+    ctx.fillStyle = "#ece8df";
     ctx.fillRect(0, 0, SAMPLE_PHOTO_SIZE, SAMPLE_PHOTO_SIZE);
   }
   return c;
@@ -143,14 +143,14 @@ export default function ScanPage() {
     <Page title="Scan a tick">
       <section className="flex flex-col gap-4 rounded-xl border bg-card p-5">
         <p className="text-muted-foreground">
-          Point your camera at your skin. The scanner finds a tick, you catch it into your Tickdex, and you see where it sits in the tick life
-          cycle. Every try is a different tick.
+          Removed a tick? Put it on a plain surface, like a sheet of paper or a table, and point your camera at it. The scanner finds it, you
+          catch it into your Tickdex, and you see where it sits in the tick life cycle.
         </p>
         <Button size="lg" className="h-14 w-full text-base" onClick={start}>
           <ScanLine className="size-5" aria-hidden />
           Start scanning
         </Button>
-        <p className="text-sm font-medium">Demo: the tick is simulated on your skin.</p>
+        <p className="text-sm font-medium">Demo: a simulated tick appears on whatever you point at, and every try is a different tick.</p>
       </section>
       <Disclaimer />
 

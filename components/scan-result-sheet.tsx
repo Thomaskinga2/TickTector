@@ -29,7 +29,7 @@ export function ScanResultSheet({ entryId, offline, onScanAgain }: Props) {
       </div>
       <div className="flex flex-col text-xs leading-snug [&_p]:text-xs [&_p]:text-[#5b6957]">
         <p>
-          Demo: the tick is simulated on your skin.{offline && <span className="font-semibold"> Offline result.</span>}
+          Demo: the tick is simulated.{offline && <span className="font-semibold"> Offline result.</span>}
         </p>
         <Disclaimer />
       </div>

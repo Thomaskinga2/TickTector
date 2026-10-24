@@ -1,8 +1,8 @@
-// Checks the skin tracker on generated skin textures. Run: node scripts/check-skin-tracker.mjs
+// Checks the surface tracker on generated textures. Run: node scripts/check-surface-tracker.mjs
 // Plain .mjs on purpose: Node 24 loads the .ts module directly, and no test framework is needed.
-import { estimateShift, greyCrop, SKIN_TRACKER } from "../lib/capture/skin-tracker.ts";
+import { estimateShift, greyCrop, SURFACE_TRACKER } from "../lib/capture/surface-tracker.ts";
 
-const N = SKIN_TRACKER.SIZE;
+const N = SURFACE_TRACKER.SIZE;
 const BIG = 160;
 
 function rng(seed) {
@@ -13,8 +13,8 @@ function rng(seed) {
   };
 }
 
-// Blurred random blotches over a skin tone, like pores and creases seen up close
-function skin(seed, contrast = 1) {
+// Blurred random blotches, like paper fibres or wood grain seen up close
+function texture(seed, contrast = 1) {
   const R = rng(seed);
   const raw = new Float32Array(BIG * BIG).map(() => R());
   const out = new Float32Array(BIG * BIG);
@@ -65,7 +65,7 @@ function shiftBetween(a, b) {
 }
 
 // The picture moving right by d means the view origin moves left: content lands d further right
-const tex = skin(7);
+const tex = texture(7);
 const cases = [
   ["stays put on a still picture", () => {
     const s = shiftBetween(view(tex, 40, 40, { noise: 6, seed: 1 }), view(tex, 40, 40, { noise: 6, seed: 2 }));
@@ -91,8 +91,8 @@ const cases = [
     const s = shiftBetween(view(tex, 40, 40, { noise: 14, seed: 3 }), view(tex, 42, 39, { noise: 14, seed: 4 }));
     return [s.confident && Math.abs(s.dx + 2) < 0.5 && Math.abs(s.dy - 1) < 0.5, s];
   }],
-  ["reports no motion on featureless skin", () => {
-    const flat = skin(9, 0.02);
+  ["reports no motion on a featureless surface", () => {
+    const flat = texture(9, 0.02);
     const s = shiftBetween(view(flat, 40, 40), view(flat, 36, 40));
     return [!s.confident && s.dx === 0 && s.dy === 0, s];
   }],

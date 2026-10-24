@@ -1,6 +1,8 @@
-// A stand-in camera for testing without a phone: /scan?fakeCamera=1 (or still).
-// A 1280x720 canvas stream of skin seen up close, with sensor noise, a slow drift of the whole
-// picture and hand shake, so the skin tracker has something to follow.
+// A stand-in camera for testing without a phone: /scan?fakeCamera=1 (a random surface), or
+// paper, wood, stone, or still (no motion). A 1280x720 canvas stream of a plain surface seen up
+// close, with sensor noise, a slow drift of the whole picture and hand shake, so the surface
+// tracker has something to follow.
+import { paintSurface, SURFACES, type Surface } from "./surfaces";
 // Loaded with a dynamic import, so it is not in the normal bundle.
 
 export type FakeCamera = {
@@ -12,7 +14,7 @@ export type FakeCamera = {
 const FW = 1280;
 const FH = 720;
 const FPS = 30;
-const PAD = 60; // the skin is painted this much larger than the frame, so drift never shows an edge
+const PAD = 60; // the surface is painted this much larger than the frame, so drift never shows an edge
 const DRIFT = 26; // slow drift, frame pixels
 const NOISE_TILES = 4;
 
@@ -28,66 +30,6 @@ function rand(seed: number) {
     s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
     return s / 4294967296;
   };
-}
-
-// Inner forearm: warm gradient, creases, pores, fine hair and a few freckles
-function paintSkin(): HTMLCanvasElement {
-  const off = document.createElement("canvas");
-  off.width = FW + PAD * 2;
-  off.height = FH + PAD * 2;
-  const c = off.getContext("2d");
-  if (!c) return off;
-  const w = off.width;
-  const h = off.height;
-  const R = rand(3);
-  const g = c.createLinearGradient(0, 0, w, h);
-  g.addColorStop(0, "#e7b998");
-  g.addColorStop(0.6, "#d79f7b");
-  g.addColorStop(1, "#bf8462");
-  c.fillStyle = g;
-  c.fillRect(0, 0, w, h);
-  const ridge = c.createLinearGradient(0, 0, 0, h);
-  ridge.addColorStop(0, "rgba(120,60,40,.18)");
-  ridge.addColorStop(0.5, "rgba(255,235,215,.14)");
-  ridge.addColorStop(1, "rgba(110,55,35,.22)");
-  c.fillStyle = ridge;
-  c.fillRect(0, 0, w, h);
-  c.lineCap = "round";
-  for (let i = 0; i < 16; i++) {
-    const x = R() * w;
-    const y = R() * h;
-    c.strokeStyle = "rgba(140,80,55,.22)";
-    c.lineWidth = 1.2 + R() * 1.8;
-    c.beginPath();
-    c.moveTo(x, y);
-    c.quadraticCurveTo(x + (R() - 0.5) * 220, y + (R() - 0.5) * 50, x + (R() - 0.5) * 420, y + (R() - 0.5) * 90);
-    c.stroke();
-  }
-  for (let i = 0; i < 3500; i++) {
-    c.fillStyle = `rgba(130,70,45,${0.05 + R() * 0.12})`;
-    c.beginPath();
-    c.arc(R() * w, R() * h, 0.8 + R() * 1.4, 0, Math.PI * 2);
-    c.fill();
-  }
-  for (let i = 0; i < 220; i++) {
-    const x = R() * w;
-    const y = R() * h;
-    const len = 18 + R() * 30;
-    const a = 0.9 + (R() - 0.5) * 0.5;
-    c.strokeStyle = `rgba(70,40,25,${0.2 + R() * 0.25})`;
-    c.lineWidth = 0.8 + R() * 0.7;
-    c.beginPath();
-    c.moveTo(x, y);
-    c.quadraticCurveTo(x + Math.cos(a) * len * 0.5 + 3, y + Math.sin(a) * len * 0.5, x + Math.cos(a) * len, y + Math.sin(a) * len);
-    c.stroke();
-  }
-  for (let i = 0; i < 9; i++) {
-    c.fillStyle = `rgba(150,85,55,${0.25 + R() * 0.2})`;
-    c.beginPath();
-    c.arc(R() * w, R() * h, 2 + R() * 3, 0, Math.PI * 2);
-    c.fill();
-  }
-  return off;
 }
 
 function noiseTile(seed: number): HTMLCanvasElement {
@@ -111,11 +53,12 @@ function noiseTile(seed: number): HTMLCanvasElement {
 
 export function startFakeCamera(mode: string): FakeCamera {
   const still = mode === "still";
+  const kind: Surface = (SURFACES as readonly string[]).includes(mode) ? (mode as Surface) : SURFACES[Math.floor(Math.random() * SURFACES.length)];
   const canvas = document.createElement("canvas");
   canvas.width = FW;
   canvas.height = FH;
   const c = canvas.getContext("2d");
-  const skin = paintSkin();
+  const surface = paintSurface(kind, FW + PAD * 2, FH + PAD * 2, 3, 1.4);
   const tiles = Array.from({ length: NOISE_TILES }, (_, i) => noiseTile(i + 11));
   const t0 = performance.now();
   let n = 0;
@@ -132,7 +75,7 @@ export function startFakeCamera(mode: string): FakeCamera {
           x: Math.sin(t * 0.8) * DRIFT + Math.sin(t * 7.3) * 1.4 + Math.sin(t * 11.1) * 0.8,
           y: Math.cos(t * 0.6) * DRIFT * 0.6 + Math.cos(t * 8.2) * 1.2 + Math.sin(t * 12.7) * 0.7,
         };
-    c.drawImage(skin, at.x - PAD, at.y - PAD);
+    c.drawImage(surface, at.x - PAD, at.y - PAD);
     if (!still) {
       const pat = c.createPattern(tiles[n % NOISE_TILES], "repeat");
       if (pat) {

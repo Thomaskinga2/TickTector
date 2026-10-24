@@ -5,9 +5,9 @@ import type { DiagramSprites } from "./diagram-sprites";
 import type { DiagramInfo } from "./diagram-caption";
 import { drawDiagram } from "./draw-diagram";
 import { brackets, drawVial, pill, roundRect, rng, stampText, star, type CanvasFonts, type Ctx } from "./draw-kit";
-import { drawBiteHalo, drawTick3d, drawTick3dShadow, type Tick3dLook } from "./draw-tick-3d";
+import { drawTick3d, drawTick3dShadow, type Tick3dLook } from "./draw-tick-3d";
 import { blendMapping, openingClip, RING_LOCK, SURROUND, type Circle, type Mapping, type Point, type SceneView } from "./framing";
-import { biteAt, tickPose, vialPose } from "./poses";
+import { tickPose, vialPose } from "./poses";
 import {
   clamp,
   DROP,
@@ -37,7 +37,7 @@ export type SceneAssets = {
   dpr: number;
   fonts: CanvasFonts;
   sprites: DiagramSprites;
-  backdrop: HTMLCanvasElement; // the clean photo, or the painted forearm
+  backdrop: HTMLCanvasElement; // the clean photo, or the painted paper sample
   wipeR: number;
 };
 
@@ -107,33 +107,11 @@ function renderScene(c: Ctx, t: number, L: Timeline, a: SceneAssets, text: Scene
   const pw = pill(c, f, 16, 52, text.pills[0], "#2f7d4f");
   pill(c, f, 16 + pw + 8, 52, text.pills[1]);
 
-  // redness around the bite, then the bite mark once the tick is out
   const look = text.look;
-  const sc = Math.max(0.6, look.scale);
-  const bite = biteAt(look);
-  drawBiteHalo(c, bite.x, bite.y, look.scale);
-  if (t >= POP) {
-    c.fillStyle = "#8e1f1a";
-    c.beginPath();
-    c.arc(bite.x, bite.y, 2.6 * sc, 0, Math.PI * 2);
-    c.fill();
-  }
+  // where the tick leaves the surface: the lift-off burst centres here
+  const liftAt = { x: TICK.x, y: TICK.y - 8 * look.scale };
 
-  // skin tenting while the mouthparts are pulled
-  const tent = t >= TUG && t < POP + 0.08 ? Math.sin(seg(t, TUG, POP + 0.08) * Math.PI) : 0;
-  if (tent > 0) {
-    c.fillStyle = `rgba(255,220,195,${0.7 * tent})`;
-    c.beginPath();
-    c.ellipse(bite.x, bite.y - 4 * tent * sc, 10 * sc, (6 * tent + 2) * sc, 0, 0, Math.PI * 2);
-    c.fill();
-    c.strokeStyle = `rgba(150,70,50,${0.4 * tent})`;
-    c.lineWidth = 1;
-    c.beginPath();
-    c.ellipse(bite.x, bite.y + 2 * sc, 13 * sc, 5 * sc, 0, 0, Math.PI);
-    c.stroke();
-  }
-
-  // the tick's shadow on the skin, fading as it is lifted off
+  // the tick's shadow on the surface, fading as it is lifted off
   const tp = tickPose(t, look);
   const posed = tp ? { ...look, scale: look.scale * tp.s, angle: tp.rot } : null;
   if (tp && posed) drawTick3dShadow(c, tp.x, tp.y, posed, { lift: tp.lift, phase: tp.phase });
@@ -189,13 +167,13 @@ function renderScene(c: Ctx, t: number, L: Timeline, a: SceneAssets, text: Scene
     c.globalAlpha = 1;
   }
 
-  // pop: the moment the mouthparts come free
+  // lift-off: the moment the beam pulls the tick off the surface
   const pop = seg(t, POP, POP + 0.3);
   if (pop > 0 && pop < 1) {
     c.strokeStyle = `rgba(255,255,255,${0.9 * (1 - pop)})`;
     c.lineWidth = 3;
     c.beginPath();
-    c.arc(bite.x, bite.y, 6 + 26 * eOut(pop), 0, Math.PI * 2);
+    c.arc(liftAt.x, liftAt.y, 6 + 26 * eOut(pop), 0, Math.PI * 2);
     c.stroke();
     c.strokeStyle = `rgba(255,255,255,${1 - pop})`;
     c.lineWidth = 2.5;
@@ -204,13 +182,10 @@ function renderScene(c: Ctx, t: number, L: Timeline, a: SceneAssets, text: Scene
       const r0 = 10 + 14 * eOut(pop);
       const r1 = r0 + 8;
       c.beginPath();
-      c.moveTo(bite.x + Math.cos(an) * r0, bite.y + Math.sin(an) * r0);
-      c.lineTo(bite.x + Math.cos(an) * r1, bite.y + Math.sin(an) * r1);
+      c.moveTo(liftAt.x + Math.cos(an) * r0, liftAt.y + Math.sin(an) * r0);
+      c.lineTo(liftAt.x + Math.cos(an) * r1, liftAt.y + Math.sin(an) * r1);
       c.stroke();
     }
-  }
-  if (t >= POP - 0.02 && t < POP + 0.35) {
-    stampText(c, f, "POP!", TICK.x + 58, bite.y - 20 - 18 * eOut(pop), 24, "#ffffff", "#9a3a1a", eBack(seg(t, POP, POP + 0.15)), 1 - seg(t, POP + 0.25, POP + 0.35));
   }
 
   // tractor beam, strongest once the tick is free

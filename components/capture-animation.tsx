@@ -1,17 +1,17 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { makeCanvas, paintForearm, paintPhoto } from "@/lib/capture/backdrop";
+import { makeCanvas, paintPhoto, paintSample } from "@/lib/capture/backdrop";
 import type { DiagramInfo } from "@/lib/capture/diagram-caption";
 import { makeDiagramSprites } from "@/lib/capture/diagram-sprites";
 import { renderFrame, type Opening, type SceneAssets, type SceneText } from "@/lib/capture/draw-scene";
-import { drawTickOnSkin, type Tick3dLook } from "@/lib/capture/draw-tick-3d";
+import { drawTickOnSurface, type Tick3dLook } from "@/lib/capture/draw-tick-3d";
 import { CAPTURE_FONTS, captureFontVars, loadCaptureFonts } from "@/lib/capture/fonts";
 import { circleInSource, sceneView, tickFraming, wipeRadius, type Circle, type Mapping, type Point } from "@/lib/capture/framing";
 import { advanceClock, DROP, makeTimeline, OPEN_LEN, TICK, type Timeline } from "@/lib/capture/timeline";
 
 // What the scanner locked on: the frozen frame (clean, and with the simulated tick laid on it)
-// and where the tick sits in it, or the painted-forearm sample.
+// and where the tick sits in it, or the painted paper sample.
 // circle: the viewfinder circle on screen; from: the frame's on-screen (object-fit cover) mapping.
 export type CaptureSource =
   | { kind: "photo"; clean: HTMLCanvasElement; withTick: HTMLCanvasElement; at: Point; unit: number; from: Mapping; circle: Circle }
@@ -44,13 +44,13 @@ declare global {
   }
 }
 
-// The painted forearm with the tick on it, for the sample's opening (device pixels)
-function forearmWithTick(backdrop: HTMLCanvasElement, look: Tick3dLook, view: ReturnType<typeof sceneView>, dpr: number): HTMLCanvasElement {
+// The sample sheet with the tick on it, for the sample's opening (device pixels)
+function sampleWithTick(backdrop: HTMLCanvasElement, look: Tick3dLook, view: ReturnType<typeof sceneView>, dpr: number): HTMLCanvasElement {
   const out = makeCanvas(backdrop.width, backdrop.height);
   const c = out.getContext("2d");
   if (c) {
     c.drawImage(backdrop, 0, 0);
-    drawTickOnSkin(c, (view.ox + view.s * TICK.x) * dpr, (view.oy + view.s * TICK.y) * dpr, look, view.s * dpr);
+    drawTickOnSurface(c, (view.ox + view.s * TICK.x) * dpr, (view.oy + view.s * TICK.y) * dpr, look, view.s * dpr);
   }
   return out;
 }
@@ -64,8 +64,8 @@ function buildAssets(source: CaptureSource, look: Tick3dLook, canvas: HTMLCanvas
   canvas.height = Math.round(sh * dpr);
   const base = { view, dpr, fonts: CAPTURE_FONTS, sprites: makeDiagramSprites(dpr), wipeR: wipeRadius(view) };
   if (source.kind === "sample") {
-    const backdrop = paintForearm(view, dpr);
-    const opened = forearmWithTick(backdrop, look, view, dpr);
+    const backdrop = paintSample(view, dpr);
+    const opened = sampleWithTick(backdrop, look, view, dpr);
     const unit = { k: 1 / dpr, ox: 0, oy: 0 };
     const c = source.circle;
     const opening: Opening = {

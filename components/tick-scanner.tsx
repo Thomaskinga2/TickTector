@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 import { CameraCapture } from "@/components/camera-capture";
 import { Button } from "@/components/ui/button";
 import { stopCamera, type CameraOpen } from "@/lib/capture/camera";
-import { drawTickOnSkin, lookFor } from "@/lib/capture/draw-tick-3d";
+import { drawTickOnSurface, lookFor } from "@/lib/capture/draw-tick-3d";
 import {
   circleInSource,
   coverMapping,
@@ -21,7 +21,7 @@ import {
   type Point,
 } from "@/lib/capture/framing";
 import { cropCircle, grabFrame, sourceOf, withTick, type FrameSource } from "@/lib/capture/photo";
-import { estimateShift, greyCrop, SKIN_TRACKER } from "@/lib/capture/skin-tracker";
+import { estimateShift, greyCrop, SURFACE_TRACKER } from "@/lib/capture/surface-tracker";
 import { eOut, lerp, seg } from "@/lib/capture/timeline";
 import type { SimTick } from "@/lib/capture/tick-sim";
 
@@ -47,10 +47,10 @@ const FIND_SPREAD = 0.6;
 const GLIDE_S = 0.3;
 const HOLD_S = 0.5;
 const FADE_IN_S = 0.3;
-const TRACK_MS = 80; // skin tracker checks, about 12 a second
+const TRACK_MS = 80; // surface tracker checks, about 12 a second
 const TRACK_SIDE = 1.3; // tracker crop side, in circle radii
 const MAX_DRIFT = 0.55; // the tick never wanders further than this share of the radius
-const FOLLOW = 0.35; // how quickly the drawn tick catches up with the tracked skin, per frame
+const FOLLOW = 0.35; // how quickly the drawn tick catches up with the tracked surface, per frame
 const MAX_DPR = 3;
 const SWEEP_TURNS = 0.9; // radar sweep, turns per second
 
@@ -81,7 +81,7 @@ function bracketPath(hx: number, hy: number): string {
 const findAtFor = (sim: SimTick): number => FIND_FROM + FIND_SPREAD * (Math.abs(Math.sin(sim.dx * 91.7 + sim.dy * 37.3)) % 1);
 
 // The live scan: the camera (or a still photo) through a round viewfinder, the simulated tick
-// drawn on the skin and kept there by a tracker, a reticle that searches and locks on.
+// drawn on the surface and kept there by a tracker, a reticle that searches and locks on.
 // The surround is a fixed dark camera surface in both themes, so its text is fixed white.
 export function TickScanner({ camera, sim, onLock, onSample, onClose }: Props) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -158,20 +158,20 @@ export function TickScanner({ camera, sim, onLock, onSample, onClose }: Props) {
     return () => URL.revokeObjectURL(photoUrl);
   }, [photoUrl]);
 
-  // the scan: draw the tick on the skin every frame, track the skin, search, lock
+  // the scan: draw the tick on the surface every frame, track the surface, search, lock
   useEffect(() => {
     if (status !== "live" && status !== "photo") return;
     const overlay = overlayRef.current;
     const octx = overlay?.getContext("2d");
     const cropCanvas = document.createElement("canvas");
-    cropCanvas.width = SKIN_TRACKER.SIZE;
-    cropCanvas.height = SKIN_TRACKER.SIZE;
+    cropCanvas.width = SURFACE_TRACKER.SIZE;
+    cropCanvas.height = SURFACE_TRACKER.SIZE;
     const crop = cropCanvas.getContext("2d", { willReadFrequently: true });
     if (!overlay || !octx || !crop) return;
     const look = lookFor(sim);
     const findAt = findAtFor(sim);
     const source = (): FrameSource | null => sourceOf(status === "photo" ? imgRef.current : videoRef.current);
-    const offset = { x: 0, y: 0 }; // tracked skin motion, frame pixels
+    const offset = { x: 0, y: 0 }; // tracked surface motion, frame pixels
     const shown = { x: 0, y: 0 }; // what is drawn, easing after it
     let prev: Float32Array | null = null;
     let mapping: Mapping | null = null;
@@ -189,12 +189,12 @@ export function TickScanner({ camera, sim, onLock, onSample, onClose }: Props) {
       const t0 = performance.now();
       const fc = circleInSource(mapping, layoutRef.current.circle);
       const side = fc.r * TRACK_SIDE;
-      cropCircle(src, { x: fc.x, y: fc.y, r: side / 2 }, crop, SKIN_TRACKER.SIZE);
-      const { grey, texture } = greyCrop(crop.getImageData(0, 0, SKIN_TRACKER.SIZE, SKIN_TRACKER.SIZE));
+      cropCircle(src, { x: fc.x, y: fc.y, r: side / 2 }, crop, SURFACE_TRACKER.SIZE);
+      const { grey, texture } = greyCrop(crop.getImageData(0, 0, SURFACE_TRACKER.SIZE, SURFACE_TRACKER.SIZE));
       if (prev) {
-        const shift = estimateShift(prev, grey, SKIN_TRACKER.SIZE, texture);
+        const shift = estimateShift(prev, grey, SURFACE_TRACKER.SIZE, texture);
         if (shift.confident) {
-          const k = side / SKIN_TRACKER.SIZE;
+          const k = side / SURFACE_TRACKER.SIZE;
           offset.x += shift.dx * k;
           offset.y += shift.dy * k;
           const d = Math.hypot(offset.x, offset.y);
@@ -234,13 +234,13 @@ export function TickScanner({ camera, sim, onLock, onSample, onClose }: Props) {
       at = { x: fc.x + sim.dx * fc.r + shown.x, y: fc.y + sim.dy * fc.r + shown.y };
       const unitScreen = sceneView(sw, sh).s * VIEWFINDER_TICK_ZOOM;
       const p = mapPoint(m, at);
-      // the tick on the skin
+      // the tick on the surface
       const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
       if (overlay.width !== Math.round(sw * dpr)) overlay.width = Math.round(sw * dpr);
       if (overlay.height !== Math.round(sh * dpr)) overlay.height = Math.round(sh * dpr);
       octx.setTransform(dpr, 0, 0, dpr, 0, 0);
       octx.clearRect(0, 0, sw, sh);
-      drawTickOnSkin(octx, p.x, p.y, look, unitScreen, seg(tau, 0, FADE_IN_S));
+      drawTickOnSurface(octx, p.x, p.y, look, unitScreen, seg(tau, 0, FADE_IN_S));
       // the reticle: sweep, glide onto the tick, hold
       // while searching, the bracket rides the radar sweep's leading edge, in and out a little
       const turn = tau * SWEEP_TURNS * Math.PI * 2;
@@ -305,7 +305,7 @@ export function TickScanner({ camera, sim, onLock, onSample, onClose }: Props) {
           ? "Got it!"
           : search === "found"
             ? "Tick found! Hold still…"
-            : "Scanning your skin for ticks…";
+            : "Scanning for the tick…";
 
   return (
     <div ref={rootRef} className="fixed inset-0 z-[100] touch-none select-none overscroll-none text-white" style={{ background: SURROUND }}>
@@ -352,8 +352,8 @@ export function TickScanner({ camera, sim, onLock, onSample, onClose }: Props) {
 
       <div className="absolute inset-x-0 top-0 flex items-start justify-between gap-3 px-4 pt-[max(14px,env(safe-area-inset-top))]">
         <div className="flex flex-col">
-          <p className="text-lg font-semibold">Scan for ticks</p>
-          <p className="text-xs text-white/75">Demo: the tick is simulated on your skin.</p>
+          <p className="text-lg font-semibold">Scan your tick</p>
+          <p className="text-xs text-white/75">Demo: a simulated tick appears on whatever you point at.</p>
         </div>
         <button type="button" onClick={onClose} aria-label="Close the scanner" className="grid size-10 place-items-center rounded-full bg-white/15">
           <X className="size-5" aria-hidden />
@@ -371,7 +371,7 @@ export function TickScanner({ camera, sim, onLock, onSample, onClose }: Props) {
           <div className="flex w-full max-w-xs flex-col gap-2">
             <CameraCapture label="Use a photo" onCapture={(file) => setPhotoUrl(URL.createObjectURL(file))} />
             <Button variant="outline" className="h-11 text-foreground" onClick={() => onSample(c)}>
-              Use the sample arm
+              Use the sample
             </Button>
           </div>
         )}

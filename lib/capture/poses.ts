@@ -76,27 +76,19 @@ export type TickPose = {
   glow: number;
   stretch: number;
   phase: number;
-  lift: number; // 0 attached .. 1 off the skin (the shadow fades)
+  lift: number; // 0 lying on the surface .. 1 lifted off (the shadow fades)
 };
 export type TickPlacement = { scale: number; angle: number };
 
-const BITE_REACH = 22; // centre to mouthparts, tick units
-const STRAIGHTEN_AT = 1.5; // the beam turns the tick head-up before the pull
+const STRAIGHTEN_AT = 1.5; // the beam turns the tick head-up before lifting it
 
-// Where the mouthparts are in the skin: fixed for the whole catch
-export function biteAt(look: TickPlacement): { x: number; y: number } {
-  const d = BITE_REACH * look.scale;
-  return { x: TICK.x + d * Math.sin(look.angle), y: TICK.y - d * Math.cos(look.angle) };
-}
-
-// The tick hangs from its bite: it turns head-up about it, strains, pops free, flies to the vial
+// The removed tick lies loose on the surface: the beam turns it head-up, grips it (it jiggles and
+// stretches a little), lifts it off at POP, and it flies into the vial
 export function tickPose(t: number, look: TickPlacement): TickPose | null {
   if (t >= IN) return null;
   const sc = look.scale;
-  const bite = biteAt(look);
   const rot = look.angle * (1 - eInOut(seg(t, STRAIGHTEN_AT, TUG)));
-  let x = bite.x - BITE_REACH * sc * Math.sin(rot);
-  let y = bite.y + BITE_REACH * sc * Math.cos(rot);
+  let y = TICK.y;
   let s = 1;
   let glow = 0;
   let stretch = 0;
@@ -114,10 +106,9 @@ export function tickPose(t: number, look: TickPlacement): TickPose | null {
     const p = eIn(seg(t, POP, IN));
     glow = lerp(0.45, 1, seg(t, POP, POP + 0.08));
     s = lerp(1, 0.08, p);
-    x = lerp(bite.x, TICK.x, p);
-    y = lerp(bite.y + (BITE_REACH - 8) * sc, HOVER_Y - 26, p);
+    y = lerp(TICK.y - 8 * sc, HOVER_Y - 26, p);
     lift = 1;
     phase = t * 3;
   }
-  return { x, y, s, rot, glow, stretch, phase, lift };
+  return { x: TICK.x, y, s, rot, glow, stretch, phase, lift };
 }

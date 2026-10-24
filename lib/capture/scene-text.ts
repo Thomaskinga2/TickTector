@@ -20,7 +20,7 @@ export function captureText(sim: SimTick, answered: boolean, offline: boolean, s
   const name = shortName(sim.speciesName);
   const deer = sim.speciesId === "deer-tick";
   return {
-    pills: ["Photo check", sample ? "Sample arm" : "Simulated tick"],
+    pills: ["Photo check", sample ? "Sample photo" : "Simulated tick"],
     plateTitle: answered ? `Likely ${name}` : null,
     plateSub: `${stage.name} · ${sim.engorgement}`.toUpperCase(),
     look: lookFor(sim),

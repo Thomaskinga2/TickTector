@@ -18,7 +18,7 @@ export const MESSAGES = {
   failed: "The camera could not start. Use a photo instead.",
 };
 
-// ?fakeCamera=1 (skin), paper, empty or still: read on the client only, never during prerender
+// ?fakeCamera=1 (a random surface), paper, wood, stone or still: read on the client only, never during prerender
 export function fakeCameraMode(): string | null {
   if (typeof window === "undefined") return null;
   return new URLSearchParams(window.location.search).get("fakeCamera");

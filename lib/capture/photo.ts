@@ -1,6 +1,6 @@
 // Frames and crops taken from the camera or a still photo: the tracker's crop, the frozen frame
 // with the simulated tick laid on it, the Tickdex thumbnail, and the file sent to /api/scan.
-import { drawTickOnSkin, type Tick3dLook } from "./draw-tick-3d";
+import { drawTickOnSurface, type Tick3dLook } from "./draw-tick-3d";
 import type { Circle, Point } from "./framing";
 
 export type FrameSource = { el: CanvasImageSource; w: number; h: number };
@@ -53,7 +53,7 @@ export function withTick(clean: HTMLCanvasElement, at: Point, look: Tick3dLook, 
   const c = out.getContext("2d");
   if (c) {
     c.drawImage(clean, 0, 0);
-    drawTickOnSkin(c, at.x, at.y, look, unit);
+    drawTickOnSurface(c, at.x, at.y, look, unit);
   }
   return out;
 }

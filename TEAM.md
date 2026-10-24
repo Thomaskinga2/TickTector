@@ -37,12 +37,15 @@ page (app/)  ->  component (components/)  ->  service (lib/services/)  ->  API r
 | Tick species | `/area/[town]` | `TickSpeciesList` | `getSpecies` (`risk.ts`) | `GET /api/species?town=` | Backend 2 | always on |
 | Action alerts | `/area/[town]` | `ActionAlerts` | `getAlerts` (`risk.ts`) | `GET /api/alerts?level=` | Backend 2 | always on |
 | Camera scan | `/scan` | `CameraCapture` | `analyzeTickPhoto` (`scan.ts`) | `POST /api/scan` | Backend 2 | `camera: true` |
-| Forum | `/forum`, `/forum/new`, `/forum/[id]` | `ForumPostList`, `ForumPostCard`, `NewPostForm`, `CommentThread` | `forum.ts` | `/api/forum/posts`, `/api/forum/posts/[id]`, `/api/forum/posts/[id]/comments`, `/api/forum/photos/[id]` | Backend 2 | `forum: true` |
+| Forum | `/forum`, `/forum/new`, `/forum/[id]` | `ForumPostList`, `ForumPostCard`, `NewPostForm`, `CommentThread` | `forum.ts` | `/api/forum/posts` (+ `/[id]`, `/[id]/comments`, `/[id]/like`, `/[id]/reports`), `/api/forum/photos/[id]`, `/api/forum/reports` | Backend 2 | `forum: true` |
+| Scan → forum post | `/scan` (Post button, not built yet) | none yet | `createScanPost` (`forum.ts`), contract `ScanPostInput` (`lib/types.ts`) | `POST /api/forum/posts` with `type=scan` | Backend 2 | always on |
 | TickQuest | `/quest` | page only | none | none | Frontend | `quest: true` |
 
 Flags live in `lib/features.ts`. A flag set to `false` shows "Coming soon"; flipping it to `true` is the only change needed to show the real component.
 
 Providers are picked by env vars (see `.env.example`): `GEOCODING_PROVIDER` (Backend 1) and `FORUM_STORE` (Backend 2). Only `mock` is implemented. The mock forum store keeps posts and their photos in memory, so they reset on every deploy.
+
+Forum rules: posts store a town and county only, never coordinates. Every photo goes through `cleanImage` (`lib/forum-images.ts`: JPEG/PNG/WebP, 10 MB, 4 per post, all EXIF removed with sharp). Moderators set `FORUM_MOD_TOKEN`, read `GET /api/forum/reports` and hide a post with `PATCH /api/forum/posts/[id]` (curl example in that route). Tests: `npm test`.
 
 ## Git
 

@@ -17,7 +17,7 @@ TickTector is a mobile-first web app. Search a town to see this week's tick risk
 | Tick species by town | `/area/[town]` | Live: deer and dog ticks statewide, lone star ticks on Cape Cod and the Islands |
 | "Did you know?" tick facts | `/area/[town]` | Live: a new fact each day, each quoted from Mass. DPH with a source link; three are computed from the newest DPH report |
 | Risk map with filters | `/map` | Live: TickTector's own vector map from Census boundaries, no tile server |
-| Sightings forum (posts with an optional photo, comments) | `/forum` | Live, in-memory (resets on each deploy); starts empty, real posts only |
+| Sightings forum (text and scan posts, up to 4 photos, likes, comments, share, reports) | `/forum` | Live, in-memory (resets on each deploy); starts empty, real posts only |
 | Towns near you | Home | Live: asks for your location on load (Census Geocoder); until then, approximate from your IP via Vercel's geo headers |
 | Tick photo scan | `/scan` | Coming soon (`features.camera`) |
 | TickQuest | `/quest` | Coming soon (`features.quest`) |

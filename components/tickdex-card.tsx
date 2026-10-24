@@ -2,6 +2,7 @@
 
 import { useLayoutEffect, useRef } from "react";
 import { TickArt } from "@/components/tick-art";
+import { TickPhoto } from "@/components/tick-photo";
 import { playRegistration, type RegistrationKind } from "@/components/tickdex-registration";
 import { cn } from "@/lib/utils";
 import { firstCaught, formatDexNumber, formatShortDate, newestPhoto, stageLabel, type DexSlot } from "@/lib/tickdex-slots";
@@ -89,7 +90,7 @@ function CaughtFace({
             // eslint-disable-next-line @next/next/no-img-element -- data URL from localStorage, nothing to optimize
             <img src={photo} alt="" width={96} height={90} className="h-full w-full object-cover" />
           ) : (
-            <TickArt speciesId={slot.speciesId} stage={slot.stage} engorgement={newest?.engorgement} className="h-full w-full" />
+            <TickPhoto speciesId={slot.speciesId} stage={slot.stage} engorgement={newest?.engorgement} width={96} height={90} />
           )}
         </span>
         {newest?.isBeanDemo && <DemoBadge className="absolute top-0.5 right-0.5" />}

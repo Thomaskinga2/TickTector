@@ -2,7 +2,7 @@
 
 import { Drawer } from "@base-ui/react/drawer";
 import { X } from "lucide-react";
-import { TickArt } from "@/components/tick-art";
+import { TickPhoto, TickPhotoCredit } from "@/components/tick-photo";
 import { DemoBadge } from "@/components/tickdex-card";
 import { tickdexDisplay } from "@/components/tickdex-font";
 import { Disclaimer, LoadingState } from "@/components/states";
@@ -71,12 +71,13 @@ function SheetBody({ slot }: { slot: DexSlot }) {
           // eslint-disable-next-line @next/next/no-img-element -- data URL from localStorage, nothing to optimize
           <img src={photo} alt={`Your photo of a ${slot.speciesName.toLowerCase()} ${slot.stage}`} width={343} height={200} className="h-full w-full object-cover" />
         ) : (
-          <TickArt speciesId={slot.speciesId} stage={slot.stage} engorgement={newest?.engorgement} className="h-full w-full p-3" />
+          <TickPhoto speciesId={slot.speciesId} stage={slot.stage} engorgement={newest?.engorgement} width={343} height={200} />
         )}
         <span className="absolute top-2 left-2 rounded-full bg-tickdex-ink px-2.5 py-1 font-tickdex text-[14px] leading-none text-tickdex-gold">
           {formatDexNumber(slot.number)}
         </span>
       </div>
+      {!photo && <TickPhotoCredit speciesId={slot.speciesId} stage={slot.stage} className="-mt-4" />}
 
       <div className="flex flex-col gap-1">
         <Drawer.Title className="font-tickdex text-[26px] leading-tight">{slot.speciesName}</Drawer.Title>
@@ -103,7 +104,7 @@ function SheetBody({ slot }: { slot: DexSlot }) {
                   // eslint-disable-next-line @next/next/no-img-element -- data URL from localStorage, nothing to optimize
                   <img src={c.photo} alt="" width={44} height={44} className="h-full w-full object-cover" />
                 ) : (
-                  <TickArt speciesId={c.speciesId} stage={c.stage} engorgement={c.engorgement} className="h-full w-full" />
+                  <TickPhoto speciesId={c.speciesId} stage={c.stage} engorgement={c.engorgement} width={44} height={44} />
                 )}
               </span>
               <span className="flex min-w-0 flex-1 flex-col">

@@ -43,6 +43,22 @@ Flags live in `lib/features.ts`. A flag set to `false` shows "Coming soon"; flip
 
 Providers are picked by env vars (see `.env.example`): `GEOCODING_PROVIDER` (Backend 1) and `FORUM_STORE` (Backend 2). Only `mock` is implemented. The mock forum store keeps posts in memory, so they reset on every deploy.
 
+## Kiro specs for the remaining work
+
+Each spec in `.kiro/specs/` has its `requirements.md` written. Build it in Kiro:
+
+1. On your branch, open the spec in Kiro (Specs panel) and review `requirements.md`. Edit it if the team decides differently.
+2. Ask Kiro to create `design.md`, review it, then ask for `tasks.md`.
+3. Run the tasks in Kiro one by one. `npm run build` passes after each, then commit.
+
+| Spec | Owner | Turns on |
+|---|---|---|
+| `real-location` | Backend 1 | `geolocation` |
+| `risk-and-map` | Backend 1 | `heatmap` |
+| `local-species-alerts` | Backend 2 | — |
+| `tick-scan` | Backend 2 | `camera` |
+| `forum-storage` | Backend 2 | `FORUM_STORE=supabase` |
+
 ## Git
 
 ```bash

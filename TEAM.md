@@ -32,7 +32,7 @@ page (app/)  ->  component (components/)  ->  service (lib/services/)  ->  API r
 | Town search | `/` | `TownSearch` | `searchTowns` (`towns.ts`) | `GET /api/towns?q=` | Backend 1 | always on |
 | My location | `/`, `/forum/new` | `LocationButton`, `useGeolocation` | `findNearestTown` (`towns.ts`) | `GET /api/towns/nearest?lat=&lng=` | Backend 1 | `geolocation: true` (on) |
 | Risk gauge | `/area/[town]` | `RiskGauge` | `getWeeklyRisk` (`risk.ts`) | `GET /api/risk?town=` | Backend 1 | always on |
-| Charts | `/`, `/area/[town]` | `StatewideSnapshot`, `TownCharts`, `charts.tsx` | `getStatewideStats`, `getTownStats` (`stats.ts`) | `GET /api/stats/statewide`, `GET /api/stats?town=` | Backend 1 | always on |
+| Charts | `/area/[town]` | `TownCharts`, `charts.tsx` | `getStatewideStats`, `getTownStats` (`stats.ts`) | `GET /api/stats/statewide`, `GET /api/stats?town=` | Backend 1 | always on |
 | Risk map | `/map`, `/area/[town]` | `Heatmap`, `MapLegend` | `getHeatmap`, `getMapShapes` (`heatmap.ts`) | `GET /api/heatmap` + `public/geo/ma-towns.json` | Backend 1 | `heatmap: true` (on) |
 | Tick species | `/area/[town]` | `TickSpeciesList` | `getSpecies` (`risk.ts`) | `GET /api/species?town=` | Backend 2 | always on |
 | Action alerts | `/area/[town]` | `ActionAlerts` | `getAlerts` (`risk.ts`) | `GET /api/alerts?level=` | Backend 2 | always on |

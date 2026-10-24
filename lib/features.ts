@@ -3,4 +3,6 @@ export const features = {
   geolocation: false,
   heatmap: false,
   camera: false,
+  forum: true,
+  quest: false,
 };

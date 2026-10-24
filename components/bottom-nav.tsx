@@ -3,13 +3,15 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { House, Map, ScanLine, type LucideIcon } from "lucide-react";
+import { Compass, House, Map, MessagesSquare, ScanLine, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const ITEMS: { href: string; label: string; icon: LucideIcon }[] = [
   { href: "/", label: "Home", icon: House },
   { href: "/map", label: "Map", icon: Map },
   { href: "/scan", label: "Scan", icon: ScanLine },
+  { href: "/forum", label: "Forum", icon: MessagesSquare },
+  { href: "/quest", label: "Quest", icon: Compass },
 ];
 
 export function BottomNav() {

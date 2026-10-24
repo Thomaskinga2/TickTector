@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Loader2, LocateFixed } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { features } from "@/lib/features";
@@ -14,22 +14,6 @@ export function LocationButton({ onTown, onError }: { onTown: (town: Town) => vo
   const [lookupError, setLookupError] = useState<string | null>(null);
   const [lookingUp, setLookingUp] = useState(false);
 
-  useEffect(() => {
-    if (!geo.coords) return;
-    setLookingUp(true);
-    setLookupError(null);
-    findNearestTown(geo.coords.lat, geo.coords.lng)
-      .then(onTown, (err: Error) => setLookupError(err.message))
-      .finally(() => setLookingUp(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [geo.coords]);
-
-  const error = geo.error ?? lookupError;
-  useEffect(() => {
-    if (error) onError?.();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [error]);
-
   if (!features.geolocation) {
     return (
       <Button variant="outline" disabled className="h-12 w-full text-base">
@@ -39,10 +23,26 @@ export function LocationButton({ onTown, onError }: { onTown: (town: Town) => vo
     );
   }
 
+  async function locate() {
+    setLookupError(null);
+    const coords = await geo.request();
+    if (!coords) return onError?.();
+    setLookingUp(true);
+    try {
+      onTown(await findNearestTown(coords.lat, coords.lng));
+    } catch (err) {
+      setLookupError((err as Error).message);
+      onError?.();
+    } finally {
+      setLookingUp(false);
+    }
+  }
+
   const busy = geo.loading || lookingUp;
+  const error = geo.error ?? lookupError;
   return (
     <div className="flex flex-col gap-2">
-      <Button variant="outline" className="h-12 w-full text-base" onClick={geo.request} disabled={busy}>
+      <Button variant="outline" className="h-12 w-full text-base" onClick={locate} disabled={busy}>
         {busy ? <Loader2 className="size-5 animate-spin" aria-hidden /> : <LocateFixed className="size-5" aria-hidden />}
         {busy ? "Finding your town…" : "Use my location"}
       </Button>

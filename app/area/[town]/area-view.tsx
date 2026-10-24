@@ -1,25 +1,19 @@
 "use client";
 
-import Link from "next/link";
 import { ExternalLink } from "lucide-react";
-import { ActionAlerts } from "@/components/action-alerts";
-import { Heatmap, MapLegend } from "@/components/heatmap";
 import { Page, Section } from "@/components/page";
 import { RiskGauge } from "@/components/risk-gauge";
 import { Disclaimer, slotStatus } from "@/components/states";
 import { TickSpeciesList } from "@/components/tick-species-list";
-import { getHeatmap } from "@/lib/services/heatmap";
-import { getAlerts, getSpecies, getWeeklyRisk } from "@/lib/services/risk";
+import { getSpecies, getWeeklyRisk } from "@/lib/services/risk";
 import { getTownStats } from "@/lib/services/stats";
 import { getWeather } from "@/lib/services/weather";
-import type { RiskLevel } from "@/lib/types";
 import { useAsync } from "@/lib/use-async";
 
 export function AreaView({ townId }: { townId: string }) {
   const { data: stats } = useAsync(() => getTownStats(townId), [townId]);
   const { data: risk, ...riskSlot } = useAsync(() => getWeeklyRisk(townId), [townId]);
   const { data: species, ...speciesSlot } = useAsync(() => getSpecies(townId), [townId]);
-  const { data: points, ...mapSlot } = useAsync(() => getHeatmap(), []);
   const town = stats?.town;
 
   return (
@@ -53,21 +47,8 @@ export function AreaView({ townId }: { townId: string }) {
         </blockquote>
       )}
 
-      {risk && (
-        <Section title="What to do this week">
-          <AlertsFor level={risk.level} />
-        </Section>
-      )}
-
       <Section title="Ticks in this area">
         <TickSpeciesList species={species} {...speciesSlot} />
-      </Section>
-
-      <Section title="Risk map">
-        <Link href="/map" aria-label="Open the full risk map" className="flex flex-col gap-2 rounded-lg border bg-card p-2">
-          <Heatmap points={points} compact county={town?.county} selectedTownId={townId} {...mapSlot} />
-        </Link>
-        <MapLegend />
       </Section>
 
       <Disclaimer />
@@ -85,9 +66,4 @@ function TodayWeather({ townId }: { townId: string }) {
       <p className="text-muted-foreground">{weather.ticks}</p>
     </section>
   );
-}
-
-function AlertsFor({ level }: { level: RiskLevel }) {
-  const { data: alerts, ...slot } = useAsync(() => getAlerts(level), [level]);
-  return <ActionAlerts alerts={alerts} {...slot} />;
 }

@@ -35,9 +35,9 @@ page (app/)  ->  component (components/)  ->  service (lib/services/)  ->  API r
 | Town info, tick fact | `/area/[town]` | `AreaView` | `getTownStats` (`stats.ts`) | `GET /api/stats?town=` | Backend 1 | always on |
 | Weather today | `/area/[town]` | `AreaView` | `getWeather` (`weather.ts`) | `GET /api/weather?town=` (Open-Meteo, no key) | Backend 1 | always on |
 | Charts | none (removed from pages) | `TownCharts`, `StatewideSnapshot`, `charts.tsx` | `getStatewideStats` (`stats.ts`) | `GET /api/stats/statewide` | Backend 1 | not shown |
-| Risk map | `/map`, `/area/[town]` | `Heatmap`, `MapLegend` | `getHeatmap`, `getMapShapes` (`heatmap.ts`) | `GET /api/heatmap` + `public/geo/ma-towns.json` | Backend 1 | `heatmap: true` (on) |
+| Risk map | `/map` | `Heatmap`, `MapLegend` | `getHeatmap`, `getMapShapes` (`heatmap.ts`) | `GET /api/heatmap` + `public/geo/ma-towns.json` | Backend 1 | `heatmap: true` (on) |
 | Tick species | `/area/[town]` | `TickSpeciesList` | `getSpecies` (`risk.ts`) | `GET /api/species?town=` | Backend 2 | always on |
-| Action alerts | `/area/[town]` | `ActionAlerts` | `getAlerts` (`risk.ts`) | `GET /api/alerts?level=` | Backend 2 | always on |
+| Action alerts | none (removed from pages) | `ActionAlerts` | `getAlerts` (`risk.ts`) | `GET /api/alerts?level=` | Backend 2 | not shown |
 | Camera scan | `/scan` | `CameraCapture` | `analyzeTickPhoto` (`scan.ts`) | `POST /api/scan` | Backend 2 | `camera: true` |
 | Forum | `/forum`, `/forum/new`, `/forum/[id]` | `ForumPostList`, `ForumPostCard`, `NewPostForm`, `CommentThread` | `forum.ts` | `/api/forum/posts`, `/api/forum/posts/[id]`, `/api/forum/posts/[id]/comments` | Backend 2 | `forum: true` |
 | TikQuest | `/quest` | page only | none | none | Frontend | `quest: true` |

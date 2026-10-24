@@ -140,3 +140,38 @@
     @apply font-sans;
   }
 }
+
+/* ==== Tickdex (Quest tab) ====================================================
+   The capture game's card look (reference/capture-preview.html), used only by the Tickdex. */
+:root {
+  --tickdex-paper: #fbf8ef;
+  --tickdex-card: #f1ebdc;
+  --tickdex-edge: #d6ccb2;
+  --tickdex-gold: #e2b23c;
+  --tickdex-ink: #1d2a1c;
+  --tickdex-night: #1c2e25;
+  --tickdex-shadow: #0f1c16;
+}
+
+@theme inline {
+  --color-tickdex-paper: var(--tickdex-paper);
+  --color-tickdex-card: var(--tickdex-card);
+  --color-tickdex-edge: var(--tickdex-edge);
+  --color-tickdex-gold: var(--tickdex-gold);
+  --color-tickdex-ink: var(--tickdex-ink);
+  --color-tickdex-night: var(--tickdex-night);
+  --color-tickdex-shadow: var(--tickdex-shadow);
+}
+
+/* Lilita One is loaded by next/font in components/tickdex-font.ts as --font-lilita. */
+@utility font-tickdex {
+  font-family: var(--font-lilita), "Arial Rounded MT Bold", system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+@utility backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+/* ==== end Tickdex ========================================================== */

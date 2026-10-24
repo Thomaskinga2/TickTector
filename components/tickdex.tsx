@@ -36,16 +36,17 @@ function registrationFor(catches: TickdexCatch[], dex: Dex, newId: string | null
 
 export function Tickdex() {
   const searchParams = useSearchParams();
-  // Read once: ?new= is removed from the URL below, but this visit should still celebrate it.
-  const [visit] = useState(() => ({
-    newId: searchParams.get("new"),
-    isDemo: searchParams.get("demo") === "1",
-    openedAt: Date.now(),
-  }));
+  const newParam = searchParams.get("new");
+  const isDemo = searchParams.get("demo") === "1";
+  // Keep the last ?new= after it is dropped from the URL below. The route can stay mounted while hidden
+  // (Cache Components), so this follows each new value rather than reading the URL once.
+  const [newId, setNewId] = useState(newParam);
+  if (newParam && newParam !== newId) setNewId(newParam);
+  const [openedAt] = useState(() => Date.now());
   const catches = useTickdex();
   const isMounted = useIsMounted();
   const dex = useMemo(() => buildDex(catches), [catches]);
-  const target = useMemo(() => registrationFor(catches, dex, visit.newId, visit.openedAt), [catches, dex, visit]);
+  const target = useMemo(() => registrationFor(catches, dex, newId, openedAt), [catches, dex, newId, openedAt]);
   // The key stays set while the sheet animates closed, so its content does not vanish mid-slide.
   const [sheet, setSheet] = useState<{ key: string; open: boolean } | null>(null);
   const openSheet = useCallback((key: string) => setSheet({ key, open: true }), []);
@@ -56,7 +57,7 @@ export function Tickdex() {
     if (!url.searchParams.has("new")) return;
     url.searchParams.delete("new");
     window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
-  }, []);
+  }, [newParam]);
 
   if (!isMounted) return <TickdexSkeleton />;
 
@@ -83,7 +84,7 @@ export function Tickdex() {
           onOpen={openSheet}
         />
       )}
-      {visit.isDemo && <TickdexDemoTools catchCount={dex.totalCatches} />}
+      {isDemo && <TickdexDemoTools catchCount={dex.totalCatches} />}
       <TickdexSheet
         slot={sheet ? findSlot(dex, sheet.key) : undefined}
         open={sheet?.open ?? false}

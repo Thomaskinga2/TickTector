@@ -26,7 +26,7 @@ export function TickdexCard({ slot, registration, onOpen }: TickdexCardProps) {
   // Layout effect: the flip's first frame (silhouette side up) must be applied before the browser paints.
   useLayoutEffect(() => {
     if (!kind || !entryId || !rootRef.current || !innerRef.current || !faceRef.current) return;
-    return playRegistration(kind, { root: rootRef.current, inner: innerRef.current, face: faceRef.current, badge: badgeRef.current });
+    return playRegistration(kind, entryId, { root: rootRef.current, inner: innerRef.current, face: faceRef.current, badge: badgeRef.current });
   }, [kind, entryId]);
 
   if (slot.catches.length === 0) return <EmptyFace slot={slot} />;

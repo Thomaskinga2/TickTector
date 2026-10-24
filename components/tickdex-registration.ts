@@ -23,12 +23,22 @@ function prefersReducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+// Catches already celebrated in this page session. Effects re-run when a hidden route is shown again,
+// and the moment should play once per catch.
+const played = new Set<string>();
+
 // Starts the moment and returns a function that cancels it (for effect cleanup).
-export function playRegistration(kind: RegistrationKind, t: RegistrationTargets): () => void {
+export function playRegistration(kind: RegistrationKind, entryId: string, t: RegistrationTargets): () => void {
+  if (played.has(entryId)) return () => {};
   const reduced = prefersReducedMotion();
   scrollToCenter(t.root, reduced);
   const wait = reduced ? 0 : SCROLL_WAIT_MS;
   const animations = reduced ? playReduced(kind, t) : kind === "new" ? playFlip(t, wait) : playPulse(t, wait);
+  // Count it as played once it has run; a cleanup before then (React Strict Mode re-runs effects) lets it replay.
+  void Promise.all(animations.map((a) => a.finished)).then(
+    () => played.add(entryId),
+    () => {}, // cancelled
+  );
   return () => animations.forEach((a) => a.cancel());
 }
 

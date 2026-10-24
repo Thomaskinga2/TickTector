@@ -149,4 +149,6 @@ export const SCAN_RESULT: ScanResult = {
   species: "Deer tick (blacklegged tick)",
   confidence: 0.82,
   advice: "Remove it with fine-tipped tweezers, save it in a sealed bag, and watch for a rash or fever over the next 30 days.",
+  stage: "adult",
+  engorgement: "partly fed",
 };

@@ -4,6 +4,7 @@ import {
   DROP,
   eBounce,
   eIn,
+  eInOut,
   eOut,
   GROUND_Y,
   HIT,
@@ -67,28 +68,56 @@ export function vialPose(t: number, L: Timeline): VialPose {
   return v;
 }
 
-export type TickPose = { x: number; y: number; s: number; glow: number; stretch: number; phase: number };
+export type TickPose = {
+  x: number;
+  y: number;
+  s: number; // multiplies the tick's own scale
+  rot: number;
+  glow: number;
+  stretch: number;
+  phase: number;
+  lift: number; // 0 attached .. 1 off the skin (the shadow fades)
+};
+export type TickPlacement = { scale: number; angle: number };
 
-export function tickPose(t: number): TickPose | null {
+const BITE_REACH = 22; // centre to mouthparts, tick units
+const STRAIGHTEN_AT = 1.5; // the beam turns the tick head-up before the pull
+
+// Where the mouthparts are in the skin: fixed for the whole catch
+export function biteAt(look: TickPlacement): { x: number; y: number } {
+  const d = BITE_REACH * look.scale;
+  return { x: TICK.x + d * Math.sin(look.angle), y: TICK.y - d * Math.cos(look.angle) };
+}
+
+// The tick hangs from its bite: it turns head-up about it, strains, pops free, flies to the vial
+export function tickPose(t: number, look: TickPlacement): TickPose | null {
   if (t >= IN) return null;
-  let y = TICK.y;
+  const sc = look.scale;
+  const bite = biteAt(look);
+  const rot = look.angle * (1 - eInOut(seg(t, STRAIGHTEN_AT, TUG)));
+  let x = bite.x - BITE_REACH * sc * Math.sin(rot);
+  let y = bite.y + BITE_REACH * sc * Math.cos(rot);
   let s = 1;
   let glow = 0;
   let stretch = 0;
+  let lift = 0;
   let phase = t * 0.5;
   if (t > 1.6) glow = 0.45 * eOut(seg(t, 1.6, 1.78));
   if (t >= TUG && t < POP) {
     const p = seg(t, TUG, POP);
-    y -= 8 * eOut(p) - Math.sin(t * 70) * 1.5;
+    y -= (8 * eOut(p) - Math.sin(t * 70) * 1.5) * sc;
     stretch = 0.16 * p;
+    lift = 0.35 * p;
     phase = t * 3;
   }
   if (t >= POP) {
     const p = eIn(seg(t, POP, IN));
     glow = lerp(0.45, 1, seg(t, POP, POP + 0.08));
     s = lerp(1, 0.08, p);
-    y = lerp(TICK.y - 8, HOVER_Y - 26, p);
+    x = lerp(bite.x, TICK.x, p);
+    y = lerp(bite.y + (BITE_REACH - 8) * sc, HOVER_Y - 26, p);
+    lift = 1;
     phase = t * 3;
   }
-  return { x: TICK.x, y, s, glow, stretch, phase };
+  return { x, y, s, rot, glow, stretch, phase, lift };
 }

@@ -2,19 +2,21 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ScanLine } from "lucide-react";
-import { BeanScanner, type ScannerLock } from "@/components/bean-scanner";
 import { CaptureAnimation, type CaptureSource, type CatchKind } from "@/components/capture-animation";
 import { Page } from "@/components/page";
 import { ScanResultSheet } from "@/components/scan-result-sheet";
 import { ComingSoon, Disclaimer } from "@/components/states";
+import { TickScanner, type ScannerLock } from "@/components/tick-scanner";
 import { Button } from "@/components/ui/button";
 import { openCamera, type CameraOpen } from "@/lib/capture/camera";
-import { STAGE_COPY } from "@/lib/capture/diagram-caption";
 import { loadCaptureFonts } from "@/lib/capture/fonts";
-import { engorgementOf, identifyFrame, shortSpecies, stageOf, type Identified } from "@/lib/capture/identify";
+import type { Circle } from "@/lib/capture/framing";
+import { identifyFrame, type Identified } from "@/lib/capture/identify";
 import { thumbnail } from "@/lib/capture/photo";
+import { captureText } from "@/lib/capture/scene-text";
+import { shuffleTick, STAGE_SCALE, type SimTick } from "@/lib/capture/tick-sim";
 import { features } from "@/lib/features";
-import { addCatch, peekCatch, speciesIdFor, type CatchOutcome } from "@/lib/tickdex";
+import { addCatch, peekCatch, type CatchOutcome } from "@/lib/tickdex";
 
 // idle -> scanning -> locked -> opening -> playing -> result
 type Phase = "idle" | "scanning" | "locked" | "opening" | "playing" | "result";
@@ -40,100 +42,91 @@ function samplePhoto(): HTMLCanvasElement {
   return c;
 }
 
+type Scan = { id: number; sim: SimTick; recorded: boolean; thumb?: string; identified: Identified | null };
+
 export default function ScanPage() {
   const [phase, setPhase] = useState<Phase>("idle");
   const [camera, setCamera] = useState<Promise<CameraOpen> | null>(null);
+  const [sim, setSim] = useState<SimTick | null>(null);
   const [source, setSource] = useState<CaptureSource | null>(null);
   const [identified, setIdentified] = useState<Identified | null>(null);
   const [outcome, setOutcome] = useState<CatchOutcome | null>(null);
   const [scanId, setScanId] = useState(0);
-  const scanRef = useRef({ id: 0, recorded: false, thumb: undefined as string | undefined, identified: null as Identified | null });
+  const scanRef = useRef<Scan | null>(null);
 
   useEffect(() => {
     loadCaptureFonts(); // warm the canvas fonts while the user is still scanning
   }, []);
 
-  // A tap starts the camera (iPhone Safari wants the gesture) and a fresh scan
+  // A tap starts the camera (iPhone Safari wants the gesture) and a fresh, reshuffled tick
   const start = useCallback(() => {
+    const next = shuffleTick();
+    const id = Date.now();
+    scanRef.current = { id, sim: next, recorded: false, identified: null };
     setCamera(openCamera());
+    setSim(next);
     setSource(null);
     setIdentified(null);
     setOutcome(null);
-    setScanId((n) => n + 1);
+    setScanId(id);
     setPhase("scanning");
   }, []);
 
-  useEffect(() => {
-    scanRef.current = { id: scanId, recorded: false, thumb: undefined, identified: null };
-  }, [scanId]);
-
   const onLock = useCallback((lock: ScannerLock) => {
-    scanRef.current.thumb = thumbnail(lock.frame, lock.bean);
-    setSource({ kind: "photo", ...lock });
+    const scan = scanRef.current;
+    // the thumbnail frames the tick at its own size, never tighter than a nymph
+    if (scan) scan.thumb = thumbnail(lock.withTick, lock.at, lock.unit * Math.max(0.6, STAGE_SCALE[scan.sim.stage]));
+    setSource({ kind: "photo", clean: lock.clean, withTick: lock.withTick, at: lock.at, from: lock.from, circle: lock.circle });
     setPhase("locked");
   }, []);
 
-  const onSample = useCallback((circle: { x: number; y: number; r: number }) => {
-    scanRef.current.thumb = undefined;
+  const onSample = useCallback((circle: Circle) => {
+    if (scanRef.current) scanRef.current.thumb = undefined;
     setSource({ kind: "sample", circle });
     setPhase("locked");
   }, []);
 
-  // The shutter flash: send the frozen frame to /api/scan
+  // The shutter flash: send the frozen frame (with the simulated tick) to /api/scan
   const onShutter = useCallback(() => {
     setPhase("playing");
-    const id = scanRef.current.id;
-    const frame = source?.kind === "photo" ? source.frame : samplePhoto();
-    identifyFrame(frame).then((found) => {
-      if (scanRef.current.id !== id) return;
-      scanRef.current.identified = found;
+    const scan = scanRef.current;
+    if (!scan) return;
+    identifyFrame(source?.kind === "photo" ? source.withTick : samplePhoto()).then((found) => {
+      if (scanRef.current?.id !== scan.id) return;
+      scan.identified = found;
       setIdentified(found);
     });
   }, [source]);
 
-  // CAUGHT!: record exactly once per scan, then name what it filled
+  // CAUGHT!: record exactly once per scan, then name the slot it filled.
+  // The simulated tick is the truth here: the API still runs (and is waited for), but its answer
+  // is a mock. TODO: once /api/scan runs a real model, record what it identified instead.
   const onCaught = useCallback((): string => {
     const scan = scanRef.current;
-    const found = scan.identified;
-    if (!found || scan.recorded) return outcome ? headingFor(outcome) : "TICKDEX";
+    if (!scan || scan.recorded) return outcome ? headingFor(outcome) : "TICKDEX";
     scan.recorded = true;
-    const { result } = found;
     const caught = addCatch({
-      speciesId: speciesIdFor(result.species),
-      speciesName: result.species ?? "Unidentified tick",
-      stage: stageOf(result),
-      engorgement: engorgementOf(result),
+      speciesId: scan.sim.speciesId,
+      speciesName: scan.sim.speciesName,
+      stage: scan.sim.stage,
+      engorgement: scan.sim.engorgement,
       photo: scan.thumb,
-      isBeanDemo: true,
+      isBeanDemo: true, // the contract's flag for a demo catch: this one is simulated
     });
     setOutcome(caught);
     return headingFor(caught);
   }, [outcome]);
 
-  // Full catch for a new slot, quick for one already filled
+  // Full catch for a new slot, quick for one already filled; decided once the API has answered
   const catchKind = useMemo((): CatchKind | null => {
-    if (!identified) return null;
-    const { result } = identified;
-    return peekCatch(speciesIdFor(result.species), stageOf(result)).isNewSlot ? "full" : "quick";
-  }, [identified]);
+    if (!identified || !sim) return null;
+    return peekCatch(sim.speciesId, sim.stage).isNewSlot ? "full" : "quick";
+  }, [identified, sim]);
 
-  const text = useMemo(() => {
-    const r = identified?.result ?? null;
-    const stage = r ? stageOf(r) : "adult";
-    const fed = r ? engorgementOf(r) : "partly fed";
-    const name = shortSpecies(r?.species ?? null);
-    const sample = source?.kind === "sample";
-    return {
-      pills: ["Photo check", sample ? "Left forearm · Amherst, MA" : "Bean demo"] as [string, string],
-      plateTitle: r ? `Likely ${name}` : null,
-      plateSub: `${STAGE_COPY[stage].name} · ${fed} · attached`.toUpperCase(),
-      diagram: {
-        stage,
-        captionLine: `Likely ${name} · ${STAGE_COPY[stage].name} · ${fed}`,
-        footer: identified?.offline ? "OFFLINE RESULT · SAMPLE DATA" : null,
-      },
-    };
-  }, [identified, source]);
+  const text = useMemo(
+    () => (sim ? captureText(sim, identified !== null, identified?.offline ?? false, source?.kind === "sample") : null),
+    [sim, identified, source],
+  );
 
   if (!features.camera) {
     return (
@@ -147,21 +140,21 @@ export default function ScanPage() {
     <Page title="Scan a tick">
       <section className="flex flex-col gap-4 rounded-xl border bg-card p-5">
         <p className="text-muted-foreground">
-          Point your camera at the tick. When it is found, it is caught into your Tickdex and you see where it sits in the deer tick life
-          cycle.
+          Point your camera at your skin. The scanner finds a tick, you catch it into your Tickdex, and you see where it sits in the tick life
+          cycle. Every try is a different tick.
         </p>
         <Button size="lg" className="h-14 w-full text-base" onClick={start}>
           <ScanLine className="size-5" aria-hidden />
           Start scanning
         </Button>
-        <p className="text-sm font-medium">Demo: a bean stands in for a tick.</p>
+        <p className="text-sm font-medium">Demo: the tick is simulated on your skin.</p>
       </section>
       <Disclaimer />
 
-      {camera && (phase === "scanning" || phase === "locked") && (
-        <BeanScanner key={scanId} camera={camera} onLock={onLock} onSample={onSample} onClose={() => setPhase("idle")} />
+      {camera && sim && (phase === "scanning" || phase === "locked") && (
+        <TickScanner key={scanId} camera={camera} sim={sim} onLock={onLock} onSample={onSample} onClose={() => setPhase("idle")} />
       )}
-      {source && phase !== "idle" && phase !== "scanning" && (
+      {source && text && phase !== "idle" && phase !== "scanning" && (
         <CaptureAnimation
           key={`anim-${scanId}`}
           source={source}

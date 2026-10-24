@@ -6,8 +6,6 @@ import { clamp, GROUND_Y, H, lerp, TICK, W } from "./timeline";
 export type Mapping = { k: number; ox: number; oy: number };
 export type Point = { x: number; y: number };
 export type Circle = { x: number; y: number; r: number };
-// A bean in frame pixels: centre, full axis lengths, and the major axis angle in radians
-export type BeanPose = { x: number; y: number; major: number; minor: number; angle: number };
 // scene -> screen: screen = o + s * scene. rect: the part of the scene plane the screen shows.
 export type SceneView = {
   sw: number;
@@ -18,10 +16,6 @@ export type SceneView = {
   rect: { x0: number; y0: number; x1: number; y1: number };
 };
 
-// Bean length in scene px, about the drawn tick's body length, so the tick covers it
-export const BEAN_SCENE_LEN = 42;
-// The final framing may zoom the photo out to this share of a full cover, then extends the edges
-export const COVER_FLOOR = 0.8;
 // The viewfinder: share of the screen width, and its largest diameter in CSS px
 export const VIEWFINDER_SHARE = 0.78;
 export const VIEWFINDER_MAX = 340;
@@ -60,18 +54,15 @@ export function wipeRadius(v: SceneView): number {
   return Math.max(440, farthestCorner(TICK.x, GROUND_Y, v.rect.x0, v.rect.y0, v.rect.x1, v.rect.y1));
 }
 
-// frame -> screen for the animation: the bean lands on the tick point, about tick-sized
-export function sceneFraming(frameW: number, frameH: number, bean: BeanPose, v: SceneView): Mapping {
-  const viewW = v.rect.x1 - v.rect.x0;
-  const viewH = v.rect.y1 - v.rect.y0;
-  const kCover = Math.max(viewW / frameW, viewH / frameH);
-  const kScene = Math.max(BEAN_SCENE_LEN / Math.max(bean.major, 1), kCover * COVER_FLOOR);
-  const k = kScene * v.s;
-  return { k, ox: v.ox + v.s * TICK.x - k * bean.x, oy: v.oy + v.s * TICK.y - k * bean.y };
+// frame -> screen for the animation: the same scale as the viewfinder's cover (so the opening
+// only slides the photo), moved so the tick lands on the scene's tick point
+export function tickFraming(frameW: number, frameH: number, at: Point, v: SceneView): Mapping {
+  const k = Math.max(v.sw / frameW, v.sh / frameH);
+  return { k, ox: v.ox + v.s * TICK.x - k * at.x, oy: v.oy + v.s * TICK.y - k * at.y };
 }
 
 // Between the viewfinder framing (e = 0) and the scene framing (e = 1): scale moves geometrically
-// and the anchor (the bean) moves in a straight line, so nothing slides off the eye's path.
+// and the anchor (the tick) moves in a straight line, so nothing slides off the eye's path.
 export function blendMapping(from: Mapping, to: Mapping, anchor: Point, e: number): Mapping {
   const k = Math.exp(lerp(Math.log(from.k), Math.log(to.k), e));
   const a0 = mapPoint(from, anchor);

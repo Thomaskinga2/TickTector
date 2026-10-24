@@ -17,13 +17,14 @@ export type DiagramInfo = {
   stage: TickStage;
   heading: string; // "TICKDEX · NO. 003 · NEW SPECIES"
   captionLine: string; // "Likely deer tick · adult female · partly fed"
+  risk: string; // the pill after the caption line
+  note: string | null; // an extra line under the advice
   footer: string | null; // small mono line under the caption
 };
 
 export function drawCaption(c: Ctx, fonts: CanvasFonts, info: DiagramInfo, u: number): void {
   const p = eOut(seg(u, CAPTION_AT, CAPTION_AT + 0.35));
   if (p <= 0) return;
-  const sm = STAGE_COPY[info.stage];
   c.save();
   c.globalAlpha = p;
   c.translate(0, (1 - p) * 12);
@@ -33,7 +34,7 @@ export function drawCaption(c: Ctx, fonts: CanvasFonts, info: DiagramInfo, u: nu
   c.font = `600 12px ${fonts.body}`;
   const tw = c.measureText(line).width;
   c.font = `700 11px ${fonts.body}`;
-  const pw = c.measureText(sm.risk).width + 16;
+  const pw = c.measureText(info.risk).width + 16;
   const x0 = (W - tw - 8 - pw) / 2;
   c.font = `600 12px ${fonts.body}`;
   c.fillStyle = INK;
@@ -43,7 +44,7 @@ export function drawCaption(c: Ctx, fonts: CanvasFonts, info: DiagramInfo, u: nu
   c.fill();
   c.font = `700 11px ${fonts.body}`;
   c.fillStyle = "#1f6b3f";
-  c.fillText(sm.risk, x0 + tw + 16, 562.5);
+  c.fillText(info.risk, x0 + tw + 16, 562.5);
   const lead = "Watch for ";
   const rest = "a spreading rash, fever or aches";
   c.font = `700 12px ${fonts.body}`;
@@ -59,10 +60,10 @@ export function drawCaption(c: Ctx, fonts: CanvasFonts, info: DiagramInfo, u: nu
   c.fillText(rest, x1 + lw, 588);
   c.textAlign = "center";
   c.fillText("over the next 30 days.", W / 2, 604);
-  if (sm.note) {
+  if (info.note) {
     c.font = `600 11.5px ${fonts.body}`;
     c.fillStyle = "#4f5947";
-    c.fillText(sm.note, W / 2, 624);
+    c.fillText(info.note, W / 2, 624);
   }
   if (info.footer) {
     c.font = `500 10px ${fonts.mono}`;

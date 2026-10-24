@@ -1,12 +1,14 @@
-// Frames and crops taken from the camera or a still photo: the detector's circle crop, the frozen
-// frame, the Tickdex thumbnail, and the file sent to /api/scan.
-import type { BeanPose, Circle } from "./framing";
+// Frames and crops taken from the camera or a still photo: the tracker's crop, the frozen frame
+// with the simulated tick laid on it, the Tickdex thumbnail, and the file sent to /api/scan.
+import { drawTickOnSkin, type Tick3dLook } from "./draw-tick-3d";
+import type { Circle, Point } from "./framing";
 
 export type FrameSource = { el: CanvasImageSource; w: number; h: number };
 
 const THUMB_SIZE = 240;
 const THUMB_QUALITY = 0.7;
-const THUMB_CONTEXT = 2.6; // thumbnail side, in bean lengths
+const THUMB_SIDE = 3.4; // thumbnail side, in adult tick lengths at this framing
+const TICK_LEN = 54; // an adult tick, legs included, in tick units
 const UPLOAD_QUALITY = 0.85;
 
 export function sourceOf(el: HTMLVideoElement | HTMLImageElement | null): FrameSource | null {
@@ -43,11 +45,24 @@ export function grabFrame(src: FrameSource): HTMLCanvasElement {
   return frame;
 }
 
-// A small square JPEG around the bean, for the Tickdex
-export function thumbnail(frame: HTMLCanvasElement, bean: BeanPose): string {
-  const side = Math.min(Math.max(bean.major * THUMB_CONTEXT, 64), frame.width, frame.height);
-  const x = Math.min(Math.max(bean.x - side / 2, 0), frame.width - side);
-  const y = Math.min(Math.max(bean.y - side / 2, 0), frame.height - side);
+// The frozen frame with the simulated tick laid on it. unit: frame pixels per tick unit.
+export function withTick(clean: HTMLCanvasElement, at: Point, look: Tick3dLook, unit: number): HTMLCanvasElement {
+  const out = document.createElement("canvas");
+  out.width = clean.width;
+  out.height = clean.height;
+  const c = out.getContext("2d");
+  if (c) {
+    c.drawImage(clean, 0, 0);
+    drawTickOnSkin(c, at.x, at.y, look, unit);
+  }
+  return out;
+}
+
+// A small square JPEG around the tick, for the Tickdex
+export function thumbnail(frame: HTMLCanvasElement, at: Point, unit: number): string {
+  const side = Math.min(Math.max(TICK_LEN * THUMB_SIDE * unit, 64), frame.width, frame.height);
+  const x = Math.min(Math.max(at.x - side / 2, 0), frame.width - side);
+  const y = Math.min(Math.max(at.y - side / 2, 0), frame.height - side);
   const out = document.createElement("canvas");
   out.width = THUMB_SIZE;
   out.height = THUMB_SIZE;

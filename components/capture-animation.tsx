@@ -1,18 +1,20 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { paintForearm, paintPhoto, ringMedian } from "@/lib/capture/backdrop";
-import { makeDiagramSprites } from "@/lib/capture/diagram-sprites";
+import { makeCanvas, paintForearm, paintPhoto } from "@/lib/capture/backdrop";
 import type { DiagramInfo } from "@/lib/capture/diagram-caption";
+import { makeDiagramSprites } from "@/lib/capture/diagram-sprites";
 import { renderFrame, type Opening, type SceneAssets, type SceneText } from "@/lib/capture/draw-scene";
+import { drawTickOnSkin, type Tick3dLook } from "@/lib/capture/draw-tick-3d";
 import { CAPTURE_FONTS, captureFontVars, loadCaptureFonts } from "@/lib/capture/fonts";
-import { circleInSource, sceneFraming, sceneView, wipeRadius, type BeanPose, type Circle, type Mapping } from "@/lib/capture/framing";
-import { advanceClock, DROP, makeTimeline, OPEN_LEN, type Timeline } from "@/lib/capture/timeline";
+import { circleInSource, sceneView, tickFraming, wipeRadius, type Circle, type Mapping, type Point } from "@/lib/capture/framing";
+import { advanceClock, DROP, makeTimeline, OPEN_LEN, TICK, type Timeline } from "@/lib/capture/timeline";
 
-// What the scanner locked on: the frozen frame with the bean, or the painted-forearm sample.
+// What the scanner locked on: the frozen frame (clean, and with the simulated tick laid on it)
+// and where the tick sits in it, or the painted-forearm sample.
 // circle: the viewfinder circle on screen; from: the frame's on-screen (object-fit cover) mapping.
 export type CaptureSource =
-  | { kind: "photo"; frame: HTMLCanvasElement; bean: BeanPose; from: Mapping; circle: Circle }
+  | { kind: "photo"; clean: HTMLCanvasElement; withTick: HTMLCanvasElement; at: Point; from: Mapping; circle: Circle }
   | { kind: "sample"; circle: Circle };
 
 export type CatchKind = "full" | "quick";
@@ -41,7 +43,18 @@ declare global {
   }
 }
 
-function buildAssets(source: CaptureSource, canvas: HTMLCanvasElement) {
+// The painted forearm with the tick on it, for the sample's opening (device pixels)
+function forearmWithTick(backdrop: HTMLCanvasElement, look: Tick3dLook, view: ReturnType<typeof sceneView>, dpr: number): HTMLCanvasElement {
+  const out = makeCanvas(backdrop.width, backdrop.height);
+  const c = out.getContext("2d");
+  if (c) {
+    c.drawImage(backdrop, 0, 0);
+    drawTickOnSkin(c, (view.ox + view.s * TICK.x) * dpr, (view.oy + view.s * TICK.y) * dpr, look, view.s * dpr);
+  }
+  return out;
+}
+
+function buildAssets(source: CaptureSource, look: Tick3dLook, canvas: HTMLCanvasElement) {
   const sw = canvas.clientWidth || window.innerWidth;
   const sh = canvas.clientHeight || window.innerHeight;
   const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
@@ -51,12 +64,13 @@ function buildAssets(source: CaptureSource, canvas: HTMLCanvasElement) {
   const base = { view, dpr, fonts: CAPTURE_FONTS, sprites: makeDiagramSprites(dpr), wipeR: wipeRadius(view) };
   if (source.kind === "sample") {
     const backdrop = paintForearm(view, dpr);
+    const opened = forearmWithTick(backdrop, look, view, dpr);
     const unit = { k: 1 / dpr, ox: 0, oy: 0 };
     const c = source.circle;
     const opening: Opening = {
-      source: backdrop,
-      srcW: backdrop.width,
-      srcH: backdrop.height,
+      source: opened,
+      srcW: opened.width,
+      srcH: opened.height,
       from: unit,
       to: unit,
       anchor: { x: 0, y: 0 },
@@ -64,24 +78,23 @@ function buildAssets(source: CaptureSource, canvas: HTMLCanvasElement) {
       r0: c.r,
       graded: false,
     };
-    return { assets: { ...base, backdrop, erased: null } as SceneAssets, opening };
+    return { assets: { ...base, backdrop } as SceneAssets, opening };
   }
-  const { frame, bean, from, circle } = source;
-  const to = sceneFraming(frame.width, frame.height, bean, view);
-  const backdrop = paintPhoto(frame, to, view, dpr, null, null);
-  const erased = paintPhoto(frame, to, view, dpr, bean, ringMedian(frame, bean));
+  // the scene starts on the clean photo; the opening shows the one with the tick, in the same place
+  const { clean, withTick, at, from, circle } = source;
+  const to = tickFraming(clean.width, clean.height, at, view);
   const opening: Opening = {
-    source: frame,
-    srcW: frame.width,
-    srcH: frame.height,
+    source: withTick,
+    srcW: withTick.width,
+    srcH: withTick.height,
     from,
     to,
-    anchor: { x: bean.x, y: bean.y },
+    anchor: at,
     circleSrc: circleInSource(from, circle),
     r0: circle.r,
     graded: true,
   };
-  return { assets: { ...base, backdrop, erased } as SceneAssets, opening };
+  return { assets: { ...base, backdrop: paintPhoto(clean, to, view, dpr) } as SceneAssets, opening };
 }
 
 // The Tickdex capture animation on one clock: one canvas, one requestAnimationFrame loop,
@@ -107,7 +120,7 @@ export function CaptureAnimation(props: Props) {
       ck.T = Math.max(ck.T, OPEN_LEN);
       ck.skip = true;
     }
-    let built = buildAssets(propsRef.current.source, canvas);
+    let built = buildAssets(propsRef.current.source, propsRef.current.text.look, canvas);
     let raf = 0;
     let last = 0;
     let cancelled = false;
@@ -173,7 +186,7 @@ export function CaptureAnimation(props: Props) {
     });
 
     const onResize = () => {
-      built = buildAssets(propsRef.current.source, canvas);
+      built = buildAssets(propsRef.current.source, propsRef.current.text.look, canvas);
     };
     window.addEventListener("resize", onResize);
     window.__capture = {

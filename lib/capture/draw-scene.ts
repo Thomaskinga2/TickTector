@@ -4,9 +4,10 @@ import { drawClamped, gradePhoto } from "./backdrop";
 import type { DiagramSprites } from "./diagram-sprites";
 import type { DiagramInfo } from "./diagram-caption";
 import { drawDiagram } from "./draw-diagram";
-import { brackets, drawTick, drawVial, pill, roundRect, rng, stampText, star, type CanvasFonts, type Ctx } from "./draw-kit";
+import { brackets, drawVial, pill, roundRect, rng, stampText, star, type CanvasFonts, type Ctx } from "./draw-kit";
+import { drawBiteHalo, drawTick3d, drawTick3dShadow, type Tick3dLook } from "./draw-tick-3d";
 import { blendMapping, openingClip, RING_LOCK, SURROUND, type Circle, type Mapping, type Point, type SceneView } from "./framing";
-import { tickPose, vialPose } from "./poses";
+import { biteAt, tickPose, vialPose } from "./poses";
 import {
   clamp,
   DROP,
@@ -36,8 +37,7 @@ export type SceneAssets = {
   dpr: number;
   fonts: CanvasFonts;
   sprites: DiagramSprites;
-  backdrop: HTMLCanvasElement;
-  erased: HTMLCanvasElement | null; // the photo with the bean painted out; null for the sample
+  backdrop: HTMLCanvasElement; // the clean photo, or the painted forearm
   wipeR: number;
 };
 
@@ -46,6 +46,7 @@ export type SceneText = {
   plateTitle: string | null; // null while the API is still identifying
   plateSub: string;
   diagram: DiagramInfo;
+  look: Tick3dLook; // the simulated tick, drawn where the opening left it
 };
 
 // The viewfinder circle opening out. The source is drawn with a mapping that blends from the
@@ -61,8 +62,6 @@ export type Opening = {
   r0: number;
   graded: boolean;
 };
-
-const ERASE_FADE = 0.08;
 
 function drawOpening(c: Ctx, op: Opening, a: SceneAssets, e: number): void {
   const { sw, sh } = a.view;
@@ -98,11 +97,6 @@ export function renderFrame(c: Ctx, T: number, L: Timeline, a: SceneAssets, text
   }
   const t = Math.min(T - OPEN_LEN, L.end);
   c.drawImage(a.backdrop, 0, 0, v.sw, v.sh);
-  if (a.erased && t >= POP) {
-    c.globalAlpha = seg(t, POP, POP + ERASE_FADE);
-    c.drawImage(a.erased, 0, 0, v.sw, v.sh);
-    c.globalAlpha = 1;
-  }
   c.setTransform(dpr * v.s, 0, 0, dpr * v.s, dpr * v.ox, dpr * v.oy);
   renderScene(c, t, L, a, text);
 }
@@ -114,18 +108,14 @@ function renderScene(c: Ctx, t: number, L: Timeline, a: SceneAssets, text: Scene
   pill(c, f, 16 + pw + 8, 52, text.pills[1]);
 
   // redness around the bite, then the bite mark once the tick is out
-  const bite = { x: TICK.x, y: TICK.y - 22 };
-  const halo = c.createRadialGradient(bite.x, bite.y, 2, bite.x, bite.y, 30);
-  halo.addColorStop(0, "rgba(205,70,60,.55)");
-  halo.addColorStop(1, "rgba(205,70,60,0)");
-  c.fillStyle = halo;
-  c.beginPath();
-  c.arc(bite.x, bite.y, 30, 0, Math.PI * 2);
-  c.fill();
+  const look = text.look;
+  const sc = Math.max(0.6, look.scale);
+  const bite = biteAt(look);
+  drawBiteHalo(c, bite.x, bite.y, look.scale);
   if (t >= POP) {
     c.fillStyle = "#8e1f1a";
     c.beginPath();
-    c.arc(bite.x, bite.y, 2.6, 0, Math.PI * 2);
+    c.arc(bite.x, bite.y, 2.6 * sc, 0, Math.PI * 2);
     c.fill();
   }
 
@@ -134,23 +124,19 @@ function renderScene(c: Ctx, t: number, L: Timeline, a: SceneAssets, text: Scene
   if (tent > 0) {
     c.fillStyle = `rgba(255,220,195,${0.7 * tent})`;
     c.beginPath();
-    c.ellipse(bite.x, bite.y - 4 * tent, 10, 6 * tent + 2, 0, 0, Math.PI * 2);
+    c.ellipse(bite.x, bite.y - 4 * tent * sc, 10 * sc, (6 * tent + 2) * sc, 0, 0, Math.PI * 2);
     c.fill();
     c.strokeStyle = `rgba(150,70,50,${0.4 * tent})`;
     c.lineWidth = 1;
     c.beginPath();
-    c.ellipse(bite.x, bite.y + 2, 13, 5, 0, 0, Math.PI);
+    c.ellipse(bite.x, bite.y + 2 * sc, 13 * sc, 5 * sc, 0, 0, Math.PI);
     c.stroke();
   }
 
-  // contact shadow while attached
-  const tp = tickPose(t);
-  if (tp && t < POP) {
-    c.fillStyle = "rgba(70,30,15,.25)";
-    c.beginPath();
-    c.ellipse(TICK.x + 4, TICK.y + 14, 22, 26, 0, 0, Math.PI * 2);
-    c.fill();
-  }
+  // the tick's shadow on the skin, fading as it is lifted off
+  const tp = tickPose(t, look);
+  const posed = tp ? { ...look, scale: look.scale * tp.s, angle: tp.rot } : null;
+  if (tp && posed) drawTick3dShadow(c, tp.x, tp.y, posed, { lift: tp.lift, phase: tp.phase });
 
   // camera lock-on
   const lock = eOut(seg(t, 0.12, 0.55));
@@ -256,7 +242,7 @@ function renderScene(c: Ctx, t: number, L: Timeline, a: SceneAssets, text: Scene
     }
   }
 
-  if (tp) drawTick(c, tp.x, tp.y, tp.s, { glow: tp.glow, phase: tp.phase, stretch: tp.stretch });
+  if (tp && posed) drawTick3d(c, tp.x, tp.y, posed, { glow: tp.glow, phase: tp.phase, stretch: tp.stretch });
 
   // camera shutter
   const shut = seg(t, 0, 0.22);

@@ -3,7 +3,6 @@
 import { SCAN_RESULT } from "@/lib/mock-data";
 import { analyzeTickPhoto } from "@/lib/services/scan";
 import { canvasToFile } from "./photo";
-import type { TickStage } from "@/lib/tickdex";
 import type { ScanResult } from "@/lib/types";
 
 export const SCAN_TIMEOUT_MS = 30_000;
@@ -30,13 +29,4 @@ export function identifyFrame(frame: HTMLCanvasElement): Promise<Identified> {
   return canvasToFile(frame)
     .then(identifyPhoto)
     .catch(() => ({ result: SCAN_RESULT, offline: true }));
-}
-
-export const stageOf = (r: ScanResult): TickStage => r.stage ?? "adult";
-export const engorgementOf = (r: ScanResult): NonNullable<ScanResult["engorgement"]> => r.engorgement ?? "partly fed";
-
-// "Deer tick (blacklegged tick)" -> "deer tick"
-export function shortSpecies(name: string | null): string {
-  if (!name) return "unknown tick";
-  return name.replace(/\s*\(.*\)\s*$/, "").trim().toLowerCase();
 }

@@ -1,14 +1,10 @@
 // What sits behind the capture scene: the painted forearm ("Use the sample") or the frozen
-// camera frame placed so the bean lands on the tick point. Both are painted once, at full
+// camera frame placed so the simulated tick's spot lands on the tick point. Both are painted once, at full
 // resolution, over the whole screen. Fixed game colours (see draw-kit.ts).
 import { rng, type Ctx } from "./draw-kit";
-import type { BeanPose, Mapping, SceneView } from "./framing";
+import type { Mapping, SceneView } from "./framing";
 import { H, TICK, W } from "./timeline";
 
-// How far the bean patch reaches past the bean's own ellipse, and where its colour is sampled
-const PATCH_GROW = 1.3;
-const RING_INNER = 1.35;
-const RING_OUTER = 1.9;
 // Photo grade: a light scrim and the forearm's camera vignette, so white overlays read on paper
 const PHOTO_SCRIM = 0.16;
 
@@ -116,7 +112,7 @@ function hairs(c: Ctx, R: () => number, x0: number, y0: number, w: number, h: nu
 }
 
 // Draws img with mapping m and stretches its edge pixels to fill the rest of [0,sw]x[0,sh],
-// so a bean near the frame's edge never leaves black bands. c is in CSS px.
+// so a tick near the frame's edge never leaves black bands. c is in CSS px.
 export function drawClamped(c: Ctx, img: CanvasImageSource, iw: number, ih: number, m: Mapping, sw: number, sh: number): void {
   const x0 = m.ox;
   const y0 = m.oy;
@@ -146,69 +142,12 @@ export function gradePhoto(c: Ctx, v: SceneView, dpr: number, amount: number): v
   c.restore();
 }
 
-// Median colour of a ring of skin or paper around the bean, from the full-resolution frame
-export function ringMedian(frame: HTMLCanvasElement, bean: BeanPose): [number, number, number] {
-  const a = (bean.major / 2) * RING_OUTER;
-  const x0 = Math.max(0, Math.floor(bean.x - a));
-  const y0 = Math.max(0, Math.floor(bean.y - a));
-  const x1 = Math.min(frame.width, Math.ceil(bean.x + a));
-  const y1 = Math.min(frame.height, Math.ceil(bean.y + a));
-  if (x1 <= x0 || y1 <= y0) return [200, 160, 130];
-  const data = context(frame).getImageData(x0, y0, x1 - x0, y1 - y0).data;
-  const cos = Math.cos(bean.angle);
-  const sin = Math.sin(bean.angle);
-  const ha = bean.major / 2;
-  const hb = Math.max(bean.minor / 2, 1);
-  const ch: number[][] = [[], [], []];
-  const step = Math.max(1, Math.floor((x1 - x0) / 120));
-  for (let y = y0; y < y1; y += step) {
-    for (let x = x0; x < x1; x += step) {
-      const dx = x - bean.x;
-      const dy = y - bean.y;
-      const u = (dx * cos + dy * sin) / ha;
-      const w = (-dx * sin + dy * cos) / hb;
-      const d = Math.sqrt(u * u + w * w);
-      if (d < RING_INNER || d > RING_OUTER) continue;
-      const i = ((y - y0) * (x1 - x0) + (x - x0)) * 4;
-      ch[0].push(data[i]);
-      ch[1].push(data[i + 1]);
-      ch[2].push(data[i + 2]);
-    }
-  }
-  if (ch[0].length === 0) return [200, 160, 130];
-  return ch.map((vals) => vals.sort((p, q) => p - q)[vals.length >> 1]) as [number, number, number];
-}
-
-// The photo in its scene framing, graded; with a patch colour the bean is painted out (after POP)
-export function paintPhoto(
-  frame: HTMLCanvasElement,
-  m: Mapping,
-  v: SceneView,
-  dpr: number,
-  bean: BeanPose | null,
-  patch: [number, number, number] | null,
-): HTMLCanvasElement {
+// The clean photo (no tick) in its scene framing, graded
+export function paintPhoto(frame: HTMLCanvasElement, m: Mapping, v: SceneView, dpr: number): HTMLCanvasElement {
   const off = makeCanvas(v.sw * dpr, v.sh * dpr);
   const c = context(off);
   c.setTransform(dpr, 0, 0, dpr, 0, 0);
   drawClamped(c, frame, frame.width, frame.height, m, v.sw, v.sh);
-  if (bean && patch) {
-    // feathered ellipse of the surrounding colour, the bean's shape grown a little
-    c.save();
-    c.translate(m.ox + m.k * bean.x, m.oy + m.k * bean.y);
-    c.rotate(bean.angle);
-    c.scale((bean.major / 2) * m.k * PATCH_GROW, (bean.minor / 2) * m.k * PATCH_GROW);
-    const [r, g, b] = patch;
-    const grad = c.createRadialGradient(0, 0, 0, 0, 0, 1);
-    grad.addColorStop(0, `rgba(${r},${g},${b},1)`);
-    grad.addColorStop(0.72, `rgba(${r},${g},${b},1)`);
-    grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
-    c.fillStyle = grad;
-    c.beginPath();
-    c.arc(0, 0, 1, 0, Math.PI * 2);
-    c.fill();
-    c.restore();
-  }
   gradePhoto(c, v, dpr, 1);
   return off;
 }

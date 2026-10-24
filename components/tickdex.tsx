@@ -96,8 +96,13 @@ export function Tickdex() {
 function TickdexHeader({ caught, totalCatches }: { caught: number; totalCatches: number }) {
   const percent = Math.round((caught / DEX_SIZE) * 100);
   return (
-    <header className="relative overflow-hidden rounded-3xl bg-primary px-5 pt-5 pb-5 text-primary-foreground shadow-[0_4px_0_var(--tickdex-shadow)]">
-      <p className="text-[12px] font-semibold tracking-[0.18em] text-primary-foreground/70 uppercase">Field collection</p>
+    <header
+      className={cn(
+        "relative overflow-hidden rounded-3xl bg-primary px-5 pt-5 pb-5 text-primary-foreground shadow-[0_4px_0_var(--tickdex-shadow)]",
+        caught === DEX_SIZE && "ring-2 ring-tickdex-gold shadow-[0_4px_0_var(--tickdex-shadow),0_0_28px_-4px_var(--tickdex-gold)]",
+      )}
+    >
+      <p className="text-[12px] font-semibold tracking-[0.18em] text-primary-foreground/80 uppercase">Field collection</p>
       <h1 className="mt-1 font-tickdex text-[34px] leading-none">Tickdex</h1>
       {caught === DEX_SIZE && (
         <p className="absolute top-5 right-5 rotate-6 rounded-xl border-2 border-tickdex-gold px-2.5 py-1 font-tickdex text-[16px] leading-none text-tickdex-gold">
@@ -108,7 +113,7 @@ function TickdexHeader({ caught, totalCatches }: { caught: number; totalCatches:
         <p className="font-tickdex text-[20px] leading-none">
           {caught} / {DEX_SIZE} <span className="text-[16px] text-primary-foreground/80">caught</span>
         </p>
-        <p className="text-[13px] text-primary-foreground/75">
+        <p className="text-[13px] text-primary-foreground/85">
           {totalCatches} {totalCatches === 1 ? "catch" : "catches"} in all
         </p>
       </div>
@@ -136,7 +141,7 @@ function EmptyTickdex() {
       <p className="text-[15px]">
         <span className="font-semibold">Nothing caught yet.</span> Every tick you scan lands here, nine slots to fill.
       </p>
-      <Link href="/scan" className={cn(buttonVariants({ size: "lg" }), "h-11 px-4 text-[15px]")}>
+      <Link href="/scan" className={cn(buttonVariants({ size: "lg" }), "h-11 bg-tickdex-gold px-4 text-[15px] font-semibold text-tickdex-ink shadow-[0_3px_0_var(--tickdex-ink)] hover:bg-tickdex-gold/90")}>
         <ScanLine aria-hidden />
         Catch your first tick
       </Link>

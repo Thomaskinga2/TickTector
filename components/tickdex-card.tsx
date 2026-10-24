@@ -40,7 +40,7 @@ export function TickdexCard({ slot, registration, onOpen }: TickdexCardProps) {
       {kind && (
         <span
           ref={badgeRef}
-          className="pointer-events-none absolute -top-2 -right-1 z-10 rotate-[-8deg] rounded-full border-2 border-tickdex-ink bg-tickdex-gold px-2 py-0.5 font-tickdex text-[13px] leading-none text-tickdex-ink shadow-[0_2px_0_var(--tickdex-ink)]"
+          className="pointer-events-none absolute -top-3 -right-2 z-10 rotate-[-8deg] rounded-full border-2 border-tickdex-ink bg-tickdex-gold px-2 py-0.5 font-tickdex text-[13px] leading-none text-tickdex-ink shadow-[0_2px_0_var(--tickdex-ink)]"
         >
           {kind === "new" ? "NEW!" : "+1"}
         </span>
@@ -92,10 +92,10 @@ function CaughtFace({
             <TickArt speciesId={slot.speciesId} stage={slot.stage} engorgement={newest?.engorgement} className="h-full w-full" />
           )}
         </span>
-        {newest?.isBeanDemo && <DemoBadge className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap" />}
+        {newest?.isBeanDemo && <DemoBadge className="absolute top-0.5 right-0.5" />}
       </span>
-      <span className="mt-2 px-0.5 text-[14px] leading-tight font-semibold">{stageLabel(slot.stage)}</span>
-      <span className="px-0.5 text-[12px] leading-tight text-tickdex-ink/65">
+      <span className="mt-auto px-0.5 text-[14px] leading-tight font-semibold">{stageLabel(slot.stage)}</span>
+      <span className="px-0.5 text-[12px] leading-tight text-tickdex-ink/80">
         {first ? `First ${formatShortDate(first.caughtAt)}` : ""}
       </span>
     </button>
@@ -113,13 +113,13 @@ function EmptyFace({ slot, className }: { slot: DexSlot; className?: string }) {
         className,
       )}
     >
-      <span className="flex h-4 items-center px-0.5 font-tickdex text-[12px] leading-none text-tickdex-paper/55">
+      <span className="flex h-4 items-center px-0.5 font-tickdex text-[12px] leading-none text-tickdex-paper/80">
         {formatDexNumber(slot.number)}
       </span>
       <span className="mt-1 block h-[90px] w-full shrink-0 overflow-hidden rounded-xl bg-[radial-gradient(circle_at_50%_50%,rgb(255_255_255/0.16),rgb(255_255_255/0.04)_45%,transparent_72%)]">
         <TickArt speciesId={slot.speciesId} stage={slot.stage} silhouette="var(--tickdex-shadow)" className="h-full w-full" />
       </span>
-      <span className="mt-1.5 px-0.5 font-tickdex text-[20px] leading-none tracking-widest text-tickdex-paper/60">???</span>
+      <span className="mt-auto px-0.5 pb-1 font-tickdex text-[20px] leading-none tracking-widest text-tickdex-paper/80">???</span>
     </div>
   );
 }

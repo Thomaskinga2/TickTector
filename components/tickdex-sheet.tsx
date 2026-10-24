@@ -16,7 +16,7 @@ const DEFAULT_TOWN = "amherst";
 
 const DANGER: Record<RiskLevel, { label: string; className: string }> = {
   low: { label: "Low danger", className: "bg-risk-low/15 text-risk-low" },
-  moderate: { label: "Moderate danger", className: "bg-risk-moderate/15 text-risk-moderate" },
+  moderate: { label: "Moderate danger", className: "bg-risk-moderate/15 text-[color-mix(in_oklch,var(--risk-moderate),var(--foreground)_40%)]" },
   high: { label: "High danger", className: "bg-risk-high/15 text-risk-high" },
 };
 

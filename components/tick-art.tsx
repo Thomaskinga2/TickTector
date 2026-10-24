@@ -56,13 +56,21 @@ export function TickArt({
 
   return (
     <svg viewBox="-36 -32 72 72" className={className} aria-hidden>
-      <g transform={`translate(0 -3) scale(${STAGE_SCALE[stage]})`}>
+      <g transform={`translate(0 2) scale(${STAGE_SCALE[stage]})`}>
         <g stroke={fill(p.legs)} strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round" fill="none">
           {[-1, 1].flatMap((side) =>
             Array.from({ length: legs }, (_, i) => <polyline key={`${side}-${i}`} points={legPoints(side, i)} />),
           )}
         </g>
-        <ellipse cx={0} cy={bodyY} rx={14.5 + fed * 4} ry={18.5 + fed * 6} fill={fill(mix(p.body, p.fedBody, fed))} />
+        <ellipse
+          cx={0}
+          cy={bodyY}
+          rx={14.5 + fed * 4}
+          ry={18.5 + fed * 6}
+          fill={fill(mix(p.body, p.fedBody, fed))}
+          stroke={silhouette ? "rgb(255 255 255 / 0.14)" : undefined}
+          strokeWidth={1.2}
+        />
         {!silhouette && (
           <>
             <ellipse cx={-4} cy={9} rx={5} ry={9} transform={`rotate(${deg(-0.2)} -4 9)`} fill={p.highlight} opacity={0.45 * (1 - fed * 0.5)} />

@@ -16,7 +16,10 @@ inclusion: always
 3. User sees <Z>: a clear, beautiful result with one "wow" element (map, chart, score, plain-language summary).
 4. User can <take one action> (save, share, export, get alert).
 
-
+## Must-have (MVP)
+- The demo flow above, working end-to-end on the deployed URL.
+- Real data or a real public API (no lorem ipsum in the demo).
+- Mobile-friendly layout.
 
 ## Nice-to-have (only after MVP is deployed)
 - Multi-language output.
@@ -31,3 +34,9 @@ inclusion: always
 ## Safety / responsibility
 - Health, legal, or civic advice: show a short disclaimer and frame output as information, not diagnosis or legal advice.
 - Never store personal data beyond the session unless required for the demo.
+## Demo link (deployment)
+- The app must work on a public Vercel URL: anyone can open it with no login.
+- Demo URL: <dán link vào đây sau khi deploy>
+- Required env vars on Vercel: ANTHROPIC_API_KEY
+- Before saying any feature is done, it must also work on the deployed URL (test in an incognito window).
+- If the AI call fails on the live site, show the demo fallback instead of an error.

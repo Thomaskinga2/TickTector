@@ -39,14 +39,17 @@ page (app/)  ->  component (components/)  ->  service (lib/services/)  ->  API r
 | Tick species | `/area/[town]` | `TickSpeciesList` | `getSpecies` (`risk.ts`) | `GET /api/species?town=` | Backend 2 | always on |
 | Action alerts | none (removed from pages) | `ActionAlerts` | `getAlerts` (`risk.ts`) | `GET /api/alerts?level=` | Backend 2 | not shown |
 | Camera scan | `/scan` | `CameraCapture` | `analyzeTickPhoto` (`scan.ts`) | `POST /api/scan` | Backend 2 | `camera: true` |
-| Forum | `/forum`, `/forum/new`, `/forum/[id]` | `ForumPostList`, `ForumPostCard`, `NewPostForm`, `CommentThread` | `forum.ts` | `/api/forum/posts`, `/api/forum/posts/[id]`, `/api/forum/posts/[id]/comments` | Backend 2 | `forum: true` |
+| Forum | `/forum`, `/forum/new`, `/forum/[id]` | `ForumPostList`, `ForumPostCard`, `NewPostForm`, `CommentThread` | `forum.ts` | `/api/forum/posts` (+ `/[id]`, `/[id]/comments`, `/[id]/like`, `/[id]/reports`), `/api/forum/images/[id]`, `/api/forum/reports` | Backend 2 | `forum: true` |
+| Scan → forum post | `/scan` (Post button, not built yet) | none yet | `createScanPost` (`forum.ts`), contract `ScanPostInput` (`lib/types.ts`) | `POST /api/forum/posts` with `type=scan` | Backend 2 | always on |
 | TikQuest | `/quest` | page only | none | none | Frontend | `quest: true` |
 
 Flags live in `lib/features.ts`. A flag set to `false` shows "Coming soon"; flipping it to `true` is the only change needed to show the real component.
 
 Risk levels, chart numbers and the map come from real MA DPH county data (see `data/README.md`). The rule lives in `lib/risk-model.ts` (`CUTOFFS`, winter step-down); species and prevention facts live in `lib/tick-facts.ts` with their sources.
 
-Providers are picked by env vars (see `.env.example`): `GEOCODING_PROVIDER` (Backend 1) and `FORUM_STORE` (Backend 2). Only `mock` is implemented. The mock forum store keeps posts in memory, so they reset on every deploy.
+Providers are picked by env vars (see `.env.example`): `GEOCODING_PROVIDER` (Backend 1) and `FORUM_STORE` (Backend 2). Only `mock` is implemented. The mock forum store keeps posts in memory, so they reset on every deploy. Forum photos live there too.
+
+Forum rules: posts store a town and county only, never coordinates. Every photo goes through `cleanImage` (`lib/forum-images.ts`: JPEG/PNG/WebP, 10 MB, 4 per post, all EXIF removed). Moderators set `FORUM_MOD_TOKEN`, read `GET /api/forum/reports` and hide a post with `PATCH /api/forum/posts/[id]` (curl example in that route). Tests: `npm test`.
 
 ## Git
 

@@ -1,64 +1,91 @@
 import type { NextRequest } from "next/server";
 import { z } from "zod";
-import { getForumStore, redactPost, roundCoord } from "@/lib/providers/forum-store";
+import { cleanImage, MAX_IMAGES, UploadError } from "@/lib/forum-images";
+import { getForumStore, type NewPostRecord } from "@/lib/providers/forum-store";
+import { findTown, townFromName } from "@/lib/risk-model";
+import { SCAN_SPECIES, SCAN_SPECIES_NAME, SCAN_STAGES } from "@/lib/types";
 
-const MAX_PHOTO_BYTES = 10 * 1024 * 1024;
+const author = z.string({ error: "Add a display name" }).trim().min(1, "Add a display name").max(40, "Display name is too long");
 
-const NewPostFields = z.object({
+const TextFields = z.object({
   townId: z.string({ error: "Choose a town" }).trim().min(1, "Choose a town"),
-  lat: z.coerce.number({ error: "Location is missing" }).min(-90).max(90),
-  lng: z.coerce.number({ error: "Location is missing" }).min(-180).max(180),
-  title: z.string({ error: "Add a title" }).trim().min(3, "Title is too short").max(120, "Title is too long"),
-  body: z.string({ error: "Describe what you saw" }).trim().min(1, "Describe what you saw").max(2000, "Description is too long"),
+  title: z.string().trim().max(120, "Title is too long").default(""),
+  body: z.string().trim().max(2000, "Description is too long").default(""),
   tickSpecies: z.string().trim().max(80).optional(),
-  author: z.string({ error: "Add a display name" }).trim().min(1, "Add a display name").max(40, "Display name is too long"),
+  author,
 });
 
-// GET /api/forum/posts?town=amherst -> ForumPost[]
+// No lat/lng here on purpose: the scan's coordinates never reach the server.
+const ScanFields = z.object({
+  species: z.enum(SCAN_SPECIES, { error: "Unknown tick species" }),
+  confidence: z.coerce.number().min(0, "Confidence must be 0–1").max(1, "Confidence must be 0–1").optional(),
+  stage: z.enum(SCAN_STAGES, { error: "Unknown life stage" }).optional(),
+  town: z.string({ error: "Location is missing" }).trim().min(1, "Location is missing"),
+  scannedAt: z.iso.datetime({ offset: true, error: "scannedAt must be an ISO date-time" }),
+  author: author.optional(),
+});
+
+const fail = (error: string, status = 400) => Response.json({ error }, { status });
+
+// GET /api/forum/posts?town=amherst -> ForumPost[] (newest first)
 export async function GET(request: NextRequest) {
   const townId = request.nextUrl.searchParams.get("town") || undefined;
   try {
-    const posts = await getForumStore().listPosts(townId);
-    return Response.json(posts.map(redactPost));
+    return Response.json(await getForumStore().listPosts(townId));
   } catch (error) {
-    return Response.json({ error: (error as Error).message }, { status: 501 });
+    return fail((error as Error).message, 501);
   }
 }
 
-// POST /api/forum/posts (multipart: NewPostInput fields + optional "photo") -> ForumPost
+// POST /api/forum/posts (multipart) -> ForumPost
+//   type=text: townId, title, body, tickSpecies?, author, photos (0–4 files)
+//   type=scan: species, confidence?, stage?, town (MA town name), scannedAt, author?, photos (1 file)
+// Every photo is validated and stripped of EXIF (lib/forum-images.ts) before it is stored.
 export async function POST(request: Request) {
   const form = await request.formData().catch(() => null);
-  if (!form) return Response.json({ error: "Send the post as multipart form data" }, { status: 400 });
+  if (!form) return fail("Send the post as multipart form data");
 
-  const text = (key: string) => {
-    const value = form.get(key);
-    return typeof value === "string" && value.trim() ? value : undefined;
-  };
-  const parsed = NewPostFields.safeParse({
-    townId: text("townId"),
-    lat: text("lat"),
-    lng: text("lng"),
-    title: text("title"),
-    body: text("body"),
-    tickSpecies: text("tickSpecies"),
-    author: text("author"),
-  });
-  if (!parsed.success) {
-    return Response.json({ error: parsed.error.issues[0]?.message ?? "Invalid post" }, { status: 400 });
-  }
+  const fields: Record<string, string> = {};
+  for (const [key, value] of form) if (typeof value === "string" && value.trim()) fields[key] = value;
+  const files = form.getAll("photos").filter((f): f is File => f instanceof File && f.size > 0);
+  if (files.length > MAX_IMAGES) return fail(`Add up to ${MAX_IMAGES} photos per post`);
 
-  const photo = form.get("photo");
-  if (photo instanceof File && photo.size > 0) {
-    if (!photo.type.startsWith("image/")) return Response.json({ error: "The photo must be an image" }, { status: 400 });
-    if (photo.size > MAX_PHOTO_BYTES) return Response.json({ error: "Photo must be under 10 MB" }, { status: 413 });
-    // TODO: upload the photo to storage (e.g. Supabase Storage) and save its URL as photoUrl.
+  let record: Omit<NewPostRecord, "photos">;
+  if (fields.type === "scan") {
+    const parsed = ScanFields.safeParse(fields);
+    if (!parsed.success) return fail(parsed.error.issues[0]?.message ?? "Invalid scan");
+    const { species, confidence, stage, town: townName, scannedAt } = parsed.data;
+    const town = townFromName(townName);
+    if (!town) return fail("Location is outside Massachusetts");
+    if (files.length !== 1) return fail("Add the tick photo");
+    record = {
+      type: "scan",
+      townId: town.id,
+      townName: town.name,
+      county: town.county,
+      title: SCAN_SPECIES_NAME[species],
+      body: "",
+      scan: { species, confidence, stage, scannedAt },
+      author: parsed.data.author ?? "Anonymous",
+    };
+  } else {
+    const parsed = TextFields.safeParse(fields);
+    if (!parsed.success) return fail(parsed.error.issues[0]?.message ?? "Invalid post");
+    const { townId, title, body, tickSpecies } = parsed.data;
+    const town = findTown(townId);
+    if (!town) return fail("Choose a Massachusetts town");
+    if (!title && !body && !files.length) return fail("Write something or add a photo");
+    record = { type: "text", townId, townName: town.name, county: town.county, title, body, tickSpecies, author: parsed.data.author };
   }
 
   try {
-    const { lat, lng, ...rest } = parsed.data;
-    const post = await getForumStore().createPost({ ...rest, lat: roundCoord(lat), lng: roundCoord(lng) });
-    return Response.json(redactPost(post), { status: 201 });
+    const store = getForumStore();
+    // Clean every photo before saving any, so a bad one doesn't leave the others behind.
+    const images = await Promise.all(files.map(cleanImage));
+    const photos = await Promise.all(images.map(async (image) => `/api/forum/images/${await store.saveImage(image)}`));
+    return Response.json(await store.createPost({ ...record, photos }), { status: 201 });
   } catch (error) {
-    return Response.json({ error: (error as Error).message }, { status: 501 });
+    if (error instanceof UploadError) return fail(error.message, error.status);
+    return fail((error as Error).message, 501);
   }
 }

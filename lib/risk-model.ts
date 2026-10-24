@@ -19,6 +19,11 @@ const MAX_SCORE = Math.max(...Object.entries(STATS).filter(([k]) => k !== "State
 
 export const TOWNS: Town[] = towns;
 export const findTown = (id: string) => TOWNS.find((t) => t.id === id);
+// "Amherst", "north adams" or "north-adams" -> the town with its county (MassGIS). undefined = not one of the 351 MA towns.
+export const townFromName = (name: string) => {
+  const q = name.trim().toLowerCase();
+  return TOWNS.find((t) => t.name.toLowerCase() === q || t.id === q.replace(/\s+/g, "-"));
+};
 
 // Dukes and Nantucket share one row in the DPH tables.
 export const statsKey = (county: string) => (county === "Dukes" || county === "Nantucket" ? "Dukes & Nantucket" : county);

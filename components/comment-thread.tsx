@@ -11,8 +11,13 @@ import type { ForumComment } from "@/lib/types";
 export function CommentThread({
   comments,
   onSend,
+  onReport,
   ...slot
-}: { comments?: ForumComment[]; onSend: (body: string, author: string) => Promise<void> } & SlotProps) {
+}: {
+  comments?: ForumComment[];
+  onSend: (body: string, author: string) => Promise<void>;
+  onReport: (commentId: string) => Promise<unknown>;
+} & SlotProps) {
   // TODO: real-time chat: subscribe to new comments for this post (e.g. Supabase Realtime) and append them.
   const status = slotStatus(slot, !comments?.length, "No comments yet. Start the conversation.");
 
@@ -22,12 +27,12 @@ export function CommentThread({
         <ul className="flex flex-col divide-y rounded-lg border bg-card">
           {comments?.map((c) => (
             <li key={c.id} className="flex flex-col gap-1 p-4">
-              <p>{c.body}</p>
+              <p className="whitespace-pre-wrap break-words">{c.body}</p>
               <div className="flex items-center justify-between text-sm text-muted-foreground">
                 <span>
                   {c.author}, {formatDate(c.createdAt)}
                 </span>
-                <ReportButton label={`Report comment by ${c.author}`} />
+                <ReportButton label={`Report comment by ${c.author}`} onReport={() => onReport(c.id)} />
               </div>
             </li>
           ))}

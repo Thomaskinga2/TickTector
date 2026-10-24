@@ -72,30 +72,74 @@ export type ScanResult = {
   engorgement?: "flat" | "partly fed" | "engorged";
 };
 
-// Forum: lat/lng are always rounded to 2 decimals (~1 km) before saving or showing.
+// Forum: a post carries its town and county only, never coordinates.
+// "text": written by a person. "scan": made by createScanPost() from a tick scan.
+export type ForumPostType = "text" | "scan";
+
+export const SCAN_SPECIES = ["deer-tick", "dog-tick", "lone-star-tick", "asian-longhorned-tick", "other", "unknown"] as const;
+export type ScanSpecies = (typeof SCAN_SPECIES)[number];
+export const SCAN_SPECIES_NAME: Record<ScanSpecies, string> = {
+  "deer-tick": "Blacklegged (deer) tick",
+  "dog-tick": "American dog tick",
+  "lone-star-tick": "Lone star tick",
+  "asian-longhorned-tick": "Asian longhorned tick",
+  other: "Other tick",
+  unknown: "Unidentified tick",
+};
+export const SCAN_STAGES = ["larva", "nymph", "adult", "unknown"] as const;
+export type ScanStage = (typeof SCAN_STAGES)[number];
+
 export type ForumPost = {
   id: string;
+  type: ForumPostType;
   townId: string;
-  lat: number;
-  lng: number;
-  title: string;
-  body: string;
-  photoUrl?: string;
-  tickSpecies?: string;
+  townName: string;
+  county: string;
+  title: string; // scan posts: the species name
+  body: string; // scan posts: ""
+  photos: string[]; // up to 4 image URLs (/api/forum/images/:id), EXIF removed
+  tickSpecies?: string; // text posts: what the writer typed, if anything
+  scan?: { species: ScanSpecies; confidence?: number; stage?: ScanStage; scannedAt: string };
   author: string;
   createdAt: string;
   commentCount: number;
+  likeCount: number;
 };
 
 export type ForumComment = { id: string; postId: string; body: string; author: string; createdAt: string };
 
+// A text post. Needs some text (title or body) or at least one photo.
 export type NewPostInput = {
   townId: string;
-  lat: number;
-  lng: number;
   title: string;
   body: string;
-  photo?: File;
+  photos: File[]; // 0–4
   tickSpecies?: string;
   author: string;
+};
+
+// Scan → forum contract. The scan screen's Post button calls createScanPost() from lib/services/forum.ts:
+//
+//   import { createScanPost } from "@/lib/services/forum";
+//   const town = await findNearestTown(lat, lng); // lib/services/towns.ts, or any MA town name
+//   const post = await createScanPost({
+//     photo: file, // the tick photo: File/Blob, or a data:/blob: URL
+//     species: speciesIdFor(result.species) as ScanSpecies, // lib/tickdex.ts ids match
+//     confidence: result.confidence,
+//     stage: result.stage,
+//     location: { town: town.name, lat, lng },
+//     scannedAt: new Date().toISOString(),
+//   });
+//   router.push(`/forum/${post.id}`);
+//
+// It throws an Error whose message the button can show as-is, e.g. "Location is outside Massachusetts"
+// or "Invalid image: use a JPEG, PNG or WebP photo". lat/lng are dropped before upload and never stored.
+export type ScanPostInput = {
+  photo: Blob | string;
+  species: ScanSpecies;
+  confidence?: number; // 0–1
+  stage?: ScanStage;
+  location: { town: string; lat?: number; lng?: number };
+  scannedAt: string; // ISO date-time
+  author?: string; // display name, "Anonymous" if left out
 };

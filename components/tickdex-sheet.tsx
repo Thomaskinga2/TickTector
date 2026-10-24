@@ -2,7 +2,8 @@
 
 import { Drawer } from "@base-ui/react/drawer";
 import { X } from "lucide-react";
-import { TickArt } from "@/components/tick-art";
+import { TickAftercare } from "@/components/tick-aftercare";
+import { TickPhoto, TickPhotoCredit } from "@/components/tick-photo";
 import { DemoBadge } from "@/components/tickdex-card";
 import { tickdexDisplay } from "@/components/tickdex-font";
 import { Disclaimer, LoadingState } from "@/components/states";
@@ -71,19 +72,22 @@ function SheetBody({ slot }: { slot: DexSlot }) {
           // eslint-disable-next-line @next/next/no-img-element -- data URL from localStorage, nothing to optimize
           <img src={photo} alt={`Your photo of a ${slot.speciesName.toLowerCase()} ${slot.stage}`} width={343} height={200} className="h-full w-full object-cover" />
         ) : (
-          <TickArt speciesId={slot.speciesId} stage={slot.stage} engorgement={newest?.engorgement} className="h-full w-full p-3" />
+          <TickPhoto speciesId={slot.speciesId} stage={slot.stage} engorgement={newest?.engorgement} width={343} height={200} />
         )}
         <span className="absolute top-2 left-2 rounded-full bg-tickdex-ink px-2.5 py-1 font-tickdex text-[14px] leading-none text-tickdex-gold">
           {formatDexNumber(slot.number)}
         </span>
       </div>
+      {!photo && <TickPhotoCredit speciesId={slot.speciesId} stage={slot.stage} className="-mt-4" />}
 
       <div className="flex flex-col gap-1">
         <Drawer.Title className="font-tickdex text-[26px] leading-tight">{slot.speciesName}</Drawer.Title>
         <Drawer.Description className="text-[15px] text-muted-foreground">
-          {stageLabel(slot.stage)} · caught {count} {count === 1 ? "time" : "times"}
+          {stageLabel(slot.stage)} · {count > 0 ? `caught ${count} ${count === 1 ? "time" : "times"}` : "not caught yet"}
         </Drawer.Description>
       </div>
+
+      <TickAftercare speciesId={slot.speciesId} latest={newest} />
 
       {slot.speciesId === UNKNOWN_SPECIES_ID ? (
         <p className="rounded-2xl bg-muted p-4 text-[15px]">
@@ -93,28 +97,30 @@ function SheetBody({ slot }: { slot: DexSlot }) {
         <SpeciesFacts speciesId={slot.speciesId} townId={townId} />
       )}
 
-      <section className="flex flex-col gap-2">
-        <h3 className="font-tickdex text-[17px]">Your catches</h3>
-        <ol className="flex flex-col divide-y rounded-2xl border bg-card">
-          {slot.catches.map((c) => (
-            <li key={c.id} className="flex items-center gap-3 p-3">
-              <span className="size-11 shrink-0 overflow-hidden rounded-lg bg-tickdex-card">
-                {c.photo ? (
-                  // eslint-disable-next-line @next/next/no-img-element -- data URL from localStorage, nothing to optimize
-                  <img src={c.photo} alt="" width={44} height={44} className="h-full w-full object-cover" />
-                ) : (
-                  <TickArt speciesId={c.speciesId} stage={c.stage} engorgement={c.engorgement} className="h-full w-full" />
-                )}
-              </span>
-              <span className="flex min-w-0 flex-1 flex-col">
-                <span className="text-[14px] font-semibold">{formatLongDate(c.caughtAt)}</span>
-                <span className="text-[13px] text-muted-foreground first-letter:uppercase">{c.engorgement}</span>
-              </span>
-              {c.isBeanDemo && <DemoBadge />}
-            </li>
-          ))}
-        </ol>
-      </section>
+      {count > 0 && (
+        <section className="flex flex-col gap-2">
+          <h3 className="font-tickdex text-[17px]">Your catches</h3>
+          <ol className="flex flex-col divide-y rounded-2xl border bg-card">
+            {slot.catches.map((c) => (
+              <li key={c.id} className="flex items-center gap-3 p-3">
+                <span className="size-11 shrink-0 overflow-hidden rounded-lg bg-tickdex-card">
+                  {c.photo ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- data URL from localStorage, nothing to optimize
+                    <img src={c.photo} alt="" width={44} height={44} className="h-full w-full object-cover" />
+                  ) : (
+                    <TickPhoto speciesId={c.speciesId} stage={c.stage} engorgement={c.engorgement} width={44} height={44} />
+                  )}
+                </span>
+                <span className="flex min-w-0 flex-1 flex-col">
+                  <span className="text-[14px] font-semibold">{formatLongDate(c.caughtAt)}</span>
+                  <span className="text-[13px] text-muted-foreground first-letter:uppercase">{c.engorgement}</span>
+                </span>
+                {c.isBeanDemo && <DemoBadge />}
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
 
       <Disclaimer />
     </Drawer.Content>

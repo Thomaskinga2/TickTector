@@ -7,6 +7,7 @@ import { makeDiagramSprites } from "@/lib/capture/diagram-sprites";
 import { renderFrame, type Opening, type SceneAssets, type SceneText } from "@/lib/capture/draw-scene";
 import { drawTickOnSurface, type Tick3dLook } from "@/lib/capture/draw-tick-3d";
 import { CAPTURE_FONTS, captureFontVars, loadCaptureFonts } from "@/lib/capture/fonts";
+import { loadNodePhotos } from "@/lib/capture/node-photos";
 import { circleInSource, sceneView, tickFraming, wipeRadius, type Circle, type Mapping, type Point } from "@/lib/capture/framing";
 import { advanceClock, DROP, makeTimeline, OPEN_LEN, TICK, type Timeline } from "@/lib/capture/timeline";
 
@@ -182,7 +183,7 @@ export function CaptureAnimation(props: Props) {
       raf = requestAnimationFrame(frame);
     };
 
-    loadCaptureFonts().then(() => {
+    Promise.all([loadCaptureFonts(), loadNodePhotos()]).then(() => {
       if (!cancelled) raf = requestAnimationFrame(frame);
     });
 

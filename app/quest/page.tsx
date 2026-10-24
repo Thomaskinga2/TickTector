@@ -3,6 +3,7 @@
 
 import { Suspense } from "react";
 import { Page } from "@/components/page";
+import { PhotoCredits } from "@/components/photo-credits";
 import { ComingSoon } from "@/components/states";
 import { Tickdex, TickdexSkeleton } from "@/components/tickdex";
 import { tickdexDisplay } from "@/components/tickdex-font";
@@ -13,9 +14,12 @@ export default function QuestPage() {
     <Page className={tickdexDisplay.variable}>
       {features.quest ? (
         // The Tickdex reads the URL (?new=, ?demo=) and localStorage, so it renders in the browser only.
-        <Suspense fallback={<TickdexSkeleton />}>
-          <Tickdex />
-        </Suspense>
+        <>
+          <Suspense fallback={<TickdexSkeleton />}>
+            <Tickdex />
+          </Suspense>
+          <PhotoCredits />
+        </>
       ) : (
         <ComingSoon title="Tickdex">Collect every tick you catch with Scan. Coming soon.</ComingSoon>
       )}

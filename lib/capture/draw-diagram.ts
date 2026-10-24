@@ -5,6 +5,7 @@ import type { TickStage } from "@/lib/tickdex";
 import { drawCaption, type DiagramInfo } from "./diagram-caption";
 import { drawEggs, type DiagramSprites } from "./diagram-sprites";
 import { blit, drawTick, mix, roundRect, type CanvasFonts, type Ctx } from "./draw-kit";
+import { nodePhoto } from "./node-photos";
 import { clamp, eBack, eOut, GROUND_Y, lerp, seg, TICK, W } from "./timeline";
 
 const RING = { x: 180, y: 366, r: 118 };
@@ -125,6 +126,18 @@ function drawCycleArrows(c: Ctx, u: number): void {
   c.restore();
 }
 
+// A real photo as a circular crop just inside the node ring, cropped to the centre square (object-fit cover)
+function drawPhotoInNode(c: Ctx, img: HTMLImageElement): void {
+  const r = NODE_R - 2;
+  const side = Math.min(img.naturalWidth, img.naturalHeight);
+  c.save();
+  c.beginPath();
+  c.arc(0, 0, r, 0, Math.PI * 2);
+  c.clip();
+  c.drawImage(img, (img.naturalWidth - side) / 2, (img.naturalHeight - side) / 2, side, side, -r, -r, r * 2, r * 2);
+  c.restore();
+}
+
 function drawNode(c: Ctx, spr: DiagramSprites, nd: DexNode, u: number, scanned: boolean): void {
   const i = nd.n - 1;
   const p = seg(u, NODE_AT[i], NODE_AT[i] + POP_DUR);
@@ -157,8 +170,10 @@ function drawNode(c: Ctx, spr: DiagramSprites, nd: DexNode, u: number, scanned: 
     blit(c, spr.leaves, 0, 4);
     drawEggs(c, 0, -1);
   } else if (nd.tick) {
+    const photo = nodePhoto(nd.key);
     c.globalAlpha = a * lerp(0.82, 1, hl);
-    drawTick(c, 0, 2, nd.tick.s, { fed: nd.tick.fed, legs: nd.tick.legs || 4, phase: 0.3 });
+    if (photo) drawPhotoInNode(c, photo);
+    else drawTick(c, 0, 2, nd.tick.s, { fed: nd.tick.fed, legs: nd.tick.legs || 4, phase: 0.3 });
     c.globalAlpha = a;
   }
   if (nd.host) {

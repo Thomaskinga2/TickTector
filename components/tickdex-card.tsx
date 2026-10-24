@@ -15,7 +15,8 @@ type TickdexCardProps = {
   onOpen: (key: string) => void;
 };
 
-// One dex slot: caught (photo or drawn tick, stage, count, first catch) or an empty silhouette.
+// One dex slot: caught (photo or drawn tick, stage, count, first catch) or not caught yet (reference photo, still opens
+// the sheet so anyone can read up on that tick). The silhouette face is only the back of the "new catch" flip.
 export function TickdexCard({ slot, registration, onOpen }: TickdexCardProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
@@ -30,7 +31,13 @@ export function TickdexCard({ slot, registration, onOpen }: TickdexCardProps) {
     return playRegistration(kind, entryId, { root: rootRef.current, inner: innerRef.current, face: faceRef.current, badge: badgeRef.current });
   }, [kind, entryId]);
 
-  if (slot.catches.length === 0) return <EmptyFace slot={slot} />;
+  if (slot.catches.length === 0) {
+    return (
+      <div data-slot-key={slot.key} className="relative h-[160px] scroll-my-24">
+        <CaughtFace ref={faceRef} slot={slot} isNew={false} onOpen={onOpen} />
+      </div>
+    );
+  }
 
   return (
     <div ref={rootRef} data-slot-key={slot.key} className="relative h-[160px] scroll-my-24 [perspective:700px]">
@@ -65,16 +72,17 @@ function CaughtFace({
   const newest = slot.catches[0];
   const first = firstCaught(slot);
   const count = slot.catches.length;
+  const isCaught = count > 0;
 
   return (
     <button
       ref={ref}
       type="button"
       onClick={() => onOpen(slot.key)}
-      aria-label={`${formatDexNumber(slot.number)}, ${slot.speciesName}, ${stageLabel(slot.stage)}, caught ${count} ${count === 1 ? "time" : "times"}`}
+      aria-label={`${formatDexNumber(slot.number)}, ${slot.speciesName}, ${stageLabel(slot.stage)}, ${isCaught ? `caught ${count} ${count === 1 ? "time" : "times"}` : "not caught yet"}`}
       className={cn(
         "absolute inset-0 flex flex-col rounded-2xl border-2 bg-tickdex-card p-1.5 text-left text-tickdex-ink backface-hidden",
-        slot.number > 0 ? "border-tickdex-gold" : "border-tickdex-edge",
+        isCaught && slot.number > 0 ? "border-tickdex-gold" : "border-tickdex-edge",
         "bg-[linear-gradient(180deg,var(--tickdex-paper),var(--tickdex-card))] shadow-[0_3px_0_var(--tickdex-edge)] transition-transform active:scale-[0.97]",
         "outline-none focus-visible:ring-3 focus-visible:ring-ring/60",
         isNew && "shadow-[0_0_0_2px_var(--tickdex-gold),0_6px_16px_-8px_var(--tickdex-gold)]",
@@ -85,7 +93,7 @@ function CaughtFace({
         {count > 1 && <span className="flex h-4 items-center rounded-full bg-tickdex-ink px-1.5 font-tickdex text-[12px] leading-none text-tickdex-gold">×{count}</span>}
       </span>
       <span className="relative mt-1 block h-[90px] w-full shrink-0">
-        <span className="block h-full w-full overflow-hidden rounded-xl bg-[radial-gradient(circle_at_50%_40%,#fff,var(--tickdex-card))]">
+        <span className={cn("block h-full w-full overflow-hidden rounded-xl bg-[radial-gradient(circle_at_50%_40%,#fff,var(--tickdex-card))]", !isCaught && "opacity-75 grayscale-[35%]")}>
           {photo ? (
             // eslint-disable-next-line @next/next/no-img-element -- data URL from localStorage, nothing to optimize
             <img src={photo} alt="" width={96} height={90} className="h-full w-full object-cover" />
@@ -97,7 +105,7 @@ function CaughtFace({
       </span>
       <span className="mt-auto px-0.5 text-[14px] leading-tight font-semibold">{stageLabel(slot.stage)}</span>
       <span className="px-0.5 text-[12px] leading-tight text-tickdex-ink/80">
-        {first ? `First ${formatShortDate(first.caughtAt)}` : ""}
+        {first ? `First ${formatShortDate(first.caughtAt)}` : "Not caught yet"}
       </span>
     </button>
   );

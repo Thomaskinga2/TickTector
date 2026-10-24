@@ -83,11 +83,11 @@ function SheetBody({ slot }: { slot: DexSlot }) {
       <div className="flex flex-col gap-1">
         <Drawer.Title className="font-tickdex text-[26px] leading-tight">{slot.speciesName}</Drawer.Title>
         <Drawer.Description className="text-[15px] text-muted-foreground">
-          {stageLabel(slot.stage)} · caught {count} {count === 1 ? "time" : "times"}
+          {stageLabel(slot.stage)} · {count > 0 ? `caught ${count} ${count === 1 ? "time" : "times"}` : "not caught yet"}
         </Drawer.Description>
       </div>
 
-      {newest && <TickAftercare latest={newest} />}
+      <TickAftercare speciesId={slot.speciesId} latest={newest} />
 
       {slot.speciesId === UNKNOWN_SPECIES_ID ? (
         <p className="rounded-2xl bg-muted p-4 text-[15px]">
@@ -97,28 +97,30 @@ function SheetBody({ slot }: { slot: DexSlot }) {
         <SpeciesFacts speciesId={slot.speciesId} townId={townId} />
       )}
 
-      <section className="flex flex-col gap-2">
-        <h3 className="font-tickdex text-[17px]">Your catches</h3>
-        <ol className="flex flex-col divide-y rounded-2xl border bg-card">
-          {slot.catches.map((c) => (
-            <li key={c.id} className="flex items-center gap-3 p-3">
-              <span className="size-11 shrink-0 overflow-hidden rounded-lg bg-tickdex-card">
-                {c.photo ? (
-                  // eslint-disable-next-line @next/next/no-img-element -- data URL from localStorage, nothing to optimize
-                  <img src={c.photo} alt="" width={44} height={44} className="h-full w-full object-cover" />
-                ) : (
-                  <TickPhoto speciesId={c.speciesId} stage={c.stage} engorgement={c.engorgement} width={44} height={44} />
-                )}
-              </span>
-              <span className="flex min-w-0 flex-1 flex-col">
-                <span className="text-[14px] font-semibold">{formatLongDate(c.caughtAt)}</span>
-                <span className="text-[13px] text-muted-foreground first-letter:uppercase">{c.engorgement}</span>
-              </span>
-              {c.isBeanDemo && <DemoBadge />}
-            </li>
-          ))}
-        </ol>
-      </section>
+      {count > 0 && (
+        <section className="flex flex-col gap-2">
+          <h3 className="font-tickdex text-[17px]">Your catches</h3>
+          <ol className="flex flex-col divide-y rounded-2xl border bg-card">
+            {slot.catches.map((c) => (
+              <li key={c.id} className="flex items-center gap-3 p-3">
+                <span className="size-11 shrink-0 overflow-hidden rounded-lg bg-tickdex-card">
+                  {c.photo ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- data URL from localStorage, nothing to optimize
+                    <img src={c.photo} alt="" width={44} height={44} className="h-full w-full object-cover" />
+                  ) : (
+                    <TickPhoto speciesId={c.speciesId} stage={c.stage} engorgement={c.engorgement} width={44} height={44} />
+                  )}
+                </span>
+                <span className="flex min-w-0 flex-1 flex-col">
+                  <span className="text-[14px] font-semibold">{formatLongDate(c.caughtAt)}</span>
+                  <span className="text-[13px] text-muted-foreground first-letter:uppercase">{c.engorgement}</span>
+                </span>
+                {c.isBeanDemo && <DemoBadge />}
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
 
       <Disclaimer />
     </Drawer.Content>

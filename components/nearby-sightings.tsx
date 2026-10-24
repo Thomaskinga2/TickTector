@@ -35,7 +35,7 @@ export function NearbySightings({ townId }: { townId: string }) {
           ))}
         </ul>
       )}
-      <Link href="/forum/new" className={cn(buttonVariants({ variant: "gray", size: "sm" }), "self-start")}>
+      <Link href="/forum/new" transitionTypes={["sheet-open"]} className={cn(buttonVariants({ variant: "gray", size: "sm" }), "self-start")}>
         <Plus className="size-4" strokeWidth={2.6} aria-hidden />
         Report a sighting
       </Link>

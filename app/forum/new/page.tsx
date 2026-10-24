@@ -41,7 +41,9 @@ export default function NewPostPage() {
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-black">
+    <div className="fixed inset-0 z-50">
+      {/* The backdrop dims in as the sheet rises (it used to be black from the first frame). */}
+      <m.div aria-hidden className="absolute inset-0 bg-black" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35 }} />
       {/* The screen underneath, receded behind the sheet as on iOS. */}
       <m.div
         aria-hidden

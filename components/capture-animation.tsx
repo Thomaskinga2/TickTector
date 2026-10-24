@@ -26,6 +26,7 @@ type Props = {
   onShutter: () => void; // the shutter flash: send the photo now
   onCaught: () => string; // CAUGHT!: record the catch, return the diagram heading
   onFinished: () => void;
+  showSkip?: boolean;
 };
 
 const MAX_DPR = 3;
@@ -197,15 +198,17 @@ export function CaptureAnimation(props: Props) {
   return (
     <div className={`fixed inset-0 z-[100] touch-none overscroll-none ${captureFontVars}`}>
       <canvas ref={canvasRef} className="block h-full w-full" role="img" aria-label="Capture animation: the tick is caught in a vial, then its life cycle" />
-      <button
-        type="button"
-        onClick={() => {
-          clock.current.skip = true;
-        }}
-        className="absolute right-[max(12px,env(safe-area-inset-right))] top-[max(12px,env(safe-area-inset-top))] rounded-full bg-background/80 px-3.5 py-2 text-sm font-semibold text-foreground shadow-sm backdrop-blur-sm"
-      >
-        Skip
-      </button>
+      {props.showSkip !== false && (
+        <button
+          type="button"
+          onClick={() => {
+            clock.current.skip = true;
+          }}
+          className="absolute right-[max(12px,env(safe-area-inset-right))] top-[max(12px,env(safe-area-inset-top))] rounded-full bg-background/80 px-3.5 py-2 text-sm font-semibold text-foreground shadow-sm backdrop-blur-sm"
+        >
+          Skip
+        </button>
+      )}
     </div>
   );
 }

@@ -20,7 +20,13 @@ export type ActionAlert = { id: string; level: RiskLevel; title: string; steps: 
 
 export type HeatmapPoint = { townId: string; lat: number; lng: number; value: number }; // value 0..1
 
-export type ScanResult = { species: string | null; confidence: number; advice: string };
+export type ScanResult = {
+  species: string | null;
+  confidence: number;
+  advice: string;
+  stage?: "larva" | "nymph" | "adult";
+  engorgement?: "flat" | "partly fed" | "engorged";
+};
 
 // Forum: lat/lng are always rounded to 2 decimals (~1 km) before saving or showing.
 export type ForumPost = {

@@ -300,7 +300,7 @@ export function BeanScanner({ camera, onLock, onSample, onClose }: Props) {
               <Button variant="secondary" className="h-11 flex-1" onClick={() => setTapMode(true)} disabled={tapMode}>
                 Tap the bean
               </Button>
-              <Button variant="outline" className="h-11 flex-1" onClick={() => onSample(c)}>
+              <Button variant="outline" className="h-11 flex-1 text-foreground" onClick={() => onSample(c)}>
                 Use the sample
               </Button>
             </div>

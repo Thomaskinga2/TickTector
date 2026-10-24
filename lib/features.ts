@@ -2,7 +2,7 @@
 export const features = {
   geolocation: false,
   heatmap: false,
-  camera: false,
+  camera: true,
   forum: true,
   quest: false,
 };

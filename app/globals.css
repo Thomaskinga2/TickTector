@@ -1,0 +1,807 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/*
+ * TickTector design tokens, following Apple's iOS Human Interface Guidelines (iOS 27).
+ * System colors and text styles come from the HIG; the hemlock tint and the risk gradients are TickTector's own.
+ * Component code uses the shadcn token names below, so every component inherits the palette automatically.
+ */
+
+@theme {
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
+  --font-rounded: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, sans-serif;
+
+
+  /* Motion. Apple's default is a bounce-free spring (duration 0.5); presses get a light bounce. */
+  --ease-out-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: linear(0, 0.06 3.4%, 0.23 7.4%, 0.73 17.2%, 0.92 22.5%, 1.03 28.7%, 1.06 33.8%, 1.05 39.6%, 1.01 50.4%, 0.995 62.3%, 1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--foreground);
+  --color-primary: var(--tint);
+  --color-primary-foreground: var(--on-tint);
+  --color-secondary: var(--fill);
+  --color-secondary-foreground: var(--foreground);
+  --color-muted: var(--fill);
+  --color-muted-foreground: var(--label-secondary);
+  --color-accent: var(--fill);
+  --color-accent-foreground: var(--foreground);
+  --color-destructive: var(--system-red);
+  --color-border: var(--separator);
+  --color-input: var(--separator);
+  --color-ring: var(--tint);
+  --color-separator: var(--separator);
+  --color-fill: var(--fill);
+  --color-label-tertiary: var(--label-tertiary);
+  --color-elevated: var(--elevated);
+  --color-risk-low: var(--risk-low);
+  --color-risk-moderate: var(--risk-moderate);
+  --color-risk-high: var(--risk-high);
+  --font-heading: var(--font-sans);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-2xl: 26px;
+}
+
+:root {
+  color-scheme: light;
+
+  /* TickTector is light only. Secondary label is a touch darker than stock for 4.5:1 on the grouped background. */
+  /* iOS grouped structure on TickTector's own warm "field notebook" beige instead of the stock cool gray. */
+  --background: #f4efe4;
+  --card: #fdfbf6;
+  --elevated: #fdfbf6;
+  --foreground: #221c14;
+  --label-secondary: rgb(72 58 40 / 0.8);
+  --label-tertiary: rgb(72 58 40 / 0.45);
+  --separator: rgb(92 72 42 / 0.18);
+  --fill: rgb(130 106 66 / 0.12);
+  --system-red: #e9152d;
+
+  /* Tint: TickTector leaf green (4.6:1 on the beige background, white on it 5.3:1). */
+  --tint: #2f7a41;
+  --on-tint: #ffffff;
+
+  /* Risk marks: the level inks (see the level colors below), readable as text and marks on the beige and cards. */
+  --risk-low: #3d6b33;
+  --risk-moderate: #875807;
+  --risk-high: #b0391f;
+
+  /* Liquid Glass approximation for bars and controls (no Apple CSS exists; see design.md). */
+  --glass-fill: rgb(253 251 246 / 0.97);
+  --glass-stroke: rgb(0 0 0 / 0.08);
+  --glass-highlight: rgb(255 255 255 / 0.75);
+  --glass-shadow: 0 8px 28px -10px rgb(0 0 0 / 0.22), 0 1px 3px rgb(0 0 0 / 0.08);
+}
+
+
+/* Increase Contrast: mostly solid surfaces with defined edges (HIG Accessibility). */
+@media (prefers-contrast: more) {
+  :root {
+    --label-secondary: rgb(60 48 32 / 0.92);
+    --separator: rgb(60 48 32 / 0.45);
+    --glass-fill: rgb(253 251 246 / 0.96);
+    --glass-stroke: rgb(0 0 0 / 0.4);
+  }
+}
+
+/* Bars, the tab bar and floating controls. Never stack one glass element on another.
+   No live blur anywhere in the app: during a page transition the browser draws from a snapshot, which can't blur,
+   so frosted controls appeared unfrosted and then frosted over late. "Glass" is a near-opaque fill with the glass
+   highlight and edge, identical in every frame. */
+@utility glass {
+  background: var(--glass-fill);
+  box-shadow: inset 0 1px 0 var(--glass-highlight), inset 0 0 0 0.5px var(--glass-stroke), var(--glass-shadow);
+}
+
+/* The tab bar is frosted glass, and the blur is there in every frame, including page transitions. During a
+   transition the bar is drawn from a snapshot; that snapshot is clipped to the capsule below
+   (::view-transition-group(tab-bar)), because unclipped its blurred backdrop showed as a square-cornered box.
+   Turning the blur off for transitions instead made it pop back in late. No fade strip sits under the bar:
+   content simply scrolls behind the floating capsule. */
+.tab-bar {
+  --glass-fill: rgb(253 251 246 / 0.66);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
+  /* Rounds the blur and keeps the selection's spring overshoot inside the capsule's ends. */
+  clip-path: inset(0 round 999px);
+}
+/* The clip also cuts the glass's own drop shadow, so a sibling behind it draws the shadow. It has its own
+   transition snapshot, so the shadow doesn't vanish and reappear on each navigation either. (It can't wrap the
+   glass: a wrapper with a transition name would stop the glass from blurring the page.) */
+.tab-bar-shadow {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  box-shadow: var(--glass-shadow);
+  pointer-events: none;
+}
+@media (prefers-contrast: more) {
+  .tab-bar { --glass-fill: rgb(253 251 246 / 0.96); }
+}
+
+/* The selection lozenge: one capsule that slides between the five columns on a spring. A CSS transition runs on
+   the compositor, so it stays smooth while the next page is being swapped in. */
+.tab-bar-lozenge {
+  position: absolute;
+  inset-block: 0.25rem;
+  left: 0.25rem;
+  width: calc((100% - 0.5rem) / 5);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--tint) 14%, transparent);
+  pointer-events: none;
+  transition: transform 0.5s var(--ease-spring), opacity 0.2s var(--ease-out-smooth);
+}
+/* The picked tab's icon hops once. */
+@keyframes tab-hop {
+  0% { transform: none; }
+  40% { transform: translateY(-4px) scale(1.14); }
+  100% { transform: none; }
+}
+.tab-hop { display: inline-block; animation: tab-hop 0.42s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .tab-bar-lozenge { transition: opacity 0.2s; }
+  .tab-hop { animation: none; }
+}
+
+/*
+ * Scroll edge (HIG): once content scrolls under a nav bar, a blurred layer fades in behind the bar and
+ * dissolves downward instead of ending in a hard line or a shadow. --edge is the color it leans toward.
+ */
+@utility scroll-edge {
+  isolation: isolate;
+  --edge: var(--background);
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 -24px;
+    z-index: -1;
+    pointer-events: none;
+    /* Solid, no blur (see .glass). Only bars that carry a title use it, and they show it from the first frame. */
+    background: var(--edge);
+    -webkit-mask-image: linear-gradient(#000 60%, transparent);
+    mask-image: linear-gradient(#000 60%, transparent);
+    opacity: 0;
+  }
+  &[data-scrolled]::before { opacity: 1; }
+}
+
+/* Reduce Transparency: fully opaque surfaces. */
+@media (prefers-reduced-transparency: reduce) {
+  .glass { background: var(--elevated); }
+  .tab-bar { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .scroll-edge::before { background: var(--edge); }
+}
+
+/* Press feedback: controls shrink a little on a spring, like iOS buttons. */
+@utility pressable {
+  transition: transform 0.35s var(--ease-spring), opacity 0.2s var(--ease-out-smooth), background-color 0.2s var(--ease-out-smooth);
+  -webkit-tap-highlight-color: transparent;
+  &:active { transform: scale(0.96); }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    background: var(--background);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background font-sans type-body text-foreground antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* No one-word last lines in titles and copy. */
+  p,
+  h1,
+  h2,
+  h3,
+  li {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--tint) 28%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--tint);
+    outline-offset: 2px;
+  }
+}
+
+/* Signature moment on the town page: the readout settles once. */
+@keyframes readout-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+/* Sheets use the elevated grouped colors. */
+.sheet {
+  --background: #f4efe4;
+  --card: #fdfbf6;
+}
+
+.readout-in { animation: readout-in 0.7s var(--ease-out-smooth) both; }
+
+/* Page navigations (React <ViewTransition> in app/layout.tsx): the old page leaves fast, the new one settles in. */
+@keyframes vt-out {
+  to { opacity: 0; }
+}
+@keyframes vt-in {
+  from { opacity: 0; transform: translateY(8px); }
+}
+::view-transition-old(.page) { animation: vt-out 0.14s ease-out both; }
+::view-transition-new(.page) { animation: vt-in 0.32s var(--ease-out-smooth) 0.06s both; }
+::view-transition-group(tab-bar) { animation: none; z-index: 100; clip-path: inset(0 round 999px); }
+::view-transition-group(tab-bar-shadow) { animation: none; z-index: 99; }
+::view-transition-old(tab-bar-shadow) { display: none; }
+::view-transition-new(tab-bar-shadow) { animation: none; }
+::view-transition-old(tab-bar) { display: none; }
+::view-transition-new(tab-bar) { animation: none; }
+/* Taps during a transition reach the live page instead of the snapshot. */
+::view-transition { pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .readout-in { animation-name: fade-in-only; }
+  .pressable:active { transform: none; opacity: 0.7; }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation-duration: 0.01s !important; }
+}
+@keyframes fade-in-only {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/*
+ * TickTector's map (components/risk-map-canvas.tsx): Census boundaries drawn in our own palette.
+ * The map sets its own tokens, so it reads the same inside the town page's white-on-color scope.
+ */
+.risk-map {
+  --map-water: #d4e5e4;
+  --map-land: #fbf8f1;
+  --map-neighbor: #ebe5d9;
+  --map-town-line: rgb(90 78 58 / 0.17);
+  --map-county-line: rgb(90 78 58 / 0.45);
+  --map-coast: rgb(62 104 116 / 0.4);
+  --map-label: rgb(64 58 50 / 0.78);
+  --map-chip: #ffffff;
+  --map-chip-ink: #1c1a17;
+  --foreground: #1c1a17;
+  --label-secondary: rgb(64 58 50 / 0.78);
+  --tint: #2f7a41;
+  --risk-low: #3d6b33;
+  --risk-moderate: #875807;
+  --risk-high: #b0391f;
+}
+.risk-map .leaflet-container {
+  background: var(--map-water);
+  font-family: var(--font-sans);
+}
+.risk-map .map-neighbor { fill: var(--map-neighbor); fill-opacity: 1; stroke: var(--map-county-line); stroke-width: 0.75; stroke-opacity: 0.6; }
+.risk-map .map-land { fill: var(--map-land); fill-opacity: 1; stroke: none; }
+.risk-map .map-coast { fill: none; stroke: var(--map-coast); stroke-width: 1.25; }
+.risk-map .map-county { fill: none; stroke: var(--map-county-line); stroke-width: 1; stroke-linejoin: round; }
+
+/* Towns: a hairline grid, shaded in the level pastels (the same as the faces); the selected town gets its ink. */
+.risk-map .map-town {
+  --town: var(--map-land);
+  --town-ink: var(--map-county-line);
+  fill: var(--town);
+  fill-opacity: 0.7;
+  stroke: var(--map-town-line);
+  stroke-width: 0.6;
+  transition: fill-opacity 0.25s var(--ease-out-smooth);
+}
+.risk-map .map-town--low { --town: var(--level-low); --town-ink: var(--risk-low); }
+.risk-map .map-town--moderate { --town: var(--level-moderate); --town-ink: var(--risk-moderate); }
+.risk-map .map-town--high { --town: var(--level-high); --town-ink: var(--risk-high); }
+.risk-map .map-town.is-off { fill-opacity: 0; pointer-events: none; }
+.risk-map .map-town.is-selected { fill-opacity: 1; stroke: var(--town-ink); stroke-width: 2; stroke-opacity: 1; }
+@media (hover: hover) {
+  .risk-map .map-town.leaflet-interactive:hover { fill-opacity: 0.9; }
+}
+
+/* Names: quiet type with a halo in the land color, like a printed map. */
+.map-label-anchor { overflow: visible; }
+.map-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  pointer-events: none;
+  color: var(--map-label);
+  font: 500 11px/13px var(--font-sans);
+  text-shadow: 0 0 2px var(--map-land), 0 0 2px var(--map-land), 0 0 3px var(--map-land);
+}
+.map-label--county { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; }
+
+.map-pin {
+  --pin: var(--risk-low);
+  display: flex;
+  align-items: center;
+  width: max-content;
+  transform-origin: 11px 11px;
+  animation: pin-in 0.4s var(--ease-out-smooth) both;
+}
+@keyframes pin-in {
+  from { transform: scale(0.6); opacity: 0; }
+}
+.map-pin--moderate { --pin: var(--risk-moderate); }
+.map-pin--high { --pin: var(--risk-high); }
+.map-pin__dot {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--map-chip);
+  border-radius: 999px;
+  background: var(--pin);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--pin) 28%, transparent), 0 4px 12px rgb(23 20 15 / 0.25);
+}
+.map-pin__name {
+  margin-left: -11px;
+  padding: 3px 10px 3px 16px;
+  border-radius: 999px;
+  background: var(--map-chip);
+  color: var(--map-chip-ink);
+  font: 600 12px/16px var(--font-sans);
+  box-shadow: 0 1px 2px rgb(23 20 15 / 0.2), 0 4px 10px rgb(23 20 15 / 0.12);
+}
+.map-pin.is-compact { transform-origin: 7px 7px; }
+.map-pin.is-compact .map-pin__dot { width: 14px; height: 14px; border-width: 2px; box-shadow: 0 0 0 3px color-mix(in oklab, var(--pin) 28%, transparent); }
+.map-pin.is-compact .map-pin__name { margin-left: -7px; padding-left: 12px; }
+.leaflet-marker-icon:focus-visible { outline: none; }
+.leaflet-marker-icon:focus-visible .map-pin__dot { outline: 3px solid var(--tint); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  .map-pin { animation-name: fade-in-only; }
+  .risk-map .map-town { transition: none; }
+}
+
+/* Doubled container class: Leaflet's own stylesheet loads later with the same specificity. */
+.risk-map .leaflet-container .leaflet-control-attribution {
+  /* Inset inside the rounded frame so the corner radius never clips it. */
+  margin: 0 8px 8px !important;
+  padding: 1px 7px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--map-land) 80%, transparent);
+  color: var(--map-label);
+  font-size: 10px;
+}
+
+/* Segmented control selection (iOS: white). */
+:root { --segment-selected: #fdfbf6; }
+
+/*
+ * iOS text styles at the default ("Large") Dynamic Type size, in points (= CSS px), per the HIG Typography table.
+ * Named type-* (not text-*) so class merging never mistakes a size for a color.
+ */
+/* Display styles use SF Pro Rounded (as in Fitness and Reminders): friendly, and still the system font. */
+@utility type-large-title { font-family: var(--font-rounded); font-size: 34px; line-height: 41px; }
+@utility type-title1 { font-family: var(--font-rounded); font-size: 28px; line-height: 34px; }
+@utility type-title2 { font-family: var(--font-rounded); font-size: 22px; line-height: 28px; }
+@utility type-title3 { font-family: var(--font-rounded); font-size: 20px; line-height: 25px; }
+@utility type-headline { font-size: 17px; line-height: 22px; font-weight: 600; }
+@utility type-body { font-size: 17px; line-height: 22px; }
+@utility type-callout { font-size: 16px; line-height: 21px; }
+@utility type-subhead { font-size: 15px; line-height: 20px; }
+@utility type-footnote { font-size: 13px; line-height: 18px; }
+@utility type-caption1 { font-size: 12px; line-height: 16px; }
+@utility type-caption2 { font-size: 11px; line-height: 13px; }
+
+
+/* Content swaps in place (Home's county view, results): a short fade and rise, never a slide. */
+@keyframes fade-rise {
+  from { opacity: 0; transform: translateY(6px); }
+}
+.fade-in { animation: fade-rise 0.35s var(--ease-out-smooth) both; }
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { animation-name: fade-in-only; }
+}
+
+/*
+ * Tick, the mascot (components/tick.tsx). Every motion is small, springy and occasional; Reduce Motion turns
+ * each into a fade or nothing. Legs, handle and marks stay readable on dark backgrounds.
+ */
+:root {
+  --tick-body: #b0643c;
+  --tick-shield: #3a2419;
+  --tick-leg: #3a2419;
+  --tick-handle: #7a5232;
+  --tick-mark: #3f8a4c;
+}
+.tick { overflow: visible; }
+.tick .tick-body,
+.tick .tick-glass,
+.tick .tick-legs-l,
+.tick .tick-legs-r,
+.tick .tick-zs text,
+.tick .tick-question { transform-box: view-box; }
+
+/* hello: hop in, then every few seconds lift the glass for a look. */
+@keyframes tick-hello {
+  0% { transform: translateY(8px) scale(0.9); opacity: 0; }
+  60% { transform: translateY(-3px) rotate(-6deg); opacity: 1; }
+  100% { transform: none; }
+}
+@keyframes tick-peek {
+  0%, 86%, 100% { transform: none; }
+  90% { transform: translate(-1px, -2px) rotate(-14deg); }
+  95% { transform: translate(0, -1px) rotate(5deg); }
+}
+.tick-motion-hello { animation: tick-hello 0.7s 0.1s var(--ease-spring) both; }
+.tick-motion-hello .tick-glass { transform-origin: 44px 22px; animation: tick-peek 6s 1.6s ease-in-out infinite; }
+
+/* search: legs paddle out of step; the glass sweeps a small circle. */
+@keyframes tick-paddle {
+  from { transform: rotate(-7deg); }
+  to { transform: rotate(7deg); }
+}
+@keyframes tick-sweep {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 1.5px); }
+  50% { transform: translate(-3px, -1px); }
+  75% { transform: translate(-1px, -2px); }
+}
+.tick-motion-search .tick-legs-l,
+.tick-motion-search .tick-legs-r { animation: tick-paddle 0.32s ease-in-out infinite alternate; }
+.tick-motion-search .tick-legs-l { transform-origin: 23px 33px; }
+.tick-motion-search .tick-legs-r { transform-origin: 41px 33px; animation-delay: -0.16s; }
+.tick-motion-search .tick-glass { animation: tick-sweep 1.1s ease-in-out infinite; }
+
+/* sleepy: z's drift up and fade, one after the other. */
+@keyframes tick-z {
+  0% { transform: translate(0, 3px); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translate(-3px, -5px); opacity: 0; }
+}
+.tick-mood-sleepy .tick-zs text { animation: tick-z 2.4s ease-out infinite; }
+.tick-mood-sleepy .tick-zs text + text { animation-delay: 1.2s; }
+
+/* puzzled: a head tilt and a "?" that pops in. */
+@keyframes tick-wonder {
+  0% { transform: scale(0.4); opacity: 0; }
+  70% { transform: scale(1.15); opacity: 1; }
+  100% { transform: none; }
+}
+.tick-mood-puzzled .tick-body { transform-origin: 32px 40px; transform: rotate(-7deg); }
+.tick-mood-puzzled .tick-question { transform-origin: 14px 10px; animation: tick-wonder 0.5s 0.2s var(--ease-spring) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tick-motion-hello { animation: fade-in-only 0.3s both; }
+  .tick-motion-hello .tick-glass,
+  .tick-motion-search .tick-legs-l,
+  .tick-motion-search .tick-legs-r,
+  .tick-motion-search .tick-glass,
+  .tick-mood-sleepy .tick-zs text,
+  .tick-mood-puzzled .tick-question { animation: none; }
+}
+
+/* Radar (components/radar.tsx): Tick's scope. Rings and crosshair in hairlines, a beam with a bright leading edge. */
+.radar { --radar: var(--tint); }
+.radar-face { fill: color-mix(in srgb, var(--radar) 9%, transparent); }
+/* No non-scaling-stroke here: the rings draw in with path-length dashes, which it would distort. */
+.radar-line { fill: none; stroke: color-mix(in srgb, var(--radar) 32%, transparent); stroke-width: 0.8; }
+.radar-sweep {
+  background: conic-gradient(
+    transparent 0 68%,
+    color-mix(in srgb, var(--radar) 26%, transparent) 96%,
+    color-mix(in srgb, var(--radar) 80%, transparent) 99.7%,
+    transparent 100%
+  );
+}
+/* The beam (and Tick, when following it) turns once per sweep, starting after the scope boots. */
+@keyframes radar-spin {
+  to { transform: rotate(360deg); }
+}
+.radar-spin { animation: radar-spin var(--spin, 4.5s) linear var(--spin-delay, 0s) infinite; }
+/* Blips are data: the level colors, bright enough to glow on the dark scope. */
+.radar-blip--low { --blip: #3ddc74; }
+.radar-blip--moderate { --blip: #ffa040; }
+.radar-blip--high { --blip: #ff5a55; }
+.radar-blip { fill: var(--blip); transform-box: fill-box; transform-origin: center; filter: drop-shadow(0 0 2.5px var(--blip)); }
+/* The state under the scope (Home): land a shade deeper than the face, county lines in hairlines. */
+.radar-land {
+  fill: color-mix(in srgb, var(--radar) 16%, transparent);
+  stroke: color-mix(in srgb, var(--radar) 55%, transparent);
+  stroke-width: 0.7;
+  stroke-linejoin: round;
+}
+.radar-county { fill: none; stroke: color-mix(in srgb, var(--radar) 55%, transparent); stroke-width: 0.55; stroke-linejoin: round; }
+
+/* Home's radar card: Tick's scope in pale sage, its blips in the level inks. */
+.radar-card .radar { --radar: var(--tint); }
+.radar-card .radar-face { fill: #eef4e4; }
+.radar-card .radar-line { stroke: color-mix(in srgb, var(--radar) 28%, transparent); }
+.radar-card .radar-blip--low { --blip: var(--level-low-ink); }
+.radar-card .radar-blip--moderate { --blip: var(--level-moderate-ink); }
+.radar-card .radar-blip--high { --blip: var(--level-high-ink); }
+.radar-card .radar-blip { filter: none; }
+/* Tick's speech bubble on the radar card, with a little tail toward the radar. */
+.radar-bubble { background: #e3efd8; color: #1f4a2a; }
+.radar-bubble::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  bottom: 6px;
+  width: 10px;
+  height: 10px;
+  background: inherit;
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+.radar-ripple { fill: none; stroke: var(--blip); stroke-width: 1; vector-effect: non-scaling-stroke; }
+/* When the beam passes, the blip flashes and bounces, and a ring spreads out from it. Each blip's delay (inline)
+   is when the beam reaches its angle, so they stay in step with .radar-spin. */
+@keyframes radar-blip-hit {
+  0% { opacity: 1; transform: scale(1.8); animation-timing-function: ease-out; }
+  35%, 100% { opacity: 0.45; transform: none; }
+}
+@keyframes radar-ripple {
+  0% { opacity: 0.8; transform: none; animation-timing-function: ease-out; }
+  30%, 100% { opacity: 0; transform: scale(4); }
+}
+.radar-blip { opacity: 0.45; animation: radar-blip-hit var(--spin, 4.5s) linear infinite; }
+.radar-ripple { opacity: 0; transform-box: fill-box; transform-origin: center; animation: radar-ripple var(--spin, 4.5s) linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .radar-spin,
+  .radar-blip,
+  .radar-ripple { animation: none; }
+}
+
+/*
+ * Level colors for Home (components/level-face.tsx, the county blocks, the radar): a soft flat pastel for each
+ * level's face and tints, and a deeper ink of the same hue for text. Ink on its tint holds at least 4.5:1.
+ */
+:root {
+  --level-low: #b5d89c;
+  --level-low-ink: #3d6b33;
+  --level-moderate: #f6d67e;
+  --level-moderate-ink: #875807;
+  --level-high: #f5ab93;
+  --level-high-ink: #b0391f;
+  --face-ink: #3a2a1f;
+}
+.level-face--low,
+.level-block--low { --level: var(--level-low); --level-ink: var(--level-low-ink); }
+.level-face--moderate,
+.level-block--moderate { --level: var(--level-moderate); --level-ink: var(--level-moderate-ink); }
+.level-face--high,
+.level-block--high { --level: var(--level-high); --level-ink: var(--level-high-ink); }
+.level-face-fill { fill: var(--level); }
+.level-face-cheek { fill: #e8604c; opacity: 0.22; }
+.level-face-ink { fill: none; stroke: var(--face-ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.level-face-dot { fill: var(--face-ink); stroke: none; }
+.level-face-drop { fill: #9fd3f2; stroke: none; }
+.level-ink { color: var(--level-ink); }
+
+/* TickTector's surface: a soft block on the beige, rounded and lifted by a gentle shadow. */
+.soft-block {
+  border-radius: 22px;
+  background: var(--card);
+  box-shadow: 0 1px 2px rgb(92 72 42 / 0.06), 0 8px 20px -12px rgb(92 72 42 / 0.22);
+}
+/* Never a block on a block: anything nested inside one (a list, an empty or error state) sits flat on it. */
+.soft-block .soft-block { background: transparent; box-shadow: none; }
+/* Home's level blocks: rows inside with inset hairlines. */
+.level-rows { padding-bottom: 6px; }
+.level-rows > li + li { position: relative; }
+.level-rows > li + li::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 16px;
+  height: 1px;
+  background: var(--separator);
+  transform: scaleY(0.5);
+  transform-origin: top;
+}
+.county-row {
+  border-radius: 14px;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.2s var(--ease-out-smooth);
+}
+.county-row:active { background: var(--fill); }
+/* The ER multiple: a little tinted chip in the level's colors. */
+.county-er {
+  flex-shrink: 0;
+  min-width: 58px;
+  padding: 4px 9px 5px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--level) 45%, #ffffff);
+  color: var(--level-ink);
+  font-family: var(--font-rounded);
+  text-align: center;
+}
+
+/* Town page hero: the level's pastel over the card, the meadow along the bottom. Neutral while loading. */
+.town-hero {
+  border-radius: 28px;
+  background: color-mix(in srgb, var(--level, #dfe5d3) 42%, var(--card));
+}
+.meadow-back { fill: #c5dcae; }
+.meadow-front { fill: #93bf7c; }
+.meadow-daisy { fill: #ffffff; }
+.meadow-daisy-eye { fill: #f2c94c; }
+/* At High the grass sways, front and back a beat apart. */
+@keyframes meadow-sway {
+  0%, 100% { transform: skewX(0deg); }
+  50% { transform: skewX(-4deg); }
+}
+.meadow--high path { transform-box: view-box; transform-origin: 50% 100%; animation: meadow-sway 3.2s ease-in-out infinite; }
+.meadow--high .meadow-front { animation-delay: -1.1s; }
+/* The hero face breathes a little. */
+@keyframes face-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.face-bob { animation: face-bob 3.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .meadow--high path,
+  .face-bob { animation: none; }
+}
+
+/* A town module's symbol: a round sage chip. */
+.module-icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: #e3efd8;
+  color: var(--tint);
+}
+
+/* The selected town on the map pings like a radar blip. */
+.map-pin.is-selected .map-pin__dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 999px;
+  border: 2px solid var(--pin);
+  animation: radar-ping-blip 1.8s var(--ease-out-smooth) infinite;
+}
+@keyframes radar-ping-blip {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* Tick on patrol (components/tick-crawler.tsx). Tick is drawn from above, so it turns to face where it walks. */
+.tick-trail {
+  container-type: inline-size;
+  background: radial-gradient(circle, var(--label-tertiary) 1px, transparent 1.6px) 0 50% / 9px 9px repeat-x;
+  opacity: 0.9;
+}
+/* Walks over, stops halfway to look around (a little head turn), walks on, turns at the end, comes back. */
+.tick-crawler { animation: tick-patrol 18s ease-in-out infinite; }
+@keyframes tick-patrol {
+  0% { transform: translate(0, -50%) rotate(90deg); }
+  20% { transform: translate(calc(50cqw - 14px), -50%) rotate(90deg); }
+  23% { transform: translate(calc(50cqw - 14px), -50%) rotate(60deg); }
+  26% { transform: translate(calc(50cqw - 14px), -50%) rotate(120deg); }
+  29% { transform: translate(calc(50cqw - 14px), -50%) rotate(90deg); }
+  46% { transform: translate(calc(100cqw - 28px), -50%) rotate(90deg); }
+  52% { transform: translate(calc(100cqw - 28px), -50%) rotate(270deg); }
+  72% { transform: translate(calc(50cqw - 14px), -50%) rotate(270deg); }
+  75% { transform: translate(calc(50cqw - 14px), -50%) rotate(240deg); }
+  78% { transform: translate(calc(50cqw - 14px), -50%) rotate(300deg); }
+  81% { transform: translate(calc(50cqw - 14px), -50%) rotate(270deg); }
+  95% { transform: translate(0, -50%) rotate(270deg); }
+  100% { transform: translate(0, -50%) rotate(450deg); }
+}
+/* Empty states: Tick crawls in from the left and turns to face you. */
+.tick-crawl-in { animation: tick-crawl-in 0.9s var(--ease-out-smooth) both; }
+.tick-crawl-in .tick-legs-l,
+.tick-crawl-in .tick-legs-r { animation: tick-paddle 0.18s ease-in-out 5 alternate; }
+.tick-crawl-in .tick-legs-l { transform-origin: 23px 33px; }
+.tick-crawl-in .tick-legs-r { transform-origin: 41px 33px; animation-delay: -0.09s; }
+@keyframes tick-crawl-in {
+  0% { transform: translateX(-70px) rotate(90deg); opacity: 0; }
+  20% { opacity: 1; }
+  70% { transform: translateX(0) rotate(90deg); }
+  100% { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-pin.is-selected .map-pin__dot::after { animation: none; }
+  .tick-crawler { animation: none; transform: translate(0, -50%) rotate(90deg); }
+  .tick-crawl-in,
+  .tick-crawl-in .tick-legs-l,
+  .tick-crawl-in .tick-legs-r { animation: fade-in-only 0.3s both; }
+}
+
+/* Tick blinks now and then (happy and puzzled moods). */
+@keyframes tick-blink {
+  0%, 95%, 100% { transform: none; }
+  97% { transform: scaleY(0.1); }
+}
+.tick .tick-eyes { transform-box: view-box; transform-origin: 32px 25px; animation: tick-blink 5.2s 1.5s infinite; }
+
+
+
+@media (prefers-reduced-motion: reduce) {
+  .tick .tick-eyes { animation: none; }
+}
+
+/* wave (the logo): hop in, then wave the magnifying glass side to side now and then, pivoting at the leg. */
+@keyframes tick-wave {
+  0%, 60%, 100% { transform: none; }
+  65% { transform: rotate(-26deg); }
+  71% { transform: rotate(18deg); }
+  77% { transform: rotate(-20deg); }
+  83% { transform: rotate(12deg); }
+  89% { transform: rotate(-4deg); }
+  93% { transform: none; }
+}
+.tick-motion-wave { animation: tick-hello 0.7s 0.1s var(--ease-spring) both; }
+.tick-motion-wave .tick-glass { transform-origin: 42px 24px; animation: tick-wave 5.5s 0.4s ease-in-out infinite; }
+
+/* The logo's magnifying-glass "o": a glint sweeps across the lens now and then. */
+@keyframes logo-glint {
+  0%, 70% { transform: translateX(-14px); opacity: 0; }
+  75% { opacity: 0.9; }
+  88%, 100% { transform: translateX(14px); opacity: 0; }
+}
+.logo-glint { animation: logo-glint 5.5s 1.2s ease-in-out infinite; }
+
+/*
+ * The logo's intro, first load only: letters pop up one after another, then the glass "o" rolls in and lands.
+ * When Tick first waves (0.4s delay + 60% of its 5.5s cycle), the word ripples back once, left to right.
+ */
+.logo-letter,
+.logo-glass { display: inline-block; }
+.logo-glass { transform-origin: 43% 48%; }
+@keyframes logo-letter-in {
+  0% { transform: translateY(0.45em) scale(0.7); opacity: 0; }
+  60% { transform: translateY(-0.06em); opacity: 1; }
+  100% { transform: none; }
+}
+@keyframes logo-glass-in {
+  0% { transform: translateX(0.5em) rotate(-200deg) scale(0.3); opacity: 0; }
+  65% { transform: rotate(10deg) scale(1.12); opacity: 1; }
+  100% { transform: none; }
+}
+@keyframes logo-ripple {
+  0%, 100% { transform: none; }
+  40% { transform: translateY(-0.09em); }
+}
+@keyframes logo-glass-tilt {
+  0%, 100% { transform: none; }
+  35% { transform: rotate(-14deg); }
+  70% { transform: rotate(8deg); }
+}
+.logo-intro .logo-letter {
+  animation:
+    logo-letter-in 0.5s calc(0.2s + var(--i) * 45ms) var(--ease-spring) both,
+    logo-ripple 0.42s calc(3.7s + var(--i) * 50ms) ease-out;
+}
+.logo-intro .logo-glass {
+  animation:
+    logo-glass-in 0.7s 0.5s var(--ease-spring) both,
+    logo-glass-tilt 0.55s calc(3.7s + var(--i) * 50ms) ease-in-out;
+}
+/* Back on Home later: Tick is already standing there, no hop. */
+.logo-settled .tick-motion-wave { animation: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tick-motion-wave { animation: fade-in-only 0.3s both; }
+  .tick-motion-wave .tick-glass,
+  .logo-glint,
+  .logo-intro .logo-letter,
+  .logo-intro .logo-glass { animation: none; }
+}
+
+/* Tickdex cards (components/tickdex-card.tsx): the "new catch" flip hides each face's back. */
+@utility backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}

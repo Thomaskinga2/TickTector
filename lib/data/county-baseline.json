@@ -1,0 +1,79 @@
+{
+  "source": "Massachusetts Department of Public Health, tick-borne disease syndromic surveillance report",
+  "sourceUrl": "https://www.mass.gov/lists/monthly-tick-borne-disease-reports",
+  "sourceTable": "tick-exposure-and-tickborne-disease-syndromic-surveillance-report-august-2026__t01.csv",
+  "reportUrl": "https://www.mass.gov/doc/tick-exposure-and-tickborne-disease-syndromic-surveillance-report-august-2026/download",
+  "builtAt": "2026-10-24T18:56:30.786Z",
+  "period": {
+    "from": "2026-01",
+    "to": "2026-08"
+  },
+  "stateRate": 5.75,
+  "counties": {
+    "Barnstable": {
+      "tickVisits": 112,
+      "edVisits": 77807,
+      "rate": 14.39
+    },
+    "Berkshire": {
+      "tickVisits": 80,
+      "edVisits": 50259,
+      "rate": 15.92
+    },
+    "Bristol": {
+      "tickVisits": 171,
+      "edVisits": 213300,
+      "rate": 8.02
+    },
+    "Dukes & Nantucket": {
+      "tickVisits": 84,
+      "edVisits": 13115,
+      "rate": 64.05
+    },
+    "Essex": {
+      "tickVisits": 91,
+      "edVisits": 239907,
+      "rate": 3.79
+    },
+    "Franklin": {
+      "tickVisits": 31,
+      "edVisits": 25093,
+      "rate": 12.35
+    },
+    "Hampden": {
+      "tickVisits": 45,
+      "edVisits": 176114,
+      "rate": 2.56
+    },
+    "Hampshire": {
+      "tickVisits": 21,
+      "edVisits": 37833,
+      "rate": 5.55
+    },
+    "Middlesex": {
+      "tickVisits": 128,
+      "edVisits": 362548,
+      "rate": 3.53
+    },
+    "Norfolk": {
+      "tickVisits": 72,
+      "edVisits": 166970,
+      "rate": 4.31
+    },
+    "Plymouth": {
+      "tickVisits": 181,
+      "edVisits": 174592,
+      "rate": 10.37
+    },
+    "Suffolk": {
+      "tickVisits": 27,
+      "edVisits": 247573,
+      "rate": 1.09
+    },
+    "Worcester": {
+      "tickVisits": 125,
+      "edVisits": 247819,
+      "rate": 5.04
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "typecheck-on-stop",
+      "description": "When the agent finishes a turn with uncommitted TypeScript changes, run the type check. On errors, the agent gets another turn with the compiler output so it fixes them before handing back.",
+      "trigger": "Stop",
+      "action": {
+        "type": "command",
+        "command": "node .kiro/hooks/scripts/typecheck-on-stop.mjs"
+      },
+      "timeout": 180
+    }
+  ]
+}

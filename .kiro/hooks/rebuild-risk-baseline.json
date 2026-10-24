@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "rebuild-risk-baseline",
+      "description": "When the Mass. DPH syndromic county data changes (a new monthly report was extracted), regenerate lib/data/county-baseline.json so the weekly risk uses the latest period.",
+      "trigger": "PostFileSave",
+      "matcher": "data/massgov/syndromic_county\\.csv$",
+      "action": {
+        "type": "command",
+        "command": "node scripts/build-risk-baseline.mjs"
+      },
+      "timeout": 30
+    }
+  ]
+}

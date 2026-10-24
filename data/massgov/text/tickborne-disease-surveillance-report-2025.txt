@@ -1,0 +1,456 @@
+
+Massachusetts Department of Public Health
+Bureau of Infectious Disease and Laboratory Sciences
+2025 Tick-Borne Disease
+Surveillance Report
+Erin Mann, MPH Kate Hampdan, MPH
+Brandi Hopkins, MPH
+Matthew Osborne, MPH
+Catherine M. Brown, DVM, MSc, MPH 
+
+Published April 2026
+
+
+Massachusetts Department of Public Health
+Bureau of Infectious Disease and Laboratory Sciences
+2025 Tick-Borne Disease
+Surveillance Report
+Erin Mann, MPH Kate Hampdan, MPH
+Brandi Hopkins, MPH
+Matthew Osborne, MPH
+Catherine M. Brown, DVM, MSc, MPH 
+
+Published April 2026
+
+Introduction
+
+The 2025 Tick-borne Disease Surveillance Summary provides data on infections reported to the Massachusetts Department of Public Health (DPH), Bureau of Infectious Disease and Laboratory Sciences by healthcare providers and laboratories. This report focuses on a subset of five tick-borne diseases: 
+	•	Lyme disease
+	•	Babesiosis
+	•	Human granulocytic anaplasmosis (HGA)
+	•	Borrelia miyamotoi infection (borreliosis)
+	•	Powassan virus infection 
+
+Lyme disease, babesiosis, anaplasmosis, Borrelia miyamotoi and Powassan virus are tick-borne diseases that are endemic to Massachusetts. Lyme disease, babesiosis and anaplasmosis are common in the state while Borrelia miyamotoi and Powassan virus occur more rarely. Transmission of all five diseases can happen when an individual is bitten by a black-legged tick, also known as the deer tick (Ixodes scapularis). Because these diseases are all transmitted by the same species of tick there is risk of co-infection with multiple pathogens from the same bite. Most infections occur in the warm spring and summer months when young (nymph) ticks are most active, though adult ticks may feed on humans and transmit disease year-round any time temperatures are above freezing. Black-legged ticks are most commonly found in grassy or wooded areas where deer and mice are present but are widely present in Massachusetts any place there is vegetation. 
+
+For more information about these and other tick-borne diseases, please visit https://www.mass.gov/tick-borne-diseases. This report includes age adjusted race and ethnicity values for Lyme, babesiosis, and anaplasmosis. It should be noted that race/ethnicity data are often incompletely reported, which may affect the calculation and interpretation of rates presented in this summary, especially if data are missing in a nonrandom or biased way.    
+Suggested citation:
+Massachusetts Department of Public Health, Bureau of Infectious Disease and Laboratory Sciences. 
+Tick-borne Disease Surveillance Summary, 2025.
+https://www.mass.gov/lists/tick-borne-disease-surveillance-summaries-and-data
+Requests for additional data:
+https://www.mass.gov/infectious-disease-surveillance-reporting-and-control 
+Surveillance Highlights	
+Figure 1: Ten-year trends in number of cases of Babesiosis, Anaplasmosis, and Lyme disease, Massachusetts, 2016-2025
+
+
+*Babesiosis and HGA include confirmed and probable cases; Lyme includes confirmed, probable and suspect cases.
+
+Year
+Babesiosis
+HGA
+Lyme
+2016
+519
+874
+13497
+2017
+591
+1218
+15118
+2018
+527
+658
+11603
+2019
+640
+703
+12106
+2020
+580
+740
+10126
+2021
+610
+773
+10333
+2022
+454
+626
+12882
+2023
+838
+747
+19198
+2024
+788
+1060
+15844
+2025
+881
+1496
+17113
+Total
+6428
+8895
+137821
+
+Lyme disease
+	•	Lyme disease is caused by the bacterium Borrelia burgdorferi. 
+	•	8,619 probable cases of Lyme were reported in Massachusetts in 2025.
+	•	Statewide, the Lyme incidence rate was 118.51 cases in 2025. The county with the highest rate was Barnstable (380.23), with the next highest rates in Plymouth (290.04), Bristol (252.26), Berkshire (239.19), and Franklin (231.38) counties.
+	•	The majority of cases developed symptoms between the months of June and August. The time between exposure and disease onset for Lyme disease is between 3-30 days suggesting that most cases were exposed between May and August. However, Lyme disease cases occur year round.
+	•	Reported data show that people between the ages of 65 and 84 have the highest rates of disease with the mean age of cases being 53 years old. However, historical information has demonstrated that children, especially males in the 5-14 year age range, also experience high rates of disease. Children are often diagnosed without laboratory testing and are therefore less likely to be included in surveillance data counts.
+	•	Males are more likely than females to be infected, accounting for 60% of cases in the state.
+	•	In January 2022, the national case definition for Lyme disease was revised so that Massachusetts and other high-incidence states report probable cases based on laboratory evidence alone, without need for additional clinical information.
+	•	This change improves the ability of public health agencies to track and compare Lyme disease cases and trends in a standardized manner across high-incidence states moving forward and to use public health resources more efficiently.
+
+Figure 2: Ten-year Lyme disease incidence rates per 100,000 population by city/town, Massachusetts, 2016-2025
+
+Table 1: Lyme disease probable cases and incidence rates per 100,000 population by county of residence, Massachusetts, 2025
+County
+2025 Cases
+2025 Incidence Rate per 100,000
+Barnstable
+888
+380.23
+Berkshire
+303
+239.19
+Bristol
+1496
+252.26
+Dukes & Nantucket
+40
+100.5
+Essex
+387
+45.89
+Franklin
+162
+231.38
+Hampden
+364
+78.13
+Hampshire
+171
+105.48
+Middlesex
+1165
+68.55
+Norfolk
+710
+93.88
+Plymouth
+1589
+290.04
+Suffolk
+207
+24.72
+Worcester
+1122
+125.03
+State Total
+8619
+118.51
+N=15 cases had unknown county, and are included in the state total
+Figure 3: Number of probable Lyme disease cases by month of testing, Massachusetts, 2025, (n=8,619)
+
+Figure 4: Rate per 100,000 population of probable Lyme disease cases by age group, Massachusetts, 2025, (N=8,610)
+
+N=9 missing age and not included in the table
+
+Figure 5: Age-adjusted rate of probable Lyme disease cases by race and ethnicity, Massachusetts, 2025, (N=3,496)
+
+N=5,123 cases not included due to race and ethnicity being unknown, or are in the “Other, two or more races” category where we do not have a denominator to calculate a rate. 
+
+Figure 6: Number of confirmed, probable, and suspect Lyme disease cases by year, Massachusetts, 2016-2025, (N=137,820)
+
+Additional information about Lyme disease surveillance
+Since 1990, the criteria used to define a case of Lyme disease for surveillance purposes relied on a combination of clinical information and laboratory testing results. While positive laboratory test results are reported electronically and automatically to the DPH, obtaining clinical information relies on information that can only be provided by contacting the healthcare provider, and in some cases, the patient. Many states where Lyme disease is common, including Massachusetts, found that it was increasingly difficult to obtain sufficient clinical information to define a case as confirmed or probable. The challenges were a result of the high volume of suspect cases reported requiring investigation by public health departments and the large number of requests for clinical information made to healthcare providers. Over time, many “high incidence” states, those with the largest burden of Lyme disease cases, developed alternative surveillance strategies which reduced standardization of data across jurisdictions and reduced the utility of the collected data.
+
+In 2016, the DPH stopped actively requesting clinical information for suspect cases reported with a positive laboratory test, but continued to monitor laboratory tests and recorded clinical information from healthcare providers that chose to provide it. This strategy remained in place from 2016-2021 and resulted in a large number of suspect cases of Lyme disease (patients with any positive laboratory test) and very few confirmed or probable cases (patients with specific combinations of laboratory test and clinical information).
+
+In 2022, led by the DPH, a new set of criteria to define cases of Lyme disease went into effect nationally. These criteria rely exclusively on laboratory test results in states where Lyme disease is already known to be common (called high incidence states). This definition https://www.cste.org/resource/resmgr/ps/ps2021/21-ID-05_Lyme_Disease.pdf substantially reduces the burden on public health and healthcare providers and supports greater use of resources on patient care and public health prevention messaging. 
+
+For questions about Lyme disease surveillance, please contact the on-call epidemiologist at 617-983-6800.
+Babesiosis
+	•	Babesiosis is a disease caused by a microscopic parasite (Babesia microti) that infects red blood cells.
+	•	881 confirmed and probable cases of babesiosis were reported in Massachusetts in 2025.
+	•	Statewide, babesiosis incidence slightly increased from 11.2 in 2024 to 12.1 cases per 100,000 residents in 2025. The highest rate was seen in Dukes and Nantucket counties (103.0), which have historically seen the highest rates in the state. 
+	•	The majority of cases developed symptoms between the months of June and August. The time between exposure and disease onset can be up to 6 weeks for babesiosis suggesting that most people were exposed between mid-April through July.
+	•	The mean age of cases is 62 years old. Males are more likely than females to be infected, accounting for 62% of cases in the state.
+	•	When asked about awareness of a recent tick bite prior to symptom onset, 23.5% of cases confirmed a known tick bite, 34.8% reported no known tick bite, while 19.1% were not sure (22.6% not reported).
+	•	Individuals between the ages of 70 and 84 years of age are at greatest risk of contracting the disease.
+	•	The most commonly reported symptoms included: fatigue (87%), fever (63%), headache (56%), joint pain (53%), and chills (52%); 26.8% of cases were hospitalized and there were two reported deaths.
+	•	The primary source of transmission is via tick-bite; however, because this parasite infects red blood cells, Babesia can also be transmitted through blood transfusions and organ donations. In 2025, there were two confirmed cases who received a blood transfusion in the six months prior to becoming ill. Neither of these cases were confirmed to have been exposed through blood transfusion.
+Figure 7: Ten-year babesiosis incidence rates per 100,000 population by city/town, Massachusetts, 2016-2025
+
+Table 2: Babesiosis confirmed and probable cases and incidence rates per 100,000 population by county of residence, Massachusetts, 2025, (N=881)
+County
+2025 Cases
+2025 Incidence Rate per 100,000
+Barnstable
+167
+71.51
+Berkshire
+27
+21.31
+Bristol
+161
+27.15
+Dukes & Nantucket
+41
+103.01
+Essex
+56
+6.64
+Franklin
+6
+8.57
+Hampden
+18
+3.86
+Hampshire
+15
+9.25
+Middlesex
+129
+7.59
+Norfolk
+58
+7.67
+Plymouth
+140
+25.55
+Suffolk
+19
+2.27
+Worcester
+44
+4.9
+State Total
+881
+12.11
+	
+Figure 8: Number of confirmed and probable babesiosis cases by month of symptom onset, Massachusetts, 2025, (n=881)
+
+
+
+Figure 9: Confirmed and probable babesiosis case incidence rates per 100,00 population by age group, Massachusetts, 2025, (N=881)
+
+Figure 10: Age-adjusted rate of confirmed and probable babesiosis cases by race and ethnicity, Massachusetts, 2025, (N=570)
+
+N=311 cases not included due to unknown race or ethnicity, or due to suppression rules
+Figure 11: Number of confirmed and probable babesiosis cases by year, Massachusetts, 2016-2025, (N=6,428)
+
+
+Human Granulocytic Anaplasmosis (HGA)
+	•	Anaplasmosis is a disease caused by the bacterium Anaplasma phagocytophilum.
+	•	1,496 confirmed and probable cases of HGA were reported in Massachusetts in 2025.
+	•	Statewide, HGA incidence increased from 15.1 in 2024 to 20.6 cases per 100,000 residents in 2025. The highest incidence rate was seen in Franklin County (121.4), followed by Berkshire County (113.68), 
+	•	The majority of cases developed symptoms during May to July during the time in which nymphal black-legged ticks are most active. The time between exposure and disease onset is about 2 weeks suggesting that exposures occurred between mid-April and July.
+	•	When asked about awareness of a recent tick bite prior to symptom onset 37% of cases confirmed a known tick bite, 20% reported no known tick bite, while 16.7% were not sure (26.2% not reported).
+	•	Individuals from ages 60 to 84 are at greatest risk of contracting the disease with the mean age of cases being 63 years old. Males were more likely than females to be infected, accounting for 60.5% of cases in the state.
+	•	The most commonly reported symptoms included: malaise (82%), fever (77%), muscle pain (68%), headache (61%), and joint pain (60%); 27.1% of cases were hospitalized and there were four reported deaths. 
+
+Figure 12: Ten-year HGA incidence rates per 100,000 population by city/town, Massachusetts, 2016-2025
+
+
+Table 3: HGA confirmed and probable cases and incidence rates per 100,000 population by county of residence, Massachusetts, 2025, (N=1,496)
+
+County
+2025 Cases
+2025 Incidence Rate per 100,000
+Barnstable
+167
+71.51
+Berkshire
+144
+113.68
+Bristol
+167
+28.16
+Dukes & Nantucket
+24
+60.3
+Essex
+79
+9.37
+Franklin
+85
+121.4
+Hampden
+50
+10.73
+Hampshire
+65
+40.1
+Middlesex
+211
+12.41
+Norfolk
+89
+11.77
+Plymouth
+238
+43.44
+Suffolk
+13
+1.55
+Worcester
+164
+18.28
+State Total
+1,496
+20.57
+
+Figure 13: Number of confirmed and probable HGA cases by month of symptom onset, Massachusetts, 2025, (N=1,496)
+
+  
+Figure 14: Confirmed and probable HGA case incidence rate per 100,000 population by age group, Massachusetts, 2025, (N=1,496)
+
+
+Figure 15: Age-adjusted rate of confirmed and probable HGA cases by race and ethnicity, Massachusetts, 2025, (N=919)
+
+N=577 cases not included due to unknown race or ethnicity, due to suppression rules, or are in the “Other, two or more races” category where we do not have a denominator to calculate a rate.
+
+Figure 16: Number of confirmed and probable HGA cases by year, Massachusetts, 2016-2025 (N=8,895)
+
+
+Borrelia miyamotoi infection
+	•	Borrelia miyamotoi is a type of spiral-shaped bacteria that is closely related to the bacteria that cause tick-borne relapsing fever. Infection is often referred to as borreliosis.
+	•	B. miyamotoi is still a relatively new, emerging disease, with the first recorded cases identified in New England in 2011. 
+	•	107 confirmed and probable cases of Borrelia miyamotoi were reported in 2025. 
+	•	The mean age of the cases was 59 years old. Males were more likely than females to be infected, accounting for 60% of cases in the state. 
+	•	The majority of cases developed symptoms June through August. The incubation period for borreliosis is usually around 2 weeks.
+	•	Race data are not displayed for this disease due to the Bureau of Infectious Disease and Laboratory Sciences (BIDLS) data standards and suppression policies which are designed to protect patient’s identity. In this instance, the race data was both under the suppression threshold for most race groups and largely incomplete. 
+	•	When asked about awareness of a recent tick bite prior to symptom onset 36.5% of cases confirmed a known tick bite, 27.1% reported no known tick bite, while 25.2% were not sure (11.2% not reported).
+	•	The most commonly reported symptoms included: fever (87%), fatigue (85%), muscle pain (75%), chills (72%), headache (67%), and joint pain (58%); 19.6% of cases were hospitalized and there were no reported deaths. 
+
+Figure 17: Ten-year Borrelia miyamotoi cases by county of residence, Massachusetts, 2016-2025
+
+Table 4: Number of confirmed and probable Borrelia miyamotoi cases by county of residence, Massachusetts, 2025, (N=107)
+
+County
+2025 Cases
+Frequency (%)
+Barnstable
+29
+27.10
+Berkshire
+5
+4.67
+Bristol
+24
+22.43
+Dukes & Nantucket
+1
+0.93
+Essex
+2
+1.87
+Franklin
+2
+1.87
+Hampden
+0
+0.00
+Hampshire
+0
+0.00
+Middlesex
+17
+15.89
+Norfolk
+5
+4.67
+Plymouth
+12
+11.21
+Suffolk
+0
+0.00
+Worcester
+10
+9.35
+State Total
+107
+100%
+Figure 18: Number of confirmed and probable Borrelia miyamotoi cases by month of symptom onset, Massachusetts, 2025, (N=107)
+
+Figure 19: Number of confirmed and probable Borrelia miyamotoi cases by age group, Massachusetts, 2016-2025, (N=423)
+
+Figure 20: Number of confirmed and probable Borrelia miyamotoi cases by year, Massachusetts, 2016-2025, (N=423)
+
+
+Powassan virus 
+	•	There are two types of Powassan virus in Massachusetts. Lineage one is found in ticks that feed on woodchucks (groundhogs); while lineage two (also known as Deer Tick virus) is carried by black-legged ticks. Powassan virus lineage 2 is the type most likely to be associated with human infections in Massachusetts.
+	•	Most Powassan virus infection cases have been identified in Massachusetts since 2013. 
+	•	Between 2016 and 2025, 75 cases of Powassan virus infection were detected in Massachusetts residents.
+	•	The mean age of cases over time  is 61, and majority male at 64%. 
+	•	Race data are not displayed for this disease due to the BIDLS data standards and suppression rules. In this instance, the race data was both under the suppression threshold for most race groups and largely incomplete.
+	•	Known tick bites before the onset of symptoms were reported in 31 out of 75 cases (41.3%), five cases (6.7%) reported no known tick bite, and 19 cases (25.3%) reported not knowing. Data were missing for 20 cases (26.7%). 
+	•	The most common symptoms reported were fever (93%), change in mental status (79%), headache (71.6%), mental confusion (70%), muscle weakness (63%) and fatigue (58%).
+	•	The primary types of infection reported were encephalitis (41%), meningoencephalitis (37%), and meningitis (14.7%).
+	•	Most cases (95%) required hospitalization due to the severity of their symptoms, with 23 individuals (31%) being hospitalized more than once. 
+	•	There have been 14 (19%) reported deaths.
+Figure 21: Ten-year Powassan virus cases by county of residence, Massachusetts, 2016-2025
+
+Table 5: Number of confirmed and probable Powassan virus cases by county of residence, Massachusetts, 2016-2025, (N=75)
+
+County
+2016- 2025 Cases
+Frequency (%)
+Barnstable
+10
+13.33
+Berkshire
+0
+0
+Bristol
+5
+6.67
+Dukes & Nantucket
+2
+2.67
+Essex
+13
+17.33
+Franklin
+1
+1.33
+Hampden
+3
+4
+Hampshire
+2
+2.67
+Middlesex
+25
+33.33
+Norfolk
+3
+4
+Plymouth
+3
+4
+Suffolk
+0
+0
+Worcester
+8
+10.67
+State Total
+75
+100.0
+
+Figure 22: Number of confirmed and probable Powassan virus cases by month of symptom onset, Massachusetts, 2016-2025, (N=75)
+
+
+Figure 23: Number of confirmed and probable Powassan virus cases by age group, Massachusetts, 2016-2025, (N=75)
+
+
+Figure 24: Number of confirmed and probable Powassan virus cases by year, Massachusetts, 2016-2025, (N=75)
+
+

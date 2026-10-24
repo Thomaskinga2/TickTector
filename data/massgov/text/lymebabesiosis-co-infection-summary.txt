@@ -1,0 +1,200 @@
+Lyme Disease and Babesiosis Co-Infection*:2009-2013
+Massachusetts Department of Public Health
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+County
+B. burgdorferi/ B. microti 
+co-infection (N=294)
+Co-infection 5 year incidence rate (per 100,000)
+Barnstable 
+65
+30
+Berkshire 
+1
+1
+Bristol 
+20
+4
+Dukes 
+11
+67
+ Essex 
+34
+5
+Franklin 
+1
+1
+Hampden 
+12
+3
+Hampshire 
+3
+2
+Middlesex 
+45
+3
+Nantucket 
+20
+197
+Norfolk 
+23
+3
+Plymouth 
+48
+10
+Suffolk
+5
+1
+Worcester 
+6
+1
+
+
+
+
+
+
+
+Figure 2: Number of confirmed and probable cases of babesiosis and cases of babesiosis with Lyme disease symptomatic co-infection in Massachusetts by age: 2009-2013
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Table 3: Percent of particular reported signs and symptoms among probable and confirmed cases of Lyme disease, babesiosis, and Lyme disease/babesiosis symptomatic co-infection reported in Massachusetts: 2009-2013
+Sign or Symptom
+
+Lyme
+(n=24,687)
+Babesiosis (n=1,084)
+Lyme/Babesiosis Symptomatic co-infection (n=171)
+
+Percent 
+Percent 
+Percent 
+Rheumatologic 
+55
+47
+75
+Arthritis
+23
+0
+12
+Joint pain
+43
+46
+58
+Neck pain
+14
+2
+12
+Cardiac 
+2
+0
+5
+Fatigue 
+36
+79
+82
+Fever 
+34
+83
+85
+Gastrointestinal 
+1
+44
+37
+Muscle Pain
+42
+50
+58
+Headache
+25
+50
+59
+Neurological 
+14
+1
+14
+Cognitive impairment
+5
+0
+8
+Erythema migrans
+49
+1
+39
+
+Reported signs and symptoms of Lyme disease include arthritis; cardiac abnormalities such as arrhythmia, AV block and palpitations; neurological (auditory impairment, Bell’s palsy, lymphocytic meningitis, paresthesia, radiculoneuropathy, and visual and cognitive impairment); rash (including erythema migrans); and headache. 
+Reported signs and symptoms of babesiosis include joint pain and muscle ache; fatigue and malaise; fever (fever, chills and sweats); headache; and gastrointestinal symptoms (anorexia and nausea).  
+Reported cases with Lyme disease and babesiosis symptomatic co-infection were more likely to experience joint pain, muscle pain, headache and cardiac manifestations than patients with either Lyme disease or babesiosis alone (p<0.05 for each of these signs or symptoms).
+
+
+
+
+
+
+
+
+
+
+
+
+
+*Co-infection = patient with confirmed/probable Lyme disease + laboratory evidence of B. microti infection. 
+  Symptomatic co-infection = patient with confirmed/probable case status for both Lyme disease and babesiosis
+
+2009-2013 Surveillance Highlights
+Between 2009 and 2013, there were 24,687 confirmed and probable cases of Lyme disease, and 1,084 confirmed and probable cases of babesiosis reported in Massachusetts.
+There were 294 Borrelia burgdorferi/Babesia microti co-infections identified in Massachusetts; 171 of these patients met the case definition for both diseases (symptomatic co-infection).
+The highest incidence rates of B. burgdorferi/B. microti co-infection occurred in Dukes and Nantucket counties (67 and 197 per 100,000 residents). Some risk of co-infection exists throughout Massachusetts.
+The majority of B. burgdorferi/B. microti co-infections occurred in June, July and August.
+Patients with Lyme disease and babesiosis symptomatic co-infection were more likely to be reported with joint pain, muscle pain, headache and cardiac manifestations than patients with either Lyme disease or babesiosis alone.
+36% of patients with Lyme disease and babesiosis symptomatic co-infection were hospitalized, which is similar to 39% of patients with babesiosis alone.
+35% of reported babesiosis cases in children less than 10 years old had Lyme disease symptomatic co-infection. 
+45% of B. burgdorferi/B. microti co-infections occurred in 50 - 69 year olds. 
+15% of patients 50 years and older with confirmed or probable babesiosis had Lyme disease symptomatic co-infection; 1% of patients in this age group with confirmed or probable Lyme disease had babesiosis symptomatic co-infection.
+
+
+MAP: Reported babesiosis cases overlaid on reported Lyme disease cases to demonstrate areas with higher risk of co-infection. (NOTE: these cases are reported by city/town
+of residence, not necessarily place of exposure).
+
+TABLE: Actual counts and incidence rates of patients with confirmed or probable Lyme disease and laboratory evidence of B. microti infection.
+
+COMPARE TO
+
+The greatest proportion of babesiosis cases with Lyme disease symptomatic co-infection occurred in children less than 10 years of age (35%).
+A large number of the symptomatic co-infection cases occurred in the 50 - 79 year age range.
+15% of patients 50 years and older, with confirmed or probable babesiosis had Lyme disease symptomatic co-infection. Only 1% of patients in this age group, with confirmed or probable Lyme disease had babesiosis symptomatic co-infection.
+
+
+
+

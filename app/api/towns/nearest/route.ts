@@ -1,6 +1,7 @@
 import type { NextRequest } from "next/server";
-import { TOWNS } from "@/lib/mock-data";
+import { TOWNS as MOCK_TOWNS } from "@/lib/mock-data";
 import { getGeocodingProvider } from "@/lib/providers/geocoding";
+import { TOWNS } from "@/lib/risk-model";
 import type { Town } from "@/lib/types";
 
 // GET /api/towns/nearest?lat=42.37&lng=-72.52 -> Town
@@ -22,8 +23,7 @@ export async function GET(request: NextRequest) {
     return Response.json({ error: "TikTector covers Massachusetts only" }, { status: 422 });
   }
 
-  // TODO: match against the full MA town list from data/ instead of the 3 mock towns.
-  const known = TOWNS.find((t) => t.name.toLowerCase() === place.town.toLowerCase());
+  const known = [...TOWNS, ...MOCK_TOWNS].find((t) => t.name.toLowerCase() === place.town.toLowerCase());
   const town: Town = known ?? {
     id: place.town.toLowerCase().replace(/\s+/g, "-"),
     name: place.town,

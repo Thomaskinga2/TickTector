@@ -1,3 +1,4 @@
+import { isDemoMode } from "@/lib/mock-data";
 import type { ForumComment, ForumPost } from "@/lib/types";
 
 // Server-only: called from app/api/forum/*.
@@ -111,6 +112,7 @@ export const mockForumStore: ForumStore = {
 };
 
 export function getForumStore(): ForumStore {
+  if (isDemoMode()) return mockForumStore;
   switch (process.env.FORUM_STORE ?? "mock") {
     case "mock":
       return mockForumStore;

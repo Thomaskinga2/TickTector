@@ -1,49 +1,67 @@
-# Team workflow
+# TikTector team workflow
 
-4 people, one repo, `main` auto-deploys to Vercel. Rule #1: **never push a broken `main`.**
+3 people, one repo. `main` auto-deploys to Vercel. **Never push a broken `main`.**
 
 ## How a feature is wired
 
 ```
-page (app/) -> component (components/) -> service (lib/services/) -> API route (app/api/) -> provider / mock (lib/providers/, lib/mock-data.ts)
+page (app/)  ->  component (components/)  ->  service (lib/services/)  ->  API route (app/api/<feature>/)  ->  provider / mock
+                                                                                                             (lib/providers/, lib/mock-data.ts)
 ```
 
-- Pages call **service functions only**, never mock data. To use real data, change the API route or provider; the UI stays the same.
-- Shared types live in `lib/types.ts`. Changing a type breaks the other side, so tell the team first.
-- `lib/features.ts` hides unfinished features behind "Coming soon". Flip a flag to `true` to show the real component.
-- Search for `TODO` to find every slot that still returns mock data.
+- Pages and components call **service functions only**, never mock data or `fetch` directly.
+- To go from mock to real data, change only the API route or the provider. The UI stays the same.
+- Every slot that still returns mock data has a `// TODO`. Run `grep -rn TODO app lib components` to list them.
+- `DEMO_MODE=1` forces every API route onto mock data. Any real data you add must check `isDemoMode()` from `lib/mock-data.ts` first.
 
-## Who owns what
+## Roles
 
-| Role | Owns (edit freely) | Don't touch without asking |
+| Role | Owns | Ask before touching |
 |---|---|---|
-| **Lead** | `.kiro/`, `lib/features.ts`, merging to `main`, Vercel env vars | — |
-| **UI** | `app/**/page.tsx`, `components/`, `app/globals.css`, `public/` | `app/api/`, `lib/providers/` |
-| **Backend 1: location & risk** | `app/api/towns`, `app/api/risk`, `app/api/species`, `app/api/alerts`, `lib/providers/geocoding.ts` | `components/` |
-| **Backend 2: map, scan, forum** | `app/api/heatmap`, `app/api/scan`, `app/api/forum`, `lib/providers/forum-store.ts`, `data/` | `components/` |
+| **Frontend** | `app/**/page.tsx`, `app/**/*-view.tsx`, `components/`, `app/globals.css`, `public/`, `lib/use-*.ts` | `app/api/`, `lib/providers/` |
+| **Backend 1: location, risk, map** | `app/api/towns/`, `app/api/risk/`, `app/api/heatmap/`, `lib/providers/geocoding.ts`, `lib/services/towns.ts`, `lib/services/heatmap.ts` | `components/` |
+| **Backend 2: species, alerts, scan, forum** | `app/api/species/`, `app/api/alerts/`, `app/api/scan/`, `app/api/forum/`, `lib/providers/forum-store.ts`, `lib/services/scan.ts`, `lib/services/forum.ts` | `components/` |
+| **Shared** | `lib/types.ts`, `lib/features.ts`, `app/layout.tsx`, `lib/mock-data.ts` | Post in team chat first; small commits |
 
-`lib/mock-data.ts` and `lib/types.ts` are shared: small commits, post in chat when you change them.
+`lib/services/risk.ts` holds `getWeeklyRisk` (Backend 1) next to `getSpecies` and `getAlerts` (Backend 2). Edit only your own functions.
 
-## Adding an endpoint
+## Feature slots
 
-1. Add the type to `lib/types.ts` and a mock to `lib/mock-data.ts`.
-2. Add `app/api/<name>/route.ts`: validate input, return mock, leave a `// TODO`.
-3. Add a service function in `lib/services/` that calls the route via `getJson()`.
-4. In the component, use `useAsync()` and spread the loading/error props: `<X data={data} {...slot} />`.
+| Feature | Page | Component | Service | API route | Backend owner | Turn on |
+|---|---|---|---|---|---|---|
+| Town search | `/` | `TownSearch` | `searchTowns` (`towns.ts`) | `GET /api/towns?q=` | Backend 1 | always on |
+| My location | `/`, `/forum/new` | `LocationButton`, `useGeolocation` | `findNearestTown` (`towns.ts`) | `GET /api/towns/nearest?lat=&lng=` | Backend 1 | `geolocation: true` |
+| Risk gauge | `/area/[town]` | `RiskGauge` | `getWeeklyRisk` (`risk.ts`) | `GET /api/risk?town=` | Backend 1 | always on |
+| Heatmap | `/map`, `/area/[town]` | `Heatmap` | `getHeatmap` (`heatmap.ts`) | `GET /api/heatmap` | Backend 1 | `heatmap: true` |
+| Tick species | `/area/[town]` | `TickSpeciesList` | `getSpecies` (`risk.ts`) | `GET /api/species?town=` | Backend 2 | always on |
+| Action alerts | `/area/[town]` | `ActionAlerts` | `getAlerts` (`risk.ts`) | `GET /api/alerts?level=` | Backend 2 | always on |
+| Camera scan | `/scan` | `CameraCapture` | `analyzeTickPhoto` (`scan.ts`) | `POST /api/scan` | Backend 2 | `camera: true` |
+| Forum | `/forum`, `/forum/new`, `/forum/[id]` | `ForumPostList`, `ForumPostCard`, `NewPostForm`, `CommentThread` | `forum.ts` | `/api/forum/posts`, `/api/forum/posts/[id]`, `/api/forum/posts/[id]/comments` | Backend 2 | `forum: true` |
+| TikQuest | `/quest` | page only | none | none | Frontend | `quest: true` |
+
+Flags live in `lib/features.ts`. A flag set to `false` shows "Coming soon"; flipping it to `true` is the only change needed to show the real component.
+
+Providers are picked by env vars (see `.env.example`): `GEOCODING_PROVIDER` (Backend 1) and `FORUM_STORE` (Backend 2). Only `mock` is implemented. The mock forum store keeps posts in memory, so they reset on every deploy.
 
 ## Git
 
 ```bash
 git checkout main && git pull
-git checkout -b ui/risk-gauge        # ui/..., be/..., lead/...
+git checkout -b be-risk/weekly-risk-data     # ui/*, be-risk/*, be-species/*
 # ...work...
-npm run build                        # must pass
-git commit -m "feat: risk gauge"     # English, small commits
-git checkout main && git pull && git merge ui/risk-gauge && git push
+npm run build                                # must pass before you push
+git commit -m "feat: weekly risk from real data"
+git push -u origin be-risk/weekly-risk-data
+gh pr create --fill                          # or open the PR on GitHub
 ```
 
-- Pull `main` at least every hour; merge small and often.
-- Merge conflict in a file you don't own → ask its owner, don't guess.
+1. One branch per change: `ui/*` (Frontend), `be-risk/*` (Backend 1), `be-species/*` (Backend 2).
+2. `npm run build` passes, then open a PR.
+3. One teammate reviews: does it build, does the page still work on a phone?
+4. Merge to `main`. Vercel deploys automatically.
+
+- Never push to `main` directly and never force-push `main`.
+- Pull `main` often. A merge conflict in a file you don't own goes to its owner.
 
 ## Setup
 

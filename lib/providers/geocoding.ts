@@ -1,4 +1,4 @@
-import { TOWNS } from "@/lib/mock-data";
+import { isDemoMode, TOWNS } from "@/lib/mock-data";
 import type { Town } from "@/lib/types";
 
 // Server-only: called from app/api/towns/*. Provider keys stay on the server.
@@ -29,6 +29,7 @@ const notImplemented: GeocodingProvider = {
 };
 
 export function getGeocodingProvider(): GeocodingProvider {
+  if (isDemoMode()) return mockProvider;
   switch (process.env.GEOCODING_PROVIDER ?? "mock") {
     case "mock":
       return mockProvider;

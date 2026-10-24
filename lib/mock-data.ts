@@ -2,6 +2,10 @@ import type { ActionAlert, HeatmapPoint, ScanResult, TickSpecies, Town, WeeklyRi
 
 // Mock data only. API routes read from here until real datasets land in data/.
 
+// DEMO_MODE=1 forces every API route onto this mock data (safe for a live demo).
+// When you replace a mock with real data in a route or provider, check this first.
+export const isDemoMode = () => process.env.DEMO_MODE === "1";
+
 export const TOWNS: Town[] = [
   { id: "amherst", name: "Amherst", county: "Hampshire", lat: 42.3732, lng: -72.5199 },
   { id: "boston", name: "Boston", county: "Suffolk", lat: 42.3601, lng: -71.0589 },

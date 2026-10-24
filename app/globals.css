@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/* Theme tokens: ink-and-paper neutrals plus one accent. */
+:root {
+  color-scheme: light dark;
+  --paper: #f5f2ea;
+  --paper-raised: #fffdf8;
+  --ink: #1a1916;
+  --ink-muted: #5e5a52;
+  --rule: #ddd7ca;
+  --accent: #c8401a;
+  --on-accent: #fffdf8;
+  --danger: #b3261e;
+  --success: #2f6b3a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #14130f;
+    --paper-raised: #1f1d18;
+    --ink: #f1ece1;
+    --ink-muted: #a39d90;
+    --rule: #34312a;
+    --accent: #f06a3d;
+    --on-accent: #14130f;
+    --danger: #ff8a80;
+    --success: #8fd19e;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-instrument-serif);
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  caret-color: var(--accent);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}

@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
 import { Heatmap } from "@/components/heatmap";
+import { MapTownSearch } from "@/components/map-town-search";
 import { Tick } from "@/components/tick";
 import { riskFromIndex } from "@/components/map-utils";
 import { Page, Section } from "@/components/page";
@@ -22,6 +23,7 @@ export default function MapPage() {
   const { data: counties } = useAsync(() => getCountyRisks(), []);
   const [filter, setFilter] = useState<RiskFilterValue>("all");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const cardSlot = useRef<HTMLDivElement>(null);
 
   const visible = points?.filter((p) => filter === "all" || riskFromIndex(p.value) === filter);
   // A town hidden by the filter can't stay selected.
@@ -31,6 +33,19 @@ export default function MapPage() {
   return (
     <Page title="Risk Map" className="gap-4">
       <p className="-mt-3 px-0.5 type-subhead text-muted-foreground">All 351 cities and towns, shaded by this week&apos;s level.</p>
+
+      <MapTownSearch
+        levelOf={(id) => {
+          const point = points?.find((p) => p.townId === id);
+          return point && riskFromIndex(point.value);
+        }}
+        onPick={(id) => {
+          // A town the level filter hides would be dropped from the selection; show all levels first.
+          const point = points?.find((p) => p.townId === id);
+          if (filter !== "all" && (!point || riskFromIndex(point.value) !== filter)) setFilter("all");
+          setSelectedId(id);
+        }}
+      />
 
       {ready && <RiskFilter points={points} value={filter} onChange={setFilter} />}
 
@@ -59,7 +74,15 @@ export default function MapPage() {
               animate={{ height: "auto", marginTop: 0, opacity: 1 }}
               exit={{ height: 0, marginTop: -12, opacity: 0 }}
               transition={smooth}
-              className="overflow-hidden"
+              // On a small phone the card opens below the fold, behind the tab bar: once it's open, scroll just enough
+              // to show it (scroll-mb clears the floating tab bar). Nothing moves when it already fits.
+              onAnimationComplete={(target) => {
+                if ((target as { height?: unknown }).height !== "auto") return;
+                const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+                cardSlot.current?.scrollIntoView({ block: "nearest", behavior: reduce ? "auto" : "smooth" });
+              }}
+              ref={cardSlot}
+              className="scroll-mb-24 overflow-hidden"
             >
               <TownRiskCard key={selected} townId={selected} onClose={() => setSelectedId(null)} />
             </m.div>

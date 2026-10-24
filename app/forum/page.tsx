@@ -25,7 +25,7 @@ export default function ForumPage() {
       trailing={
         // HIG: one prominent, tinted primary action on the trailing side of the bar.
         <Link
-          href="/forum/new"
+          href="/forum/new" transitionTypes={["sheet-open"]}
           aria-label="Report a sighting"
           className="pressable grid size-11 place-items-center rounded-full bg-primary text-primary-foreground shadow-[0_6px_16px_-8px_rgb(0_0_0/0.4)]"
         >
@@ -58,7 +58,7 @@ export default function ForumPage() {
       {posts && posts.length === 0 && !slot.loading && !slot.error ? (
         <EmptyState
           action={
-            <Link href="/forum/new" className={buttonVariants({ variant: "tinted", size: "sm" })}>
+            <Link href="/forum/new" transitionTypes={["sheet-open"]} className={buttonVariants({ variant: "tinted", size: "sm" })}>
               Report a sighting
             </Link>
           }

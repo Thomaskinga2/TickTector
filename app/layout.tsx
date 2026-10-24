@@ -25,8 +25,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-dvh flex-col">
         <MotionProvider>
           {/* Room for the floating tab bar and the home indicator. */}
-          {/* Navigations cross-fade with a slight rise (app/globals.css, .page). */}
-          <ViewTransition update="page" default="none">
+          {/* Navigations cross-fade with a slight rise (app/globals.css, .page). Opening the New Sighting sheet skips it
+              (links set the "sheet-open" type): the sheet slides up on its own, and a cross-fade on top looked muddled. */}
+          <ViewTransition update={{ "sheet-open": "none", default: "page" }} default="none">
             <div className="flex flex-1 flex-col pb-[calc(env(safe-area-inset-bottom)+6rem)]">{children}</div>
           </ViewTransition>
           <TabBar />

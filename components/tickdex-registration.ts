@@ -10,6 +10,7 @@ export type RegistrationTargets = {
 };
 
 const SCROLL_WAIT_MS = 350;
+const BOTTOM_NAV_PX = 64;
 const FLIP_MS = 560;
 const GLOW_MS = 720;
 const PULSE_MS = 450;
@@ -25,10 +26,19 @@ function prefersReducedMotion(): boolean {
 // Starts the moment and returns a function that cancels it (for effect cleanup).
 export function playRegistration(kind: RegistrationKind, t: RegistrationTargets): () => void {
   const reduced = prefersReducedMotion();
-  t.root.scrollIntoView({ block: "center", behavior: reduced ? "auto" : "smooth" });
+  scrollToCenter(t.root, reduced);
   const wait = reduced ? 0 : SCROLL_WAIT_MS;
   const animations = reduced ? playReduced(kind, t) : kind === "new" ? playFlip(t, wait) : playPulse(t, wait);
   return () => animations.forEach((a) => a.cancel());
+}
+
+// Centres the card in the space above the bottom nav (scrollIntoView would ignore the nav).
+function scrollToCenter(el: HTMLElement, reduced: boolean) {
+  const rect = el.getBoundingClientRect();
+  const visible = window.innerHeight - BOTTOM_NAV_PX;
+  const top = Math.max(0, window.scrollY + rect.top - (visible - rect.height) / 2);
+  if (Math.abs(top - window.scrollY) < 8) return;
+  window.scrollTo({ top, behavior: reduced ? "auto" : "smooth" });
 }
 
 function playFlip(t: RegistrationTargets, wait: number): Animation[] {

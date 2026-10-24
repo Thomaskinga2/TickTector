@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ScanLine } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { TickdexCard, type CardRegistration } from "@/components/tickdex-card";
 import { TickdexDemoTools } from "@/components/tickdex-demo-tools";
+import { TickdexSheet } from "@/components/tickdex-sheet";
 import { DEX_SIZE, type TickdexCatch } from "@/lib/tickdex";
-import { buildDex, firstCaught, slotKey, type Dex, type DexSlot } from "@/lib/tickdex-slots";
+import { buildDex, findSlot, firstCaught, slotKey, type Dex, type DexSlot } from "@/lib/tickdex-slots";
 import { useTickdex } from "@/lib/use-tickdex";
 import { cn } from "@/lib/utils";
 
@@ -27,8 +28,7 @@ function useIsMounted(): boolean {
 function registrationFor(catches: TickdexCatch[], dex: Dex, newId: string | null, openedAt: number) {
   const entry = catches.find((c) => c.id === newId || Date.parse(c.caughtAt) > openedAt);
   if (!entry) return null;
-  const slots: DexSlot[] = [...dex.rows.flatMap((row) => row.slots), ...dex.unidentified];
-  const slot = slots.find((s) => s.key === slotKey(entry.speciesId, entry.stage));
+  const slot = findSlot(dex, slotKey(entry.speciesId, entry.stage));
   if (!slot) return null;
   const registration: CardRegistration = { kind: firstCaught(slot)?.id === entry.id ? "new" : "repeat", entryId: entry.id };
   return { key: slot.key, registration };
@@ -46,7 +46,9 @@ export function Tickdex() {
   const isMounted = useIsMounted();
   const dex = useMemo(() => buildDex(catches), [catches]);
   const target = useMemo(() => registrationFor(catches, dex, visit.newId, visit.openedAt), [catches, dex, visit]);
-  const [, setOpenKey] = useState<string | null>(null);
+  // The key stays set while the sheet animates closed, so its content does not vanish mid-slide.
+  const [sheet, setSheet] = useState<{ key: string; open: boolean } | null>(null);
+  const openSheet = useCallback((key: string) => setSheet({ key, open: true }), []);
 
   // Drop ?new= so a reload does not replay the moment.
   useEffect(() => {
@@ -68,7 +70,7 @@ export function Tickdex() {
           title={row.name}
           slots={row.slots}
           target={target}
-          onOpen={setOpenKey}
+          onOpen={openSheet}
           chip={`${row.slots.filter((s) => s.catches.length > 0).length}/${row.slots.length}`}
         />
       ))}
@@ -78,10 +80,15 @@ export function Tickdex() {
           note="Ticks the scan could not name. They don’t fill a dex slot."
           slots={dex.unidentified}
           target={target}
-          onOpen={setOpenKey}
+          onOpen={openSheet}
         />
       )}
       {visit.isDemo && <TickdexDemoTools catchCount={dex.totalCatches} />}
+      <TickdexSheet
+        slot={sheet ? findSlot(dex, sheet.key) : undefined}
+        open={sheet?.open ?? false}
+        onOpenChange={(open) => setSheet((s) => (s ? { ...s, open } : null))}
+      />
     </div>
   );
 }

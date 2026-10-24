@@ -1,0 +1,284 @@
+
+
+
+Bureau of Infectious Disease and Laboratory Sciences
+Tickborne Disease Surveillance Summary, 2021
+Suggested citation:
+Massachusetts Department of Public Health, Bureau of Infectious Disease and Laboratory Sciences. 
+Tickborne Disease Surveillance Summary, 2021.
+https://www.mass.gov/lists/tick-borne-disease-surveillance-summaries-and-data
+Bureau of Infectious Disease and Laboratory Sciences 
+Massachusetts Department of Public Health 
+Jamaica Plain Campus/State Public Health Laboratory 305 South Street Jamaica Plain, MA 02130
+
+To speak to the on-call epidemiologist 
+
+Tel: (617) 983-6800
+
+Questions about infectious disease reporting
+
+Tel: (617) 983-6801
+
+Requests for additional data
+
+https://www.mass.gov/infectious-disease-surveillance-reporting-and-control 
+Acknowledgments
+This report was prepared by the following MDPH staff:
+Erin Mann, MPH
+Juliana Jacoboski, MPH
+Brandi Hopkins, MPH
+Matthew Osborne, MPH
+Catherine M. Brown, DVM, MSc, MPH 
+
+
+Massachusetts Department of Public Health
+Bureau of Infectious Disease and Laboratory Sciences
+2021 Tickborne Disease Surveillance Summary
+Introduction
+
+The 2021 Tickborne Disease Surveillance Summary provides data on infections reported to the Massachusetts Department of Public Health (MDPH), Bureau of Infectious Disease and Laboratory Sciences by healthcare providers and laboratories per regulation (105 CMR 300.000). This report focuses on a subset of four tickborne diseases: 
+	•	Babesiosis 
+	•	Human granulocytic anaplasmosis (HGA)
+	•	Borrelia miyamotoi infection 
+	•	Powassan virus infection 
+
+Babesiosis, HGA, and Borrelia miyamotoi are tickborne diseases that are endemic to the Commonwealth. Powassan virus is a rare tick-borne flavivirus that can cause neuroinvasive disease in humans. Transmission of all four diseases can happen when an individual is bitten by a black-legged (deer) tick (Ixodes scapularis). Powassan virus can also be transmitted by the woodchuck tick (Ixodes cookie). Most infections occur in the warm spring and summer months when young (nymph) ticks are most active, though adult ticks may feed on humans and transmit disease year-round if temperatures are above freezing. Black-legged ticks are most commonly found in grassy or wooded areas where deer and mice are present. Because these diseases (and others including Lyme disease) are all transmitted by the same species of tick there is risk of co-infection with multiple pathogens from the same bite. 
+
+For more information about these and other tickborne diseases, please visit https://www.mass.gov/tick-borne-diseases. 
+
+Surveillance Highlights
+Babesiosis
+	•	Babesiosis is a disease caused by a microscopic parasite (Babesia microti) that infects red blood cells.
+	•	609 confirmed and probable cases of babesiosis were reported in Massachusetts in 2021, with an additional 498 cases classified as suspect.
+	•	Statewide, babesiosis incidence increased from 8.3 to 8.7 cases per 100,000 residents compared to 2020. The greatest increase was seen in Dukes and Nantucket counties, which have historically seen the highest rates in the state. 
+	•	The majority of cases occurred between the months of June and August. 
+	•	When asked about awareness of a recent tick bite prior to symptom onset, 31% of cases confirmed to have a tick bite, 42% reported no tick bite, while 27% were not sure.
+	•	Individuals between the ages of 55 and 79 years of age are at greatest risk of contracting the disease with the mean age for cases being 60 years old. Males are more likely than females to be infected, accounting for 63% of cases in the state.
+	•	The most commonly reported symptoms include: fatigue (92%), fever (77%), headache (70%), chills (64%), and joint pain (66%), 30% of cases were hospitalized and there were two reported deaths.
+	•	The primary source of transmission is via tick-bite; however, because it infects red blood cells, Babesia can also be transmitted from person-to-person through blood transfusions and organ donations. In 2021, two confirmed cases had received a blood transfusion in the six months prior to becoming ill.
+
+Figure 1: Five-year babesiosis incidence rates per 100,000 population by city/town, Massachusetts, 2017-2021
+
+Table 1: Babesiosis confirmed and probable cases and incidence rates per 100,000 population by county, Massachusetts, 2021
+County
+2021 Cases
+2021 Incidence Rate per 100,000
+Barnstable
+88
+38.4
+Berkshire
+21
+16.3
+Bristol
+114
+19.7
+Dukes & Nantucket
+32
+91.8
+Essex
+32
+4.0
+Franklin
+8
+11.3
+Hampden
+18
+3.9
+Hampshire
+9
+5.5
+Middlesex
+93
+5.7
+Norfolk
+44
+6.1
+Plymouth
+92
+17.3
+Suffolk
+12
+1.5
+Worcester
+46
+5.3
+State Total
+609
+8.7
+
+Figure 2: Number of confirmed and probable babesiosis cases by month of symptom onset, Massachusetts, 2021, (n=609)
+
+
+
+.  
+Figure 3: Rate (per 100,000 population) of confirmed and probable babesiosis cases by age group, Massachusetts, 2021, (N= 609)
+
+
+Figure 4: Number of confirmed and probable babesiosis cases by year, Massachusetts, 2017-2021, (N=2,945)
+
+
+
+Human Granulocytic Anaplasmosis (HGA)
+	•	Anaplasmosis is a disease caused by the bacterium Anaplasma phagocytophilum.
+	•	773 confirmed and probable cases of HGA were reported in Massachusetts in 2021, with an additional 985 cases classified as suspect.
+	•	Statewide, HGA incidence increased from 10.5 per 100,000 residents in 2020 to 11 cases per 100,000 residents in 2021. The highest incidence rate was seen in Berkshire county (65.9), followed by Franklin county (57.7) and Dukes and Nantucket counties (51.6). 
+	•	The majority of cases occurred from June to August, a slight shift from previous years where the highest activity was from May to July during the time in which nymphal black-legged ticks are most active. 
+	•	When asked about awareness of a recent tick bite prior to symptom onset, 47% of cases confirmed to have a tick bite, 29% reported no tick bite, while 24% were not sure.
+	•	Individuals from ages 55 to 74 make up 427 of the 773 cases (55%), thus are at greatest risk of contracting the disease with the mean age for cases being 61 years old. Males were more likely than females to be infected, accounting for 62% of cases in the state.
+	•	The most commonly reported symptoms include: fever (100%), malaise (88%), muscle pain (81%), headache (75%), and joint pain (69%), 33% of cases were hospitalized and there were three reported deaths. 
+
+Figure 5: HGA incidence rates per 100,000 population by city/town, Massachusetts, 2017-2021
+
+
+Table 2: HGA confirmed and probable cases and incidence rates per 100,000 population by county, Massachusetts, 2021
+County
+2021 Cases
+2021 Incidence Rate per 100,000
+Barnstable
+46
+20.1
+Berkshire
+85
+65.9
+Bristol
+81
+14.0
+Dukes & Nantucket
+18
+51.6
+Essex
+32
+4.0
+Franklin
+41
+57.7
+Hampden
+25
+5.4
+Hampshire
+37
+22.8
+Middlesex
+150
+9.2
+Norfolk
+35
+4.8
+Plymouth
+87
+16.4
+Suffolk
+12
+1.5
+Worcester
+124
+14.4
+State Total
+773
+11.0
+
+Figure 6: Number of confirmed and probable HGA cases by month of symptom onset, Massachusetts, 2021, (n=773)
+
+
+  
+
+Figure 7: Rate (per 100,000 population) of confirmed and probable HGA cases by age group, Massachusetts, 2021, (N= 773)
+
+
+
+
+Figure 8: Number of confirmed and probable HGA cases by year, Massachusetts, 2017-2021 (N= 4,091)
+
+
+Borrelia miyamotoi infection
+	•	Borrelia miyamotoi is a type of spiral-shaped bacteria that is closely related to the bacteria that cause tickborne relapsing fever. Infection is often referred to as borreliosis.
+	•	B. miyamotoi is a relatively new, emerging disease, with the first recorded cases identified in New England in 2011. 
+	•	Only one probable case of Borrelia miyamotoi was reported in 2021 compared to 11 cases reported in 2020, representing a 91% decrease. There were an additional 47 cases classified as suspect in 2021.
+	•	The one reported case was confirmed to have had a recent tick bite prior to symptom onset, reported symptoms of fever and headache, was not hospitalized from the infection, and recovered. 
+
+Figure 9: Borrelia miyamotoi cases by county of residence, Massachusetts, 2017-2021
+
+
+Figure 11: Number of confirmed and probable Borrelia miyamotoi cases by age group, Massachusetts, 2017-2021, (N=150)
+
+
+
+Figure 12: Number of confirmed and probable Borrelia miyamotoi cases by year, Massachusetts, 2017-2021, (N=150)
+
+
+Powassan virus 
+	•	There are two types of Powassan virus in Massachusetts. Type one is found in ticks that feed on woodchucks (groundhogs); while type two is carried by black-legged ticks.
+	•	Cases of Powassan virus infection were first confirmed in Massachusetts via laboratory testing in 2013. 
+	•	Between 2013 and 2021, 45 cases of Powassan virus infection were detected in Massachusetts residents. Of those cases, 77% are 50 years of age and older, and overwhelmingly male at 71%. 
+	•	Known tick bites before the onset of symptoms were reported in 33% of cases. 
+	•	The most common symptoms reported were fever (95.6%), headache (88.6%), change in mental status (84.4%), mental confusion (80.0%), muscle weakness (69.0%) and vomiting (53.3%).
+	•	The primary types of infection reported were encephalitis (56.8%), meningoencephalitis (27.3%), and meningitis (13.6%).
+	•	Most cases (93.3%) required hospitalization due to the severity of their symptoms. 
+	•	Nine individuals (20%) were hospitalized more than once. 
+	•	There were eight fatalities.
+Figure 13: Powassan virus cases by city/town of residence, Massachusetts, 2013-2021
+
+
+
+Table 4: Number of confirmed and probable Powassan virus cases by county, Massachusetts, 2013-2021
+County
+Cases
+Barnstable 
+5
+Berkshire
+0 
+Bristol
+2
+Dukes & Nantucket
+1
+Essex 
+9
+Franklin
+1
+Hampden 
+2
+Hampshire 
+1
+Middlesex 
+15
+Norfolk 
+3
+Plymouth 
+2
+Suffolk
+0
+Worcester 
+4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 14: Number of confirmed and probable Powassan virus cases by month of symptom onset, Massachusetts, 2013-2021, (N = 45)
+
+
+
+
+
+Figure 15: Number of confirmed and probable Powassan virus cases by year, Massachusetts, 2013-2021, (N = 45)
+
+
+
+
+ 		

@@ -1,0 +1,131 @@
+Lyme Disease Surveillance in Massachusetts, 2014
+Massachusetts Department of Public Health
+
+
+
+
+
+
+
+
+
+County
+2014 Confirmed Cases (#)
+2014 Probable Cases (#)
+Combined Incidence Rate for Confirmed and Probable Cases
+Barnstable
+180
+84
+122
+Berkshire
+60
+26
+66
+Bristol
+479
+194
+123
+Dukes
+33
+18
+308
+Essex
+319
+163
+65
+Franklin
+50
+28
+109
+Hampden
+126
+54
+39
+Hampshire
+102
+34
+86
+Middlesex
+748
+320
+71
+Nantucket
+48
+10
+570
+Norfolk
+471
+205
+101
+Plymouth
+554
+280
+169
+Suffolk
+79
+67
+20
+Worcester
+421
+226
+81
+Unknown
+160
+61
+-
+State Total
+3,830
+1,770
+86.0
+
+
+
+
+
+				
+							
+		
+
+
+
+
+
+
+
+Figure 1  
+
+
+Figure 2  
+
+
+Figure 3  
+
+
+
+
+
+
+
+
+
+Data as of 03JUN2015 and subject to change.
+
+
+2014 Surveillance Highlights
+3,830 confirmed Lyme disease cases, and 1,770 probable cases, were reported in Massachusetts in 2014 (total = 5,600), which is a decrease of 1% from the number of confirmed and probable cases reported in 2013 (total=5,665). 
+
+The highest incidence rates were among children aged 5-9 years and adults aged 65-74 years.  The majority of cases had onsets in June, July, and August.
+
+66% of confirmed cases had a reported erythema migrans (“bulls-eye”) rash.
+
+MDPH was unable to classify approximately 35% of all cases reported during 2014 due to insufficient clinical information.  
+
+The map to the right illustrates Lyme disease incidence rates (number of cases per 100,000 residents) by city and town in Massachusetts from 2010-2014.  Confirmed and probable cases are included in the rate.  Darker shading represents higher incidence of Lyme disease.
+
+Lyme disease is endemic in all Massachusetts counties, with greater incidence in the eastern regions of the state.  Bristol and Plymouth counties, Cape Cod and the Islands have the highest incidence of Lyme disease.  However areas in Middlesex, Essex and Southern Berkshire counties also show similar elevated incidence. 
+
+The chart to the left shows the number and incidence rates of confirmed and probable cases, by county, per 100,000 residents. Incidence rates of confirmed and probable cases in 2014 were slightly lower for most counties, compared with 2013. Larger decreases were seen in   Dukes County, where the incidence rate decreased from 423 to 308 per 100,000 and Nantucket County, which dropped to 570 from 619 per 100,000.  Year to year variations may not be as significant as trends over time (see Figure 3).
+
+
+
+

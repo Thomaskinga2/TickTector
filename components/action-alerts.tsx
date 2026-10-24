@@ -8,8 +8,9 @@ export function ActionAlerts({ alerts, ...slot }: { alerts?: ActionAlert[] } & S
 
   return (
     <div className="flex flex-col gap-4">
-      {alerts.map((alert) => (
-        <div key={alert.id} className="rounded-lg bg-primary p-4 text-primary-foreground">
+      {/* The first alert is this week's main advice; the rest (e.g. tick removal) are quieter. */}
+      {alerts.map((alert, i) => (
+        <div key={alert.id} className={i === 0 ? "rounded-lg bg-primary p-4 text-primary-foreground" : "rounded-lg border bg-card p-4"}>
           <p className="flex items-center gap-2 font-semibold">
             <ShieldCheck className="size-5" aria-hidden />
             {alert.title}

@@ -1,0 +1,90 @@
+
+Bureau of Infectious Disease and Laboratory Sciences
+Tick Exposure and Tick-borne Disease Syndromic Surveillance Report, December 2025
+Suggested citation:
+Massachusetts Department of Public Health, Bureau of Infectious Disease and Laboratory Sciences. Tick Exposure and Tick-borne Disease Syndromic Surveillance Report, December 2025. http://www.mass.gov/eohhs/gov/departments/dph/programs/id/
+Bureau of Infectious Disease and Laboratory Sciences
+Massachusetts Public Health State Laboratory 305 South Street Jamaica Plain, MA 02130
+To speak to the on-call epidemiologist  Tel: (617) 983-6800 Questions about Infectious Disease Reporting Tel: (617) 983-6801 Requests for additional data https://www.mass.gov/lists/infectious-disease-data-reports-and-requests#requesting-infectious-disease-data-
+Acknowledgments
+This report was prepared by the following DPH staff: Susan Soliva Bruce Caldwell Rosa Ergas
+Page break
+Tick Exposure and Tick-borne Disease Syndromic Surveillance Report, December 2025
+About the data
+The Massachusetts Department of Public Health’s (DPH) Syndromic Surveillance program electronically collects limited information on patient visits to hospital emergency departments (ED) across the Commonwealth. The reported data allow the Department to track trends for certain types of ED visits. This report provides monthly updates on two visit types, tick exposures, where a patient reports an exposure to ticks, and tick-borne disease, where the patient is discharged with a diagnosis of a tick-borne disease. Because not everyone exposed to ticks or with a tick-borne disease will be seen in an ED, these data do not show all patients with tick-borne disease in Massachusetts. More information about tick-borne diseases and how to prevent them is available at www.mass.gov/dph/tick.
+Figure 1: The graphs below show that in December of 2025, less than 0.2% of visits to EDs in any week were related to exposure to ticks, while less than 0.2% of visits to EDs in any week were related to diagnosis of a tick-borne disease. The 2025 data are shown compared to both the minimum and the maximum number of visits recorded over the last three years. While tick activity usually increases in Spring and early Summer and then again in Fall, exact timing is dependent on weather. 
+
+Page break
+Figure 2: This map shows the rate, per 10,000 total population, of ED visits by patients who had a visit related to a tick exposure, by Massachusetts county of residence, 2025 to date. Although there are differences in the rate of patient visits, this shows that people are exposed to ticks throughout all of Massachusetts and should take recommended steps to reduce the chance of being bitten. 
+
+
+Page break
+Figure 3: This graph shows the rate of ED visits made by patients who were diagnosed with a tick-borne disease, by age group, 2025 to date. This trend is expected and demonstrates that children ages 5-14 and older adults are more frequently diagnosed with tick-borne diseases. Children are most commonly diagnosed with Lyme disease while older adults are more commonly diagnosed with Lyme disease, anaplasmosis or babesiosis.
+
+Page break
+Table 1: This table shows the number and the rate of ED visits by patients who were diagnosed with a tick-borne disease, by county 2025 to date. Although there are differences in the numbers and rates of patient visits, this table shows that people are exposed to ticks and are diagnosed with tick-borne diseases throughout all of Massachusetts. Both patients and providers should be aware of what tick-borne diseases occur in Massachusetts.
+
+County
+Total Visits
+Number of Tick-borne Disease Visits
+Rate (Per 10,000) of Tick-borne Disease Visits
+BARNSTABLE
+121588
+177
+14.56
+BERKSHIRE
+79919
+119
+14.89
+BRISTOL
+342998
+274
+7.99
+DUKES/NANTUCKET
+24063
+212
+88.1
+ESSEX
+386360
+107
+2.77
+FRANKLIN
+37948
+40
+10.54
+HAMPDEN
+278330
+78
+2.8
+HAMPSHIRE
+58172
+58
+9.97
+MIDDLESEX
+569858
+187
+3.28
+NORFOLK
+271685
+114
+4.2
+PLYMOUTH
+283689
+301
+10.61
+SUFFOLK
+398759
+56
+1.4
+WORCESTER
+385350
+143
+3.71
+*Visits where patient county was missing or out of state are not shown (n=179171)
+Page break
+MORE INFORMATION:
+Massachusetts Syndromic Surveillance Program: The Massachusetts Department of Public Health (DPH) collects emergency department (ED) syndromic surveillance data from hospital emergency departments across the Commonwealth. As of January 2019, DPH is receiving 100% of state-wide ED visits. The DPH syndromic surveillance system is managed by the Division of Surveillance, Analytics and Informatics within the Bureau of Infectious Disease and Laboratory Sciences, with funding provided by the Centers for Disease Control and Prevention’s National Syndromic Surveillance Program grant.
+Visit Definitions 
+Tick Exposure Visit: Free-text query for the word tick in chief complaint (patient-stated reason for visit) or in the triage notes. Tick-borne Disease Visit: International Statistical Classification of Diseases and Related Health Problems, 10th Revision (ICD-10) query of the first three diagnostic codes assigned to the ED visit for: Lyme disease (A69.2), babesiosis (B60.0), anaplasmosis (A77.49, A79.82), and other tick-borne diseases (A68.1, A68.9, A77.40, and A93.8).
+Denominators 
+As of 01/01/2020 BIDLS calculates population rates using denominators estimated by the University of Massachusetts Donahue Institute using a modified Hamilton-Perry model (UMDI Oct 2016).1 Note that rates and trends calculated using previous methods cannot be compared to these. 1 Strate S, et al. Small Area Population Estimates for 2011 through 2020, report published Oct 2016.

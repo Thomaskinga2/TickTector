@@ -1,0 +1,559 @@
+year,disease,county,cases,incidence_per_100k,case_definition,source_table
+2011,Anaplasmosis (HGA),Berkshire,30,22.86,2011 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2011__t01.csv
+2011,Anaplasmosis (HGA),Bristol,3,0.55,2011 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2011__t01.csv
+2011,Anaplasmosis (HGA),Cape Cod & Islands,31,12.78,2011 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2011__t01.csv
+2011,Anaplasmosis (HGA),Essex,7,0.94,2011 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2011__t01.csv
+2011,Anaplasmosis (HGA),Franklin,0,0.00,2011 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2011__t01.csv
+2011,Anaplasmosis (HGA),Hampden,3,0.65,2011 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2011__t01.csv
+2011,Anaplasmosis (HGA),Hampshire,0,0.00,2011 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2011__t01.csv
+2011,Anaplasmosis (HGA),Middlesex,21,1.40,2011 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2011__t01.csv
+2011,Anaplasmosis (HGA),Norfolk,20,2.98,2011 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2011__t01.csv
+2011,Anaplasmosis (HGA),Plymouth,18,3.64,2011 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2011__t01.csv
+2011,Anaplasmosis (HGA),Suffolk,0,0.00,2011 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2011__t01.csv
+2011,Anaplasmosis (HGA),Worcester,7,0.88,2011 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2011__t01.csv
+2011,Anaplasmosis (HGA),State Total,140,2.14,2011 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2011__t01.csv
+2012,Anaplasmosis (HGA),Berkshire,30,22.86,2012 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2012__t01.csv
+2012,Anaplasmosis (HGA),Bristol,8,1.46,2012 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2012__t01.csv
+2012,Anaplasmosis (HGA),Cape Cod & Islands,43,17.73,2012 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2012__t01.csv
+2012,Anaplasmosis (HGA),Essex,7,1.88,2012 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2012__t01.csv
+2012,Anaplasmosis (HGA),Franklin,3,4.20,2012 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2012__t01.csv
+2012,Anaplasmosis (HGA),Hampden,3,0.65,2012 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2012__t01.csv
+2012,Anaplasmosis (HGA),Hampshire,3,1.90,2012 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2012__t01.csv
+2012,Anaplasmosis (HGA),Middlesex,51,3.39,2012 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2012__t01.csv
+2012,Anaplasmosis (HGA),Norfolk,30,4.47,2012 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2012__t01.csv
+2012,Anaplasmosis (HGA),Plymouth,25,5.05,2012 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2012__t01.csv
+2012,Anaplasmosis (HGA),Suffolk,4,0.55,2012 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2012__t01.csv
+2012,Anaplasmosis (HGA),Worcester,23,2.88,2012 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2012__t01.csv
+2012,Anaplasmosis (HGA),State Total,237,3.62,2012 Confirmed Cases (#),human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2012__t01.csv
+2013,Anaplasmosis (HGA),Berkshire,55,41.91,2013 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2013__t01.csv
+2013,Anaplasmosis (HGA),Bristol,16,2.92,2013 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2013__t01.csv
+2013,Anaplasmosis (HGA),Cape Cod & Islands,37,15.25,2013 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2013__t01.csv
+2013,Anaplasmosis (HGA),Essex,27,3.63,2013 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2013__t01.csv
+2013,Anaplasmosis (HGA),Franklin,6,8.41,2013 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2013__t01.csv
+2013,Anaplasmosis (HGA),Hampden,7,1.51,2013 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2013__t01.csv
+2013,Anaplasmosis (HGA),Hampshire,2,1.27,2013 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2013__t01.csv
+2013,Anaplasmosis (HGA),Middlesex,67,4.46,2013 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2013__t01.csv
+2013,Anaplasmosis (HGA),Norfolk,43,6.41,2013 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2013__t01.csv
+2013,Anaplasmosis (HGA),Plymouth,45,9.09,2013 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2013__t01.csv
+2013,Anaplasmosis (HGA),Suffolk,11,1.52,2013 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2013__t01.csv
+2013,Anaplasmosis (HGA),Worcester,13,1.63,2013 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2013__t01.csv
+2013,Anaplasmosis (HGA),State Total,329,5.0,2013 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2013__t01.csv
+2014,Anaplasmosis (HGA),Barnstable,65,30.1,2014 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-annual-summary-2014__t01.csv
+2014,Anaplasmosis (HGA),Berkshire,79,60.2,2014 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-annual-summary-2014__t01.csv
+2014,Anaplasmosis (HGA),Bristol,26,4.7,2014 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-annual-summary-2014__t01.csv
+2014,Anaplasmosis (HGA),Dukes,8,48.4,2014 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-annual-summary-2014__t01.csv
+2014,Anaplasmosis (HGA),Essex,41,5.5,2014 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-annual-summary-2014__t01.csv
+2014,Anaplasmosis (HGA),Franklin,6,8.4,2014 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-annual-summary-2014__t01.csv
+2014,Anaplasmosis (HGA),Hampden,11,2.4,2014 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-annual-summary-2014__t01.csv
+2014,Anaplasmosis (HGA),Hampshire,10,6.3,2014 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-annual-summary-2014__t01.csv
+2014,Anaplasmosis (HGA),Middlesex,131,8.7,2014 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-annual-summary-2014__t01.csv
+2014,Anaplasmosis (HGA),Nantucket,9,88.5,2014 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-annual-summary-2014__t01.csv
+2014,Anaplasmosis (HGA),Norfolk,44,6.6,2014 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-annual-summary-2014__t01.csv
+2014,Anaplasmosis (HGA),Plymouth,117,23.6,2014 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-annual-summary-2014__t01.csv
+2014,Anaplasmosis (HGA),Suffolk,10,1.4,2014 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-annual-summary-2014__t01.csv
+2014,Anaplasmosis (HGA),Worcester,47,6.0,2014 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-annual-summary-2014__t01.csv
+2014,Anaplasmosis (HGA),State Total,604,9.2,2014 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-annual-summary-2014__t01.csv
+2015,Anaplasmosis (HGA),Barnstable,55,25.5,2015 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2015__t01.csv
+2015,Anaplasmosis (HGA),Berkshire,147,112.0,2015 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2015__t01.csv
+2015,Anaplasmosis (HGA),Bristol,46,8.4,2015 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2015__t01.csv
+2015,Anaplasmosis (HGA),Dukes,7,42.3,2015 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2015__t01.csv
+2015,Anaplasmosis (HGA),Essex,38,5.1,2015 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2015__t01.csv
+2015,Anaplasmosis (HGA),Franklin,11,15.4,2015 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2015__t01.csv
+2015,Anaplasmosis (HGA),Hampden,12,2.6,2015 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2015__t01.csv
+2015,Anaplasmosis (HGA),Hampshire,28,17.7,2015 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2015__t01.csv
+2015,Anaplasmosis (HGA),Middlesex,168,11.2,2015 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2015__t01.csv
+2015,Anaplasmosis (HGA),Nantucket,8,78.6,2015 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2015__t01.csv
+2015,Anaplasmosis (HGA),Norfolk,63,9.4,2015 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2015__t01.csv
+2015,Anaplasmosis (HGA),Plymouth,103,20.8,2015 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2015__t01.csv
+2015,Anaplasmosis (HGA),Suffolk,14,1.9,2015 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2015__t01.csv
+2015,Anaplasmosis (HGA),Worcester,63,7.9,2015 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2015__t01.csv
+2015,Anaplasmosis (HGA),State Total,763,11.7,2015 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2015__t01.csv
+2016,Anaplasmosis (HGA),Barnstable,68,31.5,2016 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2016__t01.csv
+2016,Anaplasmosis (HGA),Berkshire,87,66.3,2016 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2016__t01.csv
+2016,Anaplasmosis (HGA),Bristol,69,12.6,2016 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2016__t01.csv
+2016,Anaplasmosis (HGA),Dukes,15,90.7,2016 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2016__t01.csv
+2016,Anaplasmosis (HGA),Essex,48,6.5,2016 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2016__t01.csv
+2016,Anaplasmosis (HGA),Franklin,10,14.0,2016 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2016__t01.csv
+2016,Anaplasmosis (HGA),Hampden,9,1.9,2016 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2016__t01.csv
+2016,Anaplasmosis (HGA),Hampshire,19,12.0,2016 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2016__t01.csv
+2016,Anaplasmosis (HGA),Middlesex,176,11.7,2016 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2016__t01.csv
+2016,Anaplasmosis (HGA),Nantucket,10,98.3,2016 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2016__t01.csv
+2016,Anaplasmosis (HGA),Norfolk,55,8.2,2016 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2016__t01.csv
+2016,Anaplasmosis (HGA),Plymouth,162,32.7,2016 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2016__t01.csv
+2016,Anaplasmosis (HGA),Suffolk,12,1.7,2016 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2016__t01.csv
+2016,Anaplasmosis (HGA),Worcester,88,7.9,2016 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2016__t01.csv
+2016,Anaplasmosis (HGA),State Total,828,12.7,2016 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2016__t01.csv
+2017,Anaplasmosis (HGA),Barnstable,66,30.6,2017 Cases Confirmed and Probable,hga-surveillance-summary-2017__t01.csv
+2017,Anaplasmosis (HGA),Berkshire,175,133.4,2017 Cases Confirmed and Probable,hga-surveillance-summary-2017__t01.csv
+2017,Anaplasmosis (HGA),Bristol,91,16.6,2017 Cases Confirmed and Probable,hga-surveillance-summary-2017__t01.csv
+2017,Anaplasmosis (HGA),Dukes & Nantucket,11,41.2,2017 Cases Confirmed and Probable,hga-surveillance-summary-2017__t01.csv
+2017,Anaplasmosis (HGA),Essex,73,9.8,2017 Cases Confirmed and Probable,hga-surveillance-summary-2017__t01.csv
+2017,Anaplasmosis (HGA),Franklin,27,37.8,2017 Cases Confirmed and Probable,hga-surveillance-summary-2017__t01.csv
+2017,Anaplasmosis (HGA),Hampden,18,3.9,2017 Cases Confirmed and Probable,hga-surveillance-summary-2017__t01.csv
+2017,Anaplasmosis (HGA),Hampshire,30,19.0,2017 Cases Confirmed and Probable,hga-surveillance-summary-2017__t01.csv
+2017,Anaplasmosis (HGA),Middlesex,282,18.8,2017 Cases Confirmed and Probable,hga-surveillance-summary-2017__t01.csv
+2017,Anaplasmosis (HGA),Norfolk,88,13.1,2017 Cases Confirmed and Probable,hga-surveillance-summary-2017__t01.csv
+2017,Anaplasmosis (HGA),Plymouth,178,36.0,2017 Cases Confirmed and Probable,hga-surveillance-summary-2017__t01.csv
+2017,Anaplasmosis (HGA),Suffolk,12,1.7,2017 Cases Confirmed and Probable,hga-surveillance-summary-2017__t01.csv
+2017,Anaplasmosis (HGA),Worcester,153,19.2,2017 Cases Confirmed and Probable,hga-surveillance-summary-2017__t01.csv
+2017,Anaplasmosis (HGA),State Total,1204,18.4,2017 Cases Confirmed and Probable,hga-surveillance-summary-2017__t01.csv
+2018,Anaplasmosis (HGA),Barnstable,43,19.9,2018 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2018__t01.csv
+2018,Anaplasmosis (HGA),Berkshire,91,69.3,2018 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2018__t01.csv
+2018,Anaplasmosis (HGA),Bristol,47,8.6,2018 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2018__t01.csv
+2018,Anaplasmosis (HGA),Dukes & Nantucket,4,15.0,2018 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2018__t01.csv
+2018,Anaplasmosis (HGA),Essex,39,5.2,2018 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2018__t01.csv
+2018,Anaplasmosis (HGA),Franklin,14,19.6,2018 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2018__t01.csv
+2018,Anaplasmosis (HGA),Hampden,13,2.8,2018 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2018__t01.csv
+2018,Anaplasmosis (HGA),Hampshire,14,8.9,2018 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2018__t01.csv
+2018,Anaplasmosis (HGA),Middlesex,147,9.8,2018 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2018__t01.csv
+2018,Anaplasmosis (HGA),Norfolk,45,6.7,2018 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2018__t01.csv
+2018,Anaplasmosis (HGA),Plymouth,116,23.4,2018 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2018__t01.csv
+2018,Anaplasmosis (HGA),Suffolk,4,0.6,2018 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2018__t01.csv
+2018,Anaplasmosis (HGA),Worcester,79,9.9,2018 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2018__t01.csv
+2018,Anaplasmosis (HGA),State Total,656,10.0,2018 Cases Confirmed and Probable,human-granulocytic-anaplasmosis-hga-surveillance-annual-summary-2018__t01.csv
+2019,Anaplasmosis (HGA),Barnstable,44,20.3,2019 Cases,tickborne-disease-surveillance-report-2019__t02.csv
+2019,Anaplasmosis (HGA),Berkshire,175,138.1,2019 Cases,tickborne-disease-surveillance-report-2019__t02.csv
+2019,Anaplasmosis (HGA),Bristol,53,9.3,2019 Cases,tickborne-disease-surveillance-report-2019__t02.csv
+2019,Anaplasmosis (HGA),Dukes & Nantucket,8,27.7,2019 Cases,tickborne-disease-surveillance-report-2019__t02.csv
+2019,Anaplasmosis (HGA),Essex,35,4.4,2019 Cases,tickborne-disease-surveillance-report-2019__t02.csv
+2019,Anaplasmosis (HGA),Franklin,17,23.9,2019 Cases,tickborne-disease-surveillance-report-2019__t02.csv
+2019,Anaplasmosis (HGA),Hampden,16,3.4,2019 Cases,tickborne-disease-surveillance-report-2019__t02.csv
+2019,Anaplasmosis (HGA),Hampshire,16,9.7,2019 Cases,tickborne-disease-surveillance-report-2019__t02.csv
+2019,Anaplasmosis (HGA),Middlesex,130,8.0,2019 Cases,tickborne-disease-surveillance-report-2019__t02.csv
+2019,Anaplasmosis (HGA),Norfolk,29,4.1,2019 Cases,tickborne-disease-surveillance-report-2019__t02.csv
+2019,Anaplasmosis (HGA),Plymouth,87,16.5,2019 Cases,tickborne-disease-surveillance-report-2019__t02.csv
+2019,Anaplasmosis (HGA),Suffolk,7,0.9,2019 Cases,tickborne-disease-surveillance-report-2019__t02.csv
+2019,Anaplasmosis (HGA),Worcester,85,10.1,2019 Cases,tickborne-disease-surveillance-report-2019__t02.csv
+2019,Anaplasmosis (HGA),State Total,702,10.1,2019 Cases,tickborne-disease-surveillance-report-2019__t02.csv
+2020,Anaplasmosis (HGA),Barnstable,45,19.7,2020 Cases,tickborne-disease-surveillance-report-2020__t02.csv
+2020,Anaplasmosis (HGA),Berkshire,68,52.7,2020 Cases,tickborne-disease-surveillance-report-2020__t02.csv
+2020,Anaplasmosis (HGA),Bristol,82,14.2,2020 Cases,tickborne-disease-surveillance-report-2020__t02.csv
+2020,Anaplasmosis (HGA),Dukes & Nantucket,21,60.2,2020 Cases,tickborne-disease-surveillance-report-2020__t02.csv
+2020,Anaplasmosis (HGA),Essex,51,6.3,2020 Cases,tickborne-disease-surveillance-report-2020__t02.csv
+2020,Anaplasmosis (HGA),Franklin,43,60.5,2020 Cases,tickborne-disease-surveillance-report-2020__t02.csv
+2020,Anaplasmosis (HGA),Hampden,29,6.2,2020 Cases,tickborne-disease-surveillance-report-2020__t02.csv
+2020,Anaplasmosis (HGA),Hampshire,32,19.7,2020 Cases,tickborne-disease-surveillance-report-2020__t02.csv
+2020,Anaplasmosis (HGA),Middlesex,137,8.4,2020 Cases,tickborne-disease-surveillance-report-2020__t02.csv
+2020,Anaplasmosis (HGA),Norfolk,37,5.1,2020 Cases,tickborne-disease-surveillance-report-2020__t02.csv
+2020,Anaplasmosis (HGA),Plymouth,98,18.5,2020 Cases,tickborne-disease-surveillance-report-2020__t02.csv
+2020,Anaplasmosis (HGA),Suffolk,6,0.8,2020 Cases,tickborne-disease-surveillance-report-2020__t02.csv
+2020,Anaplasmosis (HGA),Worcester,91,10.6,2020 Cases,tickborne-disease-surveillance-report-2020__t02.csv
+2020,Anaplasmosis (HGA),State Total,740,10.5,2020 Cases,tickborne-disease-surveillance-report-2020__t02.csv
+2021,Anaplasmosis (HGA),Barnstable,46,20.1,2021 Cases,tickborne-disease-surveillance-report-2021__t02.csv
+2021,Anaplasmosis (HGA),Berkshire,85,65.9,2021 Cases,tickborne-disease-surveillance-report-2021__t02.csv
+2021,Anaplasmosis (HGA),Bristol,81,14.0,2021 Cases,tickborne-disease-surveillance-report-2021__t02.csv
+2021,Anaplasmosis (HGA),Dukes & Nantucket,18,51.6,2021 Cases,tickborne-disease-surveillance-report-2021__t02.csv
+2021,Anaplasmosis (HGA),Essex,32,4.0,2021 Cases,tickborne-disease-surveillance-report-2021__t02.csv
+2021,Anaplasmosis (HGA),Franklin,41,57.7,2021 Cases,tickborne-disease-surveillance-report-2021__t02.csv
+2021,Anaplasmosis (HGA),Hampden,25,5.4,2021 Cases,tickborne-disease-surveillance-report-2021__t02.csv
+2021,Anaplasmosis (HGA),Hampshire,37,22.8,2021 Cases,tickborne-disease-surveillance-report-2021__t02.csv
+2021,Anaplasmosis (HGA),Middlesex,150,9.2,2021 Cases,tickborne-disease-surveillance-report-2021__t02.csv
+2021,Anaplasmosis (HGA),Norfolk,35,4.8,2021 Cases,tickborne-disease-surveillance-report-2021__t02.csv
+2021,Anaplasmosis (HGA),Plymouth,87,16.4,2021 Cases,tickborne-disease-surveillance-report-2021__t02.csv
+2021,Anaplasmosis (HGA),Suffolk,12,1.5,2021 Cases,tickborne-disease-surveillance-report-2021__t02.csv
+2021,Anaplasmosis (HGA),Worcester,124,14.4,2021 Cases,tickborne-disease-surveillance-report-2021__t02.csv
+2021,Anaplasmosis (HGA),State Total,773,11.0,2021 Cases,tickborne-disease-surveillance-report-2021__t02.csv
+2022,Anaplasmosis (HGA),Barnstable,54,23.58,2022 Cases,tickborne-disease-surveillance-report-2022__t03.csv
+2022,Anaplasmosis (HGA),Berkshire,68,52.7,2022 Cases,tickborne-disease-surveillance-report-2022__t03.csv
+2022,Anaplasmosis (HGA),Bristol,54,9.32,2022 Cases,tickborne-disease-surveillance-report-2022__t03.csv
+2022,Anaplasmosis (HGA),Dukes & Nantucket,4,11.48,2022 Cases,tickborne-disease-surveillance-report-2022__t03.csv
+2022,Anaplasmosis (HGA),Essex,18,2.22,2022 Cases,tickborne-disease-surveillance-report-2022__t03.csv
+2022,Anaplasmosis (HGA),Franklin,31,43.64,2022 Cases,tickborne-disease-surveillance-report-2022__t03.csv
+2022,Anaplasmosis (HGA),Hampden,21,4.51,2022 Cases,tickborne-disease-surveillance-report-2022__t03.csv
+2022,Anaplasmosis (HGA),Hampshire,42,25.88,2022 Cases,tickborne-disease-surveillance-report-2022__t03.csv
+2022,Anaplasmosis (HGA),Middlesex,123,7.54,2022 Cases,tickborne-disease-surveillance-report-2022__t03.csv
+2022,Anaplasmosis (HGA),Norfolk,43,5.92,2022 Cases,tickborne-disease-surveillance-report-2022__t03.csv
+2022,Anaplasmosis (HGA),Plymouth,55,10.36,2022 Cases,tickborne-disease-surveillance-report-2022__t03.csv
+2022,Anaplasmosis (HGA),Suffolk,16,2.01,2022 Cases,tickborne-disease-surveillance-report-2022__t03.csv
+2022,Anaplasmosis (HGA),Worcester,94,10.9,2022 Cases,tickborne-disease-surveillance-report-2022__t03.csv
+2022,Anaplasmosis (HGA),State Total,623,8.86,2022 Cases,tickborne-disease-surveillance-report-2022__t03.csv
+2023,Anaplasmosis (HGA),Barnstable,47,20.52,2023 Cases,tickborne-disease-surveillance-report-2023__t03.csv
+2023,Anaplasmosis (HGA),Berkshire,81,62.78,2023 Cases,tickborne-disease-surveillance-report-2023__t03.csv
+2023,Anaplasmosis (HGA),Bristol,77,13.29,2023 Cases,tickborne-disease-surveillance-report-2023__t03.csv
+2023,Anaplasmosis (HGA),Dukes & Nantucket,19,54.51,2023 Cases,tickborne-disease-surveillance-report-2023__t03.csv
+2023,Anaplasmosis (HGA),Essex,30,3.7,2023 Cases,tickborne-disease-surveillance-report-2023__t03.csv
+2023,Anaplasmosis (HGA),Franklin,49,68.99,2023 Cases,tickborne-disease-surveillance-report-2023__t03.csv
+2023,Anaplasmosis (HGA),Hampden,23,4.94,2023 Cases,tickborne-disease-surveillance-report-2023__t03.csv
+2023,Anaplasmosis (HGA),Hampshire,38,23.41,2023 Cases,tickborne-disease-surveillance-report-2023__t03.csv
+2023,Anaplasmosis (HGA),Middlesex,109,6.68,2023 Cases,tickborne-disease-surveillance-report-2023__t03.csv
+2023,Anaplasmosis (HGA),Norfolk,43,5.92,2023 Cases,tickborne-disease-surveillance-report-2023__t03.csv
+2023,Anaplasmosis (HGA),Plymouth,85,16.01,2023 Cases,tickborne-disease-surveillance-report-2023__t03.csv
+2023,Anaplasmosis (HGA),Suffolk,11,1.38,2023 Cases,tickborne-disease-surveillance-report-2023__t03.csv
+2023,Anaplasmosis (HGA),Worcester,115,13.34,2023 Cases,tickborne-disease-surveillance-report-2023__t03.csv
+2023,Anaplasmosis (HGA),State Total,727,10.34,2023 Cases,tickborne-disease-surveillance-report-2023__t03.csv
+2024,Anaplasmosis (HGA),Barnstable,100,43.67,2024 Cases,tickborne-disease-surveillance-report-2024__t03.csv
+2024,Anaplasmosis (HGA),Berkshire,114,88.35,2024 Cases,tickborne-disease-surveillance-report-2024__t03.csv
+2024,Anaplasmosis (HGA),Bristol,130,22.44,2024 Cases,tickborne-disease-surveillance-report-2024__t03.csv
+2024,Anaplasmosis (HGA),Dukes & Nantucket,20,57.38,2024 Cases,tickborne-disease-surveillance-report-2024__t03.csv
+2024,Anaplasmosis (HGA),Essex,53,6.54,2024 Cases,tickborne-disease-surveillance-report-2024__t03.csv
+2024,Anaplasmosis (HGA),Franklin,55,77.43,2024 Cases,tickborne-disease-surveillance-report-2024__t03.csv
+2024,Anaplasmosis (HGA),Hampden,33,7.08,2024 Cases,tickborne-disease-surveillance-report-2024__t03.csv
+2024,Anaplasmosis (HGA),Hampshire,55,33.89,2024 Cases,tickborne-disease-surveillance-report-2024__t03.csv
+2024,Anaplasmosis (HGA),Middlesex,156,9.56,2024 Cases,tickborne-disease-surveillance-report-2024__t03.csv
+2024,Anaplasmosis (HGA),Norfolk,40,5.51,2024 Cases,tickborne-disease-surveillance-report-2024__t03.csv
+2024,Anaplasmosis (HGA),Plymouth,183,34.48,2024 Cases,tickborne-disease-surveillance-report-2024__t03.csv
+2024,Anaplasmosis (HGA),Suffolk,10,1.25,2024 Cases,tickborne-disease-surveillance-report-2024__t03.csv
+2024,Anaplasmosis (HGA),Worcester,110,12.76,2024 Cases,tickborne-disease-surveillance-report-2024__t03.csv
+2024,Anaplasmosis (HGA),State Total,1059,15.06,2024 Cases,tickborne-disease-surveillance-report-2024__t03.csv
+2025,Anaplasmosis (HGA),Barnstable,167,71.51,2025 Cases,tickborne-disease-surveillance-report-2025__t04.csv
+2025,Anaplasmosis (HGA),Berkshire,144,113.68,2025 Cases,tickborne-disease-surveillance-report-2025__t04.csv
+2025,Anaplasmosis (HGA),Bristol,167,28.16,2025 Cases,tickborne-disease-surveillance-report-2025__t04.csv
+2025,Anaplasmosis (HGA),Dukes & Nantucket,24,60.3,2025 Cases,tickborne-disease-surveillance-report-2025__t04.csv
+2025,Anaplasmosis (HGA),Essex,79,9.37,2025 Cases,tickborne-disease-surveillance-report-2025__t04.csv
+2025,Anaplasmosis (HGA),Franklin,85,121.4,2025 Cases,tickborne-disease-surveillance-report-2025__t04.csv
+2025,Anaplasmosis (HGA),Hampden,50,10.73,2025 Cases,tickborne-disease-surveillance-report-2025__t04.csv
+2025,Anaplasmosis (HGA),Hampshire,65,40.1,2025 Cases,tickborne-disease-surveillance-report-2025__t04.csv
+2025,Anaplasmosis (HGA),Middlesex,211,12.41,2025 Cases,tickborne-disease-surveillance-report-2025__t04.csv
+2025,Anaplasmosis (HGA),Norfolk,89,11.77,2025 Cases,tickborne-disease-surveillance-report-2025__t04.csv
+2025,Anaplasmosis (HGA),Plymouth,238,43.44,2025 Cases,tickborne-disease-surveillance-report-2025__t04.csv
+2025,Anaplasmosis (HGA),Suffolk,13,1.55,2025 Cases,tickborne-disease-surveillance-report-2025__t04.csv
+2025,Anaplasmosis (HGA),Worcester,164,18.28,2025 Cases,tickborne-disease-surveillance-report-2025__t04.csv
+2025,Anaplasmosis (HGA),State Total,1496,20.57,2025 Cases,tickborne-disease-surveillance-report-2025__t04.csv
+2011,Babesiosis,Barnstable,57,26.4,2011 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2011__t01.csv
+2011,Babesiosis,Berkshire,1,0.8,2011 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2011__t01.csv
+2011,Babesiosis,Bristol,8,1.5,2011 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2011__t01.csv
+2011,Babesiosis,Dukes & Nantucket,46,172.2,2011 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2011__t01.csv
+2011,Babesiosis,Essex,10,1.3,2011 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2011__t01.csv
+2011,Babesiosis,Franklin,0,0.0,2011 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2011__t01.csv
+2011,Babesiosis,Hampden,4,0.9,2011 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2011__t01.csv
+2011,Babesiosis,Hampshire,1,0.6,2011 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2011__t01.csv
+2011,Babesiosis,Middlesex,22,1.5,2011 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2011__t01.csv
+2011,Babesiosis,Norfolk,13,1.9,2011 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2011__t01.csv
+2011,Babesiosis,Plymouth,24,4.8,2011 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2011__t01.csv
+2011,Babesiosis,Suffolk,2,0.3,2011 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2011__t01.csv
+2011,Babesiosis,Worcester,3,0.4,2011 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2011__t01.csv
+2011,Babesiosis,State Total,191,2.9,2011 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2011__t01.csv
+2012,Babesiosis,Barnstable,59,27.3,2012 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2012__t01.csv
+2012,Babesiosis,Berkshire,0,0.0,2012 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2012__t01.csv
+2012,Babesiosis,Bristol,13,2.4,2012 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2012__t01.csv
+2012,Babesiosis,Dukes & Nantucket,44,164.8,2012 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2012__t01.csv
+2012,Babesiosis,Essex,14,1.7,2012 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2012__t01.csv
+2012,Babesiosis,Franklin,0,0.0,2012 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2012__t01.csv
+2012,Babesiosis,Hampden,4,0.9,2012 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2012__t01.csv
+2012,Babesiosis,Hampshire,0,0.0,2012 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2012__t01.csv
+2012,Babesiosis,Middlesex,37,2.5,2012 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2012__t01.csv
+2012,Babesiosis,Norfolk,23,3.4,2012 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2012__t01.csv
+2012,Babesiosis,Plymouth,24,4.8,2012 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2012__t01.csv
+2012,Babesiosis,Suffolk,8,1.1,2012 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2012__t01.csv
+2012,Babesiosis,Worcester,7,0.9,2012 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2012__t01.csv
+2012,Babesiosis,State Total,233,3.6,2012 Confirmed Cases (#),babesiosis-surveillance-data-annual-summary-2012__t01.csv
+2013,Babesiosis,Barnstable,81,37.5,2013 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2013__t01.csv
+2013,Babesiosis,Berkshire,5,3.8,2013 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2013__t01.csv
+2013,Babesiosis,Bristol,27,4.9,2013 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2013__t01.csv
+2013,Babesiosis,Dukes & Nantucket,70,262.1,2013 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2013__t01.csv
+2013,Babesiosis,Essex,34,4.6,2013 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2013__t01.csv
+2013,Babesiosis,Franklin,4,5.6,2013 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2013__t01.csv
+2013,Babesiosis,Hampden,9,1.9,2013 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2013__t01.csv
+2013,Babesiosis,Hampshire,2,1.3,2013 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2013__t01.csv
+2013,Babesiosis,Middlesex,64,4.3,2013 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2013__t01.csv
+2013,Babesiosis,Norfolk,38,5.7,2013 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2013__t01.csv
+2013,Babesiosis,Plymouth,62,12.5,2013 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2013__t01.csv
+2013,Babesiosis,Suffolk,8,1.1,2013 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2013__t01.csv
+2013,Babesiosis,Worcester,16,2.0,2013 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2013__t01.csv
+2013,Babesiosis,State Total,420,6.4,2013 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2013__t01.csv
+2014,Babesiosis,Barnstable,130,60.2,2014 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2014__t01.csv
+2014,Babesiosis,Berkshire,2,1.5,2014 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2014__t01.csv
+2014,Babesiosis,Bristol,63,11.5,2014 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2014__t01.csv
+2014,Babesiosis,Dukes,20,121.0,2014 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2014__t01.csv
+2014,Babesiosis,Essex,32,4.3,2014 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2014__t01.csv
+2014,Babesiosis,Franklin,0,0.0,2014 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2014__t01.csv
+2014,Babesiosis,Hampden,8,1.7,2014 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2014__t01.csv
+2014,Babesiosis,Hampshire,3,1.9,2014 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2014__t01.csv
+2014,Babesiosis,Middlesex,66,4.4,2014 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2014__t01.csv
+2014,Babesiosis,Nantucket,36,353.9,2014 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2014__t01.csv
+2014,Babesiosis,Norfolk,38,5.7,2014 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2014__t01.csv
+2014,Babesiosis,Plymouth,98,19.8,2014 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2014__t01.csv
+2014,Babesiosis,Suffolk,8,1.1,2014 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2014__t01.csv
+2014,Babesiosis,Worcester,14,1.8,2014 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2014__t01.csv
+2014,Babesiosis,State Total,520,7.9,2014 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2014__t01.csv
+2015,Babesiosis,Barnstable,72,33.4,2015 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2015__t01.csv
+2015,Babesiosis,Berkshire,9,6.9,2015 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2015__t01.csv
+2015,Babesiosis,Bristol,69,12.6,2015 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2015__t01.csv
+2015,Babesiosis,Dukes,18,108.9,2015 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2015__t01.csv
+2015,Babesiosis,Essex,36,4.8,2015 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2015__t01.csv
+2015,Babesiosis,Franklin,2,2.8,2015 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2015__t01.csv
+2015,Babesiosis,Hampden,5,1.1,2015 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2015__t01.csv
+2015,Babesiosis,Hampshire,5,3.2,2015 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2015__t01.csv
+2015,Babesiosis,Middlesex,65,4.3,2015 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2015__t01.csv
+2015,Babesiosis,Nantucket,22,216.3,2015 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2015__t01.csv
+2015,Babesiosis,Norfolk,42,6.3,2015 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2015__t01.csv
+2015,Babesiosis,Plymouth,73,14.7,2015 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2015__t01.csv
+2015,Babesiosis,Suffolk,9,1.2,2015 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2015__t01.csv
+2015,Babesiosis,Worcester,18,2.3,2015 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2015__t01.csv
+2015,Babesiosis,State Total,445,6.8,2015 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2015__t01.csv
+2016,Babesiosis,Barnstable,105,48.6,2016 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2016__t01.csv
+2016,Babesiosis,Berkshire,2,1.5,2016 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2016__t01.csv
+2016,Babesiosis,Bristol,92,16.8,2016 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2016__t01.csv
+2016,Babesiosis,Dukes,6,36.3,2016 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2016__t01.csv
+2016,Babesiosis,Essex,35,4.7,2016 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2016__t01.csv
+2016,Babesiosis,Franklin,1,1.4,2016 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2016__t01.csv
+2016,Babesiosis,Hampden,7,1.5,2016 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2016__t01.csv
+2016,Babesiosis,Hampshire,3,1.5,2016 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2016__t01.csv
+2016,Babesiosis,Middlesex,62,4.1,2016 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2016__t01.csv
+2016,Babesiosis,Nantucket,18,177.0,2016 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2016__t01.csv
+2016,Babesiosis,Norfolk,44,6.6,2016 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2016__t01.csv
+2016,Babesiosis,Plymouth,105,21.2,2016 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2016__t01.csv
+2016,Babesiosis,Suffolk,7,1.0,2016 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2016__t01.csv
+2016,Babesiosis,Worcester,26,3.3,2016 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2016__t01.csv
+2016,Babesiosis,State Total,513,7.8,2016 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2016__t01.csv
+2017,Babesiosis,Barnstable,99,45.9,2017 Cases Confirmed and Probable,babesiosis-surveillance-2017__t01.csv
+2017,Babesiosis,Berkshire,28,21.3,2017 Cases Confirmed and Probable,babesiosis-surveillance-2017__t01.csv
+2017,Babesiosis,Bristol,90,16.4,2017 Cases Confirmed and Probable,babesiosis-surveillance-2017__t01.csv
+2017,Babesiosis,Dukes & Nantucket,14,52.4,2017 Cases Confirmed and Probable,babesiosis-surveillance-2017__t01.csv
+2017,Babesiosis,Essex,30,4.0,2017 Cases Confirmed and Probable,babesiosis-surveillance-2017__t01.csv
+2017,Babesiosis,Franklin,2,2.8,2017 Cases Confirmed and Probable,babesiosis-surveillance-2017__t01.csv
+2017,Babesiosis,Hampden,11,2.4,2017 Cases Confirmed and Probable,babesiosis-surveillance-2017__t01.csv
+2017,Babesiosis,Hampshire,6,3.8,2017 Cases Confirmed and Probable,babesiosis-surveillance-2017__t01.csv
+2017,Babesiosis,Middlesex,62,4.1,2017 Cases Confirmed and Probable,babesiosis-surveillance-2017__t01.csv
+2017,Babesiosis,Norfolk,41,6.1,2017 Cases Confirmed and Probable,babesiosis-surveillance-2017__t01.csv
+2017,Babesiosis,Plymouth,159,32.1,2017 Cases Confirmed and Probable,babesiosis-surveillance-2017__t01.csv
+2017,Babesiosis,Suffolk,11,1.5,2017 Cases Confirmed and Probable,babesiosis-surveillance-2017__t01.csv
+2017,Babesiosis,Worcester,37,4.6,2017 Cases Confirmed and Probable,babesiosis-surveillance-2017__t01.csv
+2017,Babesiosis,State Total,590,9.0,2017 Cases Confirmed and Probable,babesiosis-surveillance-2017__t01.csv
+2018,Babesiosis,Barnstable,80,37.1,2018 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2018__t01.csv
+2018,Babesiosis,Berkshire,18,13.7,2018 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2018__t01.csv
+2018,Babesiosis,Bristol,93,17.0,2018 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2018__t01.csv
+2018,Babesiosis,Dukes & Nantucket,13,48.7,2018 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2018__t01.csv
+2018,Babesiosis,Essex,26,3.5,2018 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2018__t01.csv
+2018,Babesiosis,Franklin,0,0.0,2018 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2018__t01.csv
+2018,Babesiosis,Hampden,16,3.5,2018 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2018__t01.csv
+2018,Babesiosis,Hampshire,8,5.1,2018 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2018__t01.csv
+2018,Babesiosis,Middlesex,75,5.0,2018 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2018__t01.csv
+2018,Babesiosis,Norfolk,31,4.6,2018 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2018__t01.csv
+2018,Babesiosis,Plymouth,128,25.9,2018 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2018__t01.csv
+2018,Babesiosis,Suffolk,8,1.1,2018 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2018__t01.csv
+2018,Babesiosis,Worcester,29,3.6,2018 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2018__t01.csv
+2018,Babesiosis,State Total,525,8.0,2018 Cases Confirmed and Probable,babesiosis-surveillance-data-annual-summary-2018__t01.csv
+2019,Babesiosis,Barnstable,105,48.5,2019 Cases,tickborne-disease-surveillance-report-2019__t01.csv
+2019,Babesiosis,Berkshire,31,24.5,2019 Cases,tickborne-disease-surveillance-report-2019__t01.csv
+2019,Babesiosis,Bristol,109,19.1,2019 Cases,tickborne-disease-surveillance-report-2019__t01.csv
+2019,Babesiosis,Dukes & Nantucket,42,145.5,2019 Cases,tickborne-disease-surveillance-report-2019__t01.csv
+2019,Babesiosis,Essex,28,3.5,2019 Cases,tickborne-disease-surveillance-report-2019__t01.csv
+2019,Babesiosis,Franklin,2,2.8,2019 Cases,tickborne-disease-surveillance-report-2019__t01.csv
+2019,Babesiosis,Hampden,16,3.4,2019 Cases,tickborne-disease-surveillance-report-2019__t01.csv
+2019,Babesiosis,Hampshire,9,5.5,2019 Cases,tickborne-disease-surveillance-report-2019__t01.csv
+2019,Babesiosis,Middlesex,79,4.9,2019 Cases,tickborne-disease-surveillance-report-2019__t01.csv
+2019,Babesiosis,Norfolk,43,6.0,2019 Cases,tickborne-disease-surveillance-report-2019__t01.csv
+2019,Babesiosis,Plymouth,113,21.4,2019 Cases,tickborne-disease-surveillance-report-2019__t01.csv
+2019,Babesiosis,Suffolk,9,1.1,2019 Cases,tickborne-disease-surveillance-report-2019__t01.csv
+2019,Babesiosis,Worcester,52,6.2,2019 Cases,tickborne-disease-surveillance-report-2019__t01.csv
+2019,Babesiosis,State Total,638,9.2,2019 Cases,tickborne-disease-surveillance-report-2019__t01.csv
+2020,Babesiosis,Barnstable,78,34.1,2020 Cases,tickborne-disease-surveillance-report-2020__t01.csv
+2020,Babesiosis,Berkshire,13,10.1,2020 Cases,tickborne-disease-surveillance-report-2020__t01.csv
+2020,Babesiosis,Bristol,120,20.7,2020 Cases,tickborne-disease-surveillance-report-2020__t01.csv
+2020,Babesiosis,Dukes & Nantucket,62,177.9,2020 Cases,tickborne-disease-surveillance-report-2020__t01.csv
+2020,Babesiosis,Essex,32,4.0,2020 Cases,tickborne-disease-surveillance-report-2020__t01.csv
+2020,Babesiosis,Franklin,2,2.8,2020 Cases,tickborne-disease-surveillance-report-2020__t01.csv
+2020,Babesiosis,Hampden,10,2.1,2020 Cases,tickborne-disease-surveillance-report-2020__t01.csv
+2020,Babesiosis,Hampshire,0,0.0,2020 Cases,tickborne-disease-surveillance-report-2020__t01.csv
+2020,Babesiosis,Middlesex,66,4.0,2020 Cases,tickborne-disease-surveillance-report-2020__t01.csv
+2020,Babesiosis,Norfolk,34,4.7,2020 Cases,tickborne-disease-surveillance-report-2020__t01.csv
+2020,Babesiosis,Plymouth,96,18.1,2020 Cases,tickborne-disease-surveillance-report-2020__t01.csv
+2020,Babesiosis,Suffolk,11,1.4,2020 Cases,tickborne-disease-surveillance-report-2020__t01.csv
+2020,Babesiosis,Worcester,56,6.5,2020 Cases,tickborne-disease-surveillance-report-2020__t01.csv
+2020,Babesiosis,State Total,580,8.3,2020 Cases,tickborne-disease-surveillance-report-2020__t01.csv
+2021,Babesiosis,Barnstable,88,38.4,2021 Cases,tickborne-disease-surveillance-report-2021__t01.csv
+2021,Babesiosis,Berkshire,21,16.3,2021 Cases,tickborne-disease-surveillance-report-2021__t01.csv
+2021,Babesiosis,Bristol,114,19.7,2021 Cases,tickborne-disease-surveillance-report-2021__t01.csv
+2021,Babesiosis,Dukes & Nantucket,32,91.8,2021 Cases,tickborne-disease-surveillance-report-2021__t01.csv
+2021,Babesiosis,Essex,32,4.0,2021 Cases,tickborne-disease-surveillance-report-2021__t01.csv
+2021,Babesiosis,Franklin,8,11.3,2021 Cases,tickborne-disease-surveillance-report-2021__t01.csv
+2021,Babesiosis,Hampden,18,3.9,2021 Cases,tickborne-disease-surveillance-report-2021__t01.csv
+2021,Babesiosis,Hampshire,9,5.5,2021 Cases,tickborne-disease-surveillance-report-2021__t01.csv
+2021,Babesiosis,Middlesex,93,5.7,2021 Cases,tickborne-disease-surveillance-report-2021__t01.csv
+2021,Babesiosis,Norfolk,44,6.1,2021 Cases,tickborne-disease-surveillance-report-2021__t01.csv
+2021,Babesiosis,Plymouth,92,17.3,2021 Cases,tickborne-disease-surveillance-report-2021__t01.csv
+2021,Babesiosis,Suffolk,12,1.5,2021 Cases,tickborne-disease-surveillance-report-2021__t01.csv
+2021,Babesiosis,Worcester,46,5.3,2021 Cases,tickborne-disease-surveillance-report-2021__t01.csv
+2021,Babesiosis,State Total,609,8.7,2021 Cases,tickborne-disease-surveillance-report-2021__t01.csv
+2022,Babesiosis,Barnstable,60,26.2,2022 Cases,tickborne-disease-surveillance-report-2022__t02.csv
+2022,Babesiosis,Berkshire,13,10.08,2022 Cases,tickborne-disease-surveillance-report-2022__t02.csv
+2022,Babesiosis,Bristol,92,15.88,2022 Cases,tickborne-disease-surveillance-report-2022__t02.csv
+2022,Babesiosis,Dukes & Nantucket,11,31.56,2022 Cases,tickborne-disease-surveillance-report-2022__t02.csv
+2022,Babesiosis,Essex,22,2.72,2022 Cases,tickborne-disease-surveillance-report-2022__t02.csv
+2022,Babesiosis,Franklin,6,8.45,2022 Cases,tickborne-disease-surveillance-report-2022__t02.csv
+2022,Babesiosis,Hampden,10,2.15,2022 Cases,tickborne-disease-surveillance-report-2022__t02.csv
+2022,Babesiosis,Hampshire,11,6.78,2022 Cases,tickborne-disease-surveillance-report-2022__t02.csv
+2022,Babesiosis,Middlesex,55,3.37,2022 Cases,tickborne-disease-surveillance-report-2022__t02.csv
+2022,Babesiosis,Norfolk,33,4.55,2022 Cases,tickborne-disease-surveillance-report-2022__t02.csv
+2022,Babesiosis,Plymouth,91,17.14,2022 Cases,tickborne-disease-surveillance-report-2022__t02.csv
+2022,Babesiosis,Suffolk,11,1.38,2022 Cases,tickborne-disease-surveillance-report-2022__t02.csv
+2022,Babesiosis,Worcester,39,4.52,2022 Cases,tickborne-disease-surveillance-report-2022__t02.csv
+2022,Babesiosis,State Total,454,6.46,2022 Cases,tickborne-disease-surveillance-report-2022__t02.csv
+2023,Babesiosis,Barnstable,74,32.31,2023 Cases,tickborne-disease-surveillance-report-2023__t02.csv
+2023,Babesiosis,Berkshire,17,13.18,2023 Cases,tickborne-disease-surveillance-report-2023__t02.csv
+2023,Babesiosis,Bristol,173,29.87,2023 Cases,tickborne-disease-surveillance-report-2023__t02.csv
+2023,Babesiosis,Dukes & Nantucket,42,120.5,2023 Cases,tickborne-disease-surveillance-report-2023__t02.csv
+2023,Babesiosis,Essex,58,7.16,2023 Cases,tickborne-disease-surveillance-report-2023__t02.csv
+2023,Babesiosis,Franklin,17,23.93,2023 Cases,tickborne-disease-surveillance-report-2023__t02.csv
+2023,Babesiosis,Hampden,22,4.72,2023 Cases,tickborne-disease-surveillance-report-2023__t02.csv
+2023,Babesiosis,Hampshire,19,11.71,2023 Cases,tickborne-disease-surveillance-report-2023__t02.csv
+2023,Babesiosis,Middlesex,101,6.19,2023 Cases,tickborne-disease-surveillance-report-2023__t02.csv
+2023,Babesiosis,Norfolk,66,9.09,2023 Cases,tickborne-disease-surveillance-report-2023__t02.csv
+2023,Babesiosis,Plymouth,138,26.0,2023 Cases,tickborne-disease-surveillance-report-2023__t02.csv
+2023,Babesiosis,Suffolk,16,2.01,2023 Cases,tickborne-disease-surveillance-report-2023__t02.csv
+2023,Babesiosis,Worcester,96,11.14,2023 Cases,tickborne-disease-surveillance-report-2023__t02.csv
+2023,Babesiosis,State Total,839,11.93,2023 Cases,tickborne-disease-surveillance-report-2023__t02.csv
+2024,Babesiosis,Barnstable,139,60.7,2024 Cases,tickborne-disease-surveillance-report-2024__t02.csv
+2024,Babesiosis,Berkshire,26,20.15,2024 Cases,tickborne-disease-surveillance-report-2024__t02.csv
+2024,Babesiosis,Bristol,142,24.52,2024 Cases,tickborne-disease-surveillance-report-2024__t02.csv
+2024,Babesiosis,Dukes & Nantucket,33,94.68,2024 Cases,tickborne-disease-surveillance-report-2024__t02.csv
+2024,Babesiosis,Essex,36,4.45,2024 Cases,tickborne-disease-surveillance-report-2024__t02.csv
+2024,Babesiosis,Franklin,14,19.71,2024 Cases,tickborne-disease-surveillance-report-2024__t02.csv
+2024,Babesiosis,Hampden,18,3.86,2024 Cases,tickborne-disease-surveillance-report-2024__t02.csv
+2024,Babesiosis,Hampshire,15,9.24,2024 Cases,tickborne-disease-surveillance-report-2024__t02.csv
+2024,Babesiosis,Middlesex,89,5.45,2024 Cases,tickborne-disease-surveillance-report-2024__t02.csv
+2024,Babesiosis,Norfolk,50,6.89,2024 Cases,tickborne-disease-surveillance-report-2024__t02.csv
+2024,Babesiosis,Plymouth,154,29.01,2024 Cases,tickborne-disease-surveillance-report-2024__t02.csv
+2024,Babesiosis,Suffolk,13,1.63,2024 Cases,tickborne-disease-surveillance-report-2024__t02.csv
+2024,Babesiosis,Worcester,56,6.5,2024 Cases,tickborne-disease-surveillance-report-2024__t02.csv
+2024,Babesiosis,State Total,785,11.17,2024 Cases,tickborne-disease-surveillance-report-2024__t02.csv
+2025,Babesiosis,Barnstable,167,71.51,2025 Cases,tickborne-disease-surveillance-report-2025__t03.csv
+2025,Babesiosis,Berkshire,27,21.31,2025 Cases,tickborne-disease-surveillance-report-2025__t03.csv
+2025,Babesiosis,Bristol,161,27.15,2025 Cases,tickborne-disease-surveillance-report-2025__t03.csv
+2025,Babesiosis,Dukes & Nantucket,41,103.01,2025 Cases,tickborne-disease-surveillance-report-2025__t03.csv
+2025,Babesiosis,Essex,56,6.64,2025 Cases,tickborne-disease-surveillance-report-2025__t03.csv
+2025,Babesiosis,Franklin,6,8.57,2025 Cases,tickborne-disease-surveillance-report-2025__t03.csv
+2025,Babesiosis,Hampden,18,3.86,2025 Cases,tickborne-disease-surveillance-report-2025__t03.csv
+2025,Babesiosis,Hampshire,15,9.25,2025 Cases,tickborne-disease-surveillance-report-2025__t03.csv
+2025,Babesiosis,Middlesex,129,7.59,2025 Cases,tickborne-disease-surveillance-report-2025__t03.csv
+2025,Babesiosis,Norfolk,58,7.67,2025 Cases,tickborne-disease-surveillance-report-2025__t03.csv
+2025,Babesiosis,Plymouth,140,25.55,2025 Cases,tickborne-disease-surveillance-report-2025__t03.csv
+2025,Babesiosis,Suffolk,19,2.27,2025 Cases,tickborne-disease-surveillance-report-2025__t03.csv
+2025,Babesiosis,Worcester,44,4.9,2025 Cases,tickborne-disease-surveillance-report-2025__t03.csv
+2025,Babesiosis,State Total,881,12.11,2025 Cases,tickborne-disease-surveillance-report-2025__t03.csv
+2010,Lyme disease,Barnstable,117,54,2010 Confirmed Cases (#),lyme-disease-surveillance-data-2010-annual-summary__t01.csv
+2010,Lyme disease,Berkshire,93,71,2010 Confirmed Cases (#),lyme-disease-surveillance-data-2010-annual-summary__t01.csv
+2010,Lyme disease,Bristol,141,26,2010 Confirmed Cases (#),lyme-disease-surveillance-data-2010-annual-summary__t01.csv
+2010,Lyme disease,Dukes,25,151,2010 Confirmed Cases (#),lyme-disease-surveillance-data-2010-annual-summary__t01.csv
+2010,Lyme disease,Essex,184,25,2010 Confirmed Cases (#),lyme-disease-surveillance-data-2010-annual-summary__t01.csv
+2010,Lyme disease,Franklin,42,59,2010 Confirmed Cases (#),lyme-disease-surveillance-data-2010-annual-summary__t01.csv
+2010,Lyme disease,Hampden,130,28,2010 Confirmed Cases (#),lyme-disease-surveillance-data-2010-annual-summary__t01.csv
+2010,Lyme disease,Hampshire,80,51,2010 Confirmed Cases (#),lyme-disease-surveillance-data-2010-annual-summary__t01.csv
+2010,Lyme disease,Middlesex,414,28,2010 Confirmed Cases (#),lyme-disease-surveillance-data-2010-annual-summary__t01.csv
+2010,Lyme disease,Nantucket,27,265,2010 Confirmed Cases (#),lyme-disease-surveillance-data-2010-annual-summary__t01.csv
+2010,Lyme disease,Norfolk,267,40,2010 Confirmed Cases (#),lyme-disease-surveillance-data-2010-annual-summary__t01.csv
+2010,Lyme disease,Plymouth,230,47,2010 Confirmed Cases (#),lyme-disease-surveillance-data-2010-annual-summary__t01.csv
+2010,Lyme disease,Suffolk,34,5,2010 Confirmed Cases (#),lyme-disease-surveillance-data-2010-annual-summary__t01.csv
+2010,Lyme disease,Worcester,252,32,2010 Confirmed Cases (#),lyme-disease-surveillance-data-2010-annual-summary__t01.csv
+2010,Lyme disease,State Total,2593,40,2010 Confirmed Cases (#),lyme-disease-surveillance-data-2010-annual-summary__t01.csv
+2011,Lyme disease,Barnstable,168,78,2011Confirmed Cases (#),lyme-disease-surveillance-data-2011-annual-summary__t01.csv
+2011,Lyme disease,Berkshire,120,92,2011Confirmed Cases (#),lyme-disease-surveillance-data-2011-annual-summary__t01.csv
+2011,Lyme disease,Bristol,152,28,2011Confirmed Cases (#),lyme-disease-surveillance-data-2011-annual-summary__t01.csv
+2011,Lyme disease,Dukes,34,206,2011Confirmed Cases (#),lyme-disease-surveillance-data-2011-annual-summary__t01.csv
+2011,Lyme disease,Essex,227,31,2011Confirmed Cases (#),lyme-disease-surveillance-data-2011-annual-summary__t01.csv
+2011,Lyme disease,Franklin,52,73,2011Confirmed Cases (#),lyme-disease-surveillance-data-2011-annual-summary__t01.csv
+2011,Lyme disease,Hampden,119,26,2011Confirmed Cases (#),lyme-disease-surveillance-data-2011-annual-summary__t01.csv
+2011,Lyme disease,Hampshire,86,54,2011Confirmed Cases (#),lyme-disease-surveillance-data-2011-annual-summary__t01.csv
+2011,Lyme disease,Middlesex,361,24,2011Confirmed Cases (#),lyme-disease-surveillance-data-2011-annual-summary__t01.csv
+2011,Lyme disease,Nantucket,39,383,2011Confirmed Cases (#),lyme-disease-surveillance-data-2011-annual-summary__t01.csv
+2011,Lyme disease,Norfolk,213,32,2011Confirmed Cases (#),lyme-disease-surveillance-data-2011-annual-summary__t01.csv
+2011,Lyme disease,Plymouth,335,68,2011Confirmed Cases (#),lyme-disease-surveillance-data-2011-annual-summary__t01.csv
+2011,Lyme disease,Suffolk,61,8,2011Confirmed Cases (#),lyme-disease-surveillance-data-2011-annual-summary__t01.csv
+2011,Lyme disease,Unknown,496,,2011Confirmed Cases (#),lyme-disease-surveillance-data-2011-annual-summary__t01.csv
+2011,Lyme disease,Worcester,188,24,2011Confirmed Cases (#),lyme-disease-surveillance-data-2011-annual-summary__t01.csv
+2011,Lyme disease,State Total,2651,40,2011Confirmed Cases (#),lyme-disease-surveillance-data-2011-annual-summary__t01.csv
+2012,Lyme disease,Barnstable,290,134,2012 Confirmed Cases (#),lyme-disease-surveillance-data-2012-annual-summary__t01.csv
+2012,Lyme disease,Berkshire,88,67,2012 Confirmed Cases (#),lyme-disease-surveillance-data-2012-annual-summary__t01.csv
+2012,Lyme disease,Bristol,512,93,2012 Confirmed Cases (#),lyme-disease-surveillance-data-2012-annual-summary__t01.csv
+2012,Lyme disease,Dukes,83,502,2012 Confirmed Cases (#),lyme-disease-surveillance-data-2012-annual-summary__t01.csv
+2012,Lyme disease,Essex,505,68,2012 Confirmed Cases (#),lyme-disease-surveillance-data-2012-annual-summary__t01.csv
+2012,Lyme disease,Franklin,64,90,2012 Confirmed Cases (#),lyme-disease-surveillance-data-2012-annual-summary__t01.csv
+2012,Lyme disease,Hampden,171,37,2012 Confirmed Cases (#),lyme-disease-surveillance-data-2012-annual-summary__t01.csv
+2012,Lyme disease,Hampshire,124,78,2012 Confirmed Cases (#),lyme-disease-surveillance-data-2012-annual-summary__t01.csv
+2012,Lyme disease,Middlesex,774,51,2012 Confirmed Cases (#),lyme-disease-surveillance-data-2012-annual-summary__t01.csv
+2012,Lyme disease,Nantucket,65,639,2012 Confirmed Cases (#),lyme-disease-surveillance-data-2012-annual-summary__t01.csv
+2012,Lyme disease,Norfolk,538,80,2012 Confirmed Cases (#),lyme-disease-surveillance-data-2012-annual-summary__t01.csv
+2012,Lyme disease,Plymouth,685,138,2012 Confirmed Cases (#),lyme-disease-surveillance-data-2012-annual-summary__t01.csv
+2012,Lyme disease,Suffolk,117,16,2012 Confirmed Cases (#),lyme-disease-surveillance-data-2012-annual-summary__t01.csv
+2012,Lyme disease,Unknown,595,,2012 Confirmed Cases (#),lyme-disease-surveillance-data-2012-annual-summary__t01.csv
+2012,Lyme disease,Worcester,439,55,2012 Confirmed Cases (#),lyme-disease-surveillance-data-2012-annual-summary__t01.csv
+2012,Lyme disease,State Total,5050,77,2012 Confirmed Cases (#),lyme-disease-surveillance-data-2012-annual-summary__t01.csv
+2013,Lyme disease,Barnstable,274,127,2013 Confirmed Cases (#),lyme-disease-surveillance-data-2013-annual-summary__t01.csv
+2013,Lyme disease,Berkshire,130,99,2013 Confirmed Cases (#),lyme-disease-surveillance-data-2013-annual-summary__t01.csv
+2013,Lyme disease,Bristol,575,105,2013 Confirmed Cases (#),lyme-disease-surveillance-data-2013-annual-summary__t01.csv
+2013,Lyme disease,Dukes,70,423,2013 Confirmed Cases (#),lyme-disease-surveillance-data-2013-annual-summary__t01.csv
+2013,Lyme disease,Essex,559,75,2013 Confirmed Cases (#),lyme-disease-surveillance-data-2013-annual-summary__t01.csv
+2013,Lyme disease,Franklin,71,100,2013 Confirmed Cases (#),lyme-disease-surveillance-data-2013-annual-summary__t01.csv
+2013,Lyme disease,Hampden,224,48,2013 Confirmed Cases (#),lyme-disease-surveillance-data-2013-annual-summary__t01.csv
+2013,Lyme disease,Hampshire,147,93,2013 Confirmed Cases (#),lyme-disease-surveillance-data-2013-annual-summary__t01.csv
+2013,Lyme disease,Middlesex,987,66,2013 Confirmed Cases (#),lyme-disease-surveillance-data-2013-annual-summary__t01.csv
+2013,Lyme disease,Nantucket,63,619,2013 Confirmed Cases (#),lyme-disease-surveillance-data-2013-annual-summary__t01.csv
+2013,Lyme disease,Norfolk,610,91,2013 Confirmed Cases (#),lyme-disease-surveillance-data-2013-annual-summary__t01.csv
+2013,Lyme disease,Plymouth,864,175,2013 Confirmed Cases (#),lyme-disease-surveillance-data-2013-annual-summary__t01.csv
+2013,Lyme disease,Suffolk,130,18,2013 Confirmed Cases (#),lyme-disease-surveillance-data-2013-annual-summary__t01.csv
+2013,Lyme disease,Unknown,287,,2013 Confirmed Cases (#),lyme-disease-surveillance-data-2013-annual-summary__t01.csv
+2013,Lyme disease,Worcester,674,84,2013 Confirmed Cases (#),lyme-disease-surveillance-data-2013-annual-summary__t01.csv
+2013,Lyme disease,State Total,5665,65.09,2013 Confirmed Cases (#),lyme-disease-surveillance-data-2013-annual-summary__t01.csv
+2014,Lyme disease,Barnstable,264,122,2014 Confirmed Cases (#),lyme-disease-surveillance-data-2014-annual-summary__t01.csv
+2014,Lyme disease,Berkshire,86,66,2014 Confirmed Cases (#),lyme-disease-surveillance-data-2014-annual-summary__t01.csv
+2014,Lyme disease,Bristol,673,123,2014 Confirmed Cases (#),lyme-disease-surveillance-data-2014-annual-summary__t01.csv
+2014,Lyme disease,Dukes,51,308,2014 Confirmed Cases (#),lyme-disease-surveillance-data-2014-annual-summary__t01.csv
+2014,Lyme disease,Essex,482,65,2014 Confirmed Cases (#),lyme-disease-surveillance-data-2014-annual-summary__t01.csv
+2014,Lyme disease,Franklin,78,109,2014 Confirmed Cases (#),lyme-disease-surveillance-data-2014-annual-summary__t01.csv
+2014,Lyme disease,Hampden,180,39,2014 Confirmed Cases (#),lyme-disease-surveillance-data-2014-annual-summary__t01.csv
+2014,Lyme disease,Hampshire,136,86,2014 Confirmed Cases (#),lyme-disease-surveillance-data-2014-annual-summary__t01.csv
+2014,Lyme disease,Middlesex,1068,71,2014 Confirmed Cases (#),lyme-disease-surveillance-data-2014-annual-summary__t01.csv
+2014,Lyme disease,Nantucket,58,570,2014 Confirmed Cases (#),lyme-disease-surveillance-data-2014-annual-summary__t01.csv
+2014,Lyme disease,Norfolk,676,101,2014 Confirmed Cases (#),lyme-disease-surveillance-data-2014-annual-summary__t01.csv
+2014,Lyme disease,Plymouth,834,169,2014 Confirmed Cases (#),lyme-disease-surveillance-data-2014-annual-summary__t01.csv
+2014,Lyme disease,Suffolk,146,20,2014 Confirmed Cases (#),lyme-disease-surveillance-data-2014-annual-summary__t01.csv
+2014,Lyme disease,Unknown,221,,2014 Confirmed Cases (#),lyme-disease-surveillance-data-2014-annual-summary__t01.csv
+2014,Lyme disease,Worcester,647,81,2014 Confirmed Cases (#),lyme-disease-surveillance-data-2014-annual-summary__t01.csv
+2014,Lyme disease,State Total,5600,86.0,2014 Confirmed Cases (#),lyme-disease-surveillance-data-2014-annual-summary__t01.csv
+2022,Lyme disease,Barnstable,239,104.37,2022 Cases,tickborne-disease-surveillance-report-2022__t01.csv
+2022,Lyme disease,Berkshire,358,277.46,2022 Cases,tickborne-disease-surveillance-report-2022__t01.csv
+2022,Lyme disease,Bristol,849,146.58,2022 Cases,tickborne-disease-surveillance-report-2022__t01.csv
+2022,Lyme disease,Dukes & Nantucket,394,1130.4,2022 Cases,tickborne-disease-surveillance-report-2022__t01.csv
+2022,Lyme disease,Essex,262,32.35,2022 Cases,tickborne-disease-surveillance-report-2022__t01.csv
+2022,Lyme disease,Franklin,74,104.18,2022 Cases,tickborne-disease-surveillance-report-2022__t01.csv
+2022,Lyme disease,Hampden,119,25.55,2022 Cases,tickborne-disease-surveillance-report-2022__t01.csv
+2022,Lyme disease,Hampshire,166,102.27,2022 Cases,tickborne-disease-surveillance-report-2022__t01.csv
+2022,Lyme disease,Middlesex,673,41.24,2022 Cases,tickborne-disease-surveillance-report-2022__t01.csv
+2022,Lyme disease,Norfolk,439,60.47,2022 Cases,tickborne-disease-surveillance-report-2022__t01.csv
+2022,Lyme disease,Plymouth,670,126.22,2022 Cases,tickborne-disease-surveillance-report-2022__t01.csv
+2022,Lyme disease,Suffolk,131,16.42,2022 Cases,tickborne-disease-surveillance-report-2022__t01.csv
+2022,Lyme disease,Worcester,727,84.33,2022 Cases,tickborne-disease-surveillance-report-2022__t01.csv
+2022,Lyme disease,State Total,5113,72.73,2022 Cases,tickborne-disease-surveillance-report-2022__t01.csv
+2023,Lyme disease,Barnstable,773,337.56,2023 Cases,tickborne-disease-surveillance-report-2023__t01.csv
+2023,Lyme disease,Berkshire,588,455.72,2023 Cases,tickborne-disease-surveillance-report-2023__t01.csv
+2023,Lyme disease,Bristol,1690,291.78,2023 Cases,tickborne-disease-surveillance-report-2023__t01.csv
+2023,Lyme disease,Dukes & Nantucket,523,1500.5,2023 Cases,tickborne-disease-surveillance-report-2023__t01.csv
+2023,Lyme disease,Essex,640,79.03,2023 Cases,tickborne-disease-surveillance-report-2023__t01.csv
+2023,Lyme disease,Franklin,143,201.33,2023 Cases,tickborne-disease-surveillance-report-2023__t01.csv
+2023,Lyme disease,Hampden,218,46.8,2023 Cases,tickborne-disease-surveillance-report-2023__t01.csv
+2023,Lyme disease,Hampshire,260,160.19,2023 Cases,tickborne-disease-surveillance-report-2023__t01.csv
+2023,Lyme disease,Middlesex,1349,82.66,2023 Cases,tickborne-disease-surveillance-report-2023__t01.csv
+2023,Lyme disease,Norfolk,743,102.34,2023 Cases,tickborne-disease-surveillance-report-2023__t01.csv
+2023,Lyme disease,Plymouth,1386,261.11,2023 Cases,tickborne-disease-surveillance-report-2023__t01.csv
+2023,Lyme disease,Suffolk,230,28.82,2023 Cases,tickborne-disease-surveillance-report-2023__t01.csv
+2023,Lyme disease,Worcester,1146,132.93,2023 Cases,tickborne-disease-surveillance-report-2023__t01.csv
+2023,Lyme disease,State Total,9723,138.31,2023 Cases,tickborne-disease-surveillance-report-2023__t01.csv
+2024,Lyme disease,Barnstable,786,343.24,2024 Cases,tickborne-disease-surveillance-report-2024__t01.csv
+2024,Lyme disease,Berkshire,567,439.45,2024 Cases,tickborne-disease-surveillance-report-2024__t01.csv
+2024,Lyme disease,Bristol,1535,265.02,2024 Cases,tickborne-disease-surveillance-report-2024__t01.csv
+2024,Lyme disease,Dukes & Nantucket,263,754.55,2024 Cases,tickborne-disease-surveillance-report-2024__t01.csv
+2024,Lyme disease,Essex,389,48.03,2024 Cases,tickborne-disease-surveillance-report-2024__t01.csv
+2024,Lyme disease,Franklin,153,215.4,2024 Cases,tickborne-disease-surveillance-report-2024__t01.csv
+2024,Lyme disease,Hampden,374,80.29,2024 Cases,tickborne-disease-surveillance-report-2024__t01.csv
+2024,Lyme disease,Hampshire,240,147.87,2024 Cases,tickborne-disease-surveillance-report-2024__t01.csv
+2024,Lyme disease,Middlesex,1150,70.47,2024 Cases,tickborne-disease-surveillance-report-2024__t01.csv
+2024,Lyme disease,Norfolk,717,98.76,2024 Cases,tickborne-disease-surveillance-report-2024__t01.csv
+2024,Lyme disease,Plymouth,1441,271.47,2024 Cases,tickborne-disease-surveillance-report-2024__t01.csv
+2024,Lyme disease,Suffolk,192,24.06,2024 Cases,tickborne-disease-surveillance-report-2024__t01.csv
+2024,Lyme disease,Worcester,1006,116.69,2024 Cases,tickborne-disease-surveillance-report-2024__t01.csv
+2024,Lyme disease,State Total,8842,125.78,2024 Cases,tickborne-disease-surveillance-report-2024__t01.csv
+2025,Lyme disease,Barnstable,888,380.23,2025 Cases,tickborne-disease-surveillance-report-2025__t02.csv
+2025,Lyme disease,Berkshire,303,239.19,2025 Cases,tickborne-disease-surveillance-report-2025__t02.csv
+2025,Lyme disease,Bristol,1496,252.26,2025 Cases,tickborne-disease-surveillance-report-2025__t02.csv
+2025,Lyme disease,Dukes & Nantucket,40,100.5,2025 Cases,tickborne-disease-surveillance-report-2025__t02.csv
+2025,Lyme disease,Essex,387,45.89,2025 Cases,tickborne-disease-surveillance-report-2025__t02.csv
+2025,Lyme disease,Franklin,162,231.38,2025 Cases,tickborne-disease-surveillance-report-2025__t02.csv
+2025,Lyme disease,Hampden,364,78.13,2025 Cases,tickborne-disease-surveillance-report-2025__t02.csv
+2025,Lyme disease,Hampshire,171,105.48,2025 Cases,tickborne-disease-surveillance-report-2025__t02.csv
+2025,Lyme disease,Middlesex,1165,68.55,2025 Cases,tickborne-disease-surveillance-report-2025__t02.csv
+2025,Lyme disease,Norfolk,710,93.88,2025 Cases,tickborne-disease-surveillance-report-2025__t02.csv
+2025,Lyme disease,Plymouth,1589,290.04,2025 Cases,tickborne-disease-surveillance-report-2025__t02.csv
+2025,Lyme disease,Suffolk,207,24.72,2025 Cases,tickborne-disease-surveillance-report-2025__t02.csv
+2025,Lyme disease,Worcester,1122,125.03,2025 Cases,tickborne-disease-surveillance-report-2025__t02.csv
+2025,Lyme disease,State Total,8619,118.51,2025 Cases,tickborne-disease-surveillance-report-2025__t02.csv

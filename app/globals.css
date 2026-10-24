@@ -8,6 +8,8 @@
   --color-risk-low: var(--risk-low);
   --color-risk-moderate: var(--risk-moderate);
   --color-risk-high: var(--risk-high);
+  --color-series-place: var(--series-place);
+  --color-series-state: var(--series-state);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
@@ -56,6 +58,9 @@
   --risk-low: #3f7d4e; /* moss */
   --risk-moderate: #b8860b; /* goldenrod */
   --risk-high: #b23a2b; /* sumac */
+  /* Charts: the place you picked vs. the state as context (dataviz: highlight + gray reference). */
+  --series-place: #2a78d6;
+  --series-state: #9aa79d;
   --background: #f5f7f3; /* birch */
   --foreground: #17221c;
   --card: #ffffff;

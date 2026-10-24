@@ -1,0 +1,110 @@
+[
+ {
+  "year": "2015",
+  "partial": false,
+  "lyme": 4370,
+  "babesiosis": 448,
+  "hga": 771,
+  "miyamotoi": 8,
+  "powassan": 3
+ },
+ {
+  "year": "2016",
+  "partial": false,
+  "lyme": 207,
+  "babesiosis": 519,
+  "hga": 874,
+  "miyamotoi": 16,
+  "powassan": 5
+ },
+ {
+  "year": "2017",
+  "partial": false,
+  "lyme": 416,
+  "babesiosis": 591,
+  "hga": 1218,
+  "miyamotoi": 43,
+  "powassan": 3
+ },
+ {
+  "year": "2018",
+  "partial": false,
+  "lyme": 189,
+  "babesiosis": 527,
+  "hga": 658,
+  "miyamotoi": 63,
+  "powassan": 7
+ },
+ {
+  "year": "2019",
+  "partial": false,
+  "lyme": 165,
+  "babesiosis": 640,
+  "hga": 703,
+  "miyamotoi": 32,
+  "powassan": 9
+ },
+ {
+  "year": "2020",
+  "partial": false,
+  "lyme": 103,
+  "babesiosis": 580,
+  "hga": 740,
+  "miyamotoi": 16,
+  "powassan": 7
+ },
+ {
+  "year": "2021",
+  "partial": false,
+  "lyme": 28,
+  "babesiosis": 610,
+  "hga": 773,
+  "miyamotoi": 26,
+  "powassan": 6
+ },
+ {
+  "year": "2022",
+  "partial": false,
+  "lyme": 5102,
+  "babesiosis": 454,
+  "hga": 625,
+  "miyamotoi": 16,
+  "powassan": 5
+ },
+ {
+  "year": "2023",
+  "partial": false,
+  "lyme": 9728,
+  "babesiosis": 837,
+  "hga": 747,
+  "miyamotoi": 47,
+  "powassan": 11
+ },
+ {
+  "year": "2024",
+  "partial": false,
+  "lyme": 8840,
+  "babesiosis": 788,
+  "hga": 1060,
+  "miyamotoi": 57,
+  "powassan": 11
+ },
+ {
+  "year": "2025",
+  "partial": false,
+  "lyme": 8619,
+  "babesiosis": 881,
+  "hga": 1496,
+  "miyamotoi": 107,
+  "powassan": 12
+ },
+ {
+  "year": "2026",
+  "partial": true,
+  "lyme": 5269,
+  "babesiosis": 602,
+  "hga": 1194,
+  "miyamotoi": 66,
+  "powassan": 13
+ }
+]

@@ -16,10 +16,7 @@ inclusion: always
 3. User sees <Z>: a clear, beautiful result with one "wow" element (map, chart, score, plain-language summary).
 4. User can <take one action> (save, share, export, get alert).
 
-## Must-have (MVP)
-- The demo flow above, working end-to-end on the deployed URL.
-- Real data or a real public API (no lorem ipsum in the demo).
-- Mobile-friendly layout.
+
 
 ## Nice-to-have (only after MVP is deployed)
 - Multi-language output.

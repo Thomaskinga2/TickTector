@@ -1,4 +1,4 @@
-import type { ActionAlert, HeatmapPoint, ScanResult, StatewideStats, TickSpecies, Town, TownStats, WeeklyRisk } from "./types";
+import type { ActionAlert, HeatmapPoint, ScanResult, StatewideStats, TickSpecies, Town, TownStats, Weather, WeeklyRisk } from "./types";
 
 // Mock data, served when DEMO_MODE=1. Real data lives in lib/data/ (built from data/massgov/).
 
@@ -124,6 +124,13 @@ export const TOWN_STATS: TownStats = {
     { period: "2025", county: 10, state: 6 },
   ],
   note: { text: "Mock note for demo mode.", source: "Demo", url: "https://www.amherstma.gov/3784/Ticks" },
+  fact: "Deer ticks and dog ticks are the two most common ticks in Massachusetts.",
+};
+
+export const WEATHER: Weather = {
+  townId: "amherst",
+  summary: "Today is humid and partly cloudy: 64°F with 72% humidity.",
+  ticks: "Ticks can bite today. Adult ticks are active any time it's above freezing.",
 };
 
 export const STATEWIDE_STATS: StatewideStats = {

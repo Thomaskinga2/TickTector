@@ -53,7 +53,11 @@ export type TownStats = {
   trend: ({ year: number } & CasesByDisease)[]; // county cases per year
   er: { period: string; county: number | null; state: number }[]; // ER visits per 10k visits
   note?: { text: string; source: string; url: string };
+  fact: string; // one short tick fact for the county
 };
+
+// Today's weather for a town (Open-Meteo), already in words.
+export type Weather = { townId: string; summary: string; ticks: string };
 
 export type StatewideStats = {
   years: ({ year: string; partial: boolean; miyamotoi: number; powassan: number } & Record<DiseaseKey, number>)[];

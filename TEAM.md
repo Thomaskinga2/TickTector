@@ -32,7 +32,9 @@ page (app/)  ->  component (components/)  ->  service (lib/services/)  ->  API r
 | Town search | `/` | `TownSearch` | `searchTowns` (`towns.ts`) | `GET /api/towns?q=` | Backend 1 | always on |
 | My location | `/`, `/forum/new` | `LocationButton`, `useGeolocation` | `findNearestTown` (`towns.ts`) | `GET /api/towns/nearest?lat=&lng=` | Backend 1 | `geolocation: true` (on) |
 | Risk gauge | `/area/[town]` | `RiskGauge` | `getWeeklyRisk` (`risk.ts`) | `GET /api/risk?town=` | Backend 1 | always on |
-| Charts | `/area/[town]` | `TownCharts`, `charts.tsx` | `getStatewideStats`, `getTownStats` (`stats.ts`) | `GET /api/stats/statewide`, `GET /api/stats?town=` | Backend 1 | always on |
+| Town info, tick fact | `/area/[town]` | `AreaView` | `getTownStats` (`stats.ts`) | `GET /api/stats?town=` | Backend 1 | always on |
+| Weather today | `/area/[town]` | `AreaView` | `getWeather` (`weather.ts`) | `GET /api/weather?town=` (Open-Meteo, no key) | Backend 1 | always on |
+| Charts | none (removed from pages) | `TownCharts`, `StatewideSnapshot`, `charts.tsx` | `getStatewideStats` (`stats.ts`) | `GET /api/stats/statewide` | Backend 1 | not shown |
 | Risk map | `/map`, `/area/[town]` | `Heatmap`, `MapLegend` | `getHeatmap`, `getMapShapes` (`heatmap.ts`) | `GET /api/heatmap` + `public/geo/ma-towns.json` | Backend 1 | `heatmap: true` (on) |
 | Tick species | `/area/[town]` | `TickSpeciesList` | `getSpecies` (`risk.ts`) | `GET /api/species?town=` | Backend 2 | always on |
 | Action alerts | `/area/[town]` | `ActionAlerts` | `getAlerts` (`risk.ts`) | `GET /api/alerts?level=` | Backend 2 | always on |

@@ -4,6 +4,7 @@
 import countyStats from "@/lib/data/county-stats.json";
 import statewide from "@/lib/data/statewide.json";
 import towns from "@/lib/data/towns.json";
+import { LONE_STAR_TICK, speciesFor } from "@/lib/tick-facts";
 import type { DiseaseKey, HeatmapPoint, RiskLevel, StatewideStats, Town, TownStats, WeeklyRisk } from "@/lib/types";
 
 // Cases per 100k (2025, Lyme + babesiosis + anaplasmosis). Tune here only.
@@ -35,12 +36,27 @@ function countyLabel(key: string) {
 }
 
 function reasonFor(key: string, date: Date) {
-  const score = STATS[key].score;
-  const ratio = score / STATE.score;
-  const compared =
-    ratio >= 1.25 ? `${ratio.toFixed(1)} times the state average` : ratio <= 0.8 ? "below the state average" : "about the state average";
+  const ratio = STATS[key].score / STATE.score;
+  const compared = ratio >= 2 ? "well above" : ratio >= 1.25 ? "above" : ratio <= 0.8 ? "below" : "about";
   const winter = isWinter(date) ? " Ticks are less active in winter, so the risk is one level lower this week." : "";
-  return `${countyLabel(key)} had ${Math.round(score)} tick-borne disease cases per 100,000 people in 2025, ${compared}.${winter}`;
+  return `In 2025, the tick-borne disease rate in ${countyLabel(key)} was ${compared} the state average.${winter}`;
+}
+
+const DISEASE_NAME: Record<DiseaseKey, string> = { lyme: "Lyme disease", babesiosis: "babesiosis", hga: "anaplasmosis" };
+const RANK = ["the highest", "the second-highest", "the third-highest"];
+const COUNTIES = Object.values(STATS).filter((s) => s.county !== "State Total");
+
+// One short fact per county: lone star ticks (lib/tick-facts.ts), else the county's best DPH ranking, else a statewide fact.
+function tickFact(county: string) {
+  if (speciesFor(county).includes(LONE_STAR_TICK))
+    return "Lone star ticks have been found here. Their bite can cause alpha-gal syndrome, an allergy to red meat.";
+  const key = statsKey(county);
+  const best = DISEASES.map((d) => ({ d, rank: [...COUNTIES].sort((a, b) => b.rates[d] - a.rates[d]).findIndex((s) => s.county === key) })).sort(
+    (a, b) => a.rank - b.rank,
+  )[0];
+  if (best.rank < RANK.length) return `${countyLabel(key)} has ${RANK[best.rank]} ${DISEASE_NAME[best.d]} rate in Massachusetts. Deer ticks spread it.`;
+  // data/amherst/ticks-page.md: "The two most common types of ticks found in Massachusetts are the Black-legged ticks ... and the Dog Tick"
+  return "Deer ticks and dog ticks are the two most common ticks in Massachusetts. Deer ticks are the ones that carry Lyme disease.";
 }
 
 function mondayOf(date: Date) {
@@ -80,6 +96,7 @@ export function townStats(town: Town, date = new Date()): TownStats {
     trend: s.trend,
     er: STATE.er.map((e) => ({ period: e.period, state: e.rate, county: s.er.find((c) => c.period === e.period)?.rate ?? null })),
     note: town.id === "amherst" ? AMHERST_NOTE : undefined,
+    fact: tickFact(town.county),
   };
 }
 

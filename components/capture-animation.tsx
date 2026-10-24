@@ -14,7 +14,7 @@ import { advanceClock, DROP, makeTimeline, OPEN_LEN, TICK, type Timeline } from 
 // and where the tick sits in it, or the painted-forearm sample.
 // circle: the viewfinder circle on screen; from: the frame's on-screen (object-fit cover) mapping.
 export type CaptureSource =
-  | { kind: "photo"; clean: HTMLCanvasElement; withTick: HTMLCanvasElement; at: Point; from: Mapping; circle: Circle }
+  | { kind: "photo"; clean: HTMLCanvasElement; withTick: HTMLCanvasElement; at: Point; unit: number; from: Mapping; circle: Circle }
   | { kind: "sample"; circle: Circle };
 
 export type CatchKind = "full" | "quick";
@@ -34,6 +34,7 @@ type Props = {
 const MAX_DPR = 3;
 const MAX_DT = 0.05;
 const FRAME_LOG = 600;
+const REDUCED_HOLD_AT = 0.25; // reduced motion holds just after the shutter flash
 
 type Clock = { T: number; L: Timeline | null; shutter: boolean; caught: boolean; finished: boolean; skip: boolean; paused: boolean };
 
@@ -81,8 +82,8 @@ function buildAssets(source: CaptureSource, look: Tick3dLook, canvas: HTMLCanvas
     return { assets: { ...base, backdrop } as SceneAssets, opening };
   }
   // the scene starts on the clean photo; the opening shows the one with the tick, in the same place
-  const { clean, withTick, at, from, circle } = source;
-  const to = tickFraming(clean.width, clean.height, at, view);
+  const { clean, withTick, at, unit, from, circle } = source;
+  const to = tickFraming(at, unit, view);
   const opening: Opening = {
     source: withTick,
     srcW: withTick.width,
@@ -117,7 +118,7 @@ export function CaptureAnimation(props: Props) {
     const ck = clock.current;
     if (reduced) {
       // no opening and no animation: the open frame, then the finished diagram once the result is in
-      ck.T = Math.max(ck.T, OPEN_LEN);
+      ck.T = Math.max(ck.T, OPEN_LEN + REDUCED_HOLD_AT);
       ck.skip = true;
     }
     let built = buildAssets(propsRef.current.source, propsRef.current.text.look, canvas);

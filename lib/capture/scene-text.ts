@@ -22,7 +22,7 @@ export function captureText(sim: SimTick, answered: boolean, offline: boolean, s
   return {
     pills: ["Photo check", sample ? "Sample arm" : "Simulated tick"],
     plateTitle: answered ? `Likely ${name}` : null,
-    plateSub: `${stage.name} · ${sim.engorgement} · attached`.toUpperCase(),
+    plateSub: `${stage.name} · ${sim.engorgement}`.toUpperCase(),
     look: lookFor(sim),
     diagram: {
       stage: sim.stage,

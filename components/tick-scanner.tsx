@@ -6,7 +6,20 @@ import { CameraCapture } from "@/components/camera-capture";
 import { Button } from "@/components/ui/button";
 import { stopCamera, type CameraOpen } from "@/lib/capture/camera";
 import { drawTickOnSkin, lookFor } from "@/lib/capture/draw-tick-3d";
-import { circleInSource, coverMapping, mapPoint, RING_IDLE, RING_LOCK, sceneView, SURROUND, viewfinderCircle, type Circle, type Mapping, type Point } from "@/lib/capture/framing";
+import {
+  circleInSource,
+  coverMapping,
+  mapPoint,
+  RING_IDLE,
+  RING_LOCK,
+  sceneView,
+  SURROUND,
+  VIEWFINDER_TICK_ZOOM,
+  viewfinderCircle,
+  type Circle,
+  type Mapping,
+  type Point,
+} from "@/lib/capture/framing";
 import { cropCircle, grabFrame, sourceOf, withTick, type FrameSource } from "@/lib/capture/photo";
 import { estimateShift, greyCrop, SKIN_TRACKER } from "@/lib/capture/skin-tracker";
 import { eOut, lerp, seg } from "@/lib/capture/timeline";
@@ -39,10 +52,18 @@ const TRACK_SIDE = 1.3; // tracker crop side, in circle radii
 const MAX_DRIFT = 0.55; // the tick never wanders further than this share of the radius
 const FOLLOW = 0.35; // how quickly the drawn tick catches up with the tracked skin, per frame
 const MAX_DPR = 3;
+const SWEEP_TURNS = 0.9; // radar sweep, turns per second
 
 declare global {
   interface Window {
-    __scanner?: { mapping: () => Mapping | null; at: () => Point | null; offset: () => Point; trackMs: number[] };
+    __scanner?: {
+      mapping: () => Mapping | null;
+      at: () => Point | null;
+      offset: () => Point;
+      trackMs: number[];
+      seek: (tau: number | null) => void; // testing: hold the search at tau seconds (null resumes)
+      lockAt: number;
+    };
   }
 }
 
@@ -70,6 +91,7 @@ export function TickScanner({ camera, sim, onLock, onSample, onClose }: Props) {
   const reticleRef = useRef<SVGGElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const progressRef = useRef<SVGCircleElement>(null);
+  const sweepRef = useRef<HTMLDivElement>(null);
   const openRef = useRef<CameraOpen | null>(null);
   const mounted = useRef(false);
   const stopTimer = useRef(0);
@@ -158,6 +180,7 @@ export function TickScanner({ camera, sim, onLock, onSample, onClose }: Props) {
     let raf = 0;
     let done = false;
     let found = false;
+    let fixedTau: number | null = null;
     const trackMs: number[] = [];
 
     const track = () => {
@@ -201,7 +224,7 @@ export function TickScanner({ camera, sim, onLock, onSample, onClose }: Props) {
       const src = source();
       if (!src) return;
       if (!start) start = now;
-      const tau = (now - start) / 1000;
+      const tau = fixedTau ?? (now - start) / 1000;
       const { sw, sh, circle } = layoutRef.current;
       const m = coverMapping(src.w, src.h, sw, sh);
       mapping = m;
@@ -209,7 +232,7 @@ export function TickScanner({ camera, sim, onLock, onSample, onClose }: Props) {
       shown.x += (offset.x - shown.x) * FOLLOW;
       shown.y += (offset.y - shown.y) * FOLLOW;
       at = { x: fc.x + sim.dx * fc.r + shown.x, y: fc.y + sim.dy * fc.r + shown.y };
-      const unitScreen = sceneView(sw, sh).s;
+      const unitScreen = sceneView(sw, sh).s * VIEWFINDER_TICK_ZOOM;
       const p = mapPoint(m, at);
       // the tick on the skin
       const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
@@ -219,7 +242,10 @@ export function TickScanner({ camera, sim, onLock, onSample, onClose }: Props) {
       octx.clearRect(0, 0, sw, sh);
       drawTickOnSkin(octx, p.x, p.y, look, unitScreen, seg(tau, 0, FADE_IN_S));
       // the reticle: sweep, glide onto the tick, hold
-      const sweep = { x: circle.x + circle.r * 0.32 * Math.sin(tau * 1.7), y: circle.y + circle.r * 0.26 * Math.sin(tau * 2.3 + 0.6) };
+      // while searching, the bracket rides the radar sweep's leading edge, in and out a little
+      const turn = tau * SWEEP_TURNS * Math.PI * 2;
+      const reach = circle.r * (0.45 + 0.15 * Math.sin(tau * 2.3));
+      const sweep = { x: circle.x + reach * Math.sin(turn), y: circle.y - reach * Math.cos(turn) };
       const g = eOut(seg(tau, findAt, findAt + GLIDE_S));
       const tickH = { x: (30 * look.scale + 4) * unitScreen + 4, y: (30 * look.scale + 4) * unitScreen + 4 };
       const hx = lerp(circle.r * 0.16, tickH.x, g);
@@ -231,9 +257,15 @@ export function TickScanner({ camera, sim, onLock, onSample, onClose }: Props) {
       const path = pathRef.current;
       if (gEl && path) {
         gEl.style.opacity = String(seg(tau, 0.15, 0.45));
-        gEl.style.transform = `translate(${rx}px, ${ry}px) rotate(${look.angle * g}rad)`;
+        gEl.style.transform = `translate(${rx}px, ${ry}px) rotate(${lerp(turn, look.angle, g)}rad)`;
         path.setAttribute("d", bracketPath(hx, hy));
         path.setAttribute("stroke", g >= 1 ? RING_LOCK : "#ffffff");
+      }
+      const sweepEl = sweepRef.current;
+      if (sweepEl) {
+        // the radar sweep turns while searching and fades as the reticle glides onto the tick
+        sweepEl.style.transform = `rotate(${tau * SWEEP_TURNS * 360}deg)`;
+        sweepEl.style.opacity = String(seg(tau, 0.1, 0.4) * (1 - g));
       }
       if (progressRef.current) progressRef.current.style.strokeDashoffset = String(2 * Math.PI * (circle.r + 1.5) * (1 - progress));
       if (!found && tau >= findAt) {
@@ -245,7 +277,16 @@ export function TickScanner({ camera, sim, onLock, onSample, onClose }: Props) {
 
     raf = requestAnimationFrame(frame);
     const timer = window.setInterval(track, TRACK_MS);
-    window.__scanner = { mapping: () => mapping, at: () => at, offset: () => ({ ...offset }), trackMs };
+    window.__scanner = {
+      mapping: () => mapping,
+      at: () => at,
+      offset: () => ({ ...offset }),
+      trackMs,
+      seek: (tau) => {
+        fixedTau = tau;
+      },
+      lockAt: findAt + GLIDE_S + HOLD_S,
+    };
     return () => {
       done = true;
       cancelAnimationFrame(raf);
@@ -264,7 +305,7 @@ export function TickScanner({ camera, sim, onLock, onSample, onClose }: Props) {
           ? "Got it!"
           : search === "found"
             ? "Tick found! Hold still…"
-            : "Point the camera at your skin. Scanning for ticks…";
+            : "Scanning your skin for ticks…";
 
   return (
     <div ref={rootRef} className="fixed inset-0 z-[100] touch-none select-none overscroll-none text-white" style={{ background: SURROUND }}>
@@ -274,6 +315,17 @@ export function TickScanner({ camera, sim, onLock, onSample, onClose }: Props) {
         <img ref={imgRef} src={photoUrl} alt="" className="absolute inset-0 h-full w-full object-cover" onLoad={() => setStatus("photo")} />
       )}
       <canvas ref={overlayRef} className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden />
+      <div
+        ref={sweepRef}
+        className="pointer-events-none absolute rounded-full opacity-0"
+        style={{
+          left: c.x - c.r,
+          top: c.y - c.r,
+          width: c.r * 2,
+          height: c.r * 2,
+          background: `conic-gradient(from 0deg, transparent 0deg 280deg, ${RING_LOCK}00 280deg, ${RING_LOCK}38 358deg, ${RING_LOCK}b0 360deg)`,
+        }}
+      />
       <div
         className="pointer-events-none absolute rounded-full"
         style={{ left: c.x - c.r, top: c.y - c.r, width: c.r * 2, height: c.r * 2, boxShadow: `0 0 0 200vmax ${SURROUND}` }}

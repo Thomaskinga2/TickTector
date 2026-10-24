@@ -14,7 +14,7 @@ import type { Circle } from "@/lib/capture/framing";
 import { identifyFrame, type Identified } from "@/lib/capture/identify";
 import { thumbnail } from "@/lib/capture/photo";
 import { captureText } from "@/lib/capture/scene-text";
-import { shuffleTick, STAGE_SCALE, type SimTick } from "@/lib/capture/tick-sim";
+import { seededRandom, shuffleTick, STAGE_SCALE, type SimTick } from "@/lib/capture/tick-sim";
 import { features } from "@/lib/features";
 import { addCatch, peekCatch, type CatchOutcome } from "@/lib/tickdex";
 
@@ -53,6 +53,7 @@ export default function ScanPage() {
   const [outcome, setOutcome] = useState<CatchOutcome | null>(null);
   const [scanId, setScanId] = useState(0);
   const scanRef = useRef<Scan | null>(null);
+  const triesRef = useRef(0);
 
   useEffect(() => {
     loadCaptureFonts(); // warm the canvas fonts while the user is still scanning
@@ -60,7 +61,9 @@ export default function ScanPage() {
 
   // A tap starts the camera (iPhone Safari wants the gesture) and a fresh, reshuffled tick
   const start = useCallback(() => {
-    const next = shuffleTick();
+    const seed = new URLSearchParams(window.location.search).get("tickSeed");
+    const next = shuffleTick(seed ? seededRandom(Number(seed) + triesRef.current) : Math.random);
+    triesRef.current += 1;
     const id = Date.now();
     scanRef.current = { id, sim: next, recorded: false, identified: null };
     setCamera(openCamera());
@@ -76,7 +79,7 @@ export default function ScanPage() {
     const scan = scanRef.current;
     // the thumbnail frames the tick at its own size, never tighter than a nymph
     if (scan) scan.thumb = thumbnail(lock.withTick, lock.at, lock.unit * Math.max(0.6, STAGE_SCALE[scan.sim.stage]));
-    setSource({ kind: "photo", clean: lock.clean, withTick: lock.withTick, at: lock.at, from: lock.from, circle: lock.circle });
+    setSource({ kind: "photo", clean: lock.clean, withTick: lock.withTick, at: lock.at, unit: lock.unit, from: lock.from, circle: lock.circle });
     setPhase("locked");
   }, []);
 

@@ -103,6 +103,18 @@ export function drawTick3dShadow(c: Ctx, x: number, y: number, look: Tick3dLook,
   }
   if (lift < 0.5) drawLegs(c, look.legs, pose.phase ?? 0, [0, 0, 0], true);
   c.restore();
+  // contact: a tight dark rim where the body presses on the skin
+  if (lift < 0.3) {
+    c.save();
+    c.translate(x, y);
+    c.rotate(look.angle);
+    c.scale(look.scale, look.scale);
+    c.fillStyle = `rgba(40,18,10,${0.22 * (1 - lift / 0.3)})`;
+    c.beginPath();
+    c.ellipse(0.8, 5 + fed * 3, 15.5 + fed * 4, 20 + fed * 6, 0, 0, Math.PI * 2);
+    c.fill();
+    c.restore();
+  }
 }
 
 export function drawTick3d(c: Ctx, x: number, y: number, look: Tick3dLook, pose: Tick3dPose = {}): void {
@@ -139,7 +151,7 @@ export function drawTick3d(c: Ctx, x: number, y: number, look: Tick3dLook, pose:
   c.beginPath();
   c.ellipse(0, by + 1, rx * 0.78, ry * 0.8, 0, 0.2, Math.PI - 0.2);
   c.stroke();
-  c.fillStyle = `rgba(255,255,255,${0.12 + 0.3 * fed})`;
+  c.fillStyle = `rgba(255,255,255,${0.07 + 0.22 * fed})`;
   c.beginPath();
   c.ellipse(-rx * 0.38, by - ry * 0.3, rx * 0.22, ry * 0.32, -0.35, 0, Math.PI * 2);
   c.fill();
@@ -191,11 +203,12 @@ export function drawTick3d(c: Ctx, x: number, y: number, look: Tick3dLook, pose:
   c.restore();
 }
 
-// Redness of the skin around the bite, scaled with the tick
+// Redness of the skin around the bite, scaled with the tick; kept faint so it reads as skin
+const HALO_ALPHA = 0.4;
 export function drawBiteHalo(c: Ctx, x: number, y: number, scale: number, alpha = 1): void {
   const r = 30 * Math.max(0.6, scale);
   const halo = c.createRadialGradient(x, y, 2, x, y, r);
-  halo.addColorStop(0, `rgba(205,70,60,${0.55 * alpha})`);
+  halo.addColorStop(0, `rgba(205,70,60,${HALO_ALPHA * alpha})`);
   halo.addColorStop(1, "rgba(205,70,60,0)");
   c.fillStyle = halo;
   c.beginPath();

@@ -25,6 +25,17 @@ const MAX_OFFSET = 0.42;
 
 const pick = <T,>(list: readonly T[], rand: () => number): T => list[Math.floor(rand() * list.length) % list.length];
 
+// Repeatable shuffles for testing: /scan?tickSeed=7 (each try moves on to the next seed)
+export function seededRandom(seed: number): () => number {
+  let x = (seed * 2654435761) >>> 0 || 1;
+  return () => {
+    x ^= x << 13;
+    x ^= x >>> 17;
+    x ^= x << 5;
+    return (x >>> 0) / 4294967296;
+  };
+}
+
 export function shuffleTick(rand: () => number = Math.random): SimTick {
   const species = pick(DEX_SPECIES, rand);
   const r = MAX_OFFSET * Math.sqrt(rand());

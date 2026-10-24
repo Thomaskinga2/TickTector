@@ -111,23 +111,27 @@ function hairs(c: Ctx, R: () => number, x0: number, y0: number, w: number, h: nu
   }
 }
 
-// Draws img with mapping m and stretches its edge pixels to fill the rest of [0,sw]x[0,sh],
-// so a tick near the frame's edge never leaves black bands. c is in CSS px.
+// Draws img with mapping m and fills the rest of [0,sw]x[0,sh] with the image mirrored across
+// its edges (skin texture carries on, where stretched edge pixels would show as streaks), so a
+// tick near the frame's edge never leaves black bands. c is in CSS px.
 export function drawClamped(c: Ctx, img: CanvasImageSource, iw: number, ih: number, m: Mapping, sw: number, sh: number): void {
   const x0 = m.ox;
   const y0 = m.oy;
-  const x1 = m.ox + iw * m.k;
-  const y1 = m.oy + ih * m.k;
-  const o = 0.5; // overlap so no seam shows between a strip and the image
-  if (x0 > 0) c.drawImage(img, 0, 0, 1, ih, 0, y0, x0 + o, y1 - y0);
-  if (x1 < sw) c.drawImage(img, iw - 1, 0, 1, ih, x1 - o, y0, sw - x1 + o, y1 - y0);
-  if (y0 > 0) c.drawImage(img, 0, 0, iw, 1, x0, 0, x1 - x0, y0 + o);
-  if (y1 < sh) c.drawImage(img, 0, ih - 1, iw, 1, x0, y1 - o, x1 - x0, sh - y1 + o);
-  if (x0 > 0 && y0 > 0) c.drawImage(img, 0, 0, 1, 1, 0, 0, x0 + o, y0 + o);
-  if (x1 < sw && y0 > 0) c.drawImage(img, iw - 1, 0, 1, 1, x1 - o, 0, sw - x1 + o, y0 + o);
-  if (x0 > 0 && y1 < sh) c.drawImage(img, 0, ih - 1, 1, 1, 0, y1 - o, x0 + o, sh - y1 + o);
-  if (x1 < sw && y1 < sh) c.drawImage(img, iw - 1, ih - 1, 1, 1, x1 - o, y1 - o, sw - x1 + o, sh - y1 + o);
-  c.drawImage(img, x0, y0, x1 - x0, y1 - y0);
+  const w = iw * m.k;
+  const h = ih * m.k;
+  for (const ty of [-1, 0, 1]) {
+    for (const tx of [-1, 0, 1]) {
+      // the mirrored copy next to the image on this side, if any of it is on screen
+      const left = x0 + tx * w;
+      const top = y0 + ty * h;
+      if (left >= sw || left + w <= 0 || top >= sh || top + h <= 0) continue;
+      c.save();
+      c.translate(tx === 0 ? 0 : 2 * (tx < 0 ? x0 : x0 + w), ty === 0 ? 0 : 2 * (ty < 0 ? y0 : y0 + h));
+      c.scale(tx === 0 ? 1 : -1, ty === 0 ? 1 : -1);
+      c.drawImage(img, x0, y0, w, h);
+      c.restore();
+    }
+  }
 }
 
 // The scrim and vignette laid over the photo; amount 0..1 fades them in during the opening

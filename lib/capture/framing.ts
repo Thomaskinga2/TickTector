@@ -54,10 +54,14 @@ export function wipeRadius(v: SceneView): number {
   return Math.max(440, farthestCorner(TICK.x, GROUND_Y, v.rect.x0, v.rect.y0, v.rect.x1, v.rect.y1));
 }
 
-// frame -> screen for the animation: the same scale as the viewfinder's cover (so the opening
-// only slides the photo), moved so the tick lands on the scene's tick point
-export function tickFraming(frameW: number, frameH: number, at: Point, v: SceneView): Mapping {
-  const k = Math.max(v.sw / frameW, v.sh / frameH);
+// In the viewfinder the tick is drawn at this share of its animation size; the opening zooms the
+// photo in by the inverse, so the tick grows into the catch (and looks life-size while scanning)
+export const VIEWFINDER_TICK_ZOOM = 0.62;
+
+// frame -> screen for the animation: zoomed so the tick (unit: frame px per tick unit) is the
+// scene's size, moved so it lands on the scene's tick point. Always at least a cover.
+export function tickFraming(at: Point, unit: number, v: SceneView): Mapping {
+  const k = v.s / unit;
   return { k, ox: v.ox + v.s * TICK.x - k * at.x, oy: v.oy + v.s * TICK.y - k * at.y };
 }
 

@@ -2,6 +2,7 @@
 
 import { Drawer } from "@base-ui/react/drawer";
 import { X } from "lucide-react";
+import { TickAftercare } from "@/components/tick-aftercare";
 import { TickPhoto, TickPhotoCredit } from "@/components/tick-photo";
 import { DemoBadge } from "@/components/tickdex-card";
 import { tickdexDisplay } from "@/components/tickdex-font";
@@ -85,6 +86,8 @@ function SheetBody({ slot }: { slot: DexSlot }) {
           {stageLabel(slot.stage)} · caught {count} {count === 1 ? "time" : "times"}
         </Drawer.Description>
       </div>
+
+      {newest && <TickAftercare latest={newest} />}
 
       {slot.speciesId === UNKNOWN_SPECIES_ID ? (
         <p className="rounded-2xl bg-muted p-4 text-[15px]">

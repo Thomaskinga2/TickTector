@@ -37,6 +37,6 @@ inclusion: always
 ## Demo link (deployment)
 - The app must work on a public Vercel URL: anyone can open it with no login.
 - Demo URL: <dán link vào đây sau khi deploy>
-- Required env vars on Vercel: ANTHROPIC_API_KEY
+- Required env vars on Vercel: none for the demo (everything runs on mock data). Optional: `DEMO_MODE`, `GEOCODING_PROVIDER`, `GEOCODING_API_KEY`, `FORUM_STORE` (see `.env.example`). Add the vision model's API key once the scan feature uses one.
 - Before saying any feature is done, it must also work on the deployed URL (test in an incognito window).
 - If the AI call fails on the live site, show the demo fallback instead of an error.

@@ -4,6 +4,8 @@ const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
+  // Don't generate AGENTS.md during `next dev`; project guidance lives in .kiro/steering.
+  agentRules: false,
   turbopack: {
     rules: {
       "*.css": {

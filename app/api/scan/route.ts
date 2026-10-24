@@ -10,6 +10,6 @@ export async function POST(request: Request) {
   if (!photo.type.startsWith("image/")) return Response.json({ error: "The file must be an image" }, { status: 400 });
   if (photo.size > MAX_BYTES) return Response.json({ error: "Photo must be under 10 MB" }, { status: 413 });
 
-  // TODO: send the photo to a vision model (e.g. Claude via @anthropic-ai/sdk) and validate its JSON.
+  // TODO: send the photo to a vision model and validate its JSON with zod.
   return Response.json(SCAN_RESULT);
 }

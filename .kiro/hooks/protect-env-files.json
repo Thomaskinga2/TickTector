@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "protect-env-files",
+      "description": "Block the agent from reading or editing .env files, which hold secrets. .env.example stays editable.",
+      "trigger": "PreToolUse",
+      "action": {
+        "type": "command",
+        "command": "node .kiro/hooks/scripts/protect-env-files.mjs"
+      },
+      "timeout": 10
+    }
+  ]
+}

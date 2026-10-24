@@ -1,7 +1,7 @@
 import type { ScanPostInput } from "@/lib/types";
 
-// One scan, shaped exactly like the scan screen will send it. Used by tests/forum.test.mjs and by the
-// dev-only "Post sample scan" button on /forum. The photo carries fake GPS EXIF so both show it gets stripped.
+// One scan, shaped exactly like the scan screen sends it. Used by tests/forum.test.mjs; the photo carries
+// fake GPS EXIF so the test shows it gets stripped.
 export const SAMPLE_SCAN: ScanPostInput = {
   photo: "/samples/scan-tick.jpg",
   species: "deer-tick",

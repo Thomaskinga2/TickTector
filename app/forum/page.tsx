@@ -2,16 +2,14 @@
 
 import { Suspense, useState } from "react";
 import Link from "next/link";
-import { Loader2, Plus, ScanLine } from "lucide-react";
+import { Plus } from "lucide-react";
 import { ForumNotice, ForumPostList } from "@/components/forum-post-list";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { EmptyState } from "@/components/states";
 import { Page } from "@/components/page";
 import { ScanPostComposer } from "@/components/scan-post-composer";
-import { toast } from "@/components/toaster";
 import { TownSelect } from "@/components/town-select";
-import { SAMPLE_SCAN } from "@/lib/fixtures/sample-scan";
-import { createScanPost, getPosts } from "@/lib/services/forum";
+import { getPosts } from "@/lib/services/forum";
 import { useAsync } from "@/lib/use-async";
 
 export default function ForumPage() {
@@ -53,8 +51,6 @@ export default function ForumPage() {
         <TownSelect id="forum-town" appearance="menu" value={townId} onChange={setTownId} allLabel="All towns" />
       </div>
 
-      {(process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_VERCEL_ENV === "preview") && <SampleScanButton onPosted={slot.onRetry} />}
-
       {posts && posts.length === 0 && !slot.loading && !slot.error ? (
         <EmptyState
           action={
@@ -72,29 +68,3 @@ export default function ForumPage() {
   );
 }
 
-// Dev server and Vercel previews only: posts lib/fixtures/sample-scan.ts through createScanPost, like the scan screen will.
-function SampleScanButton({ onPosted }: { onPosted: () => void }) {
-  const [busy, setBusy] = useState(false);
-  return (
-    <Button
-      variant="gray"
-      size="sm"
-      className="self-start"
-      disabled={busy}
-      onClick={async () => {
-        setBusy(true);
-        try {
-          await createScanPost(SAMPLE_SCAN);
-          onPosted();
-        } catch (err) {
-          toast((err as Error).message);
-        } finally {
-          setBusy(false);
-        }
-      }}
-    >
-      {busy ? <Loader2 className="size-4 animate-spin" aria-hidden /> : <ScanLine className="size-4" aria-hidden />}
-      Post sample scan (preview only)
-    </Button>
-  );
-}

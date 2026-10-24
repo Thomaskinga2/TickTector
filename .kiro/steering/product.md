@@ -1,22 +1,42 @@
-# Product
+---
+inclusion: always
+---
 
-> Placeholder. Fill this in before building features.
+# Product (fill in at kickoff — 10 minutes max)
 
-## One-liner
-_What the app does, in one sentence._
+- **Name:** <APP_NAME>
+- **Track:** <Biotech & healthcare | Energy & climate tech | Civic action>
+- **One-liner:** <APP_NAME> helps <specific user> do <job> by <AI-powered mechanism>.
+- **Primary user:** <one concrete person, e.g. "an international student reading a US prescription">
+- **Pain today:** <what is slow/confusing/expensive now, with one real number if possible>
 
-## Target user
-_Who it is for, and the situation they are in when they open the app._
+## The ONE demo flow (everything serves this)
+1. User opens the app and <does X> (e.g. uploads a photo / types an address).
+2. AI <does Y> in under ~10 seconds, with a visible loading state.
+3. User sees <Z>: a clear, beautiful result with one "wow" element (map, chart, score, plain-language summary).
+4. User can <take one action> (save, share, export, get alert).
 
-## Problem
-_The pain this solves today, and how people deal with it now._
+## Must-have (MVP)
+- The demo flow above, working end-to-end on the deployed URL.
+- Real data or a real public API (no lorem ipsum in the demo).
+- Mobile-friendly layout.
 
-## The demo flow
-_The single path we show in the demo, step by step._
+## Nice-to-have (only after MVP is deployed)
+- Multi-language output.
+- History / saved results.
+- Second input mode.
 
-1. …
-2. …
-3. …
+## Out of scope (do NOT build)
+- Auth / login (use a demo user).
+- Payments, admin panels, settings pages.
+- Anything not visible in the 3-minute demo.
 
-## Out of scope
-_What we are deliberately not building today (for example: auth, payments, settings, admin)._
+## Safety / responsibility
+- Health, legal, or civic advice: show a short disclaimer and frame output as information, not diagnosis or legal advice.
+- Never store personal data beyond the session unless required for the demo.
+## Demo link (deployment)
+- The app must work on a public Vercel URL: anyone can open it with no login.
+- Demo URL: <dán link vào đây sau khi deploy>
+- Required env vars on Vercel: `API_URL` (and `API_KEY` if the backend needs one). Both are server-only.
+- Before saying any feature is done, it must also work on the deployed URL (test in an incognito window).
+- If the AI call fails on the live site, show the demo fallback instead of an error.

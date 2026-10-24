@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LocationButton } from "@/components/location-button";
 import { Page } from "@/components/page";
+import { StatewideSnapshot } from "@/components/statewide-snapshot";
 import { TOWN_SEARCH_ID, TownSearch } from "@/components/town-search";
 import { buttonVariants } from "@/components/ui/button";
 import type { Town } from "@/lib/types";
@@ -28,6 +29,11 @@ export default function Home() {
           Try Amherst
         </Link>
       </div>
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xl font-semibold">Across Massachusetts</h2>
+        <StatewideSnapshot />
+      </section>
     </Page>
   );
 }

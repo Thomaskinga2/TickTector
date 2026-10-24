@@ -30,9 +30,10 @@ page (app/)  ->  component (components/)  ->  service (lib/services/)  ->  API r
 | Feature | Page | Component | Service | API route | Backend owner | Turn on |
 |---|---|---|---|---|---|---|
 | Town search | `/` | `TownSearch` | `searchTowns` (`towns.ts`) | `GET /api/towns?q=` | Backend 1 | always on |
-| My location | `/`, `/forum/new` | `LocationButton`, `useGeolocation` | `findNearestTown` (`towns.ts`) | `GET /api/towns/nearest?lat=&lng=` | Backend 1 | `geolocation: true` |
+| My location | `/`, `/forum/new` | `LocationButton`, `useGeolocation` | `findNearestTown` (`towns.ts`) | `GET /api/towns/nearest?lat=&lng=` | Backend 1 | `geolocation: true` (on) |
 | Risk gauge | `/area/[town]` | `RiskGauge` | `getWeeklyRisk` (`risk.ts`) | `GET /api/risk?town=` | Backend 1 | always on |
-| Heatmap | `/map`, `/area/[town]` | `Heatmap` | `getHeatmap` (`heatmap.ts`) | `GET /api/heatmap` | Backend 1 | `heatmap: true` |
+| Charts | `/`, `/area/[town]` | `StatewideSnapshot`, `TownCharts`, `charts.tsx` | `getStatewideStats`, `getTownStats` (`stats.ts`) | `GET /api/stats/statewide`, `GET /api/stats?town=` | Backend 1 | always on |
+| Risk map | `/map`, `/area/[town]` | `Heatmap`, `MapLegend` | `getHeatmap`, `getMapShapes` (`heatmap.ts`) | `GET /api/heatmap` + `public/geo/ma-towns.json` | Backend 1 | `heatmap: true` (on) |
 | Tick species | `/area/[town]` | `TickSpeciesList` | `getSpecies` (`risk.ts`) | `GET /api/species?town=` | Backend 2 | always on |
 | Action alerts | `/area/[town]` | `ActionAlerts` | `getAlerts` (`risk.ts`) | `GET /api/alerts?level=` | Backend 2 | always on |
 | Camera scan | `/scan` | `CameraCapture` | `analyzeTickPhoto` (`scan.ts`) | `POST /api/scan` | Backend 2 | `camera: true` |
@@ -40,6 +41,8 @@ page (app/)  ->  component (components/)  ->  service (lib/services/)  ->  API r
 | TikQuest | `/quest` | page only | none | none | Frontend | `quest: true` |
 
 Flags live in `lib/features.ts`. A flag set to `false` shows "Coming soon"; flipping it to `true` is the only change needed to show the real component.
+
+Risk levels, chart numbers and the map come from real MA DPH county data (see `data/README.md`). The rule lives in `lib/risk-model.ts` (`CUTOFFS`, winter step-down); species and prevention facts live in `lib/tick-facts.ts` with their sources.
 
 Providers are picked by env vars (see `.env.example`): `GEOCODING_PROVIDER` (Backend 1) and `FORUM_STORE` (Backend 2). Only `mock` is implemented. The mock forum store keeps posts in memory, so they reset on every deploy.
 

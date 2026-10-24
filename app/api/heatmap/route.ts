@@ -1,8 +1,10 @@
-import { HEATMAP } from "@/lib/mock-data";
+import { connection } from "next/server";
+import { HEATMAP, isDemoMode } from "@/lib/mock-data";
+import { heatmap } from "@/lib/risk-model";
 
-// GET /api/heatmap -> HeatmapPoint[]
-// Static mock, so Next prerenders it at build time.
+// GET /api/heatmap -> HeatmapPoint[] (one per town, county-based level)
 export async function GET() {
-  // TODO: compute per-town risk values (0..1) for all MA towns from data/.
-  return Response.json(HEATMAP);
+  // Levels drop in winter, so compute per request instead of at build time.
+  await connection();
+  return Response.json(isDemoMode() ? HEATMAP : heatmap());
 }

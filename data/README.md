@@ -9,6 +9,19 @@ Extracted on 2026-10-24 from two public sources. Numbers are copied exactly from
 
 Cite as: Massachusetts Department of Public Health, Bureau of Infectious Disease and Laboratory Sciences. DPH data are preliminary and subject to change.
 
+## Data the app uses (`lib/data/`, `public/geo/`)
+
+Built by `python3 data/scripts/build_app_data.py` (run from the repo root; needs network for MassGIS, no key). Commit the output.
+
+| File | What it is |
+|---|---|
+| `lib/data/towns.json` | All 351 towns from [MassGIS municipalities](https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/Massachusetts_Municipalities_Hosted/FeatureServer/0): id, name, county, centroid, 2020 population |
+| `lib/data/county-stats.json` | Per county and `State Total`: 2025 rates per disease, `score` (their sum), yearly cases, ER-visit rates. Dukes and Nantucket share one row, as in DPH tables |
+| `lib/data/statewide.json` | `statewide_cases.csv` by year |
+| `public/geo/ma-towns.json` | Simplified town outlines and county lines (MassGIS), pre-projected to SVG coordinates (~100 KB). Also used server-side for "Use my location" |
+
+How the app turns these into a risk level: `lib/risk-model.ts`. Species and prevention text: `lib/tick-facts.ts`.
+
 ## Files
 
 ### Ready to use (`data/massgov/`)

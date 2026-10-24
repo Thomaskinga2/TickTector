@@ -1,12 +1,13 @@
 import type { NextRequest } from "next/server";
-import { SPECIES, TOWNS } from "@/lib/mock-data";
+import { isDemoMode, SPECIES } from "@/lib/mock-data";
+import { findTown } from "@/lib/risk-model";
+import { speciesFor } from "@/lib/tick-facts";
 
-// GET /api/species?town=amherst -> TickSpecies[]
+// GET /api/species?town=amherst -> TickSpecies[] (facts sourced in lib/tick-facts.ts)
 export async function GET(request: NextRequest) {
-  const townId = request.nextUrl.searchParams.get("town");
-  if (!TOWNS.some((t) => t.id === townId)) {
-    return Response.json({ error: "No species data for this town yet" }, { status: 404 });
-  }
-  // TODO: filter species by what is actually found in this town.
-  return Response.json(SPECIES);
+  const townId = request.nextUrl.searchParams.get("town") ?? "";
+  if (isDemoMode()) return Response.json(SPECIES);
+  const town = findTown(townId);
+  if (!town) return Response.json({ error: "We couldn't find that Massachusetts town" }, { status: 404 });
+  return Response.json(speciesFor(town.county));
 }

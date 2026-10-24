@@ -1,0 +1,1976 @@
+{
+ "Barnstable": {
+  "county": "Barnstable",
+  "score": 523.2,
+  "rates": {
+   "lyme": 380.23,
+   "babesiosis": 71.51,
+   "hga": 71.51
+  },
+  "trend": [
+   {
+    "year": 2010,
+    "lyme": 117,
+    "babesiosis": null,
+    "hga": null
+   },
+   {
+    "year": 2011,
+    "lyme": 168,
+    "babesiosis": 57,
+    "hga": null
+   },
+   {
+    "year": 2012,
+    "lyme": 290,
+    "babesiosis": 59,
+    "hga": null
+   },
+   {
+    "year": 2013,
+    "lyme": 274,
+    "babesiosis": 81,
+    "hga": null
+   },
+   {
+    "year": 2014,
+    "lyme": 264,
+    "babesiosis": 130,
+    "hga": 65
+   },
+   {
+    "year": 2015,
+    "lyme": null,
+    "babesiosis": 72,
+    "hga": 55
+   },
+   {
+    "year": 2016,
+    "lyme": null,
+    "babesiosis": 105,
+    "hga": 68
+   },
+   {
+    "year": 2017,
+    "lyme": null,
+    "babesiosis": 99,
+    "hga": 66
+   },
+   {
+    "year": 2018,
+    "lyme": null,
+    "babesiosis": 80,
+    "hga": 43
+   },
+   {
+    "year": 2019,
+    "lyme": null,
+    "babesiosis": 105,
+    "hga": 44
+   },
+   {
+    "year": 2020,
+    "lyme": null,
+    "babesiosis": 78,
+    "hga": 45
+   },
+   {
+    "year": 2021,
+    "lyme": null,
+    "babesiosis": 88,
+    "hga": 46
+   },
+   {
+    "year": 2022,
+    "lyme": 239,
+    "babesiosis": 60,
+    "hga": 54
+   },
+   {
+    "year": 2023,
+    "lyme": 773,
+    "babesiosis": 74,
+    "hga": 47
+   },
+   {
+    "year": 2024,
+    "lyme": 786,
+    "babesiosis": 139,
+    "hga": 100
+   },
+   {
+    "year": 2025,
+    "lyme": 888,
+    "babesiosis": 167,
+    "hga": 167
+   }
+  ],
+  "er": [
+   {
+    "period": "2019",
+    "rate": 9.59
+   },
+   {
+    "period": "2020",
+    "rate": 9.56
+   },
+   {
+    "period": "2021",
+    "rate": 13.15
+   },
+   {
+    "period": "2022",
+    "rate": 9.28
+   },
+   {
+    "period": "2023",
+    "rate": 11.68
+   },
+   {
+    "period": "2024",
+    "rate": 9.46
+   },
+   {
+    "period": "2025",
+    "rate": 14.56
+   },
+   {
+    "period": "2026 (Jan\u2013Aug)",
+    "rate": 14.39
+   }
+  ]
+ },
+ "Berkshire": {
+  "county": "Berkshire",
+  "score": 374.2,
+  "rates": {
+   "lyme": 239.19,
+   "babesiosis": 21.31,
+   "hga": 113.68
+  },
+  "trend": [
+   {
+    "year": 2010,
+    "lyme": 93,
+    "babesiosis": null,
+    "hga": null
+   },
+   {
+    "year": 2011,
+    "lyme": 120,
+    "babesiosis": 1,
+    "hga": 30
+   },
+   {
+    "year": 2012,
+    "lyme": 88,
+    "babesiosis": 0,
+    "hga": 30
+   },
+   {
+    "year": 2013,
+    "lyme": 130,
+    "babesiosis": 5,
+    "hga": 55
+   },
+   {
+    "year": 2014,
+    "lyme": 86,
+    "babesiosis": 2,
+    "hga": 79
+   },
+   {
+    "year": 2015,
+    "lyme": null,
+    "babesiosis": 9,
+    "hga": 147
+   },
+   {
+    "year": 2016,
+    "lyme": null,
+    "babesiosis": 2,
+    "hga": 87
+   },
+   {
+    "year": 2017,
+    "lyme": null,
+    "babesiosis": 28,
+    "hga": 175
+   },
+   {
+    "year": 2018,
+    "lyme": null,
+    "babesiosis": 18,
+    "hga": 91
+   },
+   {
+    "year": 2019,
+    "lyme": null,
+    "babesiosis": 31,
+    "hga": 175
+   },
+   {
+    "year": 2020,
+    "lyme": null,
+    "babesiosis": 13,
+    "hga": 68
+   },
+   {
+    "year": 2021,
+    "lyme": null,
+    "babesiosis": 21,
+    "hga": 85
+   },
+   {
+    "year": 2022,
+    "lyme": 358,
+    "babesiosis": 13,
+    "hga": 68
+   },
+   {
+    "year": 2023,
+    "lyme": 588,
+    "babesiosis": 17,
+    "hga": 81
+   },
+   {
+    "year": 2024,
+    "lyme": 567,
+    "babesiosis": 26,
+    "hga": 114
+   },
+   {
+    "year": 2025,
+    "lyme": 303,
+    "babesiosis": 27,
+    "hga": 144
+   }
+  ],
+  "er": [
+   {
+    "period": "2019",
+    "rate": 10.54
+   },
+   {
+    "period": "2020",
+    "rate": 11.92
+   },
+   {
+    "period": "2021",
+    "rate": 18.93
+   },
+   {
+    "period": "2022",
+    "rate": 11.93
+   },
+   {
+    "period": "2023",
+    "rate": 11.44
+   },
+   {
+    "period": "2024",
+    "rate": 13.29
+   },
+   {
+    "period": "2025",
+    "rate": 14.89
+   },
+   {
+    "period": "2026 (Jan\u2013Aug)",
+    "rate": 15.92
+   }
+  ]
+ },
+ "Bristol": {
+  "county": "Bristol",
+  "score": 307.6,
+  "rates": {
+   "lyme": 252.26,
+   "babesiosis": 27.15,
+   "hga": 28.16
+  },
+  "trend": [
+   {
+    "year": 2010,
+    "lyme": 141,
+    "babesiosis": null,
+    "hga": null
+   },
+   {
+    "year": 2011,
+    "lyme": 152,
+    "babesiosis": 8,
+    "hga": 3
+   },
+   {
+    "year": 2012,
+    "lyme": 512,
+    "babesiosis": 13,
+    "hga": 8
+   },
+   {
+    "year": 2013,
+    "lyme": 575,
+    "babesiosis": 27,
+    "hga": 16
+   },
+   {
+    "year": 2014,
+    "lyme": 673,
+    "babesiosis": 63,
+    "hga": 26
+   },
+   {
+    "year": 2015,
+    "lyme": null,
+    "babesiosis": 69,
+    "hga": 46
+   },
+   {
+    "year": 2016,
+    "lyme": null,
+    "babesiosis": 92,
+    "hga": 69
+   },
+   {
+    "year": 2017,
+    "lyme": null,
+    "babesiosis": 90,
+    "hga": 91
+   },
+   {
+    "year": 2018,
+    "lyme": null,
+    "babesiosis": 93,
+    "hga": 47
+   },
+   {
+    "year": 2019,
+    "lyme": null,
+    "babesiosis": 109,
+    "hga": 53
+   },
+   {
+    "year": 2020,
+    "lyme": null,
+    "babesiosis": 120,
+    "hga": 82
+   },
+   {
+    "year": 2021,
+    "lyme": null,
+    "babesiosis": 114,
+    "hga": 81
+   },
+   {
+    "year": 2022,
+    "lyme": 849,
+    "babesiosis": 92,
+    "hga": 54
+   },
+   {
+    "year": 2023,
+    "lyme": 1690,
+    "babesiosis": 173,
+    "hga": 77
+   },
+   {
+    "year": 2024,
+    "lyme": 1535,
+    "babesiosis": 142,
+    "hga": 130
+   },
+   {
+    "year": 2025,
+    "lyme": 1496,
+    "babesiosis": 161,
+    "hga": 167
+   }
+  ],
+  "er": [
+   {
+    "period": "2019",
+    "rate": 6.45
+   },
+   {
+    "period": "2020",
+    "rate": 8.15
+   },
+   {
+    "period": "2021",
+    "rate": 7.94
+   },
+   {
+    "period": "2022",
+    "rate": 5.5
+   },
+   {
+    "period": "2023",
+    "rate": 9.5
+   },
+   {
+    "period": "2024",
+    "rate": 7.42
+   },
+   {
+    "period": "2025",
+    "rate": 7.99
+   },
+   {
+    "period": "2026 (Jan\u2013Aug)",
+    "rate": 8.02
+   }
+  ]
+ },
+ "Dukes & Nantucket": {
+  "county": "Dukes & Nantucket",
+  "score": 263.8,
+  "rates": {
+   "lyme": 100.5,
+   "babesiosis": 103.01,
+   "hga": 60.3
+  },
+  "trend": [
+   {
+    "year": 2010,
+    "lyme": 52,
+    "babesiosis": null,
+    "hga": null
+   },
+   {
+    "year": 2011,
+    "lyme": 73,
+    "babesiosis": 46,
+    "hga": null
+   },
+   {
+    "year": 2012,
+    "lyme": 148,
+    "babesiosis": 44,
+    "hga": null
+   },
+   {
+    "year": 2013,
+    "lyme": 133,
+    "babesiosis": 70,
+    "hga": null
+   },
+   {
+    "year": 2014,
+    "lyme": 109,
+    "babesiosis": 56,
+    "hga": 17
+   },
+   {
+    "year": 2015,
+    "lyme": null,
+    "babesiosis": 40,
+    "hga": 15
+   },
+   {
+    "year": 2016,
+    "lyme": null,
+    "babesiosis": 24,
+    "hga": 25
+   },
+   {
+    "year": 2017,
+    "lyme": null,
+    "babesiosis": 14,
+    "hga": 11
+   },
+   {
+    "year": 2018,
+    "lyme": null,
+    "babesiosis": 13,
+    "hga": 4
+   },
+   {
+    "year": 2019,
+    "lyme": null,
+    "babesiosis": 42,
+    "hga": 8
+   },
+   {
+    "year": 2020,
+    "lyme": null,
+    "babesiosis": 62,
+    "hga": 21
+   },
+   {
+    "year": 2021,
+    "lyme": null,
+    "babesiosis": 32,
+    "hga": 18
+   },
+   {
+    "year": 2022,
+    "lyme": 394,
+    "babesiosis": 11,
+    "hga": 4
+   },
+   {
+    "year": 2023,
+    "lyme": 523,
+    "babesiosis": 42,
+    "hga": 19
+   },
+   {
+    "year": 2024,
+    "lyme": 263,
+    "babesiosis": 33,
+    "hga": 20
+   },
+   {
+    "year": 2025,
+    "lyme": 40,
+    "babesiosis": 41,
+    "hga": 24
+   }
+  ],
+  "er": [
+   {
+    "period": "2019",
+    "rate": 89.58
+   },
+   {
+    "period": "2020",
+    "rate": 107.02
+   },
+   {
+    "period": "2021",
+    "rate": 110.07
+   },
+   {
+    "period": "2022",
+    "rate": 91.65
+   },
+   {
+    "period": "2023",
+    "rate": 115.4
+   },
+   {
+    "period": "2024",
+    "rate": 91.81
+   },
+   {
+    "period": "2025",
+    "rate": 88.1
+   },
+   {
+    "period": "2026 (Jan\u2013Aug)",
+    "rate": 64.05
+   }
+  ]
+ },
+ "Essex": {
+  "county": "Essex",
+  "score": 61.9,
+  "rates": {
+   "lyme": 45.89,
+   "babesiosis": 6.64,
+   "hga": 9.37
+  },
+  "trend": [
+   {
+    "year": 2010,
+    "lyme": 184,
+    "babesiosis": null,
+    "hga": null
+   },
+   {
+    "year": 2011,
+    "lyme": 227,
+    "babesiosis": 10,
+    "hga": 7
+   },
+   {
+    "year": 2012,
+    "lyme": 505,
+    "babesiosis": 14,
+    "hga": 7
+   },
+   {
+    "year": 2013,
+    "lyme": 559,
+    "babesiosis": 34,
+    "hga": 27
+   },
+   {
+    "year": 2014,
+    "lyme": 482,
+    "babesiosis": 32,
+    "hga": 41
+   },
+   {
+    "year": 2015,
+    "lyme": null,
+    "babesiosis": 36,
+    "hga": 38
+   },
+   {
+    "year": 2016,
+    "lyme": null,
+    "babesiosis": 35,
+    "hga": 48
+   },
+   {
+    "year": 2017,
+    "lyme": null,
+    "babesiosis": 30,
+    "hga": 73
+   },
+   {
+    "year": 2018,
+    "lyme": null,
+    "babesiosis": 26,
+    "hga": 39
+   },
+   {
+    "year": 2019,
+    "lyme": null,
+    "babesiosis": 28,
+    "hga": 35
+   },
+   {
+    "year": 2020,
+    "lyme": null,
+    "babesiosis": 32,
+    "hga": 51
+   },
+   {
+    "year": 2021,
+    "lyme": null,
+    "babesiosis": 32,
+    "hga": 32
+   },
+   {
+    "year": 2022,
+    "lyme": 262,
+    "babesiosis": 22,
+    "hga": 18
+   },
+   {
+    "year": 2023,
+    "lyme": 640,
+    "babesiosis": 58,
+    "hga": 30
+   },
+   {
+    "year": 2024,
+    "lyme": 389,
+    "babesiosis": 36,
+    "hga": 53
+   },
+   {
+    "year": 2025,
+    "lyme": 387,
+    "babesiosis": 56,
+    "hga": 79
+   }
+  ],
+  "er": [
+   {
+    "period": "2019",
+    "rate": 3.48
+   },
+   {
+    "period": "2020",
+    "rate": 3.18
+   },
+   {
+    "period": "2021",
+    "rate": 4.45
+   },
+   {
+    "period": "2022",
+    "rate": 3.1
+   },
+   {
+    "period": "2023",
+    "rate": 3.54
+   },
+   {
+    "period": "2024",
+    "rate": 2.02
+   },
+   {
+    "period": "2025",
+    "rate": 2.77
+   },
+   {
+    "period": "2026 (Jan\u2013Aug)",
+    "rate": 3.79
+   }
+  ]
+ },
+ "Franklin": {
+  "county": "Franklin",
+  "score": 361.4,
+  "rates": {
+   "lyme": 231.38,
+   "babesiosis": 8.57,
+   "hga": 121.4
+  },
+  "trend": [
+   {
+    "year": 2010,
+    "lyme": 42,
+    "babesiosis": null,
+    "hga": null
+   },
+   {
+    "year": 2011,
+    "lyme": 52,
+    "babesiosis": 0,
+    "hga": 0
+   },
+   {
+    "year": 2012,
+    "lyme": 64,
+    "babesiosis": 0,
+    "hga": 3
+   },
+   {
+    "year": 2013,
+    "lyme": 71,
+    "babesiosis": 4,
+    "hga": 6
+   },
+   {
+    "year": 2014,
+    "lyme": 78,
+    "babesiosis": 0,
+    "hga": 6
+   },
+   {
+    "year": 2015,
+    "lyme": null,
+    "babesiosis": 2,
+    "hga": 11
+   },
+   {
+    "year": 2016,
+    "lyme": null,
+    "babesiosis": 1,
+    "hga": 10
+   },
+   {
+    "year": 2017,
+    "lyme": null,
+    "babesiosis": 2,
+    "hga": 27
+   },
+   {
+    "year": 2018,
+    "lyme": null,
+    "babesiosis": 0,
+    "hga": 14
+   },
+   {
+    "year": 2019,
+    "lyme": null,
+    "babesiosis": 2,
+    "hga": 17
+   },
+   {
+    "year": 2020,
+    "lyme": null,
+    "babesiosis": 2,
+    "hga": 43
+   },
+   {
+    "year": 2021,
+    "lyme": null,
+    "babesiosis": 8,
+    "hga": 41
+   },
+   {
+    "year": 2022,
+    "lyme": 74,
+    "babesiosis": 6,
+    "hga": 31
+   },
+   {
+    "year": 2023,
+    "lyme": 143,
+    "babesiosis": 17,
+    "hga": 49
+   },
+   {
+    "year": 2024,
+    "lyme": 153,
+    "babesiosis": 14,
+    "hga": 55
+   },
+   {
+    "year": 2025,
+    "lyme": 162,
+    "babesiosis": 6,
+    "hga": 85
+   }
+  ],
+  "er": [
+   {
+    "period": "2019",
+    "rate": 15.09
+   },
+   {
+    "period": "2020",
+    "rate": 13.39
+   },
+   {
+    "period": "2021",
+    "rate": 18.66
+   },
+   {
+    "period": "2022",
+    "rate": 9.07
+   },
+   {
+    "period": "2023",
+    "rate": 9.25
+   },
+   {
+    "period": "2024",
+    "rate": 8.39
+   },
+   {
+    "period": "2025",
+    "rate": 10.54
+   },
+   {
+    "period": "2026 (Jan\u2013Aug)",
+    "rate": 12.35
+   }
+  ]
+ },
+ "Hampden": {
+  "county": "Hampden",
+  "score": 92.7,
+  "rates": {
+   "lyme": 78.13,
+   "babesiosis": 3.86,
+   "hga": 10.73
+  },
+  "trend": [
+   {
+    "year": 2010,
+    "lyme": 130,
+    "babesiosis": null,
+    "hga": null
+   },
+   {
+    "year": 2011,
+    "lyme": 119,
+    "babesiosis": 4,
+    "hga": 3
+   },
+   {
+    "year": 2012,
+    "lyme": 171,
+    "babesiosis": 4,
+    "hga": 3
+   },
+   {
+    "year": 2013,
+    "lyme": 224,
+    "babesiosis": 9,
+    "hga": 7
+   },
+   {
+    "year": 2014,
+    "lyme": 180,
+    "babesiosis": 8,
+    "hga": 11
+   },
+   {
+    "year": 2015,
+    "lyme": null,
+    "babesiosis": 5,
+    "hga": 12
+   },
+   {
+    "year": 2016,
+    "lyme": null,
+    "babesiosis": 7,
+    "hga": 9
+   },
+   {
+    "year": 2017,
+    "lyme": null,
+    "babesiosis": 11,
+    "hga": 18
+   },
+   {
+    "year": 2018,
+    "lyme": null,
+    "babesiosis": 16,
+    "hga": 13
+   },
+   {
+    "year": 2019,
+    "lyme": null,
+    "babesiosis": 16,
+    "hga": 16
+   },
+   {
+    "year": 2020,
+    "lyme": null,
+    "babesiosis": 10,
+    "hga": 29
+   },
+   {
+    "year": 2021,
+    "lyme": null,
+    "babesiosis": 18,
+    "hga": 25
+   },
+   {
+    "year": 2022,
+    "lyme": 119,
+    "babesiosis": 10,
+    "hga": 21
+   },
+   {
+    "year": 2023,
+    "lyme": 218,
+    "babesiosis": 22,
+    "hga": 23
+   },
+   {
+    "year": 2024,
+    "lyme": 374,
+    "babesiosis": 18,
+    "hga": 33
+   },
+   {
+    "year": 2025,
+    "lyme": 364,
+    "babesiosis": 18,
+    "hga": 50
+   }
+  ],
+  "er": [
+   {
+    "period": "2019",
+    "rate": 4.3
+   },
+   {
+    "period": "2020",
+    "rate": 3.24
+   },
+   {
+    "period": "2021",
+    "rate": 3.84
+   },
+   {
+    "period": "2022",
+    "rate": 1.88
+   },
+   {
+    "period": "2023",
+    "rate": 3.54
+   },
+   {
+    "period": "2024",
+    "rate": 2.56
+   },
+   {
+    "period": "2025",
+    "rate": 2.8
+   },
+   {
+    "period": "2026 (Jan\u2013Aug)",
+    "rate": 2.56
+   }
+  ]
+ },
+ "Hampshire": {
+  "county": "Hampshire",
+  "score": 154.8,
+  "rates": {
+   "lyme": 105.48,
+   "babesiosis": 9.25,
+   "hga": 40.1
+  },
+  "trend": [
+   {
+    "year": 2010,
+    "lyme": 80,
+    "babesiosis": null,
+    "hga": null
+   },
+   {
+    "year": 2011,
+    "lyme": 86,
+    "babesiosis": 1,
+    "hga": 0
+   },
+   {
+    "year": 2012,
+    "lyme": 124,
+    "babesiosis": 0,
+    "hga": 3
+   },
+   {
+    "year": 2013,
+    "lyme": 147,
+    "babesiosis": 2,
+    "hga": 2
+   },
+   {
+    "year": 2014,
+    "lyme": 136,
+    "babesiosis": 3,
+    "hga": 10
+   },
+   {
+    "year": 2015,
+    "lyme": null,
+    "babesiosis": 5,
+    "hga": 28
+   },
+   {
+    "year": 2016,
+    "lyme": null,
+    "babesiosis": 3,
+    "hga": 19
+   },
+   {
+    "year": 2017,
+    "lyme": null,
+    "babesiosis": 6,
+    "hga": 30
+   },
+   {
+    "year": 2018,
+    "lyme": null,
+    "babesiosis": 8,
+    "hga": 14
+   },
+   {
+    "year": 2019,
+    "lyme": null,
+    "babesiosis": 9,
+    "hga": 16
+   },
+   {
+    "year": 2020,
+    "lyme": null,
+    "babesiosis": 0,
+    "hga": 32
+   },
+   {
+    "year": 2021,
+    "lyme": null,
+    "babesiosis": 9,
+    "hga": 37
+   },
+   {
+    "year": 2022,
+    "lyme": 166,
+    "babesiosis": 11,
+    "hga": 42
+   },
+   {
+    "year": 2023,
+    "lyme": 260,
+    "babesiosis": 19,
+    "hga": 38
+   },
+   {
+    "year": 2024,
+    "lyme": 240,
+    "babesiosis": 15,
+    "hga": 55
+   },
+   {
+    "year": 2025,
+    "lyme": 171,
+    "babesiosis": 15,
+    "hga": 65
+   }
+  ],
+  "er": [
+   {
+    "period": "2019",
+    "rate": 15.89
+   },
+   {
+    "period": "2020",
+    "rate": 11.57
+   },
+   {
+    "period": "2021",
+    "rate": 16.29
+   },
+   {
+    "period": "2022",
+    "rate": 4.34
+   },
+   {
+    "period": "2023",
+    "rate": 9.68
+   },
+   {
+    "period": "2024",
+    "rate": 5.43
+   },
+   {
+    "period": "2025",
+    "rate": 9.97
+   },
+   {
+    "period": "2026 (Jan\u2013Aug)",
+    "rate": 5.55
+   }
+  ]
+ },
+ "Middlesex": {
+  "county": "Middlesex",
+  "score": 88.5,
+  "rates": {
+   "lyme": 68.55,
+   "babesiosis": 7.59,
+   "hga": 12.41
+  },
+  "trend": [
+   {
+    "year": 2010,
+    "lyme": 414,
+    "babesiosis": null,
+    "hga": null
+   },
+   {
+    "year": 2011,
+    "lyme": 361,
+    "babesiosis": 22,
+    "hga": 21
+   },
+   {
+    "year": 2012,
+    "lyme": 774,
+    "babesiosis": 37,
+    "hga": 51
+   },
+   {
+    "year": 2013,
+    "lyme": 987,
+    "babesiosis": 64,
+    "hga": 67
+   },
+   {
+    "year": 2014,
+    "lyme": 1068,
+    "babesiosis": 66,
+    "hga": 131
+   },
+   {
+    "year": 2015,
+    "lyme": null,
+    "babesiosis": 65,
+    "hga": 168
+   },
+   {
+    "year": 2016,
+    "lyme": null,
+    "babesiosis": 62,
+    "hga": 176
+   },
+   {
+    "year": 2017,
+    "lyme": null,
+    "babesiosis": 62,
+    "hga": 282
+   },
+   {
+    "year": 2018,
+    "lyme": null,
+    "babesiosis": 75,
+    "hga": 147
+   },
+   {
+    "year": 2019,
+    "lyme": null,
+    "babesiosis": 79,
+    "hga": 130
+   },
+   {
+    "year": 2020,
+    "lyme": null,
+    "babesiosis": 66,
+    "hga": 137
+   },
+   {
+    "year": 2021,
+    "lyme": null,
+    "babesiosis": 93,
+    "hga": 150
+   },
+   {
+    "year": 2022,
+    "lyme": 673,
+    "babesiosis": 55,
+    "hga": 123
+   },
+   {
+    "year": 2023,
+    "lyme": 1349,
+    "babesiosis": 101,
+    "hga": 109
+   },
+   {
+    "year": 2024,
+    "lyme": 1150,
+    "babesiosis": 89,
+    "hga": 156
+   },
+   {
+    "year": 2025,
+    "lyme": 1165,
+    "babesiosis": 129,
+    "hga": 211
+   }
+  ],
+  "er": [
+   {
+    "period": "2019",
+    "rate": 5.7
+   },
+   {
+    "period": "2020",
+    "rate": 4.5
+   },
+   {
+    "period": "2021",
+    "rate": 4.64
+   },
+   {
+    "period": "2022",
+    "rate": 3.0
+   },
+   {
+    "period": "2023",
+    "rate": 3.86
+   },
+   {
+    "period": "2024",
+    "rate": 3.25
+   },
+   {
+    "period": "2025",
+    "rate": 3.28
+   },
+   {
+    "period": "2026 (Jan\u2013Aug)",
+    "rate": 3.53
+   }
+  ]
+ },
+ "Norfolk": {
+  "county": "Norfolk",
+  "score": 113.3,
+  "rates": {
+   "lyme": 93.88,
+   "babesiosis": 7.67,
+   "hga": 11.77
+  },
+  "trend": [
+   {
+    "year": 2010,
+    "lyme": 267,
+    "babesiosis": null,
+    "hga": null
+   },
+   {
+    "year": 2011,
+    "lyme": 213,
+    "babesiosis": 13,
+    "hga": 20
+   },
+   {
+    "year": 2012,
+    "lyme": 538,
+    "babesiosis": 23,
+    "hga": 30
+   },
+   {
+    "year": 2013,
+    "lyme": 610,
+    "babesiosis": 38,
+    "hga": 43
+   },
+   {
+    "year": 2014,
+    "lyme": 676,
+    "babesiosis": 38,
+    "hga": 44
+   },
+   {
+    "year": 2015,
+    "lyme": null,
+    "babesiosis": 42,
+    "hga": 63
+   },
+   {
+    "year": 2016,
+    "lyme": null,
+    "babesiosis": 44,
+    "hga": 55
+   },
+   {
+    "year": 2017,
+    "lyme": null,
+    "babesiosis": 41,
+    "hga": 88
+   },
+   {
+    "year": 2018,
+    "lyme": null,
+    "babesiosis": 31,
+    "hga": 45
+   },
+   {
+    "year": 2019,
+    "lyme": null,
+    "babesiosis": 43,
+    "hga": 29
+   },
+   {
+    "year": 2020,
+    "lyme": null,
+    "babesiosis": 34,
+    "hga": 37
+   },
+   {
+    "year": 2021,
+    "lyme": null,
+    "babesiosis": 44,
+    "hga": 35
+   },
+   {
+    "year": 2022,
+    "lyme": 439,
+    "babesiosis": 33,
+    "hga": 43
+   },
+   {
+    "year": 2023,
+    "lyme": 743,
+    "babesiosis": 66,
+    "hga": 43
+   },
+   {
+    "year": 2024,
+    "lyme": 717,
+    "babesiosis": 50,
+    "hga": 40
+   },
+   {
+    "year": 2025,
+    "lyme": 710,
+    "babesiosis": 58,
+    "hga": 89
+   }
+  ],
+  "er": [
+   {
+    "period": "2019",
+    "rate": 6.64
+   },
+   {
+    "period": "2020",
+    "rate": 7.49
+   },
+   {
+    "period": "2021",
+    "rate": 8.45
+   },
+   {
+    "period": "2022",
+    "rate": 5.04
+   },
+   {
+    "period": "2023",
+    "rate": 6.99
+   },
+   {
+    "period": "2024",
+    "rate": 3.98
+   },
+   {
+    "period": "2025",
+    "rate": 4.2
+   },
+   {
+    "period": "2026 (Jan\u2013Aug)",
+    "rate": 4.31
+   }
+  ]
+ },
+ "Plymouth": {
+  "county": "Plymouth",
+  "score": 359.0,
+  "rates": {
+   "lyme": 290.04,
+   "babesiosis": 25.55,
+   "hga": 43.44
+  },
+  "trend": [
+   {
+    "year": 2010,
+    "lyme": 230,
+    "babesiosis": null,
+    "hga": null
+   },
+   {
+    "year": 2011,
+    "lyme": 335,
+    "babesiosis": 24,
+    "hga": 18
+   },
+   {
+    "year": 2012,
+    "lyme": 685,
+    "babesiosis": 24,
+    "hga": 25
+   },
+   {
+    "year": 2013,
+    "lyme": 864,
+    "babesiosis": 62,
+    "hga": 45
+   },
+   {
+    "year": 2014,
+    "lyme": 834,
+    "babesiosis": 98,
+    "hga": 117
+   },
+   {
+    "year": 2015,
+    "lyme": null,
+    "babesiosis": 73,
+    "hga": 103
+   },
+   {
+    "year": 2016,
+    "lyme": null,
+    "babesiosis": 105,
+    "hga": 162
+   },
+   {
+    "year": 2017,
+    "lyme": null,
+    "babesiosis": 159,
+    "hga": 178
+   },
+   {
+    "year": 2018,
+    "lyme": null,
+    "babesiosis": 128,
+    "hga": 116
+   },
+   {
+    "year": 2019,
+    "lyme": null,
+    "babesiosis": 113,
+    "hga": 87
+   },
+   {
+    "year": 2020,
+    "lyme": null,
+    "babesiosis": 96,
+    "hga": 98
+   },
+   {
+    "year": 2021,
+    "lyme": null,
+    "babesiosis": 92,
+    "hga": 87
+   },
+   {
+    "year": 2022,
+    "lyme": 670,
+    "babesiosis": 91,
+    "hga": 55
+   },
+   {
+    "year": 2023,
+    "lyme": 1386,
+    "babesiosis": 138,
+    "hga": 85
+   },
+   {
+    "year": 2024,
+    "lyme": 1441,
+    "babesiosis": 154,
+    "hga": 183
+   },
+   {
+    "year": 2025,
+    "lyme": 1589,
+    "babesiosis": 140,
+    "hga": 238
+   }
+  ],
+  "er": [
+   {
+    "period": "2019",
+    "rate": 8.73
+   },
+   {
+    "period": "2020",
+    "rate": 11.99
+   },
+   {
+    "period": "2021",
+    "rate": 13.06
+   },
+   {
+    "period": "2022",
+    "rate": 8.69
+   },
+   {
+    "period": "2023",
+    "rate": 13.03
+   },
+   {
+    "period": "2024",
+    "rate": 11.45
+   },
+   {
+    "period": "2025",
+    "rate": 10.61
+   },
+   {
+    "period": "2026 (Jan\u2013Aug)",
+    "rate": 10.37
+   }
+  ]
+ },
+ "State Total": {
+  "county": "State Total",
+  "score": 151.2,
+  "rates": {
+   "lyme": 118.51,
+   "babesiosis": 12.11,
+   "hga": 20.57
+  },
+  "trend": [
+   {
+    "year": 2010,
+    "lyme": 2593,
+    "babesiosis": null,
+    "hga": null
+   },
+   {
+    "year": 2011,
+    "lyme": 2651,
+    "babesiosis": 191,
+    "hga": 140
+   },
+   {
+    "year": 2012,
+    "lyme": 5050,
+    "babesiosis": 233,
+    "hga": 237
+   },
+   {
+    "year": 2013,
+    "lyme": 5665,
+    "babesiosis": 420,
+    "hga": 329
+   },
+   {
+    "year": 2014,
+    "lyme": 5600,
+    "babesiosis": 520,
+    "hga": 604
+   },
+   {
+    "year": 2015,
+    "lyme": null,
+    "babesiosis": 445,
+    "hga": 763
+   },
+   {
+    "year": 2016,
+    "lyme": null,
+    "babesiosis": 513,
+    "hga": 828
+   },
+   {
+    "year": 2017,
+    "lyme": null,
+    "babesiosis": 590,
+    "hga": 1204
+   },
+   {
+    "year": 2018,
+    "lyme": null,
+    "babesiosis": 525,
+    "hga": 656
+   },
+   {
+    "year": 2019,
+    "lyme": null,
+    "babesiosis": 638,
+    "hga": 702
+   },
+   {
+    "year": 2020,
+    "lyme": null,
+    "babesiosis": 580,
+    "hga": 740
+   },
+   {
+    "year": 2021,
+    "lyme": null,
+    "babesiosis": 609,
+    "hga": 773
+   },
+   {
+    "year": 2022,
+    "lyme": 5113,
+    "babesiosis": 454,
+    "hga": 623
+   },
+   {
+    "year": 2023,
+    "lyme": 9723,
+    "babesiosis": 839,
+    "hga": 727
+   },
+   {
+    "year": 2024,
+    "lyme": 8842,
+    "babesiosis": 785,
+    "hga": 1059
+   },
+   {
+    "year": 2025,
+    "lyme": 8619,
+    "babesiosis": 881,
+    "hga": 1496
+   }
+  ],
+  "er": [
+   {
+    "period": "2019",
+    "rate": 6.39
+   },
+   {
+    "period": "2020",
+    "rate": 6.46
+   },
+   {
+    "period": "2021",
+    "rate": 7.4
+   },
+   {
+    "period": "2022",
+    "rate": 4.89
+   },
+   {
+    "period": "2023",
+    "rate": 6.77
+   },
+   {
+    "period": "2024",
+    "rate": 5.26
+   },
+   {
+    "period": "2025",
+    "rate": 5.76
+   },
+   {
+    "period": "2026 (Jan\u2013Aug)",
+    "rate": 5.75
+   }
+  ]
+ },
+ "Suffolk": {
+  "county": "Suffolk",
+  "score": 28.5,
+  "rates": {
+   "lyme": 24.72,
+   "babesiosis": 2.27,
+   "hga": 1.55
+  },
+  "trend": [
+   {
+    "year": 2010,
+    "lyme": 34,
+    "babesiosis": null,
+    "hga": null
+   },
+   {
+    "year": 2011,
+    "lyme": 61,
+    "babesiosis": 2,
+    "hga": 0
+   },
+   {
+    "year": 2012,
+    "lyme": 117,
+    "babesiosis": 8,
+    "hga": 4
+   },
+   {
+    "year": 2013,
+    "lyme": 130,
+    "babesiosis": 8,
+    "hga": 11
+   },
+   {
+    "year": 2014,
+    "lyme": 146,
+    "babesiosis": 8,
+    "hga": 10
+   },
+   {
+    "year": 2015,
+    "lyme": null,
+    "babesiosis": 9,
+    "hga": 14
+   },
+   {
+    "year": 2016,
+    "lyme": null,
+    "babesiosis": 7,
+    "hga": 12
+   },
+   {
+    "year": 2017,
+    "lyme": null,
+    "babesiosis": 11,
+    "hga": 12
+   },
+   {
+    "year": 2018,
+    "lyme": null,
+    "babesiosis": 8,
+    "hga": 4
+   },
+   {
+    "year": 2019,
+    "lyme": null,
+    "babesiosis": 9,
+    "hga": 7
+   },
+   {
+    "year": 2020,
+    "lyme": null,
+    "babesiosis": 11,
+    "hga": 6
+   },
+   {
+    "year": 2021,
+    "lyme": null,
+    "babesiosis": 12,
+    "hga": 12
+   },
+   {
+    "year": 2022,
+    "lyme": 131,
+    "babesiosis": 11,
+    "hga": 16
+   },
+   {
+    "year": 2023,
+    "lyme": 230,
+    "babesiosis": 16,
+    "hga": 11
+   },
+   {
+    "year": 2024,
+    "lyme": 192,
+    "babesiosis": 13,
+    "hga": 10
+   },
+   {
+    "year": 2025,
+    "lyme": 207,
+    "babesiosis": 19,
+    "hga": 13
+   }
+  ],
+  "er": [
+   {
+    "period": "2019",
+    "rate": 1.56
+   },
+   {
+    "period": "2020",
+    "rate": 1.7
+   },
+   {
+    "period": "2021",
+    "rate": 1.39
+   },
+   {
+    "period": "2022",
+    "rate": 1.04
+   },
+   {
+    "period": "2023",
+    "rate": 1.66
+   },
+   {
+    "period": "2024",
+    "rate": 1.24
+   },
+   {
+    "period": "2025",
+    "rate": 1.4
+   },
+   {
+    "period": "2026 (Jan\u2013Aug)",
+    "rate": 1.09
+   }
+  ]
+ },
+ "Worcester": {
+  "county": "Worcester",
+  "score": 148.2,
+  "rates": {
+   "lyme": 125.03,
+   "babesiosis": 4.9,
+   "hga": 18.28
+  },
+  "trend": [
+   {
+    "year": 2010,
+    "lyme": 252,
+    "babesiosis": null,
+    "hga": null
+   },
+   {
+    "year": 2011,
+    "lyme": 188,
+    "babesiosis": 3,
+    "hga": 7
+   },
+   {
+    "year": 2012,
+    "lyme": 439,
+    "babesiosis": 7,
+    "hga": 23
+   },
+   {
+    "year": 2013,
+    "lyme": 674,
+    "babesiosis": 16,
+    "hga": 13
+   },
+   {
+    "year": 2014,
+    "lyme": 647,
+    "babesiosis": 14,
+    "hga": 47
+   },
+   {
+    "year": 2015,
+    "lyme": null,
+    "babesiosis": 18,
+    "hga": 63
+   },
+   {
+    "year": 2016,
+    "lyme": null,
+    "babesiosis": 26,
+    "hga": 88
+   },
+   {
+    "year": 2017,
+    "lyme": null,
+    "babesiosis": 37,
+    "hga": 153
+   },
+   {
+    "year": 2018,
+    "lyme": null,
+    "babesiosis": 29,
+    "hga": 79
+   },
+   {
+    "year": 2019,
+    "lyme": null,
+    "babesiosis": 52,
+    "hga": 85
+   },
+   {
+    "year": 2020,
+    "lyme": null,
+    "babesiosis": 56,
+    "hga": 91
+   },
+   {
+    "year": 2021,
+    "lyme": null,
+    "babesiosis": 46,
+    "hga": 124
+   },
+   {
+    "year": 2022,
+    "lyme": 727,
+    "babesiosis": 39,
+    "hga": 94
+   },
+   {
+    "year": 2023,
+    "lyme": 1146,
+    "babesiosis": 96,
+    "hga": 115
+   },
+   {
+    "year": 2024,
+    "lyme": 1006,
+    "babesiosis": 56,
+    "hga": 110
+   },
+   {
+    "year": 2025,
+    "lyme": 1122,
+    "babesiosis": 44,
+    "hga": 164
+   }
+  ],
+  "er": [
+   {
+    "period": "2019",
+    "rate": 7.25
+   },
+   {
+    "period": "2020",
+    "rate": 6.0
+   },
+   {
+    "period": "2021",
+    "rate": 6.28
+   },
+   {
+    "period": "2022",
+    "rate": 3.67
+   },
+   {
+    "period": "2023",
+    "rate": 4.67
+   },
+   {
+    "period": "2024",
+    "rate": 3.04
+   },
+   {
+    "period": "2025",
+    "rate": 3.71
+   },
+   {
+    "period": "2026 (Jan\u2013Aug)",
+    "rate": 5.04
+   }
+  ]
+ }
+}

@@ -86,11 +86,10 @@ export function MapTownSearch({ levelOf, onPick }: { levelOf: (townId: string) =
                     id={optionId(i)}
                     role="option"
                     aria-selected={i === active}
-                    // Pick on pointer down, before the input's blur can close the list.
-                    onPointerDown={(e) => {
-                      e.preventDefault();
-                      pick(town.id);
-                    }}
+                    // Pick on click, never on pointer down: picking on press closed the list under the finger, and on
+                    // a phone the tap's click then landed on what was beneath it (a level filter, which hid the town).
+                    // The list stays open on blur, so the click still reaches the row.
+                    onClick={() => pick(town.id)}
                     onPointerEnter={() => setActive(i)}
                     className={cn(
                       "flex min-h-12 cursor-pointer items-center gap-3 px-4 py-2",

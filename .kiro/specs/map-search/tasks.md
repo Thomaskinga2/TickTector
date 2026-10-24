@@ -16,3 +16,6 @@
 
 - [x] 4. Verify at 393 and 320 pt wide: fit, pick a town, keyboard
   - _Requirements: 2.1, 3.1, 3.2_
+
+- [x] 5. Fix: picking a result with a tap on a phone also tapped the level filter beneath the list (the pick ran on pointer down and closed the list under the finger); pick on click instead
+  - _Requirements: 2.1_

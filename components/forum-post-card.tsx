@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Menu } from "@base-ui/react/menu";
 import { Check, Ellipsis, Flag, MessagesSquare, PenLine, ScanLine, ThumbsUp } from "lucide-react";
 import { formatRelative } from "@/components/format";
+import { Avatar } from "@/components/google-sign-in";
 import { ShareButton } from "@/components/share-button";
 import { TickSpeciesIcon } from "@/components/tick-species-icon";
 import { toast } from "@/components/toaster";
@@ -27,9 +28,7 @@ export function ForumPostCard({ post, full = false }: { post: ForumPost; full?: 
   return (
     <article className="soft-block overflow-hidden">
       <header className="flex items-start gap-3 px-4 pt-4">
-        <span aria-hidden className="grid size-11 shrink-0 place-items-center rounded-full bg-fill type-headline text-primary">
-          {post.author.trim().charAt(0).toUpperCase() || "?"}
-        </span>
+        <Avatar name={post.author} picture={post.authorPicture} className="size-11 type-headline" />
         <div className="flex min-w-0 flex-1 flex-col">
           <p className="truncate type-headline">{post.author}</p>
           <p className="flex items-start gap-1.5 type-footnote text-muted-foreground">

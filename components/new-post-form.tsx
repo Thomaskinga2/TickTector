@@ -18,12 +18,14 @@ const MAX_PHOTOS = 4;
 
 // An iOS form: grouped rows with labels, footers for the privacy notes. The Post button lives in the nav bar
 // (it submits this form by id), so the page passes onSubmittingChange to disable it while sending
-// and onReadyChange to keep it disabled until the post has a town, a name, and some text or a photo.
+// and onReadyChange to keep it disabled until the post has a town and some text or a photo.
 export function NewPostForm({
+  author,
   onSubmit,
   onSubmittingChange,
   onReadyChange,
 }: {
+  author: string; // the signed-in Google user, who the post is from
   onSubmit: (input: NewPostInput) => Promise<void>;
   onSubmittingChange?: (submitting: boolean) => void;
   onReadyChange?: (ready: boolean) => void;
@@ -32,11 +34,10 @@ export function NewPostForm({
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [tickSpecies, setTickSpecies] = useState("");
-  const [author, setAuthor] = useState("");
   const [photos, setPhotos] = useState<File[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  const ready = !!town && author.trim().length > 0 && (title.trim().length > 0 || body.trim().length > 0 || photos.length > 0);
+  const ready = !!town && (title.trim().length > 0 || body.trim().length > 0 || photos.length > 0);
   useEffect(() => onReadyChange?.(ready), [ready, onReadyChange]);
 
   async function submit(e: React.FormEvent) {
@@ -46,7 +47,7 @@ export function NewPostForm({
     setError(null);
     try {
       // Only the town is sent: posts never carry coordinates.
-      await onSubmit({ townId: town.id, title, body, tickSpecies: tickSpecies || undefined, author, photos });
+      await onSubmit({ townId: town.id, title, body, tickSpecies: tickSpecies || undefined, photos });
       // Pages stay mounted across navigations (Cache Components), so clear the form for next time.
       setTitle("");
       setBody("");
@@ -98,11 +99,7 @@ export function NewPostForm({
         <PhotosField photos={photos} onChange={setPhotos} />
       </Group>
 
-      <Group footer="Don't include personal information.">
-        <Row label="Display name" htmlFor="post-author">
-          <input id="post-author" required maxLength={40} autoComplete="nickname" placeholder="First name or nickname" value={author} onChange={(e) => setAuthor(e.target.value)} className={INPUT} />
-        </Row>
-      </Group>
+      <p className="px-4 type-footnote text-muted-foreground">Posting as {author}. Don&apos;t include personal information.</p>
     </form>
   );
 }

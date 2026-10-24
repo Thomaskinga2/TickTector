@@ -11,7 +11,10 @@ globalThis.__forumDb = {
   comments: [],
   photos: new Map([["old", new Uint8Array([0xff, 0xd8, 0xff, 0xd9])]]),
 };
+process.env.AUTH_SECRET = "test-secret";
+process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID = "test-client.apps.googleusercontent.com";
 const { POST } = await import("@/app/api/forum/posts/route.ts");
+const { getSessionUser, sessionCookie, verifyGoogleToken } = await import("@/lib/auth.ts");
 const { SAMPLE_SCAN } = await import("@/lib/fixtures/sample-scan.ts");
 const { cleanImage } = await import("@/lib/forum-images.ts");
 const { getForumStore, townFromName } = await import("@/lib/providers/forum-store.ts");
@@ -27,16 +30,22 @@ async function jpegWithGps() {
     .toBuffer();
 }
 
-// createScanPost runs in the browser; here fetch goes straight to the route handler, and other
-// same-site paths (the fixture photo) are read from public/. `sent` keeps the last form it posted.
+// A signed-in browser: the session cookie, as the Cookie header it would send back.
+const MAYA = { id: "google-123", name: "Maya Chen", picture: "https://lh3.googleusercontent.com/a/maya" };
+const signedIn = (user = MAYA) => sessionCookie(user).split(";")[0];
+
+// createScanPost runs in the browser; here fetch goes straight to the route handler (signed in as `cookie`), and
+// other same-site paths (the fixture photo) are read from public/. `sent` keeps the last form it posted.
 let sent;
+let cookie;
 beforeEach(() => {
   sent = undefined;
+  cookie = signedIn();
   globalThis.fetch = async (input, init) => {
     const url = String(input);
     if (url === "/api/forum/posts") {
       sent = init.body;
-      return POST(new Request(`http://test${url}`, init));
+      return POST(new Request(`http://test${url}`, { ...init, headers: cookie ? { cookie } : {} }));
     }
     if (url.startsWith("/")) return new Response(readFileSync(`public${url}`));
     throw new Error(`Unexpected fetch: ${url}`);
@@ -81,7 +90,7 @@ test("the posts route rejects more than 4 photos", async () => {
   for (const [k, v] of Object.entries({ type: "text", townId: "amherst", body: "Five photos", author: "Test" })) form.append(k, v);
   const img = await jpegWithGps();
   for (let i = 0; i < 5; i++) form.append("photos", new Blob([img], { type: "image/jpeg" }), `p${i}.jpg`);
-  const res = await POST(new Request("http://test/api/forum/posts", { method: "POST", body: form }));
+  const res = await POST(new Request("http://test/api/forum/posts", { method: "POST", body: form, headers: { cookie } }));
   assert.equal(res.status, 400);
   assert.match((await res.json()).error, /up to 4/);
 });
@@ -125,4 +134,32 @@ test("existing posts load as text posts, without coordinates", async () => {
   assert.deepEqual(legacy.photos, ["/api/forum/photos/old"]);
   assert.equal("lat" in legacy || "lng" in legacy, false);
   assert.equal((await getForumStore().getPhoto("old")).type, "image/jpeg");
+});
+
+test("posting needs a Google sign-in, and the author comes from it", async () => {
+  cookie = undefined;
+  await assert.rejects(createScanPost(SAMPLE_SCAN), /Sign in with Google to post/);
+
+  const [payload] = signedIn().split("=")[1].split(".");
+  cookie = `tt_session=${payload}.forged-signature`;
+  await assert.rejects(createScanPost(SAMPLE_SCAN), /Sign in with Google to post/, "a tampered cookie is refused");
+
+  cookie = signedIn();
+  const form = new FormData();
+  for (const [k, v] of Object.entries({ type: "text", townId: "amherst", body: "Hi", author: "Someone Else" })) form.append(k, v);
+  const post = await (await POST(new Request("http://test/api/forum/posts", { method: "POST", body: form, headers: { cookie } }))).json();
+  assert.equal(post.author, "Maya Chen", "the form can't choose the author");
+  assert.equal(post.authorPicture, MAYA.picture);
+  assert.deepEqual(getSessionUser(new Request("http://test", { headers: { cookie } })), MAYA);
+});
+
+test("verifyGoogleToken accepts only tokens Google issued for this app", async () => {
+  const info = { aud: "test-client.apps.googleusercontent.com", iss: "https://accounts.google.com", sub: "google-9", exp: String(Date.now() / 1000 + 600), name: "Leo" };
+  const answer = (body) => (globalThis.fetch = async (url) => (String(url).startsWith("https://oauth2.googleapis.com/tokeninfo") ? Response.json(body) : new Response(null, { status: 404 })));
+  answer(info);
+  assert.deepEqual(await verifyGoogleToken("token"), { id: "google-9", name: "Leo", picture: undefined });
+  answer({ ...info, aud: "another-app.apps.googleusercontent.com" });
+  assert.equal(await verifyGoogleToken("token"), null);
+  answer({ ...info, exp: String(Date.now() / 1000 - 60) });
+  assert.equal(await verifyGoogleToken("token"), null);
 });

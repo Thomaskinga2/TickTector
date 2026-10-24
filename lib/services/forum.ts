@@ -54,10 +54,11 @@ export function getComments(postId: string): Promise<ForumComment[]> {
   return getJson(`/api/forum/posts/${encodeURIComponent(postId)}/comments`);
 }
 
-export function addComment(postId: string, body: string, author: string): Promise<ForumComment> {
+// Needs a signed-in user; the comment is theirs.
+export function addComment(postId: string, body: string): Promise<ForumComment> {
   return getJson(`/api/forum/posts/${encodeURIComponent(postId)}/comments`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ body, author }),
+    body: JSON.stringify({ body }),
   });
 }

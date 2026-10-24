@@ -10,6 +10,7 @@ import { createScanPost } from "@/lib/services/forum";
 import type { TickdexCatch } from "@/lib/tickdex";
 import { SCAN_SPECIES, SCAN_SPECIES_NAME, type ScanSpecies } from "@/lib/types";
 import { useNearMe } from "@/lib/use-near-me";
+import { useSession } from "@/lib/use-session";
 import { useTickdex } from "@/lib/use-tickdex";
 
 const STAGE = { larva: "Larva", nymph: "Nymph", adult: "Adult" };
@@ -38,10 +39,12 @@ function Composer({ entry, photo, onPosted }: { entry: TickdexCatch; photo: stri
   const townId = picked ?? near?.town.id ?? "";
   const [feeling, setFeeling] = useState("");
   const [sending, setSending] = useState(false);
+  const { user } = useSession();
   const species: ScanSpecies = (SCAN_SPECIES as readonly string[]).includes(entry.speciesId) ? (entry.speciesId as ScanSpecies) : "unknown";
 
   async function post(e: React.FormEvent) {
     e.preventDefault();
+    if (!user) return toast("Sign in with Google to post");
     if (!townId) return toast("Choose your town first");
     setSending(true);
     try {
@@ -80,10 +83,11 @@ function Composer({ entry, photo, onPosted }: { entry: TickdexCatch; photo: stri
           onChange={(e) => setFeeling(e.target.value)}
           className="h-9 min-w-0 flex-1 bg-transparent type-body outline-none placeholder:text-muted-foreground"
         />
-        <Button type="submit" size="icon-sm" disabled={sending} aria-label="Post to Sightings">
+        <Button type="submit" size="icon-sm" disabled={sending || !user} aria-label="Post to Sightings">
           {sending ? <Loader2 className="size-4 animate-spin" aria-hidden /> : <ArrowUp className="size-5" strokeWidth={2.6} aria-hidden />}
         </Button>
       </div>
+      {!user && <p className="px-1 type-footnote text-muted-foreground">Sign in with Google above to post it.</p>}
     </form>
   );
 }

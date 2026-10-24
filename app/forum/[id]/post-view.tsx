@@ -28,8 +28,8 @@ export function PostView({ postId }: { postId: string }) {
                 <CommentThread
                   comments={comments && [...comments, ...sent.filter((s) => !comments.some((c) => c.id === s.id))]}
                   {...commentsSlot}
-                  onSend={async (body, author) => {
-                    const comment = await addComment(postId, body, author);
+                  onSend={async (body) => {
+                    const comment = await addComment(postId, body);
                     setSent((prev) => [...prev, comment]);
                     toast("Comment added");
                   }}

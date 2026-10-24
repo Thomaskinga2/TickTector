@@ -1,18 +1,16 @@
 import type { NextRequest } from "next/server";
 import { z } from "zod";
+import { getSessionUser, signInRequired } from "@/lib/auth";
 import { cleanImage, MAX_IMAGES, UploadError } from "@/lib/forum-images";
 import { getForumStore, townFromName, type NewPostRecord } from "@/lib/providers/forum-store";
 import { findTown } from "@/lib/providers/risk";
 import { SCAN_SPECIES, SCAN_SPECIES_NAME, SCAN_STAGES } from "@/lib/types";
-
-const author = z.string({ error: "Add a display name" }).trim().min(1, "Add a display name").max(40, "Display name is too long");
 
 const TextFields = z.object({
   townId: z.string({ error: "Choose a town" }).trim().min(1, "Choose a town"),
   title: z.string().trim().max(120, "Title is too long").default(""),
   body: z.string().trim().max(2000, "Description is too long").default(""),
   tickSpecies: z.string().trim().max(80).optional(),
-  author,
 });
 
 // No lat/lng here on purpose: the scan's coordinates never reach the server.
@@ -23,7 +21,6 @@ const ScanFields = z.object({
   town: z.string({ error: "Location is missing" }).trim().min(1, "Location is missing"),
   scannedAt: z.iso.datetime({ offset: true, error: "scannedAt must be an ISO date-time" }),
   caption: z.string().trim().max(500, "Keep it under 500 characters").optional(),
-  author: author.optional(),
 });
 
 const fail = (error: string, status = 400) => Response.json({ error }, { status });
@@ -38,11 +35,15 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/forum/posts (multipart) -> ForumPost
-//   type=text: townId, title, body, tickSpecies?, author, photos (0–4 files)
-//   type=scan: species, confidence?, stage?, town (MA town name or id), scannedAt, caption?, author?, photos (1 file)
+// POST /api/forum/posts (multipart) -> ForumPost. Needs a signed-in user (lib/auth.ts), who becomes the author.
+//   type=text: townId, title, body, tickSpecies?, photos (0–4 files)
+//   type=scan: species, confidence?, stage?, town (MA town name or id), scannedAt, caption?, photos (1 file)
 // Every photo is validated and stripped of EXIF (lib/forum-images.ts) before it is stored.
 export async function POST(request: Request) {
+  const user = getSessionUser(request);
+  if (!user) return signInRequired();
+  const author = { author: user.name, authorPicture: user.picture };
+
   const form = await request.formData().catch(() => null);
   if (!form) return fail("Send the post as multipart form data");
 
@@ -67,7 +68,7 @@ export async function POST(request: Request) {
       title: SCAN_SPECIES_NAME[species],
       body: caption ?? "",
       scan: { species, confidence, stage, scannedAt },
-      author: parsed.data.author ?? "Anonymous",
+      ...author,
     };
   } else {
     const parsed = TextFields.safeParse(fields);
@@ -76,7 +77,7 @@ export async function POST(request: Request) {
     const town = findTown(townId);
     if (!town) return fail("Choose a Massachusetts city or town");
     if (!title && !body && !files.length) return fail("Write something or add a photo");
-    record = { type: "text", townId, townName: town.name, county: town.county, title, body, tickSpecies, author: parsed.data.author };
+    record = { type: "text", townId, townName: town.name, county: town.county, title, body, tickSpecies, ...author };
   }
 
   try {

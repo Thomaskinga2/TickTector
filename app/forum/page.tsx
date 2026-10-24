@@ -4,6 +4,7 @@ import { Suspense, useState } from "react";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { ForumNotice, ForumPostList } from "@/components/forum-post-list";
+import { AccountRow } from "@/components/google-sign-in";
 import { buttonVariants } from "@/components/ui/button";
 import { EmptyState } from "@/components/states";
 import { Page } from "@/components/page";
@@ -33,6 +34,7 @@ export default function ForumPage() {
     >
       <p className="-mt-3 px-0.5 type-subhead text-muted-foreground">Ticks your neighbors found or scanned, town by town.</p>
       <ForumNotice />
+      <AccountRow prompt="Sign in with Google to post and comment. Reading is open to everyone." />
 
       {/* Opened by Scan's "Post tick" button (?post=<catch id>). */}
       <Suspense fallback={null}>

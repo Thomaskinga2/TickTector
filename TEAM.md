@@ -39,13 +39,14 @@ page (app/)  ->  component (components/)  ->  service (lib/services/)  ->  API r
 | Camera scan | `/scan` | `CameraCapture` | `analyzeTickPhoto` (`scan.ts`) | `POST /api/scan` | Backend 2 | `camera: true` |
 | Forum | `/forum`, `/forum/new`, `/forum/[id]` | `ForumPostList`, `ForumPostCard`, `NewPostForm`, `CommentThread` | `forum.ts` | `/api/forum/posts` (+ `/[id]`, `/[id]/comments`, `/[id]/like`, `/[id]/reports`), `/api/forum/photos/[id]`, `/api/forum/reports` | Backend 2 | `forum: true` |
 | Scan → forum post | `/scan` (Post button, not built yet) | none yet | `createScanPost` (`forum.ts`), contract `ScanPostInput` (`lib/types.ts`) | `POST /api/forum/posts` with `type=scan` | Backend 2 | always on |
+| Google sign-in | `/forum`, `/forum/new`, `/forum/[id]` | `AccountRow`, `GoogleSignIn` (`google-sign-in.tsx`), `useSession` | `auth.ts` | `GET/POST/DELETE /api/auth/session` (`lib/auth.ts`) | Backend 2 | needs `NEXT_PUBLIC_GOOGLE_CLIENT_ID` + `AUTH_SECRET` |
 | TickQuest | `/quest` | page only | none | none | Frontend | `quest: true` |
 
 Flags live in `lib/features.ts`. A flag set to `false` shows "Coming soon"; flipping it to `true` is the only change needed to show the real component.
 
 Providers are picked by env vars (see `.env.example`): `GEOCODING_PROVIDER` (Backend 1) and `FORUM_STORE` (Backend 2). Only `mock` is implemented. The mock forum store keeps posts and their photos in memory, so they reset on every deploy.
 
-Forum rules: posts store a town and county only, never coordinates. Every photo goes through `cleanImage` (`lib/forum-images.ts`: JPEG/PNG/WebP, 10 MB, 4 per post, all EXIF removed with sharp). Moderators set `FORUM_MOD_TOKEN`, read `GET /api/forum/reports` and hide a post with `PATCH /api/forum/posts/[id]` (curl example in that route). Tests: `npm test`.
+Forum rules: posting and commenting need a Google sign-in (the author is the signed-in name; reading stays public). Posts store a town and county only, never coordinates. Every photo goes through `cleanImage` (`lib/forum-images.ts`: JPEG/PNG/WebP, 10 MB, 4 per post, all EXIF removed with sharp). Moderators set `FORUM_MOD_TOKEN`, read `GET /api/forum/reports` and hide a post with `PATCH /api/forum/posts/[id]` (curl example in that route). Tests: `npm test`.
 
 ## Git
 

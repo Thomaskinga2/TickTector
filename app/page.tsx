@@ -1,65 +1,33 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { postAnalyze } from "@/lib/api";
-import type { AnalyzeResponse } from "@/lib/schema";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { LocationButton } from "@/components/location-button";
+import { Page } from "@/components/page";
+import { TOWN_SEARCH_ID, TownSearch } from "@/components/town-search";
+import { buttonVariants } from "@/components/ui/button";
+import type { Town } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
-// Working skeleton of the demo flow (input -> loading -> result / error).
-// UI owner: restyle freely; keep calling postAnalyze().
 export default function Home() {
-  const [text, setText] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [data, setData] = useState<AnalyzeResponse | null>(null);
-
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    try {
-      setData(await postAnalyze({ text }));
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
-    } finally {
-      setLoading(false);
-    }
-  }
+  const router = useRouter();
+  const openTown = (town: Town) => router.push(`/area/${town.id}`);
 
   return (
-    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col gap-6 px-4 py-10">
-      <h1 className="text-2xl font-semibold">App name</h1>
+    <Page className="gap-8 pt-10">
+      <header className="flex flex-col gap-2">
+        <h1 className="text-4xl font-bold tracking-tight text-primary">TikTector</h1>
+        <p className="text-lg text-muted-foreground">See this week&apos;s tick risk for your Massachusetts town.</p>
+      </header>
 
-      <form onSubmit={onSubmit} className="flex flex-col gap-3">
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Type something…"
-          rows={4}
-          className="rounded-md border p-3 text-base"
-        />
-        <Button type="submit" disabled={loading || !text.trim()}>
-          {loading ? "Analyzing…" : "Analyze"}
-        </Button>
-      </form>
+      <TownSearch onSelect={openTown} />
 
-      {error && <p role="alert" className="text-red-600">{error}</p>}
-
-      {data && (
-        <section className="flex flex-col gap-3">
-          {data.demo && <p className="text-sm text-zinc-500">Showing demo result</p>}
-          <h2 className="text-xl font-semibold">{data.result.title}</h2>
-          <p>{data.result.summary}</p>
-          <ul className="flex flex-col gap-2">
-            {data.result.items.map((item) => (
-              <li key={item.label} className="rounded-md border p-3">
-                <strong>{item.label}</strong>
-                <p>{item.detail}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-    </main>
+      <div className="flex flex-col gap-3">
+        <LocationButton onTown={openTown} onError={() => document.getElementById(TOWN_SEARCH_ID)?.focus()} />
+        <Link href="/area/amherst" className={cn(buttonVariants({ variant: "secondary" }), "h-12 w-full text-base")}>
+          Try Amherst
+        </Link>
+      </div>
+    </Page>
   );
 }

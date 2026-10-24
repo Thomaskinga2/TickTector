@@ -99,6 +99,11 @@ function TickdexHeader({ caught, totalCatches }: { caught: number; totalCatches:
     <header className="relative overflow-hidden rounded-3xl bg-primary px-5 pt-5 pb-5 text-primary-foreground shadow-[0_4px_0_var(--tickdex-shadow)]">
       <p className="text-[12px] font-semibold tracking-[0.18em] text-primary-foreground/70 uppercase">Field collection</p>
       <h1 className="mt-1 font-tickdex text-[34px] leading-none">Tickdex</h1>
+      {caught === DEX_SIZE && (
+        <p className="absolute top-5 right-5 rotate-6 rounded-xl border-2 border-tickdex-gold px-2.5 py-1 font-tickdex text-[16px] leading-none text-tickdex-gold">
+          Complete!
+        </p>
+      )}
       <div className="mt-4 flex items-baseline justify-between">
         <p className="font-tickdex text-[20px] leading-none">
           {caught} / {DEX_SIZE} <span className="text-[16px] text-primary-foreground/80">caught</span>

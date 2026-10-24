@@ -14,7 +14,7 @@ const PALETTES: Record<string, Palette> = {
 };
 
 const FED: Record<Engorgement, number> = { flat: 0.1, "partly fed": 0.5, engorged: 0.95 };
-const STAGE_SCALE: Record<TickStage, number> = { larva: 0.55, nymph: 0.75, adult: 1 };
+const STAGE_SCALE: Record<TickStage, number> = { larva: 0.5, nymph: 0.7, adult: 0.88 };
 
 function mix(a: string, b: string, t: number): string {
   const channel = (hex: string, i: number) => parseInt(hex.slice(1 + i * 2, 3 + i * 2), 16);
@@ -56,7 +56,7 @@ export function TickArt({
 
   return (
     <svg viewBox="-36 -32 72 72" className={className} aria-hidden>
-      <g transform={`scale(${STAGE_SCALE[stage]})`}>
+      <g transform={`translate(0 -3) scale(${STAGE_SCALE[stage]})`}>
         <g stroke={fill(p.legs)} strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round" fill="none">
           {[-1, 1].flatMap((side) =>
             Array.from({ length: legs }, (_, i) => <polyline key={`${side}-${i}`} points={legPoints(side, i)} />),

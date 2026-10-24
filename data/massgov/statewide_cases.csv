@@ -1,0 +1,61 @@
+year,disease,cases
+2015,Lyme Disease,4370
+2016,Lyme Disease,207
+2017,Lyme Disease,416
+2018,Lyme Disease,189
+2019,Lyme Disease,165
+2020,Lyme Disease,103
+2021,Lyme Disease,28
+2022,Lyme Disease,5102
+2023,Lyme Disease,9728
+2024,Lyme Disease,8840
+2025,Lyme Disease,8619
+2026_ytd,Lyme Disease,5269
+2015,Babesiosis,448
+2016,Babesiosis,519
+2017,Babesiosis,591
+2018,Babesiosis,527
+2019,Babesiosis,640
+2020,Babesiosis,580
+2021,Babesiosis,610
+2022,Babesiosis,454
+2023,Babesiosis,837
+2024,Babesiosis,788
+2025,Babesiosis,881
+2026_ytd,Babesiosis,602
+2015,Human Granulocytic Anaplasmosis,771
+2016,Human Granulocytic Anaplasmosis,874
+2017,Human Granulocytic Anaplasmosis,1218
+2018,Human Granulocytic Anaplasmosis,658
+2019,Human Granulocytic Anaplasmosis,703
+2020,Human Granulocytic Anaplasmosis,740
+2021,Human Granulocytic Anaplasmosis,773
+2022,Human Granulocytic Anaplasmosis,625
+2023,Human Granulocytic Anaplasmosis,747
+2024,Human Granulocytic Anaplasmosis,1060
+2025,Human Granulocytic Anaplasmosis,1496
+2026_ytd,Human Granulocytic Anaplasmosis,1194
+2015,Borrelia miyamotoi,8
+2016,Borrelia miyamotoi,16
+2017,Borrelia miyamotoi,43
+2018,Borrelia miyamotoi,63
+2019,Borrelia miyamotoi,32
+2020,Borrelia miyamotoi,16
+2021,Borrelia miyamotoi,26
+2022,Borrelia miyamotoi,16
+2023,Borrelia miyamotoi,47
+2024,Borrelia miyamotoi,57
+2025,Borrelia miyamotoi,107
+2026_ytd,Borrelia miyamotoi,66
+2015,Powassan virus,3
+2016,Powassan virus,5
+2017,Powassan virus,3
+2018,Powassan virus,7
+2019,Powassan virus,9
+2020,Powassan virus,7
+2021,Powassan virus,6
+2022,Powassan virus,5
+2023,Powassan virus,11
+2024,Powassan virus,11
+2025,Powassan virus,12
+2026_ytd,Powassan virus,13

@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw downloads (56 MB); see data/README.md to re-download
+/data/raw/

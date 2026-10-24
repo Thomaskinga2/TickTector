@@ -1,0 +1,110 @@
+Lyme Disease Surveillance in Massachusetts, 2011
+Massachusetts Department of Public Health
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+County*
+2011Confirmed Cases (#)
+2011 Incidence Rate             (per 100,000)
+Barnstable 
+168
+78
+Berkshire 
+120
+92
+Bristol 
+152
+28
+Dukes
+34
+206
+Essex 
+227
+31
+Franklin 
+52
+73
+Hampden
+119
+26
+Hampshire
+86
+54
+Middlesex
+361
+24
+Nantucket 
+39
+383
+Norfolk 
+213
+32
+Plymouth 
+335
+68
+Suffolk 
+61
+8
+Worcester 
+188
+24
+Unknown
+496
+--
+State Total
+2,651
+40
+
+ SHAPE  \* MERGEFORMAT 
+				
+							
+
+
+Figure 1  
+
+
+Figure 2  
+
+Figure 3 
+
+
+
+
+
+
+
+
+
+Data as of 15AUG2012 are subject to change.
+
+
+2011 Surveillance Highlights
+
+2,651 confirmed Lyme disease cases were reported in Massachusetts in 2011, representing little change from the number of cases reported in 2010 (2,663). 
+
+Incidence rates of Lyme disease in 2011 were higher for most counties, compared with 2010. Worcester County was an exception, where the incidence rate decreased from 32 per 100,000 in 2010 to 24 per 100,000 in 2011.
+
+The majority of confirmed cases had onsets in June, July, and August.
+
+The highest incidence rates were among children aged 5-9 years and adults aged 65-75 years.
+
+69% of confirmed cases reported an erythema migrans (“bulls-eye”) rash.
+
+The map below illustrates Lyme disease incidence rates per 100,000 by city and town in Massachusetts from 2007-2011.  The darker the shading, the higher the incidence.  Lyme disease is considered endemic in all of Massachusetts.  
+
+Areas of high incidence include much of the eastern half of the state. Regions of particularly high incidence include Cape Cod and the Islands, as well as some areas in Norfolk, Middlesex, Essex, and southern Berkshire Counties. More isolated areas of high incidence were in Franklin, Hampshire, and Hampden Counties. 
+
+
+

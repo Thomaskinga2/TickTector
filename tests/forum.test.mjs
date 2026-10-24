@@ -107,6 +107,12 @@ test("createScanPost(SAMPLE_SCAN) puts a scan post on top with town + county, an
   assert.equal((await sharp(image.bytes).metadata()).exif, undefined);
 });
 
+test("a scan post keeps its caption as the post text", async () => {
+  const post = await createScanPost({ ...SAMPLE_SCAN, caption: "  Found it on my sock after the hike  " });
+  assert.equal(post.body, "Found it on my sock after the hike");
+  assert.equal(post.title, "Blacklegged (deer) tick");
+});
+
 test("createScanPost rejects a town outside Massachusetts", async () => {
   await assert.rejects(createScanPost({ ...SAMPLE_SCAN, location: { town: "Hartford", lat: 41.76, lng: -72.68 } }), /Location is outside Massachusetts/);
 });

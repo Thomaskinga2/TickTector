@@ -43,6 +43,7 @@ export function ForumPostCard({ post, full = false }: { post: ForumPost; full?: 
       </header>
 
       {post.title && <h2 className="break-words px-4 pt-3 type-title2 font-bold">{full ? post.title : <Link href={href}>{post.title}</Link>}</h2>}
+      {scan && post.body && <p className={cn("break-words whitespace-pre-line px-4 pt-1 type-body", !full && "line-clamp-3")}>{post.body}</p>}
 
       {scan ? (
         <dl className="grid grid-cols-3 gap-3 px-4 pt-3">

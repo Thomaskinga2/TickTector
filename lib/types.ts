@@ -79,7 +79,7 @@ export type ForumPost = {
   townName: string;
   county: string;
   title: string; // scan posts: the species name
-  body: string; // scan posts: ""
+  body: string; // scan posts: the caption, or ""
   photos: string[]; // up to 4 image URLs (/api/forum/photos/:id), EXIF removed
   tickSpecies?: string; // text posts: what the writer typed, if anything
   scan?: { species: ScanSpecies; confidence?: number; stage?: ScanStage; scannedAt: string };
@@ -112,6 +112,7 @@ export type NewPostInput = {
 //     stage: entry.stage, // the Tickdex catch (lib/tickdex.ts TickStage)
 //     location: { town: town.name, lat, lng },
 //     scannedAt: new Date().toISOString(),
+//     caption: "Found it on my sock after the hike", // optional
 //   });
 //   router.push(`/forum/${post.id}`);
 //
@@ -124,6 +125,7 @@ export type ScanPostInput = {
   stage?: ScanStage;
   location: { town: string; lat?: number; lng?: number };
   scannedAt: string; // ISO date-time
+  caption?: string; // how the person feels about it, up to 500 characters, shown under the title
   author?: string; // display name, "Anonymous" if left out
 };
 

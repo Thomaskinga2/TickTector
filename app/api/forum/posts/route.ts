@@ -22,6 +22,7 @@ const ScanFields = z.object({
   stage: z.enum(SCAN_STAGES, { error: "Unknown life stage" }).optional(),
   town: z.string({ error: "Location is missing" }).trim().min(1, "Location is missing"),
   scannedAt: z.iso.datetime({ offset: true, error: "scannedAt must be an ISO date-time" }),
+  caption: z.string().trim().max(500, "Keep it under 500 characters").optional(),
   author: author.optional(),
 });
 
@@ -39,7 +40,7 @@ export async function GET(request: NextRequest) {
 
 // POST /api/forum/posts (multipart) -> ForumPost
 //   type=text: townId, title, body, tickSpecies?, author, photos (0–4 files)
-//   type=scan: species, confidence?, stage?, town (MA town name), scannedAt, author?, photos (1 file)
+//   type=scan: species, confidence?, stage?, town (MA town name or id), scannedAt, caption?, author?, photos (1 file)
 // Every photo is validated and stripped of EXIF (lib/forum-images.ts) before it is stored.
 export async function POST(request: Request) {
   const form = await request.formData().catch(() => null);
@@ -54,7 +55,7 @@ export async function POST(request: Request) {
   if (fields.type === "scan") {
     const parsed = ScanFields.safeParse(fields);
     if (!parsed.success) return fail(parsed.error.issues[0]?.message ?? "Invalid scan");
-    const { species, confidence, stage, town: townName, scannedAt } = parsed.data;
+    const { species, confidence, stage, town: townName, scannedAt, caption } = parsed.data;
     const town = townFromName(townName);
     if (!town) return fail("Location is outside Massachusetts");
     if (files.length !== 1) return fail("Add the tick photo");
@@ -64,7 +65,7 @@ export async function POST(request: Request) {
       townName: town.name,
       county: town.county,
       title: SCAN_SPECIES_NAME[species],
-      body: "",
+      body: caption ?? "",
       scan: { species, confidence, stage, scannedAt },
       author: parsed.data.author ?? "Anonymous",
     };

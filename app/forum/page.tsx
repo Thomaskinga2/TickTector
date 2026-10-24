@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
 import { Loader2, Plus, ScanLine } from "lucide-react";
 import { ForumNotice, ForumPostList } from "@/components/forum-post-list";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { EmptyState } from "@/components/states";
 import { Page } from "@/components/page";
+import { ScanPostComposer } from "@/components/scan-post-composer";
 import { toast } from "@/components/toaster";
 import { TownSelect } from "@/components/town-select";
 import { SAMPLE_SCAN } from "@/lib/fixtures/sample-scan";
@@ -34,6 +35,11 @@ export default function ForumPage() {
     >
       <p className="-mt-3 px-0.5 type-subhead text-muted-foreground">Ticks your neighbors found or scanned, town by town.</p>
       <ForumNotice />
+
+      {/* Opened by Scan's "Post tick" button (?post=<catch id>). */}
+      <Suspense fallback={null}>
+        <ScanPostComposer onPosted={slot.onRetry} />
+      </Suspense>
 
       <div className="flex flex-col gap-1.5">
         <div className="flex items-baseline justify-between px-1 type-footnote text-muted-foreground">

@@ -24,3 +24,13 @@ export function townName(id: string) {
 export function townCounty(id: string) {
   return COUNTIES.get(id);
 }
+
+// Towns whose name starts with the text, or has a word that does (as Home's search): "ware" finds Ware and Wareham,
+// "bridge" finds East and West Bridgewater. Name order, names that start with it first.
+export function matchTowns(query: string, limit = 6) {
+  const needle = query.trim().toLowerCase();
+  if (!needle) return [];
+  const starts = towns.filter((t) => t.name.toLowerCase().startsWith(needle));
+  const words = towns.filter((t) => !t.name.toLowerCase().startsWith(needle) && t.name.toLowerCase().includes(` ${needle}`));
+  return [...starts, ...words].slice(0, limit);
+}

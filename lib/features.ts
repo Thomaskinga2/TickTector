@@ -4,5 +4,5 @@ export const features = {
   heatmap: false,
   camera: false,
   forum: true,
-  quest: false,
+  quest: true,
 };
